@@ -8,6 +8,7 @@ public class Ex08_Input {
 	public static void main(String[] args) throws Exception { //예외 처리
 		
 		//Ex08_Input.java
+		//콘솔 입력, BufferedReader, 에러의 분류
 		
 		/*
 		  

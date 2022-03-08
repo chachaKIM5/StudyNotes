@@ -8,6 +8,7 @@ public class Ex10_Input {
 	public static void main(String[] args) throws Exception {
 		
 		//Ex10_input.java
+		//콘솔 입력, 유틸 클래스, 문자열과 값형의 변환
 		
 		//요구사항] 숫자 2개를 입력받아 두 숫자의 합을 구하시오.
 		

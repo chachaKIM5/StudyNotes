@@ -5,6 +5,7 @@ public class Ex02_DataType {
 	public static void main(String[] args) {
 	
 
+		//주석 달기(필기에도 유용)
 		//단일 주석 단축키: Ctrl+/
 		//다중 주석 단축키: Ctrl+Shift+/, Ctrl+Shift+\
 

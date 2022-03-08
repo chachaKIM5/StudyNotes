@@ -8,8 +8,7 @@ public class Ex00_필기 {
 		
 				
 		/*
-		
-		Hello World!
+				
 		 
 		1. 메모장
 			- 코드 작성

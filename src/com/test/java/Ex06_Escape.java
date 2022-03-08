@@ -5,6 +5,7 @@ public class Ex06_Escape {
 	public static void main(String[] args) {
 		
 		//Ex06_Escape.java
+		//특수 문자(Escape Sequence), Null
 		
 		//특수 문자 > Escape Sequence
 		//- 컴파일러가 번역을 할 때, 미리 약속된 표현을 만나면 그 표현을 바로 출력하지 않고,

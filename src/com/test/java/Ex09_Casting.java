@@ -5,6 +5,7 @@ public class Ex09_Casting {
 	public static void main(String[] args) {
 		
 		//Ex09_Casting.java
+		//형변환
 		
 		/*
 	 	

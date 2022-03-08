@@ -6,10 +6,10 @@ public class Ex00_필기 {
 		
 		//Ex00_필기.java
 		
+				
+		/*
 		
 		Hello World!
-		
-		/*
 		 
 		1. 메모장
 			- 코드 작성

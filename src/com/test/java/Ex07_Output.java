@@ -5,6 +5,7 @@ public class Ex07_Output {
 	public static void main(String[] args) {
 		
 		//Ex07_Output.java
+		//콘솔 출력, 형식 문자, 형식 문자의 확장 기능
 		
 		/*
 		  

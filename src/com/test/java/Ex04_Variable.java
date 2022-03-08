@@ -6,7 +6,7 @@ public class Ex04_Variable {
 		
 		//Ex04.Variable.java
 		
-		//상황
+		//요구사항]
 		//- 성적 관리 프로그램
 		//- 과목별 점수를 입력, 조작, 출력해야 함
 		//- 국어 점수

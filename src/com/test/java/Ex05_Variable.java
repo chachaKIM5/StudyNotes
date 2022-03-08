@@ -5,6 +5,7 @@ public class Ex05_Variable {
 	public static void main(String[] args) {
 		
 		//Ex05_Variable.java
+		//자료형별 리터럴 형태, 참조형 자료형(String)
 		
 		//1. 각 자료형별로 변수 만들기
 		//2. 각 자료형별 리터럴 만드는 방법

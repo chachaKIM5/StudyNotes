@@ -3,6 +3,10 @@ package com.test.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+//클래스의 이름은 반드시 파일의 이름과 같아야 한다
+//Ex10_Input = Ex10_input.java
+//Rename 단축키: Ctrl + 1, 파일명은 F2
+
 public class Ex10_Input {
 
 	public static void main(String[] args) throws Exception {

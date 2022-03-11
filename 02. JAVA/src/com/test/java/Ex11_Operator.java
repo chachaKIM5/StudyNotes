@@ -16,7 +16,7 @@ public class Ex11_Operator {
 		 
 		 1. 문장, Statement
 		 2. 표현식, Expression
-		 3. 연산자, Operatior
+		 3. 연산자, Operator
 		 4. 피연산자, Operand
 		 5. 연산자 우선순위
 		 6. 연산자 연산방향

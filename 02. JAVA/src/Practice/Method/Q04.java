@@ -51,8 +51,7 @@ public class Q04 {
 	
 	public static String add(int n1, int n2) {
 		
-		String result = String.valueOf(n1) + " + " +
-						String.valueOf(n2) + " = " + (n1 + n2);
+		String result = n1 + " + " + n2 + " = " + (n1 + n2);
 		
 		return result;
 		
@@ -60,8 +59,7 @@ public class Q04 {
 	
 	public static String subtract(int n1, int n2) {
 		
-		String result = String.valueOf(n1) + " - " +
-						String.valueOf(n2) + " = " + (n1 - n2);
+		String result = n1 + " - " + n2 + " = " + (n1 - n2);
 		
 		return result;
 		
@@ -69,8 +67,7 @@ public class Q04 {
 	
 	public static String multiply(int n1, int n2) {
 		
-		String result = String.valueOf(n1) + " * " +
-						String.valueOf(n2) + " = " + (n1 * n2);
+		String result = n1 + " * " + n2 + " = " + (n1 * n2);
 		
 		return result;
 		
@@ -78,8 +75,8 @@ public class Q04 {
 	
 	public static String divide(int n1, int n2) {
 		
-		String result = String.valueOf(n1) + " / " +
-						String.valueOf(n2) + " = " + ((double)n1 / (double)n2);
+		String result = n1 + " / " + n2 + " = " + ((double)n1 / n2);
+		//산술 연산의 결과는 더 큰 자료형을 따른다
 		
 		return result;
 		
@@ -87,8 +84,7 @@ public class Q04 {
 	
 	public static String mod(int n1, int n2) {
 		
-		String result = String.valueOf(n1) + " % " +
-						String.valueOf(n2) + " = " + (n1 % n2);
+		String result = n1 + " % " + n2 + " = " + (n1 % n2);
 		
 		return result;
 		

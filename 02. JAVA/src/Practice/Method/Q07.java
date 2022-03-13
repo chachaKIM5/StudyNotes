@@ -16,6 +16,7 @@ public class Q07 {
 	 	더해 result에 대입되도록 메소드 바디 구현
 	 3. 메인 메소드에서 Bufferedreader, reader.readLine() 이용해 변수 3개 입력받기
 	 4. 메소드 호출 > printf 결과 출력! "총 소요 시간은 %d분입니다."
+	 // "시간대"에 1, 2, 3 아닌 다른 숫자를 넣어도 작동?
 	 
 	 */
 		

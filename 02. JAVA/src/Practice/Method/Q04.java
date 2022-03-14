@@ -18,8 +18,8 @@ public class Q04 {
 	 4. Bufferedreader, reader.readLine()이용 사용자에게 숫자 2개(int n1, int n2) 입력받고
 	 	String -> int로 바꾸기
 	 5. 메소드 호출 및 println으로 결과 출력
-	 6. 나누기 메소드 결과값을 어떻게 1.7로 표시할 수 있을지 모르겠다...!
-	  	
+	 6. 나누기 메소드 결과값을 어떻게 1.7로 표시할 수 있을지 모르겠다...! -> 03/14 String.format 메소드로 해결
+	   	
 	 */
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -75,7 +75,7 @@ public class Q04 {
 	
 	public static String divide(int n1, int n2) {
 		
-		String result = n1 + " / " + n2 + " = " + ((double)n1 / n2);
+		String result = n1 + " / " + n2 + " = " + String.format("%.1f", ((double)n1 / n2));
 		//산술 연산의 결과는 더 큰 자료형을 따른다
 		
 		return result;

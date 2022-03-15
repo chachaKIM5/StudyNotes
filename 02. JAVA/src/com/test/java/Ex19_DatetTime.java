@@ -52,10 +52,195 @@ public class Ex19_DatetTime {
 		 
 		 */
 		
+		/*
+		
+		
+		요약!
+		1. 현재 시각 만들기 > getInstance() + get()
+		2. 특정 시각 만들기 > set()
+		3. 시각 + 시간 = 시각 > add()
+		4. 시각 - 시간 = 시각 > add()
+		5. 시각 - 시각 = 시간 > getTimeInMills()
+		6. 시간 + 시간 = 시간
+		7. 시간 - 시간 = 시간
+			
+		
+		
+		
+		 */
+		
+		
+	
 		//m1();
-		m2();
+		//m2();
+		//m3();
+		//m4();
+		//m5();
+		//m6();
+		m7();
 		
 	}//main
+
+	private static void m7() {
+		
+		//현재 시각의 tick
+		Calendar now = Calendar.getInstance();
+		System.out.println(now.getTimeInMillis());
+		
+		System.out.println(System.currentTimeMillis());
+		
+	}
+
+	private static void m6() {
+
+		//연산
+		//시간 + 시간
+		
+		//2시간 30분 + 40분 = 2시간 70분 = 3시간 10분
+		
+		int hour = 2 + (70 / 60);
+		int min = (70 % 60);
+	
+		System.out.printf("%d시간 %d분\n", hour, min);
+
+		
+	}
+
+	private static void m5() {
+		//연산
+		//- 시각 - 시각
+		
+		Calendar now = Calendar.getInstance();
+		Calendar birthday = Calendar.getInstance();
+		birthday.set(1996, 4, 6);
+		
+		//now - birthday = 내가 살아온 시간
+		//System.out.println(now - birthday);
+		//The operator - is undefined for the argument type(s) java.util.Calendar, java.util.Calendar
+		//모든 산술 연산자(-)는 값형을 대상으로 연산, 8가지 자료형 외에는 모두 참조형이므로 Calendar는 참조형
+		
+		//tick, epoch값을 이용
+		System.out.println(now.getTimeInMillis());
+		//1647306480798 (1970년 1월 1일 0시 0분 0초 ~ 지금)
+		
+		System.out.println(birthday.getTimeInMillis());
+		//831344860491 (1970년 1월 1일 0시 0분 0초 ~ birthday)
+
+		System.out.println(now.getTimeInMillis() / 1000 / 60 / 60 / 24 / 365);
+		
+		System.out.println((now.getTimeInMillis() - birthday.getTimeInMillis()) / 1000 / 60 / 60 / 24);
+		//9443
+		
+		
+		
+		//수료일까지 며칠 남았나?
+		//점심까지 몇 분 남았나?
+
+		
+		//올해 크리스마스는 며칠 남았나?
+		
+		Calendar christmas = Calendar.getInstance();
+		christmas.set(2022, 11, 25, 0, 0, 0);
+		
+		long nowTick = now.getTimeInMillis();
+		long christmasTick = christmas.getTimeInMillis();
+		
+		System.out.println((christmasTick - nowTick) / 1000 / 60 / 60 / 24);
+
+		
+		
+		//오늘 수업 끝나려면 몇 시간 남았나?
+		
+		Calendar end = Calendar.getInstance();
+		end.set(Calendar.HOUR_OF_DAY, 18);
+		end.set(Calendar.MINUTE, 0);
+		
+		long endTick = end.getTimeInMillis();
+		
+		System.out.println((double)(endTick - nowTick) / 1000 / 60 / 60);
+		
+	}
+
+	private static void m4() {
+		
+		//연산
+		//- 시각 + 시간
+		//- 시각 - 시간
+		
+		//요구사항] 오늘 만난 커플의 100일을 계산하세요.
+		Calendar now = Calendar.getInstance();
+		
+		System.out.printf("1일차: %tF\n", now);
+		now.add(Calendar.DATE, 99);
+		System.out.printf("100일차: %tF\n", now);
+		
+		
+		Calendar birthday = Calendar.getInstance();
+		
+		birthday.set(1996, 4, 6);
+		birthday.add(Calendar.YEAR, 1);
+		System.out.printf("내 백일잔치: %tF\n", birthday);
+		
+		
+		//현재 시각 초기화
+		now = Calendar.getInstance();
+		
+		now.add(Calendar.DATE, -50);
+		System.out.printf("%tF\n", now);
+		
+		
+		//3시간 25분 뒤 비타민 복용
+		now = Calendar.getInstance();
+		now.add(Calendar.HOUR, 3);
+		now.add(Calendar.MINUTE, 25);
+		
+		System.out.printf("비타민 먹을 시간: %tT\n", now);
+		
+
+	}
+
+	private static void m3() {
+		
+		//Canledar 메소드
+		//1. int.get(int)
+		//2. int.set(상수, 값) 하나씩 수정하기 / 여러 개 수정하기 int.set(...) 오버로딩 된 목록 확인하기
+		
+		//현재 시각 얻어오기
+		Calendar c1 = Calendar.getInstance();
+		
+		//특정 시각 얻어오기 > 원하는 시각 만들기
+		//1. 무조건 현재 시각 얻어오기
+		//2. 원하는 시각으로 수정
+		Calendar birthday = Calendar.getInstance();
+		
+		//시각 수정하기
+		//void set() 메소드 사용
+		//시간 하나 수정하는 데 너무 많은 작업
+		birthday.set(Calendar.YEAR, 1996);
+		birthday.set(Calendar.MONTH, 4);
+		birthday.set(Calendar.DATE, 6);
+		
+		birthday.set(Calendar.HOUR, 10);
+		birthday.set(Calendar.MINUTE, 04);
+		birthday.set(Calendar.SECOND, 0);
+		
+		System.out.printf("%tF %tT %tA\n", birthday, birthday, birthday);
+
+	
+		
+		Calendar christmas = Calendar.getInstance();
+		
+		christmas.set(2022, 11, 25);		
+		System.out.printf("%tF %tT %tA\n", christmas, christmas, christmas);
+		
+		christmas.set(2022, 11, 25, 18, 0);
+		System.out.printf("%tF %tT %tA\n", christmas, christmas, christmas);
+		
+		christmas.set(2022, 11, 25, 18, 0, 0);
+		System.out.printf("%tF %tT %tA\n", christmas, christmas, christmas);
+	
+	
+	}
 
 	private static void m2() {
 		//두번째 예제
@@ -145,7 +330,6 @@ public class Ex19_DatetTime {
 		System.out.printf("%tA\n", now); //월요일 > 로컬화된 요일 이름!
 	}
 
-	
 	private static void m1() {
 		//첫번째 예제
 	

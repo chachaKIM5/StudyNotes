@@ -33,6 +33,7 @@ public class Ex20_if {
 			
 		3. 분기문
 			- 개발자가 코드의 흐름을 원하는 곳으로 이동한다.
+			- 독립적으로 사용되지 않고 다른 제어문에 섞여서 사용된다.
 			a. break
 			b. continue
 			c. goto(JDK 1.5에서 폐기)

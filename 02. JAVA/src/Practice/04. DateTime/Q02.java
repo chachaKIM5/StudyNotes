@@ -16,14 +16,14 @@ public class Q02 {
 	 4. add() 메소드 사용해 Calendar.YEAR에 1년 더하고 printf %tF로 첫돌 출력
 	 
 	 */
-		Calendar now = Calendar.getInstance();
+		Calendar birthday = Calendar.getInstance();
 		
-		now.add(Calendar.DATE, 100);
-		System.out.printf("백일: %tF\n", now);
+		birthday.add(Calendar.DATE, 100);
+		System.out.printf("백일: %tF\n", birthday);
 		
-		now = Calendar.getInstance();
-		now.add(Calendar.YEAR, 1);
-		System.out.printf("첫돌: %tF\n", now);
+		birthday = Calendar.getInstance();
+		birthday.add(Calendar.YEAR, 1);
+		System.out.printf("첫돌: %tF\n", birthday);
 		
 	}
 }

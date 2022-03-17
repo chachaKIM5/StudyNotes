@@ -32,17 +32,23 @@ public class Q06 {
 		System.out.print("종료 숫자: ");
 		int endNum = Integer.parseInt(reader.readLine());
 		
+
 		int sum = 0;
 		int sign = 1;
 		
+		
 		if (startNum <= endNum) {
 			for ( ; startNum <= endNum ; startNum++) {
+				
 				if (startNum == endNum) {
 					System.out.printf("%d = ", startNum);
+					
 				} else if (sign > 0) {
 					System.out.printf("%d - ", startNum);
+					
 				} else if (sign < 0) {
 					System.out.printf("%d + ", startNum);
+					
 				} 
 				sum += sign * startNum;
 				sign *= (-1); 
@@ -62,9 +68,59 @@ public class Q06 {
 				sign *= (-1);
 			}
 				
-		} 
-		
-		System.out.print(sum);
-		
-	}
+		} System.out.print(sum);
+
+	}//main
 }
+		
+
+
+
+
+
+//		int sum = 0;
+//		int sign = 1;
+//		
+//		for (;;) {
+//			
+//			if (startNum == endNum) {
+//				System.out.printf("%d", startNum);
+//				sum += sign * startNum;
+//				break;
+//				
+//			} else if (startNum < endNum) {
+//				if (sign > 0) {
+//					System.out.printf("%d - ", startNum);
+//					
+//				} else if (sign < 0) {
+//					System.out.printf("%d + ", startNum);
+//					
+//				} sum += sign * startNum;
+//				sign *= (-1);
+//				startNum++;
+//
+//			} else {
+//				if (sign > 0) {
+//					System.out.printf("%d - ", startNum);
+//
+//				} else if (sign < 0) {
+//					System.out.printf("%d + ", startNum);
+//
+//				} sum += sign * startNum;
+//				sign *= (-1);
+//				startNum--; 
+//			}
+//			
+//		} System.out.printf(" = %d", sum);
+//		
+//		
+//	}//main
+//}	
+		
+		
+		
+		
+		
+		
+		
+

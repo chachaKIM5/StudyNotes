@@ -12,12 +12,11 @@ public class Q05 {
 	 프로세스 설계
 	 1. BufferedReader, parseInt로 시작 숫자(startNum)와 종료 숫자(endNum) 입력받기
 	 2. 더한 값을 누적할 int sum = 0; 선언
-	 3.	(1) 시작 숫자 < 종료 숫자인 경우
-	  	 	시작 숫자 1씩 증가하면서 "%d + " 출력, 시작 숫자 = 종료 숫자 됐을 때 "%d = " 출력
-	 4. (2) 시작 숫자 > 종료 숫자인 경우,
-	 		시작 숫자 1씩 감소하면서 "%d + " 출력, 시작 숫자 = 종료 숫자 됐을 때 "%d = " 출력
-	 5. 안쪽 if문에서 빠져나오면 sum에 startNum을 누적해서 더하면서 for문 반복
-	 6. 바깥 if문에서 빠져나오면 sum값 출력
+	 3. for문 안에서 startNum을 1씩 증감 & 누적 변수 sum에 startNum을 더하면서 무한 루프,
+	  (1) 시작 숫자 = 종료 숫자: 루프 탈출
+	  (2) 시작 숫자 < 종료 숫자: 1씩 증가
+	  (3) 시작 숫자 > 종료 숫자: 1씩 감소
+	 4. for문을 탈출하면 "= sum" 값을 출력, 마지막 + 없애기 위해 \b\b 추가
 	 
 	 */
 		
@@ -31,27 +30,19 @@ public class Q05 {
 		
 		int sum = 0;
 		
-		if (startNum <= endNum) {
-			for ( ; startNum <= endNum ; startNum++) {
-				if (startNum == endNum) {
-					System.out.printf("%d = ", startNum);
-				} else {
-					System.out.printf("%d + ", startNum);
-				} sum += startNum;
-			}
+		for (;;) {
+			System.out.printf("%d + ", startNum);
+			sum += startNum;
 			
-		} else {
-			for ( ; startNum >= endNum ; startNum--) {
 				if (startNum == endNum) {
-					System.out.printf("%d = ", startNum);
+					break;
+				} else if (startNum <= endNum) {
+					startNum++;
 				} else {
-					System.out.printf("%d + ", startNum);
-				} sum += startNum;
-			}
-				
-		} 
-		
-		System.out.print(sum);
+					startNum--;				
+				}
 
+		} System.out.printf("\b\b= %d", sum);
+		
 	}
 }

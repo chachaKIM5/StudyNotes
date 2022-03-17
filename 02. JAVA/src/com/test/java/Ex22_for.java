@@ -32,10 +32,178 @@ public class Ex22_for {
 		//m7();
 		//m8();
 		//m9();
-		m10();
+		//m10();
 		//m11();
+		//m12();
+		//m13();
+		m14();
 		
 	} //main
+
+	private static void m14() {
+		//달력 만들기
+		//1. 월의 마지막일
+		//2. 해당 월 1일의 요일만 알면 만들 수 있다
+
+		int year = 2022;
+		int month = 2;
+		
+		int lastDay = getLastDay(year, month);
+		int dayOfWeek = getDayOfWeek(year, month);
+		
+		System.out.println("====================================================");
+		System.out.printf("                     %d년 %d월\n", year, month);	
+		System.out.println("====================================================");
+		System.out.println("[일]\t[월]\t[화]\t[수]\t[목]\t[금]\t[토]");
+		System.out.println("====================================================");
+		
+		for (int i=0 ; i<dayOfWeek ; i++) {
+			System.out.print("\t");
+		}
+
+		for (int i=1 ; i<=lastDay ; i++) {
+			System.out.printf("%3d\t", i);
+		
+			if ((i + dayOfWeek) % 7 == 0) {
+				System.out.println();
+			}
+		}	
+	}
+	
+	
+	//m13을 활용해 입력한 달의 1일이 무슨 요일인지 알려주는 메소드 만들기
+	private static int getDayOfWeek(int year, int month) {
+
+		int total = 0;
+		int date = 1;
+		
+		for (int i=1 ; i<year ; i++) {
+			total += 365;
+			
+			if (isLeapYear(i)) {
+				total++;
+			}
+		}
+		
+		for (int i=1 ; i<month ; i++) {
+			total += getLastDay(year, i);
+		}
+		
+		total += date;
+		
+		return (total % 7);
+	}
+
+	private static void m13() {
+		
+		//서기 1년 1월 1일부터 오늘까지 며칠째인지 합을 구하시오.
+		//1년 = 365일, 윤년은 366일
+		
+		int total = 0;
+		int year = 2022;
+		int month = 3;
+		int date = 17;
+		
+		//1년 1월 1일 ~ 2021년 12월 31일
+		
+		for (int i=1 ; i<year ; i++) {
+			total += 365;
+			
+			//현재 i가 윤년인지 검사?
+			if (isLeapYear(i)) {
+				total++;
+			}
+		}
+		
+		//2022년 1월 1일 ~ 2022년 2월 28일
+		for (int i=1 ; i<month ; i++) {
+			
+			total += getLastDay(year, i);
+		}
+		
+		//2022년 3월 1일 ~ 2022년 3월 17일
+		total += date;
+		
+		System.out.printf("%d년 %d월 %d일은 %,d일째 되는 날이고 %s요일입니다.\n"
+							, year, month, date
+							, total
+							, getDay(total));
+		
+	}
+	
+	private static int getLastDay(int year, int month) {
+		
+		switch (month) {
+			case 1: case 3: case 7: case 8: case 10: case 12:
+				return 31;
+			case 4: case 6: case 9: case 11:
+				return 30;
+			case 2:
+				return isLeapYear(year) ? 29: 28;
+		}
+		
+		return 0;
+	}
+
+	
+	public static boolean isLeapYear(int year) {
+		
+		if (year % 4 == 0) {
+			
+			if (year % 100 == 0) {
+				
+				if (year % 400 == 0) {
+					return true;
+				} else {
+					return false;
+				}
+				
+			} else {
+				return true;
+			}
+			
+		} else {
+			return false;
+		}
+	}
+
+	private static void m12() {
+		
+		//요구사항] 누적값이 1000을 넘기는 순간 루프를 종료하시오. (반복문 Q07 같이 풀어보기)
+		//선생님 방법.. \b를 활용해 마지막 + 기호 지워버리기. 쉽다!
+		
+		int sum = 0;
+		
+		for (int i=1 ; ; i++) {
+			
+			sum += i;
+			
+			System.out.printf("%d + ", i);
+			if (sum >= 1000) {
+				break;
+			}
+						
+		} System.out.printf("\b\b= %d", sum);
+		
+		
+		
+//내가 푼 방법.. 어렵다!		
+//		int sum = 0;
+//		
+//		for (int i=1 ; ; i++) {
+//			
+//			sum += i;
+//			
+//			if (sum >= 1000) {
+//				System.out.printf("%d = ", i);
+//				break;
+//			} else {
+//				System.out.printf("%d + ", i);
+//			}	
+//						
+//		} System.out.println(sum);
+		
+	}
 
 	private static void m11() {
 		//난수, Random
@@ -119,19 +287,19 @@ public class Ex22_for {
 	public static String getDay(int date) {
 	
 		if (date % 7 == 1) {
-			return "화";
-		} else if (date % 7 == 2) {
-			return "수";
-		} else if (date % 7 == 3) {
-			return "목";
-		} else if (date % 7 == 4) {
-			return "금";
-		} else if (date % 7 == 5) {
-			return "토";
-		} else if (date % 7 == 6) {
-			return "일";
-		} else if (date % 7 == 0) {
 			return "월";
+		} else if (date % 7 == 2) {
+			return "화";
+		} else if (date % 7 == 3) {
+			return "수";
+		} else if (date % 7 == 4) {
+			return "목";
+		} else if (date % 7 == 5) {
+			return "금";
+		} else if (date % 7 == 6) {
+			return "토";
+		} else if (date % 7 == 0) {
+			return "일";
 		}
 		
 		return "";

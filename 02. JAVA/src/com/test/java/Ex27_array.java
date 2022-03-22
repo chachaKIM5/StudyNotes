@@ -11,13 +11,13 @@ public class Ex27_array {
 		//다차원 배열
 		// - 배열의 n차원: 차원을 늘려서 더 복잡한 데이터를 담을 수 있다
 		
-		//m1();
+		m1();
 		//m2();
 		//m3();
 		//m4();
 		//m5();
 		//m6();
-		m7();
+		//m7();
 	}
 
 	private static void m7() {
@@ -162,20 +162,30 @@ public class Ex27_array {
 		//중복되지 않는 임의의 숫자 6개를 만드시오. (로또)
 		
 		int[] lotto = new int[6];
+		boolean isDuplicate = false;
 		
 		for (int i=0 ; i<lotto.length ; i++) {
 			int n = (int)(Math.random() * 45) + 1;
 			
+			for (int j=0 ; j<i ; j++) {
+				if (lotto[j] == n) {
+					isDuplicate = true;
+					i--;
+					break;
+				}
+			}
 			
+			if (!isDuplicate) {
+				lotto[i] = n;
+			}
 			
-			lotto[i] = n;
+			isDuplicate = false;
 			
 		}
 		
 		Arrays.sort(lotto);						   //정렬
 		System.out.println(Arrays.toString(lotto)); //덤프
 
-		//TODO 이 부분 놓친 거 있음!
 
 	}
 
@@ -289,7 +299,7 @@ public class Ex27_array {
 		
 		
 		//3차원 배열
-		
+		System.out.println("3차원 배열");
 		for (int i=0 ; i<2 ; i++) {
 			for (int j=0 ; j<2 ; j++) {
 				for (int k=0 ; k<3 ; k++) {

@@ -11,6 +11,7 @@ public class Item34 {
 		
 		String test = "가나다라마바사.!@ #$";
 		System.out.println(test.length());
+		//13
 		
 		
 		//참고: 배열의 길이를 알려주는 nums.length는 메소드가 아니라 변수로서 작용 

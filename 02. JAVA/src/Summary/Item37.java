@@ -6,6 +6,8 @@ public class Item37 {
 	
 		//[SUMMARY] 문자열 조작 기능: 문자열 검색 (2022. 3. 22. 오전 2:55:21)
 
+		
+		//1
 		//String.indexOf(char c)
 		//String.indexOf(String s)
 		//String.indexOf(char c, int beginIndex)
@@ -28,5 +30,16 @@ public class Item37 {
 		
 		index = test.indexOf("안녕", index + "안녕".length()); //첫 번째 "안녕" 다음 위치부터 찾은 "안녕"
 		System.out.println(index); //15
+		
+		
+		
+		//2
+		//String.lastIndexOf(char c)
+		//String.lastIndexOf(String s)
+		//String.lastIndexOf(char c, int beginIndex)
+		//String.lastIndexOf(String s, int beginIndex)
+		
+		//indexOf와 같지만 오른쪽 -> 왼쪽으로 검색한다.
+		
 	}
 }

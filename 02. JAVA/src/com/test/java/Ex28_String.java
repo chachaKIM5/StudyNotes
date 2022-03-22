@@ -2,6 +2,7 @@ package com.test.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Ex28_String {
 
@@ -22,9 +23,245 @@ public class Ex28_String {
 		//m6();
 		//m7();		
 		//m8();
-		m9();
+		//m9();
+		//m10();
+		//m11();
+		//m12();
+		//m13();
+		//m14();
+		m15();
+		
+		//String
+//		1. length() > 문자열 길이
+//		2. charAt(index) > 문자 추출
+//		3. trim() > 문자열 공백 제거
+//		4. indexOf(search, Index), lastIndexOf(search, index) > 문자열 검색
+//		5. toUpperCase(), toLowerCase > 문자열 대소문자 변경
+//		6. startsWith(word), endsWith(word) > 패턴 검색
+//		7. substring(begin, end) > 문자열 추출
+//		8. contains(word) > 문자열 검색
+//		9. replace(old, new) > 문자열 치환
+//		10. split(delimiter) > 문자열 분리: 구분자를 기준으로 String[]로 반환
+//		11. toCharArray() > 문자열 분리: 한 글자씩 char[]로 반환
+		
+	}
+
+	private static void m15() {	//split, toCharArray
+		
+		//문자열 분리
+		//- String[] split(String delimiter)
+		//- 문자열을 구분자를 기준으로 쪼개는 메소드
+		
+		String name = "홍길동,아무개,하하하,강호동,유재석";
+		
+		String[] list = name.split(","); //구분자는 사라진다
+		
+		for (int i=0 ; i<list.length ; i++) {
+			System.out.println(list[i]);
+		}
 		
 		
+		String txt = "홍길동입니다.";
+		
+		char[] clist = txt.toCharArray();
+		System.out.println(Arrays.toString(clist));
+		
+		char[] clist2 = new char[txt.length()];
+		
+		for (int i=0 ; i<clist2.length ; i++) {
+			clist2[i] = txt.charAt(i);
+		}
+		System.out.println(Arrays.toString(clist2));
+		
+		
+	}
+
+	private static void m14() { //replace 문자열 치환
+
+		//문자열 치환(바꾸기)
+		// - String replace(String old, String new)
+		// - 문자열의 일부를 다른 문자열로 교체하는 메소드
+		
+		String txt = "안녕하세요, 홍길동입니다. 저를 홍길동이라고 부르세요.";
+		
+		System.out.println(txt.replace("홍길동", "김승연"));
+		//안녕하세요, 김승연입니다. 저를 김승연이라고 부르세요.
+		//모든 String old를 String new로 바꿔준다
+
+		
+		//문자열 치환 예제) 게시판 금지어 바꾸기 -> "Masking"
+		
+		String content = "게시판에 글을 작성합니다. 바보야!!";
+		String word = "바보";
+		
+		System.out.println(content.replace("바보", "**"));
+		
+		txt = "     하나       둘      셋        ";
+		System.out.printf("[%s]\n", txt);
+		
+		System.out.printf("[%s]\n", txt.trim()); //양옆 공백만 사라진다
+		System.out.printf("[%s]\n", txt.replace(" ", ""));
+		//replace로 공백을 빈문자열로 대체 -> 사라짐
+		//뭔가를 제거하고 싶을 때 replace 이용해 ""로 대체하면 쉽다
+		System.out.printf("[%s]\n", txt.replace("하나", ""));
+		
+	}
+
+	private static void m13() { //contains 문자열 검색
+
+		//문자열 검색
+		//indexOf => 어디에 있는지 index를 알려준다
+		//contains => 있는지 없는지 true, false를 알려준다
+		String txt = "안녕하세요. 홍길동입니다.";
+		
+		System.out.println(txt.contains("홍길동"));		//true
+		System.out.println(txt.indexOf("홍길동") > -1);	//true
+		
+		System.out.println(txt.contains("아무개"));		//false
+		System.out.println(txt.indexOf("아무개") > -1);	//false
+		
+	}
+
+	private static void m12() { //substring 문자열 추출
+
+		//문자열 추출
+		//- String substring(int beginIndex, int endIndex)
+		//- String substring(int beginIndex)
+		//- beginIndex: 포함(inclusive)
+		//- endIndex: 미포함(exclusive)
+		
+		String txt = "가나다라마바사아자차카타파하";
+		
+		System.out.println(txt.substring(3, 7)); //3, 4, 5, 6번째 글자를 추출
+		
+		System.out.println(txt.charAt(5)); // 자료형 char > '바'
+		System.out.println(txt.substring(5, 6)); // 자료형 Str > "바"
+		System.out.println();
+		
+		//substring 사용 예시) 정형화된 데이터
+		
+		String jumin = "960322-2018732";
+		
+		//성별?
+		System.out.println(jumin.charAt(7) == '1' ? "남자" : "여자");
+		System.out.println(jumin.substring(7, 8).equals("1") ? "남자" : "여자");
+		
+		//몇년생?
+		System.out.println(jumin.charAt(0) + jumin.charAt(1)); //'9'(57) + '6'(54) = 111
+		System.out.println("" + jumin.charAt(0) + jumin.charAt(1)); // 96
+		System.out.println(jumin.substring(0, 2) + "년생");
+		
+		//몇월생?
+		System.out.println(jumin.substring(2, 4) + "월생");
+		
+		//며칠에 태어났을까?
+		System.out.println(jumin.substring(4, 6) + "일생");
+		System.out.println();
+		
+		
+		
+		//substring 사용 예시) 파일 경로
+		String path = "C:\\class\\JavaTest\\Hello.java";
+		
+		//1. 파일명 추출
+		int index = path.lastIndexOf("\\");
+		System.out.println(path.substring(index+1)); 
+		
+//		
+//		int indexEnd = path.lastIndexOf(".");
+//		//확장자까지 //endIndex 안 쓰면 "끝까지"
+//		System.out.println(path.substring(indexBegin+1, path.length())); //endIndex 필요 X
+//		
+//		//파일 이름만
+//		System.out.println(path.substring(indexBegin+1, indexEnd));
+//		
+//		index = filename.lastIndex
+//		TODO 수정
+		
+		
+	}
+
+	private static void m11() {	//indexOf와 비슷한 lastIndexOf (오른쪽 -> 왼쪽 검색)
+
+//		왼쪽 -> 오른쪽으로 검색
+//		- int indexOf(char)
+//		- int indexOf(String)
+//		- int indexOf(char, int)
+//		- int indexOf(String, int)
+		
+//		오른쪽 -> 왼쪽으로 검색
+//		- int lastIndexOf(char)
+//		- int lastIndexOf(String)
+//		- int lastIndexOf(char, int)
+//		- int lastIndexOf(String, int)
+		
+		String txt = "홍길동 자바 공부 홍길동";
+		
+		System.out.println(txt.indexOf("홍길동")); 		//0
+		System.out.println(txt.indexOf("홍길동", 3));		//10
+		
+		System.out.println(txt.lastIndexOf("홍길동"));	//10
+		System.out.println(txt.lastIndexOf("홍길동", 9));	//0
+		
+	}
+
+	private static void m10() {	//문자열 패턴 검색 startsWith(), endsWith()
+		
+		//패턴 검색
+		//- boolean startsWith(String word)
+		//- boolean endsWith(String word)
+		
+		String txt = "자바 오라클 프로그래밍";
+		
+		System.out.println(txt.startsWith("자바"));
+		System.out.println(txt.startsWith("오라클"));
+		System.out.println();
+		
+		String name = "홍길동";
+		
+		//다 같은 기능이지만 startsWith가 가독성 높다
+		System.out.println(name.startsWith("홍"));
+		System.out.println(name.charAt(0) == '홍');
+		System.out.println(name.indexOf('홍') == 0);
+		System.out.println();
+		
+		System.out.println(name.endsWith("프로그래밍"));
+		System.out.println(name.endsWith("밍"));
+		
+		System.out.println(name.endsWith("동"));
+		System.out.println(name.endsWith("석"));
+		System.out.println(name.charAt(name.length()-1) == '동');
+		System.out.println(name.indexOf('동') == name.length() - 1);
+		
+		System.out.println();
+		
+		
+		//예제) 파일 경로(파일명)
+		
+		String path = "C:\\class\\Java\\JavaTest\\Ex28_String.java";
+		
+		//요구사항] 해당 경로의 파일이 자바 소스파일입니까? > 확장자 검사
+		if (path.endsWith(".java")) {
+			System.out.println("자바 소스파일입니다.");
+		} else {
+			System.out.println("자바 소스파일이 아닙니다.");
+		}
+		
+		
+		//요구사항2] 해당 파일이 이미지 파일입니까? > 확장자 검사
+		
+		String img = "dog.PNG";
+		//img = img.toLowerCase(); //아래 조건에 사용되는 목적 이외에 영구적으로 변환됨. 원본을 훼손하는 행위라 비추천
+
+		if (img.toLowerCase().endsWith(".jpg")
+				|| img.toLowerCase().endsWith(".jpeg")
+				|| img.toLowerCase().endsWith(".gif")
+				|| img.toLowerCase().endsWith(".png")) {
+			
+			System.out.println("이미지 파일입니다.");
+		} else {
+			System.out.println("이미지 파일이 아닙니다.");
+		}
 	}
 
 	private static void m9() { //문자열 대소문자 변경

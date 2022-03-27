@@ -4,12 +4,24 @@ public class Q03 {
 
 	public static void main(String[] args) {
 		
+		
+		//1. 클래스 5개 생성(Packer, Pencil, Eraser, BallPointPen, Ruler)
+		//2. Packer에 static 변수 선언 (객체 개수 카운트)
+		//3. 각 클래스에서 문구류 특성(진하기, 사이즈...등등) Setter로 설정, Getter 대신 info()로 String값 반환
+		//4. Packer 클래스에서 문구류.info()로 정보 얻어온 후 조건에 맞는지 검사 -> 맞으면 포장, static 변수 카운트 ++ / 아니면 포장 X
+		//5. static 변수 결과를 출력하는 Packer.countPacking 메소드 만들기 
+		//6. main 메소드에서 호출
+		
+		
+		
+		//
+		
 		//포장하는 직원
 		Packer packer = new Packer();
 
 		//연필
 		Pencil p1 = new Pencil();
-		p1.setHardness("3H");
+		p1.setHardness("B");
 		packer.packing(p1);
 
 		Pencil p2 = new Pencil();
@@ -57,10 +69,10 @@ public class Q03 {
 
 class Packer {
 	
-	public static int pencilCount;
-	public static int eraserCount;
-	public static int ballPointPenCount;
-	public static int rulerCount;
+	private static int pencilCount;
+	private static int eraserCount;
+	private static int ballPointPenCount;
+	private static int rulerCount;
 	
 	
 	public void packing(Pencil pencil) {
@@ -97,6 +109,7 @@ class Packer {
 		if (ruler.info() == null) {
 			System.out.println("포장 전 검수: 포장할 수 없습니다.");
 		} else {
+			
 			System.out.printf("포장 전 검수: %s입니다.\n", ruler.info());
 			Packer.rulerCount++;
 			System.out.println("포장을 완료했습니다.");
@@ -133,7 +146,6 @@ class Packer {
 class Pencil {
 	private String hardness;
 
-	
 	public void setHardness(String hardness) {
 		if (hardness.equals("4B") || hardness.equals("3B") ||
 			hardness.equals("2B") || hardness.equals("B")  ||
@@ -156,6 +168,8 @@ class Pencil {
 	}
 }
 
+
+
 class Eraser {
 	private String size;
 	
@@ -176,6 +190,8 @@ class Eraser {
 	}
 	
 }
+
+
 
 class BallPointPen {
 	private double thickness;
@@ -211,10 +227,11 @@ class BallPointPen {
 	
 }
 
+
+
 class Ruler {
 	private int length;
 	private String shape;
-	
 
 	public void setLength(int length) {
 		if ((length == 30) || (length == 50) || (length == 100)) {

@@ -75,10 +75,13 @@ class Employee {
 	
 	public void setDepartment(String department) {
 		if (department.equals("영업부") || department.equals("기획부") ||
-			department.equals("총무부") || department.equals("총무부") ||
+			department.equals("총무부") || department.equals("개발부") ||
 			department.equals("홍보부")) {
 		
 			this.department = department;
+			
+		} else {
+			System.out.println("부서 형식이 올바르지 않습니다.");
 		}
 	}	
 	
@@ -91,6 +94,9 @@ class Employee {
 			position.equals("대리") || position.equals("사원")) {
 			
 			this.position = position;
+			
+		} else {
+			System.out.println("직위 형식이 올바르지 않습니다.");
 		}
 	}
 
@@ -99,6 +105,7 @@ class Employee {
 	}
 	
 	public void setTel(String tel) {
+		//선생님 풀이에서 조건을 ||로 묶었는데 그래도 괜찮은지??
 		if (tel.substring(3, 4).equals("-") && tel.substring(8, 9).equals("-")
 			&& tel.startsWith("010")) {
 			
@@ -116,16 +123,18 @@ class Employee {
 	}
 	
 	public void setBoss(Employee boss) {
-		if (boss == null) {
-			this.boss = null;
-		} else if (boss.department.equals(this.department)) {
-			this.boss = boss;
+		if (boss != null) {
+			if (boss.getDepartment().equals(this.department)) {
+				this.boss = boss;
+			}
 		}
 	}
 	
 
 	public void info() {
 		
+		
+		//StringBuilder를 사용하는 게 좋다
 		System.out.printf("[%s]\n", this.name);
 		System.out.printf("- 부서: %s\n", this.department);
 		System.out.printf("- 직위: %s\n", this.position);
@@ -138,6 +147,7 @@ class Employee {
 												   , this.boss.department
 												   , this.boss.position);
 
+			
 		}
 	}	
 }

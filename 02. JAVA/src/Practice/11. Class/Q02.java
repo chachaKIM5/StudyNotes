@@ -38,7 +38,7 @@ class Note {
 	private String size;
 	private String color;
 	private int page;
-	private String owner = "";
+	private String owner;
 	private int price=500;
 	
 	
@@ -168,7 +168,7 @@ class Note {
 		
 		String result;
 		
-		if (this.owner.equals("")) {
+		if (this.owner == null) {
 			result = String.format("■■■■■■ 노트 정보 ■■■■■■\n")
 					 + String.format("주인 없는 노트\n")
 					 + String.format("■■■■■■■■■■■■■■■■■■■■■■■");

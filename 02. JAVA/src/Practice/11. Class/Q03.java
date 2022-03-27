@@ -10,7 +10,7 @@ public class Q03 {
 		Bugles snack = new Bugles();
 		
 		snack.setWeight(500);
-		snack.setCreationTime("2022-03-20");
+		snack.setCreationTime("2022-03-21");
 		System.out.println("가격: " + snack.getPrice() + "원");
 		System.out.println("유통 기한이 " + snack.getExpiration() + "일 남았습니다.");
 		
@@ -20,7 +20,7 @@ public class Q03 {
 		Bugles snack2 = new Bugles();
 		
 		snack2.setWeight(300);
-		snack2.setCreationTime("2022-03-12");
+		snack2.setCreationTime("2022-03-13");
 		System.out.println("가격: " + snack2.getPrice() +"원");
 		System.out.println("유통 기한이 " + snack2.getExpiration() + "일 남았습니다.");
 		
@@ -116,7 +116,8 @@ class Bugles {
 		}
 		
 		Calendar now = Calendar.getInstance();
-		expiration = last - (now.get(Calendar.DATE) - this.creationTime.get(Calendar.DATE));
+		expiration = (int)((this.creationTime.getTimeInMillis() - now.getTimeInMillis())
+						/ 1000 / 60 / 60 / 24) + last - 1;
 		
 	}
 

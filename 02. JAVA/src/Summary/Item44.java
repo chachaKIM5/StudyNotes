@@ -4,7 +4,7 @@ public class Item44 {
 
 	public static void main(String[] args) {
 		
-		//[SUMMARY] static, static 변수, 정적 변수, 클래스 변수, 공용 변수 (2022. 3. 27. 오후 10:29:41)
+		//[SUMMARY] static, static 변수, 정적 변수, 클래스 변수, 공용 변수, 정적 생성자 (2022. 3. 27. 오후 10:29:41)
 		
 		/*
 		
@@ -13,17 +13,26 @@ public class Item44 {
 		static 변수(공용 변수)
 		- 하나의 클래스로부터 만들어진 모든 객체가 공통으로 가지는 데이터를 저장하는 변수
 		
+		정적 생성자: static 변수만을 초기화하는 역할 
+		
 		*/
 		
-		
-		Student.setSchool("역삼 중학교");
+		//-- 정적 생성자의 정적 변수 school 초기화 ▼ -- 
 		Student s1 = new Student();	
 		Student s2 = new Student();	
 		Student s3 = new Student();	
 		
-		System.out.println(s1.info());
-		System.out.println(s2.info());
-		System.out.println(s3.info());
+		System.out.println(s1.info()); //학교: 역삼 중학교
+		System.out.println(s2.info()); //학교: 역삼 중학교
+		System.out.println(s3.info()); //학교: 역삼 중학교
+
+		//-- Setter로 정적 변수 school 값 바꾸기 ▼ --
+		Student.setSchool("원미 중학교");
+		
+		System.out.println(s1.info()); //학교: 원미 중학교
+		System.out.println(s2.info()); //학교: 원미 중학교
+		System.out.println(s3.info()); //학교: 원미 중학교
+		
 	}
 }
 
@@ -32,7 +41,10 @@ class Student {
 	
 	private static String school;
 
-	
+	static {
+		Student.school = "역삼 중학교";	
+	}
+
 	public static String getSchool() {
 		return school;
 	}

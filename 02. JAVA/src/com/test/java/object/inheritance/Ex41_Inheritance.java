@@ -26,7 +26,7 @@ public class Ex41_Inheritance {
 		 
 		 
 		 * 수업 외 의문점: 부모 클래스의 private 멤버 변수도 자식 클래스에 상속될까?
-		  > test 결과 = X
+		 TODO 선생님께 질문하기
 		 
 		 */
 		

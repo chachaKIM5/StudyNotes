@@ -32,23 +32,72 @@ public class Ex52_Generic {
 		
 		
 		//위의 문제점 해결 방안
-		//1. Object 클래스 	> 오래된 방식 > Ex53_Object.java
-		//2. 제네릭 클래스 	> 최신 방식
+		//1. Object 클래스 	> 오래된 방식 > 개념은 Ex53_Object.java 참고
+		//2. 제네릭 클래스 	> 최신 방식 > 개념은 Ex54_Generic.java 참고
 		
+		
+		//예시
+		//(1) 전용 클래스
+		//(2) Object 클래스(범용)	> 사용할 때 다운캐스팅
+		//(3) 제네릭 클래스(범용)	> 바로 사용 가능, 범용+전용 클래스 장점만 취함
+		
+		//(1)
 		WrapperInt n1 = new WrapperInt(10);
 		System.out.println(n1.toString());
 		System.out.println(n1.getData() * 2);
 		System.out.println();
 		
+		//(2)
+		WrapperObject n2 = new WrapperObject(20); //UpCasting, Boxing
+		System.out.println(n2.toString());
+		System.out.println((int)(n2.getData()) * 2); //DownCasting, UnBoxing
+		System.out.println();
+
+		//(3)
+		Wrapper<Integer> n3 = new Wrapper<Integer>(30);
+		System.out.println(n3.toString());
+		System.out.println(n3.getData() * 2);
+		System.out.println();
+
+		
+		//(1)
 		WrapperString s1 = new WrapperString("홍길동");
 		System.out.println(s1.toString());
 		System.out.println(s1.getData().length());
 		System.out.println();
+
+		//(2)
+		WrapperObject s2 = new WrapperObject("아무개"); //UpCasting, Boxing
+		System.out.println(s2.toString());
+		System.out.println(((String)s2.getData()).length()); //괄호 유의, DownCasting, UnBoxing
+		System.out.println();
 		
+		//(3)
+		Wrapper<String> s3 = new Wrapper<String>("김승연");
+		System.out.println(s3.toString());
+		System.out.println(s3.getData().length());
+		System.out.println();
+		
+		
+		//(1)
 		WrapperBoolean b1 = new WrapperBoolean(true);
 		System.out.println(b1.toString());
 		System.out.println(b1.getData() ? "참" : "거짓");
 		System.out.println();
+		
+		//(2)
+		WrapperObject b2 = new WrapperObject(false); //UpCasting, Boxing
+		System.out.println(b2.toString());
+		System.out.println((boolean)b2.getData() ? "참" : "거짓"); //DownCasting, UnBoxing
+		System.out.println();
+		
+		//(3)
+		Wrapper<Boolean> b3 = new Wrapper<Boolean>(true);
+		System.out.println(b3.toString());
+		System.out.println(b3.getData() ? "참" : "거짓");
+		System.out.println();
+		
+
 		
 		
 	} //main
@@ -132,4 +181,50 @@ class WrapperBoolean {
 	public String toString() {
 		return "data=" + data;
 	}
+}
+
+
+class WrapperObject {
+	
+	private Object data;
+	
+	public WrapperObject(Object data) {
+		this.data = data;
+	}
+	
+	public Object getData() {
+		return data;
+	}
+	
+	public void setData(Object data) {
+		this.data = data;
+	}
+	
+	@Override
+	public String toString() {
+		return "data=" + data;
+	}
+}
+
+
+class Wrapper<T> {
+	private T data;
+	
+	public Wrapper(T data) {
+		this.data = data;
+	}
+	
+	public T getData() {
+		return data;
+	}
+	
+	public void setData(T data) {
+		this.data = data;
+	}
+	
+	@Override
+	public String toString() {
+		return "data=" + data;
+	}
+	//TODO 제네릭 클래스와 타입 변수 이해하고 복습, 연습해 보기
 }

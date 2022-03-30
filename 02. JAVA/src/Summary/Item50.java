@@ -4,7 +4,7 @@ public class Item50 {
 	
 	public static void main(String[] args) {
 		
-	
+		//[SUMMARY] Stereo Type 추상적 클래스 (2022. 3. 30. 오후 9:31:35)
 	/*
 	 	
 	 	클래스의 종류
@@ -31,15 +31,26 @@ public class Item50 {
 		 	- final public static 상수를 열거한 형태 (변수명은 대문자로 적는다)
 		 	
 		 4. 제네릭 클래스
+		 	- T: 타입 변수에 '자료형을 저장'하는 클래스
+		 	- 클래스 설계 당시에는 자료형이 결정되지 않고, 런타임(실행) 객체 생성 시 결정된다
+		 	- 인자 리스트는 꺾쇠(<>)안에 적는다
+		 	- 자료형은 값형 X, 반드시 참조형(클래스) 형태로 적는다 (Byte, Integer, Boolean, Double...)
 	 	
 
 	 */
 	
  	색상 color1 = 색상.노랑;
  	색상 color2 = 색상.파랑;
- 	System.out.println(color1);
- 	System.out.println(color2);
+ 	System.out.println(color1); //노랑
+ 	System.out.println(color2); //파랑
  	//color1 = 색상.빨강; -> 수정 불가능, final 변수기 때문에
+ 	
+ 	
+ 	Cup<String, Integer> cup = new Cup<String, Integer>("문자열", 100);
+ 	System.out.println(cup.getA()); //문자열
+ 	System.out.println(cup.getB()); //100
+ 	
+ 	
 
 	}//main
 } //Item50
@@ -96,3 +107,25 @@ enum 색상 {
 	빨강
 }
 
+
+
+//4. 제네릭 클래스
+
+class Cup<T,U> {
+	
+	public T a;
+	public U b;
+	
+	public Cup(T a, U b) {   //생성자. 생성자에는 <> 없어도 됨
+		this.a = a;
+		this.b = b;
+	}
+	
+	public T getA() {
+		return this.a;
+	}
+	
+	public U getB() {
+		return this.b;
+	}
+}

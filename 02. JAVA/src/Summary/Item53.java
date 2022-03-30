@@ -55,7 +55,7 @@ public class Item53 {
 		System.out.println(list2.get(list2.size() - 1));
 		
 		
-		//4. 요소의 수정 String set(int index, T newValue)
+		//4. 요소의 수정 T set(int index, T newValue)
 		System.out.println(list2.set(2, "다라마바사")); //다 //수정 전 값 반환
 		System.out.println(list2.get(2)); //다라마바사
 		

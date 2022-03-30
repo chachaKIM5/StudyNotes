@@ -228,7 +228,7 @@ public class Ex56_ArrayList {
 		
 		//4. 요소의 수정
 		// - list[0] = 10; (배열은 대입, 수정을 동일한 표현법으로)
-		// - String set(int index, T newValue)
+		// - T set(int index, T newValue)
 		//2번째 방을 포도 -> 파인애플
 		String temp = list.set(2, "파인애플"); 
 		System.out.println(temp); //포도

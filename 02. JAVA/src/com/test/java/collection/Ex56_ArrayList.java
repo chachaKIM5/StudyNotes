@@ -19,9 +19,13 @@ public class Ex56_ArrayList {
 		 - 자료구조
 		 
 		 컬렉션 종류
+		 
+		 
+		 
+		 
 		 1. List 계열
 		 	- ArrayList
-		 	- LinkedList
+		 	- LinkedList (Queue의 껍데기로 쓰이거나, 단독으로 쓰이거나)
 		 	- Queue
 		 	- Stack
 		 	- Vector(legacy)
@@ -51,12 +55,72 @@ public class Ex56_ArrayList {
 		//m2();
 		//m3();
 		//m4();
-		m5();
+		//m5();
+		//m6();
+		m7();
 		
 	} //main
 
+	private static void m7() {					//컬렉션 사용의 문제점 2가지와 해결 방법
+
+		//문제점 (1)
+		//*** 컬렉션에 반복적응로 데이터를 넣는 행동 > 가변 특성 유지하기 위해 프로그램을 무겁게 한다
+		//1. 버려지는 배열 = 쓰레기(Garbage) 발생 > 비용 발생
+		//2. 배열 복사 발생 > 비용 발생
+		
+		//위의 문제점을 해결하는 방법
+		//- ArrayList의 초기 길이를 지정할 수 있다
+		
+		
+		ArrayList<Integer> list = new ArrayList<Integer>(10);
+
+		for (int i=0 ; i<10 ; i++) {
+			list.add(i);
+		}
+		
+		list.add(5); //11번째 방에 데이터를 넣으려고 시도하면, 20칸으로 늘어남
+		//어느 정도 예측해서 초기 길이를 설정해 주는 것이 중요함
+ 		
+		
+		//문제점 (2)
+		//이 이후로 list에 데이터를 추가할 일이 없을 때? > 9칸이 남는다...!
+		//ArrayList는 배열의 길이를 무조건 더블링(2배) 하기 때문에,
+		//데이터 1024개가 있다고 할 때, 하나만 더 추가해도 2048칸짜리 배열, 1023칸이 빈 공간으로 남게 됨
+		
+		list.trimToSize();
+		//20칸 -> 11칸으로 줄인다
+		//작은 배열로 바꿔치기
+		//역시 쓰레기가 발생하므로 데이터를 더 추가할 일이 없다고 확신이 들 때만 호출해야 함
+		
+		//문제점은 다른 컬렉션에도 적용된다
+		
+	}
+
+	private static void m6() {
+		
+		//ArrayList(컬렉션) 특징
+		//1. 내부에 배열을 가지고 있다. == ArrayList를 배열이라고 생각하자
+		//2. ArrayList 클래스의 대부분 기능이 내부 배열을 조작하는 기능들로 구성
+		//3. 길이가 가변 > 데이터를 넣으면.. 계속 공간이 늘어난다?
+		
+		//1 + 3 = ??? 메모리를 차지한 후에도 길이가 가변일 수 있는 이유는 무엇일까?
+		//4칸 -> 공간이 부족하다? 2배 크기의 배열을 만들고 이전의 값을 복사한 후 원래 배열 삭제, 다시 더하기 시작
+		//list.length가 아니라 list.size()인 이유, 배열의 길이가 아니라 값이 몇 개인지 카운트
+		
+		
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(10);
+		list.add(20);
+		list.add(30);
+		list.add(40);
+		
+
+	}
+
+	
 	private static void m5() {						//컬렉션 + 성적표 만들기 예제
 
+			
 		// 배열 vs ArrayList를 선택?
 		// - 길이로 선택!
 		// - 학생이 몇 명인지 정확? 고정된 상태 > 배열
@@ -424,4 +488,18 @@ class Student {
 	}
 	
 	
+}
+
+//Member m = new Member();
+
+class Member {
+	
+	private int a;
+	private String b;
+	private int[] c;
+	public Member() {
+		a = 10;
+		b = "홍길동";
+		c = new int[5];
+	}
 }

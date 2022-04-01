@@ -11,36 +11,24 @@ public class MyStack {
 
 	public boolean push(String value) {
 		
-
-		//첫 add에만 배열을 생성 (index == 0)
-		if (this.index == 0) {
-			this.list = new String[4];
-		}
-		
-		
-		//try catch 사용해
-		//배열 범위 내 / 배열 범위 밖 / 기타 입력 실패 3가지 상황으로 나눈다
-		
-		//배열 범위 내
 		try {
+			if (this.index == 0) {
+				this.list = new String[4];
+			}
+			
+			if (this.index == this.list.length) {
+				String[] listNew = new String[this.list.length * 2];
+				
+				for (int i=0 ; i<this.list.length ; i++) {
+					listNew[i] = this.list[i];
+				}	
+				this.list = listNew;
+			}
+				
 			this.list[this.index] = value;
 			this.index++;
 			return true;
-		
-		//배열 범위 밖
-		} catch (IndexOutOfBoundsException e) {
-			String[] listNew = new String[this.list.length * 2];
-		
-			for (int i=0 ; i<this.list.length ; i++) {
-				listNew[i] = this.list[i];
-			}
-			
-			this.list = listNew;			
-			this.list[this.index] = value; 
-			this.index++;
-			return true;
-			
-		//입력 실패(boolean false 반환)
+	
 		} catch (Exception e) {
 			return false;
 		}
@@ -52,20 +40,16 @@ public class MyStack {
 		//stack은 후입선출
 		//MyArrayList의 get()과 비슷하지만, 매개변수 없고 뒤에서부터 하나씩 자동으로 꺼낸다
 		
-		try { 
-			if (this.list[this.index - 1] == null) {
-				throw new IndexOutOfBoundsException();
 
-			} else {
-				String result = this.list[index - 1];
-				index--;
-				return result;
-			}
-		} catch (IndexOutOfBoundsException e) {
-			return e.toString();
-		} catch (Exception e) {
-			return e.toString();
+		if (this.list[this.index - 1] == null) {
+			throw new IndexOutOfBoundsException();
+
+		} else {
+			String result = this.list[index - 1];
+			index--;
+			return result;
 		}
+
 	
 	}
 	

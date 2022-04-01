@@ -20,36 +20,33 @@ public class MyArrayList {
 		//현재 배열의 길이보다 많은 데이터를 입력하려고 한다
 		// -> 배열을 2배로 늘려 복사 + 교체
 		
-		//첫 add에만 배열을 생성 (index == 0)
-		if (this.index == 0) {
-			this.list = new String[4];
-		}
-		
-		
-		//try catch 사용해
-		//배열 범위 내 / 배열 범위 밖 / 기타 입력 실패 3가지 상황으로 나눈다
-		
-		//배열 범위 내
-		try {
-			this.list[this.index] = value;
-			this.index++;
-			return true;
-		
-		//배열 범위 밖
-		} catch (IndexOutOfBoundsException e) {
-			String[] listNew = new String[this.list.length * 2];
-		
-			for (int i=0 ; i<this.list.length ; i++) {
-				listNew[i] = this.list[i];
+		try { 
+
+			//첫 add에만 배열을 생성 (index == 0)
+			if (this.index == 0) {
+				this.list = new String[4];
 			}
 			
-			this.list = listNew;			
-			this.list[this.index] = value; 
-			this.index++;
-			return true;
+			//배열 범위 밖
+	
+			if (this.index == this.list.length) {
+				String[] listNew = new String[this.list.length * 2];
 			
-		//입력 실패(boolean false 반환)
+				for (int i=0 ; i<this.list.length ; i++) {
+					listNew[i] = this.list[i];
+				}
+				this.list = listNew;				
+			}
+		
+			//배열 범위 내
+	
+				this.list[this.index] = value;
+				this.index++;
+				return true;
+		
 		} catch (Exception e) {
+			
+			//입력 실패(boolean false 반환)
 			return false;
 		}
 	}
@@ -62,18 +59,14 @@ public class MyArrayList {
 		//ArrayList는 없는 방 번호를 요청하면 IndexOutOfBoundsException 오류
 		//add()로 만든 list는 2배수 방이 생성되기 때문에
 		//list 길이가 8, 값이 7까지만 있어도 8번 방은 null값이 나온다
-		//예외 던지기를 통해 오류 메시지 생성
-		try { 
-			if (this.list[index] == null) {
-				throw new IndexOutOfBoundsException();
-			} else {
-				return this.list[index];
-			}
-		} catch (IndexOutOfBoundsException e) {
-			return e.toString();
-		} catch (Exception e) {
-			return e.toString();
+
+		if (this.list[index] == null) {
+			throw new IndexOutOfBoundsException();
+
+		} else {
+			return this.list[index];
 		}
+
 	}
 	
 	public int size() {
@@ -91,57 +84,36 @@ public class MyArrayList {
 		//get()과 마찬가지로 ArrayList처럼
 		//방 4개, 값 3개 있을 때 4번째 방에서 오류 나타나도록 예외 처리
 		
-		try {
-			if (this.list[index] == null) {
-				throw new IndexOutOfBoundsException();
-			} else {
-				String oldValue = this.list[index];
-				this.list[index] = value;
-				
-				return oldValue;
-			}
-		} catch (IndexOutOfBoundsException e) {
-			return e.toString();
-		} catch (Exception e) {
-			return e.toString();
+		if (this.list[index] == null) {
+			throw new IndexOutOfBoundsException();
+		} else {
+			String oldValue = this.list[index];
+			this.list[index] = value;
+			
+			return oldValue;
 		}
-		
+	
 	}
 	
 	public String remove(int index) {
 	
 		//set, get()과 마찬가지로 ArrayList처럼
 		//방 4개, 값 3개 있을 때 4번째 방을 지우려고 시도하면
-		//null이 아니라 오류 나타나도록 예외 처리 (1)
-		//원하는 위치의 요소 삭제된 후 left shift 발생 & 방 개수 -1
+		//null이 아니라 오류 나타나도록 예외 처리
 		
-		try {
-			if (this.list[index] == null) {
-				throw new IndexOutOfBoundsException();
+		if (this.list[index] == null) {
+			throw new IndexOutOfBoundsException();
 
-			} else {
-				String removeValue = this.list[index];
-				String[] newList = new String[this.index - 1];
-				
-				for (int i=0 ; i<index ; i++) {
-					newList[i] = this.list[i];
-				}
-
-				for (int i=index ; i<newList.length ; i++) {
-					newList[i] = this.list[i+1];
-				}
-				
-				this.list = newList;
-				this.index--;
-				return removeValue;
-			}
+		} else {
+			String removeValue = this.list[index];
 			
-		} catch (IndexOutOfBoundsException e) {
-			return e.toString();
-		} catch (Exception e) {
-			return e.toString();
-		}
+			for (int i=index ; i<this.list.length-1 ; i++) {
+				this.list[i] = this.list[i+1];
+			}
 		
+			this.index--;
+			return removeValue;
+		}		
 	}
 
 	public boolean add(int index, String value) {
@@ -149,12 +121,10 @@ public class MyArrayList {
 		
 		//insert mode
 		//right shift 발생
-		
-		
-		
+	
 		try {
 			//이미 만들어 둔 add 메소드를 통해 지금 가장 마지막 요소를 복사해서 마지막 항 만들기
-			//ex {0, 1, 2, 3, 4} -> {0, 1, 2, 3, 4, 4}
+			//ex {0, 1, 2, 3} -> {0, 1, 2, 3, 3, null, null, null}
 			add(this.list[this.index - 1]);
 			
 			//right shift, this.list[index]에는 value 값 넣기
@@ -176,7 +146,7 @@ public class MyArrayList {
 		
 		//앞에서부터 value를 찾고 가장 먼저 만나는 value의 위치를 반환
 		for (int i=0 ; i<this.index ; i++) {
-			if (this.list[i] == value) {
+			if (this.list[i].equals(value)) {
 				return i; 
 			}
 		}
@@ -187,7 +157,7 @@ public class MyArrayList {
 
 		//뒤에서부터 value를 찾고 가장 먼저 만나는 value의 위치를 반환
 		for (int i=this.index-1 ; i>=0 ; i--) {
-			if (this.list[i] == value) {
+			if (this.list[i].equals(value)) {
 				return i; 
 			}
 		}
@@ -206,8 +176,8 @@ public class MyArrayList {
 	
 	public void trimToSize() {
 		
-		String[] listTrim = new String[index];
-		for (int i=0; i<index ; i++) {
+		String[] listTrim = new String[this.index];
+		for (int i=0; i<this.index ; i++) {
 			 listTrim[i] = this.list[i];
 		}
 		this.list = listTrim;

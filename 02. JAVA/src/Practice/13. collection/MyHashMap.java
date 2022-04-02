@@ -1,6 +1,6 @@
 package com.test.java.question.collection;
 
-class MyHashMap {
+public class MyHashMap {
 	private String[] key;
 	private String[] value;
 	private int index;
@@ -24,14 +24,16 @@ class MyHashMap {
 			doubleList();
 		}
 		
-		//Key는 중복될 수 없다 > key가 있는지 없는지 체크하는 메소드 checkKey()
+		//Key는 중복될 수 없다 > key가 있는지 없는지 체크 > containsKey 메소드
+		// > findIndex를 사용해 findIndex(key)> -1로 해도 됨
+		
 		//Key가 이미 있다 -> value 요소 수정하고 수정 전 값 return
 		//key를 넣으면 숨겨진 방번호를 찾아주는 메소드 findIndex()
-		if (checkKey(key)) {
+		if (containsKey(key)) {
 
-			String temp;
-			temp = this.value[findIndex(key)];
-			this.value[findIndex(key)] = value;
+			int index = findIndex(key);
+			String temp = this.value[index];
+			this.value[index] = value;
 
 			return temp;
 
@@ -40,41 +42,30 @@ class MyHashMap {
 			
 			this.key[this.index] = key;
 			this.value[this.index] = value;
-			this.index++;			
+			this.index++;		
+			
 			return null;
 		}		
 	}
 	
-	
-	public boolean checkKey(String key) {
-		
-		//있다 > true, 없다 > false
-		for (int i=0 ; i < this.index ; i++) {
-			if (this.key[i].equals(key)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	
 	public void doubleList() {
 		
-		String[] listNew = new String[this.index * 2];
+		//2배 배열 생성, 깊은 복사, 교체
+		String[] newKey = new String[this.index * 2];
+		String[] newValue = new String[this.index * 2];
 		
 		for (int i=0 ; i<this.index ; i++) {
-			listNew[i] = this.key[i];
+			newKey[i] = this.key[i];
+			newValue[i] = this.value[i];
 		}
-		this.key = listNew;
-		
-		for (int i=0 ; i<this.index ; i++) {
-			listNew[i] = this.value[i];
-		}
-		this.value = listNew;
+		this.key = newKey;		
+		this.value = newValue;
 	}
 	
 	
 	public boolean checkLength() {
+		
+		//index == 배열 실제 길이 > 배열이 꽉 찼을 때
 		if (this.index == this.key.length
 				&& this.index == this.value.length) {
 			return true;
@@ -84,6 +75,8 @@ class MyHashMap {
 	
 	
 	public int findIndex(String key) {
+		
+		//key를 입력하면 방번호를 반환해준다, 없으면 -1 반환
 		for (int i=0 ; i<this.index ; i++) {
 			if (this.key[i].equals(key)) {
 				return i;
@@ -97,7 +90,9 @@ class MyHashMap {
 
 		
 	public String get(String key) {
-		if (checkKey(key)) {
+		
+		//입력한 key가 있으면 value값을 반환, 없으면 null 반환
+		if (containsKey(key)) {
 			return this.value[findIndex(key)];
 
 		} else {
@@ -112,12 +107,27 @@ class MyHashMap {
 	
 	public String remove(String key) {
 		
-		String removeValue = this.value[findIndex(key)];
-		for (int i=findIndex(key) ; i<this.index-1 ; i++) {
+		int index = findIndex(key);
+		
+		//입력한 key가 배열에 없으면 null 반환
+		if (index == -1) {
+			return null;
+		}
+		
+		
+		//입력한 index 위치부터 복사 시작, left shift 발생 
+		//ex) {0, 1, 2, 3, 4, null, null, null}
+		//[1]을 지운다고 가정했을 때
+
+		String removeValue = this.value[index];
+		
+		// -> {0, 2, 3, 4, 4, null, null, null}
+		for (int i=index ; i<this.index-1 ; i++) {
 			this.key[i] = this.key[i+1];
 			this.value[i] = this.value[i+1];
 		}
 		
+		// -> {0, 2, 3, 4, null, null, null, null}
 		this.key[this.index-1] = null;
 		this.value[this.index-1] = null;
 		this.index--;
@@ -168,7 +178,8 @@ class MyHashMap {
 		String temp = "";
 		
 		temp += "\n";
-		temp += String.format("length: %d\n", this.key.length); //배열의 실제 길이
+		temp += String.format("Key length: %d\n", this.key.length); //배열의 실제 길이
+		temp += String.format("Value length: %d\n", this.value.length); //배열의 실제 길이
 		temp += String.format("index: %d\n", this.index); //현재 방번호
 		temp += String.format("[\n");
 		

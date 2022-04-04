@@ -41,25 +41,33 @@ public class Q08 {
 		 */
 		
 		
-		String PATH = "C:\\class\\java\\파일_디렉토리_문제\\폴더 삭제\\delete";
+		String PATH = "C:\\class\\java\\파일_디렉토리_문제\\폴더 삭제\\delete";						//(1)
 		File dir = new File(PATH);
 		
-		getAllFile(dir);
 		
-		for (File file : totalList) {
-			file.delete();
+		if (dir.exists()) {
+			
+			
+			getAllFile(dir);																	//(2)
+			
+			for (File file : totalList) {														//(4)
+				file.delete();
+			}
+			
+			System.out.println("폴더를 삭제했습니다.");												//(5)
+			System.out.printf("삭제된 폴더는 %d개이고, 파일은 %d개입니다.", countFolder, countFile);
+			
+			
+		} else {
+			
+			System.out.println("잘못된 경로입니다.");
 		}
-		
-		System.out.println("폴더를 삭제했습니다.");
-		System.out.printf("삭제된 폴더는 %d개이고, 파일은 %d개입니다.", countFolder, countFile);
-		
-		
 		
 		
 		
 	}
 	
-	public static void getAllFile(File dir) {
+	public static void getAllFile(File dir) {													//(3)
 		
 		File[] list = dir.listFiles();
 		

@@ -20,24 +20,32 @@ public class Q06 {
 		
 		//(1)
 		File dir = new File("C:\\class\\java\\파일_디렉토리_문제\\파일 제거");
-		File[] list = dir.listFiles();
-		int count = 0;
 		
-		for (int i=0 ; i<list.length ; i++) {
+		if (dir.exists()) {
 			
-			//(2)
-			if (list[i].isFile()) {
+			
+			File[] list = dir.listFiles();
+			int count = 0;
+			
+			for (int i=0 ; i<list.length ; i++) {
 				
-				if (list[i].length() == 0) { 
-					list[i].delete();
-					count++;
+				//(2)
+				if (list[i].isFile()) {
+					
+					if (list[i].length() == 0) { 
+						list[i].delete();
+						count++;
+					}
+							
 				}
-						
 			}
+			
+			//(3)
+			System.out.printf("총 %d개의 파일을 삭제했습니다.", count);
+
+			
+		} else {
+			System.out.println("잘못된 경로입니다.");
 		}
-		
-		//(3)
-		System.out.printf("총 %d개의 파일을 삭제했습니다.", count);
-		
 	}
 }

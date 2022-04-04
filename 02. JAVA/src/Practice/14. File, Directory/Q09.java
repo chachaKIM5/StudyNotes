@@ -46,14 +46,14 @@ public class Q09 {
 			
 			
 			
-		System.out.println("[파일명]\t\t\t\t[크기]\t\t[파일이 들어있는 폴더]");
-		
-		for (File file : totalList) {
-			System.out.printf("%-30s\t%5s\t\t%s\n"
-										, file.getName()
-										, getLength(file)
-										, getParent(file));
-		}
+			System.out.println("[파일명]\t\t\t\t[크기]\t\t[파일이 들어있는 폴더]");
+			
+			for (File file : totalList) {
+				System.out.printf("%-30s\t%5s\t\t%s\n"
+											, file.getName()
+											, getLength(file)
+											, getParent(file));
+			}
 		
 			
 		} else {

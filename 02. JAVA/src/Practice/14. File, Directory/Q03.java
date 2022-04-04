@@ -27,19 +27,20 @@ public class Q03 {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		
 		
+																									//(1)
 		File file = new File("C:\\class\\java\\file\\AAA\\test.txt");
 		File fileMove = new File("C:\\class\\java\\file\\BBB\\test.txt");
 		String answer = "";
 		
 
-		if (!fileMove.exists()) {
+		if (!fileMove.exists()) {																	//(2)
 			
-			file.renameTo(fileMove);
+			file.renameTo(fileMove);																//(3)
 			System.out.println("파일을 이동했습니다.");
 		
 		} else {
 			
-			System.out.print("같은 이름을 가지는 파일이 이미 존재합니다. 덮어쓸까요? (y/n) ");
+			System.out.print("같은 이름을 가지는 파일이 이미 존재합니다. 덮어쓸까요? (y/n) ");					//(4)
 			answer = reader.readLine().toLowerCase();
 			
 			if (answer.equals("y")) {

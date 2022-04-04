@@ -30,31 +30,36 @@ public class Q07 {
 		File dirA = new File("C:\\class\\java\\파일_디렉토리_문제\\동일 파일\\MusicA");
 		File dirB = new File("C:\\class\\java\\파일_디렉토리_문제\\동일 파일\\MusicB");
 		
-		File[] listA = dirA.listFiles();
-		File[] listB = dirB.listFiles();
 		
+		if (dirA.exists() && dirB.exists()) {
 		
-		
-		//(2)
-		for (File file : listA) {
-			if (file.isFile()) {
-				set.add(file.getName());
-			}
-		}
-		
-		
-		
-		//(3)
-		for (File file : listB) {
-			if (file.isFile()) {
-				
-				if (!set.add(file.getName())) {
-					System.out.println(file.getName());
-					
+			File[] listA = dirA.listFiles();
+			File[] listB = dirB.listFiles();
+			
+			
+			
+			//(2)
+			for (File file : listA) {
+				if (file.isFile()) {
+					set.add(file.getName());
 				}
-			}			
+			}
+			
+			
+			
+			//(3)
+			for (File file : listB) {
+				if (file.isFile()) {
+					
+					if (!set.add(file.getName())) {
+						System.out.println(file.getName());
+						
+					}
+				}			
+			}
+			
+		} else { 
+			System.out.println("MusicA 혹은 Music B 폴더를 찾을 수 없습니다.");
 		}
-		
-		
 	}
 }

@@ -31,37 +31,44 @@ public class Q10 {
 		String PATH = "C:\\class\\java\\파일_디렉토리_문제\\직원";
 		File dir = new File(PATH);
 		
-		File[] list = dir.listFiles();
-		
-		//(1)
-		for (File file : list) {
-			if (file.isFile()) {
-				set.add(file);
-			}
-		}
-		
-		
-		
-		//(2)
-		
-		Iterator<File> iter = set.iterator();
-		
-		
-		while (iter.hasNext()) {
+		if (dir.exists()) {
 			
-			File next = iter.next();
-			File memberDir = new File(getMEMBERDIR(next));						//(3)
+			File[] list = dir.listFiles();
 			
-			
-			if (!memberDir.exists()) {											//(4)
-				memberDir.mkdirs();
+			//(1)
+			for (File file : list) {
+				if (file.isFile()) {
+					set.add(file);
+				}
 			}
 			
 			
-			File member = new File(memberDir + "\\" + next.getName()); 			//(5)
-			next.renameTo(member);
+			
+			//(2)
+			
+			Iterator<File> iter = set.iterator();
+			
+			
+			while (iter.hasNext()) {
+				
+				File next = iter.next();
+				File memberDir = new File(getMEMBERDIR(next));						//(3)
+				
+				
+				if (!memberDir.exists()) {											//(4)
+					memberDir.mkdirs();
+				}
+				
+				
+				File member = new File(memberDir + "\\" + next.getName()); 			//(5)
+				next.renameTo(member);
+			}
+			
+			System.out.println("분류가 완료되었습니다.");
+			
+		} else {
+			System.out.println("잘못된 경로입니다.");
 		}
-		
 		
 		
 	}

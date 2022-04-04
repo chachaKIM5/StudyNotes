@@ -33,29 +33,38 @@ public class Q04 {
 		
 		//(1)
 		File dir = new File(PATH);
-		File[] list = dir.listFiles();
 		
-		for (int i=0 ; i<list.length ; i++) {									//(2)
-			String renamePATH = String.format("%s\\[%03d]%s"
-													, PATH
-													, i+1
-													, list[i].getName());
-
-			File temp = new File(renamePATH);									//(3)
-			list[i].renameTo(temp);
-
-		}
 		
-
-		//새 File 배열로 다시 만들지 않으면 출력에 [001]~[100]이 반영되지 않는다..!
-		//동기화 되는 건 아닌가 봄
+		if (dir.exists()) {
+			
+			
+			File[] list = dir.listFiles();
+			
+			for (int i=0 ; i<list.length ; i++) {									//(2)
+				String renamePATH = String.format("%s\\[%03d]%s"
+														, PATH
+														, i+1
+														, list[i].getName());
+	
+				File temp = new File(renamePATH);									//(3)
+				list[i].renameTo(temp);
+	
+			}
+	
+	
+			//새 File 배열로 다시 만들지 않으면 출력에 [001]~[100]이 반영되지 않는다..!
+			//동기화 되는 건 아닌가 봄
+			
+			File[] listNew = dir.listFiles();
+			
+			for (File f : listNew) {
+				System.out.println(f.getName());
+			}
 		
-		File[] listNew = dir.listFiles();
 		
-		for (File f : listNew) {
-			System.out.println(f.getName());
-		}
-		
+		} else {
+			System.out.println("잘못된 경로입니다.");
+		}	
 		
 	}
 }

@@ -16,7 +16,7 @@ public class Q06 {
 		
 		try {
 			
-		FileReader reader = new FileReader("C:\\class\\java\\JavaTest\\src\\com\\test\\java\\question\\FileIO\\testQ06.java");
+		FileReader reader = new FileReader("C:\\class\\java\\파일_입출력_문제\\자바소스.java");
 		int countParenthesis = 0;
 		int countBrace = 0;
 		int code = -1;
@@ -29,6 +29,12 @@ public class Q06 {
 		
 		
 		
+		
+		//stack은 꺼낼수록 stack.size()가 줄어드니까 미리 변수에 처음 stack.size()를 저장하기
+		//{ = 123, } = 125
+		//( = 40, ) = 41
+		
+		//한쪽을 꺼내면 count--, 다른 한쪽을 꺼내면 count++.. 짝이 맞으면 결과가 0
 		
 		int loop = stack.size();
 		

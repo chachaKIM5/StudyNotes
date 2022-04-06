@@ -27,7 +27,7 @@ public class Q02 {
 			String line = null;
 			
 			while ((line = reader.readLine()) != null) {
-				writer.write(replaceNum(line));
+				writer.write(replaceNum(line));					//문장의 숫자를 한글 숫자로 바꾸는 메소드
 				writer.newLine();
 			}
 			
@@ -50,6 +50,8 @@ public class Q02 {
 		String[] num	= { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 		String[] numKor = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
 		
+		
+		//num을 포함하면 같은 방 번호의 numKor로 바꾸기 
 		for (int i=0 ; i<num.length ; i++) {
 			if (line.contains(num[i])) {
 				line = line.replace(num[i], numKor[i]);

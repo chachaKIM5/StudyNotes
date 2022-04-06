@@ -25,7 +25,9 @@ public class Q01 {
 			
 			
 			String line = null;
-						
+			
+			
+			//한 줄씩 읽어오면서 line의 "유재석"을 모두 "메뚜기"로 바꾼다
 			while ((line = reader.readLine()) != null) {
 				writer.write(line.replace("유재석", "메뚜기"));
 				writer.newLine();

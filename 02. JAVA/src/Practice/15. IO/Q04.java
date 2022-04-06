@@ -29,7 +29,9 @@ public class Q04 {
 			
 			while ((line = reader.readLine()) != null) {
 				if (line.contains(name)) {
-					getData(line);
+					getData(line);								
+					//static HashMap에 "번호", "주소", "전화" 키 값과 그에 따른 value 값을 입력하는 메소드
+					
 					
 					System.out.printf("\n[%s]\n", name);
 					System.out.printf("번호: %s\n", map.get("번호"));
@@ -53,6 +55,7 @@ public class Q04 {
 
 	private static void getData(String line) {
 
+		//1,유게무,광주시 강동구 다동, 010-3086-6664
 		String[] data = line.split(",");
 		
 		map.put("번호", data[data.length - 4]);

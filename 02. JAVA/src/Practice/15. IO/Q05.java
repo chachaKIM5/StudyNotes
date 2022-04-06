@@ -17,6 +17,8 @@ public class Q05 {
 		//황길돈은 키보드를 14개 시킨 사람
 		//test: 길게무(많이 삼), 하재명(동명이인), 황명석(구매내역 없음)
 		
+		//Person 객체를 만들어 ArrayList에 넣기
+		
 		try {
 			
 			File member = new File("C:\\class\\java\\파일_입출력_문제\\검색_회원.dat");
@@ -33,8 +35,9 @@ public class Q05 {
 			while ((line = reader.readLine()) != null) {
 				
 				if (line.contains(inputName)) {
+					//1,정재재,서울시 강동구 라동
 					String[] data = line.split(",");
-					addList(data);
+					addList(data); //ArrayList<Person>에 add하는 메소드
 				}
 			}
 			
@@ -72,15 +75,18 @@ public class Q05 {
 
 		try {
 
+			//메소드에서 한 번 더 파일 읽기+while문
+			//data[] = 1,정재재,서울시 강동구 라동
+			//dataResult[] = 1,마우스,19,53
 			
 			File order = new File("C:\\class\\java\\파일_입출력_문제\\검색_주문.dat");
 			BufferedReader reader = new BufferedReader(new FileReader(order));
 			String line = null;
 			
 			while ((line = reader.readLine()) != null) {
-				if (line.endsWith(data[0])) {
-					String[] dataResult = line.split(",");
-					list.add(new Person(data[0], data[1], data[2], dataResult[1], dataResult[2]));
+				if (line.endsWith("," + data[0])) {
+					String[] dataOrder = line.split(",");
+					list.add(new Person(data[0], data[1], data[2], dataOrder[1], dataOrder[2]));
 				}
 			}
 		

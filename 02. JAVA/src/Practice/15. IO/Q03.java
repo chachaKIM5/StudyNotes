@@ -14,7 +14,11 @@ public class Q03 {
 		//합격 조건: 3과목 평균 60점 이상
 		//과락 조건: 1과목 40점 미만
 		//C:\class\java\파일_입출력_문제\성적.dat
-		//(이름(Str), 국어성적(Int), 영어성적(Int), 수학성적(Int)이라 HashMap을 쓰기는 어렵다...
+		//(이름(Str), 국어성적(Int), 영어성적(Int), 수학성적(Int)이라.. HashMap을 어떻게 써야할지 모르겠다
+		
+		
+		//Student 클래스 만들어서 ArrayList 배열에 넣기
+		
 		
 		try {
 			
@@ -24,6 +28,7 @@ public class Q03 {
 			String line = null;
 			
 			while ((line = reader.readLine()) != null) {
+				//성적을 각 Student 객체를 만들어 넣고, 그 객체를 ArrayList에 추가하는 메소드
 				addStudent(line);
 		
 			}
@@ -36,7 +41,7 @@ public class Q03 {
 			System.out.println("[합격자]");
 			
 			for (Student s: list) {
-				if (isPass(s)) {
+				if (isPass(s)) {						//합격/불합격을 true, false로 반환하는 메소드
 					System.out.println(s.getName());
 				}
 			}

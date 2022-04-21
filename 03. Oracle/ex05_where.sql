@@ -170,9 +170,59 @@ select name from tblInsa where name like '김__';
 select name from tblInsa where name like '__수';
 select name from tblInsa where name like '_길_';
 
-select * from employees where first_name like 'S%';
+select * from employees where first_name like 'S_____';
 
 select * from tblInsa where tel like '010-____-____';
 select * from tblInsa where not tel like '010-____-____';
 
+select * from tblInsa where jikwi like '_장';
+
+select * from tblInsa where ssn like '______-2______';
+
+select name from tblInsa where name like '김%';
+select * from employees where first_name like 'S%';
+select * from employees where first_name like '%a';
+select * from employees where first_name like '%a%';
+select * from tblInsa where ssn like '%-2%';
+
+
+
+/*
+
+    RDBMS에서의 null
+    - 자바의 null 유사
+    - 컬럼값(셀)이 비어 있는 상태
+    - null 상수 제공
+    - 보통의 언어에서는 null 값은 연산의 대상이 될 수 없다. (***)
+
+    null 조건
+    - where절 사용
+    - 컬럼명 is null
+    
+*/
+
+
+select * from tblCountry;
+
+-- 인구수가 미기재된 나라는?
+select * from tblCountry where population = null; -- X
+select * from tblCountry where population is null;
+select * from tblCountry where not population is null;
+select * from tblCountry where population is not null; -- 더 많이 사용(가독성) **
+
+
+-- 연락처가 없는 직원?
+select * from tblInsa where tel is null;
+
+
+-- 아직 끝내지 않은 할 일?
+select * from tblTodo;
+select * from tblTodo where completedate is null;
+select * from tblTodo where completedate is not null;
+
+-- 도서관 > 대여 테이블 > (속성.... 대여날짜, 반납날짜)
+-- 아직 반납을 안 한 사람은?
+-- select * from 도서대여 where 반납날짜 is null;
+-- 반납이 완료된 대여 기록?
+-- select * from 도서대여 where 반납날짜 is not null;
 

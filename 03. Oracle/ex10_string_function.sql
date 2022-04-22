@@ -91,5 +91,188 @@ from tblInsa;
 select * from tblInsa
     order by substr(ssn, 8, 1) asc;
     
+
+
+/*
+
+    length
+    - number length
+
+
+*/
+
+-- 컬럼리스트에서 사용
+select name, length(name) from tblCountry;
+
+
+-- 조건절에 사용
+select name from tblCountry where length(name) > 3;
+select name from tblCountry where length(name) between 4 and 6;
+
+
+-- 정렬에 사용
+select name from tblCountry order by length(name) desc, name asc;
+
+
+-- 남자 > 여자 순
+select * from tblInsa order by substr(ssn, 8, 1) asc, ssn asc;
+
+
+-- 게시판 제목 > 길면 + 잘라서 + 말줄임표(..)
+select
     
+    title,
+    case
+        when length(title) >= 8 then substr(title, 1, 8) || '...'
+        else title 
+    end as "게시판 제목"
     
+from tblTodo;
+
+
+
+
+
+/*
+    
+    instr()
+    - 검색(= indexOf())
+    - 검색어의 위치를 반환
+    - number instr(컬럼, 검색어)
+    - number instr(컬럼, 검색어, 시작위치)
+    - 못 찾으면 0을 반환
+    
+*/
+
+select
+
+    '안녕하세요, 홍길동님' as c1,
+    instr('안녕하세요, 홍길동님', '홍길동') as c2,
+    instr('안녕하세요, 홍길동님', '아무개') as c3,
+    instr('안녕하세요, 홍길동님. 반갑습니다. 홍길동님.', '홍길동') as c4,    
+    instr('안녕하세요, 홍길동님. 반갑습니다. 홍길동님.', '홍길동', 11) as c5    
+    
+from dual;
+
+
+
+/*
+
+    lpad(), rpad()
+    - left padding, right padding
+    - varchar2 lpad(컬럼, 개수, 문자)
+    - varchar2 rpad(컬럼, 개수, 문자)
+    
+*/
+
+
+select
+    'a',
+    lpad('a', 5, 'b'),
+    '1',
+    lpad('1', 3, '0'),
+    rpad('1', 3, '0')
+from dual;
+
+
+
+
+
+/*
+
+    trim()
+
+*/
+
+
+select
+    '   하나  둘       셋       ',
+    trim('   하나  둘       셋       '),
+    ltrim('   하나  둘       셋       '),
+    rtrim('   하나  둘       셋      ')
+from dual;
+
+
+
+/*
+
+    replace()
+    - 문자열 치환
+    - varchar2 replace (컬럼, 찾을 문자열, 바꿀 문자열)
+
+*/
+
+
+select
+    replace('홍길동', '홍', '김'),
+    replace('홍길동', '이', '김'),
+    replace('홍길홍', '홍', '김')
+from dual;
+
+
+
+select
+    name, ssn,
+    case
+        when substr(ssn, 8, 1) = '1' then '남자'
+        when substr(ssn, 8, 1) = '2' then '여자'
+    end as gender
+from tblInsa;
+
+
+
+select
+    name, ssn,
+    replace(replace(substr(ssn, 8, 1), '1', '남자'), '2', '여자') as gender
+from tblInsa;
+
+
+select
+    name,
+    continent,
+    case
+        when continent = 'AS' then '아시아'
+        when continent = 'EU' then '유럽'
+        when continent = 'AF' then '아프리카'
+    end as c, 
+    
+    replace(replace(replace(continent, 'AS', '아시아'), 'EU', '유럽'), 'AF', '아프리카'),
+    decode(continent, 'AS', '아시아', 'EU', '유럽', 'AF', '아프리카', 'NA', '북아메리카', 'AU', '오스트레일리아', 'SA', '남아메리카')
+from tblCountry;
+
+
+
+
+/*
+
+    decode()
+    - 문자열 치환
+    - varchar2 decode(컬럼, 찾을 문자열, 바꿀 문자열 [, 찾을 문자열, 바꿀 문자열] x N)
+    - replace는 못 찾으면 원본을 반환, decode는 못 찾으면 null을 반환!!! ***
+    - case end의 간단한 버전
+
+*/
+
+select
+    substr(ssn, 8, 1),
+    replace(replace(substr(ssn, 8, 1), '1', '남자'), '2', '여자'),
+    decode(substr(ssn, 8, 1), '1', '남자', '2', '여자')
+from tblInsa;
+
+
+
+
+-- 남자? 여자?
+select
+    --A 방식
+    count(case
+        when gender = 'm' then 1
+    end),
+    count(case
+        when gender = 'f' then 1
+    end),
+    
+    -- B 방식
+    count(decode(gender, 'm', 1)),
+    count(decode(gender, 'f', 2))
+from tblComedian;

@@ -134,7 +134,7 @@ from dual;
     
     시각 - 시각
     1. 일, 시, 분, 초 > 연산자 사용
-    2. 월, 년 > months.between()
+    2. 월, 년 > months_between()
 
     시각 + 시간
     1. 일, 시, 분, 초 > 연산자 사용

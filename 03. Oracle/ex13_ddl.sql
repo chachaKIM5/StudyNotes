@@ -243,10 +243,10 @@ drop table tblMemo;
 
 create table tblMemo (
 
-    seq number(3) primary key,                                                             --메모번호(PK)
-    name varchar2(30) default '(익명)',                                                    --작성자
-    memo varchar2(1000),                                                                   --메모
-    regdate date                                                                           --작성날짜
+    seq number(3) primary key,                 --메모번호(PK)
+    name varchar2(30) default '(익명)',        --작성자
+    memo varchar2(1000),                       --메모
+    regdate date                               --작성날짜
     
 );
 
@@ -288,3 +288,68 @@ select * from tblMemo;
 
 
 -- 3. FOREIGN KEY는 다음 시간에!
+
+
+
+---------- ▼ 복습 후 4/25 수업 ▼ -----------
+
+
+-- DDL > 테이블 생성 > 컬럼 생성 = 컬럼명 + 자료형(길이) + 제약사항
+
+-- 1. not null
+-- 2. primary key = not null + unique
+-- 3. unique
+-- 4. check
+-- 5. default
+-- 6. foreign
+
+
+
+/*
+
+    제약 사항을 만드는 방법
+    
+    1. 컬럼 수준에서 만드는 방법
+     - 위에서 수업한 방법
+     - 컬럼을 정의할 때 제약 사항도 같이 정의하는 방법
+          
+    2. 테이블 수준에서 만드는 방법
+     - 컬럼 정의와 제약 사항 정의를 분리시킨 방법
+     - 제약 사항만 따로 정의 > 관리 차원 > 코드 분리
+     - not null, default > 컬럼 수준에서만 정의할 수 있다
+    
+    
+    3. 외부에서 만드는 방법
+     - alter 명령어 (추후 테이블 수정 배운 후 수업!)
+
+*/
+
+drop table tblMemo;
+
+create table tblMemo (
+
+    seq number(3),
+    -- seq number(3) constraint tblmemo_seq_pk primary key, (정석)
+    name varchar2(30) not null,
+    memo varchar2(1000) null,
+    regdate date,
+    
+    -- 테이블 수준의 제약사항 정의
+    -- 제약사항명: 테이블명_컬럼명_제약사항
+    constraint tblmemo_seq_pk primary key(seq),
+    constraint tblmemo_name_uq unique(name),
+    -- 메모 내용을 최소 10글자 이상
+    constraint tblmemo_memo_ck check(length(memo) >= 10)
+    -- ***** not null, dafault 제약은 외부에서 할 수 없고 반드시 컬럼 수준에서 정의해야 한다
+);
+
+
+insert into tblMemo(seq, name, memo, regdate) values (1, '홍길동', '메모입니다.', sysdate);
+--ORA-00001: unique constraint (HR.TBLMEMO_SEQ_PK) violated
+--HR.TBLMEMO_SEQ_PK: 제약사항의 이름!
+--ORA-02290: check constraint (HR.TBLMEMO_MEMO_CK) violated
+insert into tblMemo(seq, name, memo, regdate) values (1, '홍길동', '메모입니다.', sysdate);
+insert into tblMemo(seq, name, memo, regdate) values (1, '홍길동', '메모입니다. 홍길동입니다.', sysdate);
+insert into tblMemo(seq, name, memo, regdate) values (2, '아무개', '메모입니다. 홍길동입니다.', sysdate);
+
+select * from tblMemo;

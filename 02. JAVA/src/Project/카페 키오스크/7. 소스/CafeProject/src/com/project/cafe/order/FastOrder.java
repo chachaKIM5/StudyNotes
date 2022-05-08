@@ -1,5 +1,6 @@
 package com.project.cafe.order;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import com.project.cafe.Data;
 import com.project.cafe.FindData;
@@ -10,7 +11,16 @@ import com.project.cafe.dataClass.CustomMenu;
 
 
 public class FastOrder extends Payment {
-//
+
+	public static ArrayList<CustomMenu> currentCmlist;
+	
+	public FastOrder() {
+		 currentCmlist = new ArrayList<CustomMenu>();
+	}
+		
+	
+	
+	//
 //	for(CustomMenu cm : cmlist) {
 //		String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s\n"
 //									,cm.getSeq()
@@ -43,7 +53,8 @@ public class FastOrder extends Payment {
 			
 			
 			loadCustomMenu();
-	
+			ChooseCustomMenu();
+			NormalOrder.addCart();
 		}
 		
 
@@ -52,9 +63,19 @@ public class FastOrder extends Payment {
 	
 	
 	
+	private static void ChooseCustomMenu() {
+	// 사용자에게 currentCmlist 번호 입력받은 후 (currnetCmlist.get(사용자input-1) 정보를 getter로 빼내
+	// NormalOrder.currentMenu 카트 객체에 대입,
+	// NormalOrder.addCart(임시카트객체) 실행 -> 장바구니에 담기
+	
+}
+
+
+
 	private static void loadCustomMenu() {
 	// cmlist(커스텀메뉴 arraylist)에서 currenetLogin에 저장된 고객의 커스텀 메뉴를 검색, 불러오는 메소드
 		
+
 		
 		int index = 1;
 		for (int i=0 ; i<Data.cmlist.size() ; i++) {
@@ -65,7 +86,9 @@ public class FastOrder extends Payment {
 			
 			if (Data.cmlist.get(i).getSeq().equals(Main.currentLogin.getSeq())) {
 				System.out.printf("[%d] printf로 커스텀 메뉴 정보 출력(추후 매끄럽게 수정)", index);
+				currentCmlist.add(Data.cmlist.get(i));
 				index++;
+				
 			}
 			
 			if (i == Data.cmlist.size() - 1) {

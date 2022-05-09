@@ -1424,3 +1424,620 @@ begin
         dbms_output.put_line('실패');
     end if;
 end;
+
+
+
+
+
+
+---------------- 22/05/09 ▼ --------------------
+
+
+
+/*
+
+    저장 프로시저
+        1. 저장 프로시저
+        2. 저장 함수
+    
+    저장 함수, Stored Function > 함수, Function
+    - 저장 프로시저와 동일
+    - 반환값이 반드시 존재
+    - out 파라미터 사용 X, return문만 사용
+    - in 파라미터는 사용할 수 있다
+    
+
+*/
+
+
+create or replace function funSum(pnum1 in number, pnum2 in number) return number
+is
+begin
+
+    return pnum1 + pnum2;
+
+end funSum;
+
+
+set serveroutput on;
+
+declare
+    vresult number;
+begin
+    -- 프로시저는 변수 := procSum(10, 20, vresult);
+    -- 함수 호출 특징 > 자바의 메소드 반환값과 동일한 형태로 사용
+    -- 단일값을 반환(return문 특징) > 호출했던 곳에서 대입 연산자 사용 가능
+    vresult := FunSum(10, 20);
+    dbms_output.put_line(vresult);
+end;
+
+
+-- 저장 프로시저는 ANSI-SQL에서는 사용이 불가능하다 (*****) > 예외적으로 함수는 가능하다 (**********)
+-- 반환값을 돌려주는 방식의 차이 > 프로시저와 함수는 사용하는 장소가 다르다.
+-- 함수: ANSI-SQL에서 값으로 사용!
+
+
+select
+    height, weight,
+    height + weight,
+    funSum(height, weight) -- 반환값이 1개 > 값으로 사용
+    --procSum(height, weight ??)
+from tblComedian;
+
+
+-- tblInsa. 이름, 부서, 직위, 성별(남자|여자)
+select
+    name, buseo, jikwi,
+    case
+        when substr(ssn, 8, 1) = '1' then '남자'
+        when substr(ssn, 8, 1) = '2' then '여자'
+    end as gender
+from tblInsa;
+
+
+create or replace function fnGender(
+    pssn varchar2
+) return varchar2
+is
+begin
+    return case
+                when substr(pssn, 8, 1) = '1' then '남자'
+                when substr(pssn, 8, 1) = '2' then '여자'
+           end;
+end;
+
+
+select
+    name, buseo, jikwi, fnGender(ssn)
+from tblInsa;
+
+
+
+
+-- 반복되는 업무 or (다량의) 복잡한 업무 > 아래 2가지 비교
+
+-- 생산, 호출 고비용
+-- 개발자 가독성 + 조작성 저하 > 유지보수성 저하
+-- 팀작업 나쁨
+select
+    name, buseo, jikwi
+    case
+        when substr(ssn, 8, 1) = '1' then '남자'
+        when substr(ssn, 8, 1) = '2' then '여자'
+    end as gender
+from tblInsa;
+
+
+-- 생산, 호출 저비용
+-- 개발자 가독성 + 조작성 향상 > 유지보수성 ㅑㅇ상
+-- 팀작업 좋음
+select
+    name, buseo, jikwi,
+    fnGender(ssn) as gender
+from tblInsa;
+
+
+
+
+
+
+
+
+/*
+
+    트리거, Trigger
+    - 프로시저의 한 종류
+    - 개발자의 호출이 아닌, 미리 지정한 특정 사건이 발생하면 자동으로 실행되는 프로시저
+    - 예약(사건) > 사건 발생 > 프로시저 자동 호출
+    - 특정 테이블 지정 > 지정 테이블 감시(오라클) > insert or update or delete > 미리 준비해놓은 프로시저 호출
+    - 부하가 걸린다 (감시해야 하기 때문에) 매우 필요한 경우 아니면 신중하게...
+    
+    트리거 구문
+    
+    create or replace trigger 트리거명
+        before|afetr
+        insert|update|delete on 테이블명
+        [for each row]
+    declare
+        선언부;
+    begin
+        실행부;
+    exception
+        예외처리부;
+    end;
+    
+*/
+
+
+-- before trigger: 트리거 실행 > 쿼리 실행
+-- 쿼리를 실행하기 전에 트리거를 실행하기 때문에 조건에 따라 쿼리의 실행 유무를 통제할 수 있다
+-- 사전 검사 가능 (ex.. 월요일에는 퇴사 불가!)
+
+-- after trigger: 쿼리 실행 > 트리거 실행
+
+
+
+-- tblInsa > 직원 퇴사(삭제)
+create or replace trigger trgInsa
+    before      -- 삭제하기 직전에 아래 구현부를 실행
+--    after       -- 삭제한 후 아래 구현부를 실행
+    delete      -- 삭제가 발생하는지 감시
+    on tblInsa  -- 인사 테이블에서
+begin
+
+    dbms_output.put_line('트리거가 실행되었습니다.');
+
+    -- 월요일에는 퇴사가 불가능하게 만들기
+    if to_char(sysdate, 'dy') = '월' then
+    
+        -- 현재 진행하려던 업무(delete 실행 전) > 취소 > 취소하는 법은 강제로 예외 발생시키기 > 뒤에 이어질 업무(delete)가 취소
+        -- 자바의 throw new Exception()
+        -- -20000 ~ - 29999: 에러 코드는 마음대로
+        raise_application_error(-20001, '월요일에는 퇴사가 불가능합니다.');
+        
+    end if;
+
+end;
+/
+
+select * from tblInsa;
+
+delete from tblInsa where num = 1005;
+-- ORA-20001: 월요일에는 퇴사가 불가능합니다.
+delete from tblInsa where num = 1006;
+
+select * from tblBonus where num = 1006;
+delete from tblBonus;
+commit;
+
+
+
+
+-- 로그 기록
+create table tblLogMan (
+    seq number primary key,
+    message varchar2(1000) not null,
+    regdate date default sysdate not null
+);
+
+create sequence seqLogMan;
+
+
+select * from tblMan;
+
+
+create or replace trigger trgLogMan
+    after
+    insert or update or delete
+    on tblMan
+declare
+    vmessage varchar2(1000);
+begin
+
+    -- insert or update or delete?
+    -- 어떤 명령이 일어났는지에 따라 다른 결과 나오게 하기
+    dbms_output.put_line('트리거 실행');
+    
+    if inserting then
+        dbms_output.put_line('추가 실행');
+        vmessage := '새로운 항목이 추가되었습니다.';
+    elsif updating then
+        dbms_output.put_line('수정 실행');
+        vmessage := '항목이 수정되었습니다.';
+    elsif deleting then
+        dbms_output.put_line('삭제 실행');
+        vmessage := '항목이 삭제되었습니다.';
+    end if;
+    
+    insert into tblLogMan values (seqLogMan.nextVal, vmessage, default);
+end;
+/
+
+
+insert into tblMan values ('테스트', 22, 175, 60, null);
+update tblMan set weight = 65 where name = '테스트';
+delete from tblMan where name = '테스트';
+
+select * from tblLogMan;
+
+
+
+
+/*
+
+    [for each row]
+    
+    1. 사용 X
+        - 문장(Query) 단위 트리거
+        - 트리거 실행 1회 -> 사건이 적용되는 레코드의 개수와 상관없이 트리거는 1회 호출
+        - 적용된 레코드의 정보가 중요하지 않은 경우 + 사건 자체가 중요한 경우
+    2. 사용 O
+        - 행(Record) 단위 트리거
+        - 트리거 실행 반복 -> 사건이 적용되는 레코드의 개수만큼 트리거가 반복 호출
+        - 적용된 레코드의 정보가 중요한 경우 + 사건 자체보다 영향을 받은 레코드의 정보 하나하나가 중요한 경우
+
+
+*/
+
+
+select * from tblMan;
+
+create or replace trigger trgMan1
+    after
+    delete
+    on tblMan
+begin
+    dbms_output.put_line('트리거1');
+end;
+
+create or replace trigger trgMan2
+    after
+    delete
+    on tblMan
+begin
+    dbms_output.put_line('트리거2');
+end;
+
+create or replace trigger trgMan3
+    after
+    delete
+    on tblMan
+begin
+    dbms_output.put_line('트리거3');
+end;
+    
+-- 특정 테이블에 여러 개의 트리거 적용 > 관리가 어렵다 > 확인도 귀찮다 > 트리거끼리 충돌! or 재귀 호출... 무한 루프
+delete from tblMan where name = '홍길동';
+
+select * from tblMan;
+ 
+ 
+-- 때문에 쓰지 않는 트리거는 지워주는 것이 좋다
+
+drop trigger trgInsa;
+drop trigger trgLogMan;
+drop trigger trgMan1;
+drop trigger trgMan2;
+drop trigger trgMan3;
+
+
+
+-- Table A > insert 트리거 > Table B 기록
+-- Table B > insert 트리거 > Table A 기록
+
+create or replace trigger trgMan
+    after
+    delete
+    on tblMan
+begin
+    dbms_output.put_line('레코드를 삭제했습니다.');
+end;
+
+
+-- delete 1회 실행 > 적용된 행 10개 > 프로시저 1회 실행
+-- >>>>> 문장 단위 프로시저!
+
+delete from tblMan; -- 10명 삭제
+rollback;
+
+
+create or replace trigger trgMan
+    after
+    delete
+    on tblMan
+    for each row
+begin
+    dbms_output.put_line('레코드를 삭제했습니다.');
+end;
+
+
+-- delete 1회 실행 > 적용된 행 10개 > 프로시저 10회 실행!
+-- >> 행 단위 프로시저
+delete from tblMan;
+rollback;
+
+
+
+
+-- for each row를 활용하는 방법? 왜 행 단위로 실행해야 할까?
+-- 상관 관계(:old, :new) 사용 > 일종의 가상 레코드
+
+-- insert
+-- > :new (방금 추가된 행을 참조)
+
+-- update
+-- > :old, :new (수정되기 전, 수정된 후 행 참조)
+create or replace trigger trgMan
+    after
+    update
+    on tblMan
+    for each row
+begin
+    dbms_output.put_line('나이 레코드가 수정되었습니다. : ' || :old.name);
+    dbms_output.put_line('수정 전 나이: ' || :old.age);
+    dbms_output.put_line('수정 후 나이: ' || :new.age);
+end;
+
+update tblMan set age = age + 1 where couple is not null; --여자 친구가 없는 사람만 나이를 1살씩 증가시키기
+select * from tblMan;
+
+
+
+
+-- delete
+-- > :old (삭제된 행을 참조)
+create or replace trigger trgMan
+    after
+    delete
+    on tblMan
+    for each row
+begin
+    dbms_output.put_line('레코드를 삭제했습니다.' || :old.name);
+end;
+
+delete from tblMan;
+rollback;
+
+
+
+
+select * from tblProject; 
+
+
+-- 2번 직원 퇴사 > 4번에게 위임
+-- 직원 퇴사시키기 직전 > 담당 프로젝트를 체크, 자동 위임
+
+create or replace trigger trgDeleteStaff
+    before              -- 3. 퇴사하기 전에
+    delete              -- 2. 퇴사
+    on tblStaff         -- 1. 직원 테이블에서
+    for each row        -- 4. 해당 직원 정보 가져오기
+begin
+
+    --5 무언가를 할지? > 퇴사 직원의 프로젝트를 다른 직원에게 위임
+    update tblProject set
+        staff_seq = 4
+            where staff_seq = :old.seq;
+
+end;
+
+
+delete from tblStaff where seq = 2;
+select * from tblStaff;
+select * from tblProject;
+
+
+
+-- 회원 테이블, 게시판 테이블
+-- 포인트 제도 
+-- 1. 글 작성 > 포인트 + 100
+-- 2. 글 삭제 > 포인트 - 50
+
+create table tblBoardUser (
+    id varchar2(30) primary key,
+    point number default 10000 not null
+);
+
+create table tblBoard (
+    seq number primary key,
+    subject varchar2(1000) not null,
+    id varchar2(30) not null references tblBoardUser(id)
+);
+
+create sequence seqBoard;
+
+
+insert into tblBoardUser values('hong', default);
+select * from tblBoardUser;
+
+
+-- Case 1. ANSI-SQL로 하드코딩 > 사용 X
+-- 절차 > 개발자가 직접 제어
+-- 실수 확률 높음 > 일부 절차 누락...
+
+
+-- 1.1 글쓰기
+insert into tblBoard values (seqBoard.nextVal, '게시판입니다.', 'hong');
+
+-- 1.2 포인트 누적하기
+update tblBoardUser set point = point + 100 where id = 'hong';
+
+-- 1.3 글삭제
+delete from tblBoard where seq = 1;
+
+-- 1.4 포인트 차감하기
+update tblBoardUser set point = point - 50 where id = 'hong';
+
+
+select * from tblBoard;
+select * from tblBoardUser;
+
+
+
+
+-- Case 2. 프로시저
+create or replace procedure procAddBoard (
+    psubject varchar2,
+    pid varchar2
+)
+is 
+begin
+
+    -- 2.1 글쓰기
+    insert into tblBoard values (seqBoard.nextVal, psubject, pid);
+    
+    -- 2.2 포인트 누적하기
+    update tblBoardUser set point = point + 100 where id = pid;
+    commit;
+    
+exception
+    when others then
+        rollback;
+
+end;
+
+
+
+create or replace procedure procDeleteBoard (
+    pseq number
+)
+is 
+    vid varchar2(30);
+begin
+
+    -- 2. 삭제글의 작성자 알아내기
+    select id into vid from tblBoard where seq = pseq;
+    
+    -- 2.3 글삭제
+    delete from tblBoard where seq = pseq;
+    
+    -- 2.4 포인트 누적하기
+    update tblBoardUser set point = point - 50 where id = vid;
+    commit;
+    
+exception
+    when others then
+        rollback;
+
+end;
+
+
+
+begin
+    --procAddBoard('다시 글을 씁니다.', 'hong');
+    procDeleteBoard(3);
+end;
+
+select * from tblBoard;
+select * from tblBoardUser;
+
+
+
+
+
+-- Case 3. 트리거
+
+create or replace trigger trgBoard
+    after
+    insert or delete
+    on tblBoard
+    for each row
+begin
+    
+    if inserting then
+        update tblBoardUser set point = point + 100 where id = :new.id;
+    elsif deleting then
+        update tblBoardUser set point = point - 50 where id = :old.id;
+    end if;
+
+end;
+
+
+insert into tblBoard values (seqBoard.nextVal, '트리거를 시험하기 위해 다시 글을 씁니다.', 'hong');
+delete from tblBoard where seq = 4;
+
+select * from tblBoard;
+select * from tblBoardUser;
+
+
+
+
+/*
+
+    프로시저 Out Parameter
+    1. 단일값
+        a. number
+        b. varchar2
+        c. date
+    2. 다중값
+        a. cursor *******
+        
+        
+    저장 프로시저 내에서 커서 사용
+    1. 커서 호출 > 결과값 > 프로시저 내에서 소비
+    
+*/
+
+
+create or replace procedure procBuseo (
+    pbuseo varchar2
+)
+is 
+
+    cursor vcursor
+    is
+    select * from tblInsa where buseo = pbuseo;
+    
+    vrow tblInsa%rowtype;
+    
+begin
+    open vcursor;
+    
+    loop
+        fetch vcursor into vrow;
+        exit when vcursor%notfound;
+        
+        dbms_output.put_line(vrow.name || ', ' || vrow.buseo);
+    end loop;
+    close vcursor;
+end procBuseo;
+
+
+begin
+    procBuseo('영업부');
+end;
+
+
+create or replace procedure procBuseo(
+    pbuseo in varchar2,
+    pcursor out sys_refcursor       -- 커서를 반환값으로 사용할 때 쓰는 자료형!! 필수
+)
+is
+begin
+
+    open pcursor
+    for 
+    select * from tblInsa where buseo = pbuseo;
+    
+end procBuseo;
+
+
+declare
+    vcursor sys_refcursor; -- 커서 참조 변수
+    vrow tblInsa%rowtype;
+begin
+    procBuseo('영업부', vcursor); -- open cursor
+    
+    loop
+        fetch vcursor into vrow;
+        exit when vcursor%notfound;
+        
+        dbms_output.put_line(vrow.name || ', ' || vrow.buseo);
+    end loop;
+end;
+
+
+
+-- 프로시저 + 커서 사용
+-- 1. 자체 소비용
+-- 2. 반환용

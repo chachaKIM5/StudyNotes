@@ -165,29 +165,34 @@ public class Ex04_select {
 		Statement stat = null;
 		ResultSet rs = null;
 		
-		try {
+try {
 			
 			conn = DBUtil.open();
 			stat = conn.createStatement();
 			
+			//SQL 오류
+			//ORA-00904: "NAM": invalid identifier
+			//ORA-00942: table or view does not exist
 			String sql = "select name, buseo, jikwi from tblInsa";
 			
-			//java.lang.NullPointerException
-			//rs = stat.executeQuery(sql);
+			rs = stat.executeQuery(sql);
 			
 			while (rs.next()) {
 				
+				//Java 오류
+				//java.sql.SQLException: 부적합한 열 이름				
 				System.out.println(rs.getString("name"));
 				System.out.println(rs.getString("buseo"));
 				System.out.println(rs.getString("jikwi"));
+				
 			}
 			
 			rs.close();
 			stat.close();
 			conn.close();
 			
+			
 		} catch (Exception e) {
-			System.out.println("Ex04_select.m6");
 			e.printStackTrace();
 		}
 		

@@ -1,4 +1,4 @@
---1관리자 
+--관리자 
 create table tblManager(
         seq number not null,
         id VARCHAR2(60) not null,
@@ -10,7 +10,7 @@ create table tblManager(
 create sequence seq_Manager;
 
 
---2과목
+--과목
 
 create table tblSubject(
         
@@ -23,7 +23,7 @@ create table tblSubject(
 
 create sequence seq_Subject;
 
--- 3과정
+-- 과정
 
 create table tblCourse(
         
@@ -37,8 +37,7 @@ create table tblCourse(
 
 create sequence seq_Course;
 
---4 과정-과목
-
+-- 과정-과목
 create table tblSubjectCourse (
     seq number not null,
     sseq number not null,
@@ -51,7 +50,7 @@ create table tblSubjectCourse (
 
 create sequence seq_SubjectCourse;
 
---5강의실
+--강의실
 
 create table tblClassroom(
         
@@ -66,7 +65,7 @@ create table tblClassroom(
 
 create sequence seq_tblClassroom;
 
---6교재
+--교재
 
 create table tblBook (
     seq number not null,
@@ -80,7 +79,7 @@ create table tblBook (
 
 create sequence seq_tblBook;
 
---7교사
+--교사
 
 create table tblTeacher(
         
@@ -93,7 +92,7 @@ create table tblTeacher(
 );
 create sequence seq_Teacher;
 
--- 8개설 과정
+-- 개설 과정
 create table tblOpenedCourse(
     seq number not null,
     cseq number not null,
@@ -108,7 +107,7 @@ create table tblOpenedCourse(
 
 create sequence seq_openedCourse;
 
--- 9강의 가능 과목
+-- 강의 가능 과목
 create table tblAvailable(
     seq number not null,
     tseq number not null,
@@ -122,7 +121,7 @@ create table tblAvailable(
 create sequence seq_available;
 
 
--- 10교육생 정보
+-- 교육생 정보
 create table tblStudent(
     seq number not null,
     name varchar2(15) not null,
@@ -135,7 +134,7 @@ create table tblStudent(
 
 create sequence seq_student;
 
--- 11교육생 수강정보
+-- 교육생 수강정보
 create table tblSignUp(
     seq number not null,
     ocseq number not null,
@@ -150,13 +149,13 @@ create table tblSignUp(
 
 create sequence seq_signUp;
 
---12 개설과목
+--개설과목
 create table tblOpenedSubject (
     seq number not null,
     ocseq number not null,
     tseq number not null,
     scseq number not null,
-    isprogress varchar2(15) not null,
+    isprogress char not null,
     startdate date not null,
     enddate date not null,
     
@@ -164,13 +163,13 @@ create table tblOpenedSubject (
     constraint tblOpenedSubject_ocseq_fk foreign key(ocseq) references tblOpenedCourse(seq),
     constraint tblOpenedSubject_tseq_fk foreign key(tseq) references tblTeacher(seq),
     constraint tblOpenedSubject_scseq_fk foreign key(scseq) references tblSubjectCourse(seq),
-    constraint tblOpenedSubject_isprogress_ck check (isprogress in ('강의예정', '강의중','강의종료'))
+    constraint tblOpenedSubject_isprogress_ck check (isprogress in ('y', 'n'))
 );
 
 create sequence seq_openedsubject;
 
 
---13 교재-개설과목
+--교재-개설과목
 create table tblBookSubject (
     seq number not null,
     bseq number not null,
@@ -186,7 +185,7 @@ create sequence seq_booksubject;
 
 
 
---14 시험
+--시험
 create table tblTest (
     seq number not null,
     osseq number not null,
@@ -200,7 +199,7 @@ create table tblTest (
 
 create sequence seq_test;
 
---15 시험결과
+--시험결과
 create table tblScore (
     seq number not null,
     tseq number not null,
@@ -215,7 +214,7 @@ create table tblScore (
 
 create sequence seq_score;
 
---16 출결
+--출결
 
 create table tblAttendence (
     seq number not null,
@@ -231,7 +230,7 @@ create table tblAttendence (
 create sequence seq_Attendence;
 
 
---17 배점
+--배점
 create table tblScoring (
     seq number not null,
     osseq number not null,
@@ -248,9 +247,7 @@ create table tblScoring (
 
 create sequence seq_Scoring;
 
-
-
---18 프로젝트 참여자 모집 공고
+--프로젝트 참여자 모집 공고
 create table tblProjectRecruitment(
     seq number not null,
     stuseq number not null,
@@ -271,7 +268,7 @@ create sequence seq_ProjectRecruitment;
 
 
 
---19 프로젝트 참여자 모집 공고 - 신청
+--프로젝트 참여자 모집 공고 - 신청
 create table tblProjectParticipant(
     seq number not null,
     pseq number not null,
@@ -284,7 +281,7 @@ create table tblProjectParticipant(
 
 create sequence seq_ProjectParticipant;
 
--- 20 대면/비대면 수업 등록 내역 (교육생)
+-- 대면/비대면 수업 등록 내역 (교육생)
 create table tblHomeStudent (
     seq number not null,
     suseq number not null,
@@ -298,7 +295,7 @@ create table tblHomeStudent (
 
 create sequence seq_homeStudent;
 
---21 직무
+--직무
 create table tblJob (
     seq number not null,
     jobname varchar2(60) not null,
@@ -308,7 +305,7 @@ create table tblJob (
 
 create sequence seq_Job;
 
---22 수료생
+-- 수료생
 create table tblGraduate (
     seq number not null,
     suseq number not null,
@@ -327,17 +324,15 @@ create table tblGraduate (
 create sequence seq_graduate;
 
 
---23 수령방법
+--수령방법
 create table tblDelivery (
     seq number not null,
     suseq number not null,
-    osseq number not null,
     delivery varchar2(10) not null,
     receipt char not null,
     
     constraint tblDelivery_seq_pk primary key(seq),
     constraint tblDelivery_suseq_fk foreign key(suseq) references tblSignUp(seq),
-    constraint tblDelivery_osseq_fk foreign key(osseq) references tblOpenedSubject(seq),
     constraint tblDelivery_delivery_ck check (delivery in ('방문', '택배')),
     constraint tblDelivery_receipt_ck check (receipt in ('y', 'n'))
 );
@@ -345,7 +340,7 @@ create table tblDelivery (
 create sequence seq_delivery;
 
 
---24 자격증
+--자격증
 create table tblCertificate (
     seq number not null,
     certificateName varchar2(60) not null,
@@ -356,7 +351,7 @@ create table tblCertificate (
 create sequence seq_certificate;
 
 
---25 자격증 - 교육생
+--자격증 - 교육생
 create table tblCerStudent (
     seq number not null,
     stuseq number not null,
@@ -370,7 +365,7 @@ create table tblCerStudent (
 
 create sequence seq_cerStudent;
 
---26 기업
+--기업
 create table tblCompany (
     seq number not null,
     companyname varchar2(60) not null,
@@ -382,7 +377,7 @@ create table tblCompany (
 
 create sequence seq_Company;
 
---27 채용모집
+--채용모집
 create table tblRecruitment (
     seq number not null,
     cseq number not null,
@@ -400,7 +395,7 @@ create table tblRecruitment (
 
 create sequence seq_Recruitment;
 
---28 취업연계
+--취업연계
 create table tblEmploymentLink (
     seq number not null,
     gseq number not null,
@@ -413,7 +408,7 @@ create table tblEmploymentLink (
 
 create sequence seq_EmploymentLink;
 
---29 Q&A게시판
+--Q&A게시판
 create table tblQna (
     seq number not null,
     stuseq number not null,
@@ -427,7 +422,7 @@ create table tblQna (
 
 create sequence seq_Qna;
 
---30 댓글
+--댓글
 create table tblComments (
     seq number not null,
     qseq number not null,

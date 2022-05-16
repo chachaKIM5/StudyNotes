@@ -1,4 +1,4 @@
---관리자 
+--관리자
 create table tblManager(
         seq number not null,
         id VARCHAR2(60) not null,
@@ -28,7 +28,7 @@ create sequence seq_Subject;
 create table tblCourse(
         
         seq number not null,
-        courseName VARCHAR2(60) not null,
+        courseName VARCHAR2(300) not null,
         
         constraint tblCourse_seq_pk primary key(seq)
     
@@ -63,7 +63,7 @@ create table tblClassroom(
         
 );
 
-create sequence seq_tblClassroom;
+create sequence seq_Classroom;
 
 --교재
 
@@ -155,7 +155,7 @@ create table tblOpenedSubject (
     ocseq number not null,
     tseq number not null,
     scseq number not null,
-    isprogress char not null,
+    isprogress varchar2(15) not null,
     startdate date not null,
     enddate date not null,
     
@@ -163,7 +163,7 @@ create table tblOpenedSubject (
     constraint tblOpenedSubject_ocseq_fk foreign key(ocseq) references tblOpenedCourse(seq),
     constraint tblOpenedSubject_tseq_fk foreign key(tseq) references tblTeacher(seq),
     constraint tblOpenedSubject_scseq_fk foreign key(scseq) references tblSubjectCourse(seq),
-    constraint tblOpenedSubject_isprogress_ck check (isprogress in ('y', 'n'))
+    constraint tblOpenedSubject_isprogress_ck check (isprogress in ('강의예정', '강의중','강의종료'))
 );
 
 create sequence seq_openedsubject;
@@ -184,13 +184,13 @@ create table tblBookSubject (
 create sequence seq_booksubject;
 
 
-
---시험
+-- 시험
 create table tblTest (
     seq number not null,
     osseq number not null,
     testdate date not null,
     testtype varchar2(6) not null,
+    question varchar(20) null,
     
     constraint tblTest_seq_pk primary key(seq),
     constraint tblTest_osseq_fk foreign key(osseq) references tblOpenedSubject(seq),
@@ -412,8 +412,8 @@ create sequence seq_EmploymentLink;
 create table tblQna (
     seq number not null,
     stuseq number not null,
-    title varchar2(60) not null,
-    contents varchar2(300) not null,
+    title varchar2(300) not null,
+    contents varchar2(3000) not null,
     regdate date default sysdate not null,
     
     constraint tblQna_seq_pk primary key(seq),
@@ -427,7 +427,7 @@ create table tblComments (
     seq number not null,
     qseq number not null,
     tseq number not null,
-    contents varchar2(300) not null,
+    contents varchar2(3000) not null,
     regdate date default sysdate not null,
     
     constraint tblComments_seq_pk primary key(seq),

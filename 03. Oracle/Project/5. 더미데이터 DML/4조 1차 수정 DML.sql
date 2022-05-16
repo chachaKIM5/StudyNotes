@@ -817,84 +817,84 @@ insert into tblBookSubject(seq, bseq, osseq) values (SEQ_BOOKSUBJECT.nextVal, 3,
 --시험.sql
 
 --과정1
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 1 ,'2021-11-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 1 ,'2021-12-23','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 1 ,'2021-11-18','필기','문제01');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 1 ,'2021-12-23','실기','문제02');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 2 ,'2022-01-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 2 ,'2022-02-18','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 2 ,'2022-01-18','필기','문제03');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 2 ,'2022-02-18','실기','문제04');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 3 ,'2022-03-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 3,'2022-04-17','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 3 ,'2022-03-18','필기','문제05');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 3,'2022-04-17','실기','문제06');
 
 --과정2
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 4 ,'2022-01-15','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 4 ,'2022-02-15','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 4 ,'2022-01-15','필기','문제07');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 4 ,'2022-02-15','실기','문제08');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 5 ,'2022-03-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 5,'2022-04-18','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 5 ,'2022-03-18','필기','문제09');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 5,'2022-04-18','실기','문제10');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 6 ,'2022-05-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 6 ,'2022-06-17','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 6 ,'2022-05-18','필기','문제11');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 6 ,'2022-06-17','실기','문제12');
 
 --과정3
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 7 ,'2022-03-23','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 7 ,'2022-04-23','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 7 ,'2022-03-23','필기','문제13');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 7 ,'2022-04-23','실기','문제14');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 8 ,'2022-05-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,  8,'2022-06-18','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 8 ,'2022-05-18','필기','문제15');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,  8,'2022-06-18','실기','문제16');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 9 ,'2022-07-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 9 ,'2022-08-04','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 9 ,'2022-07-18','필기','문제17');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 9 ,'2022-08-04','실기','문제18');
 
 --과정4
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 10 ,'2022-03-14','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,10  ,'2022-04-14','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 10 ,'2022-03-14','필기','문제19');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,10  ,'2022-04-14','실기','문제20');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 11 ,'2022-05-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 11 ,'2022-06-18','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 11 ,'2022-05-18','필기','문제21');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 11 ,'2022-06-18','실기','문제22');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 12 ,'2022-07-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 12 ,'2022-08-12','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 12 ,'2022-07-18','필기','문제23');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 12 ,'2022-08-12','실기','문제24');
 
 --과정5
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 13 ,'2022-04-28','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 13 ,'2022-05-23','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 13 ,'2022-04-28','필기','문제25');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 13 ,'2022-05-23','실기','문제26');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 14 ,'2022-06-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 14 ,'2022-07-18','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 14 ,'2022-06-18','필기','문제27');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 14 ,'2022-07-18','실기','문제28');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,  15,'2022-08-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 15 ,'2022-09-01','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,  15,'2022-08-18','필기','문제29');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 15 ,'2022-09-01','실기','문제30');
 
 --과정6
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 16 ,'2022-05-28','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 16 ,'2022-06-23','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 16 ,'2022-05-28','필기','문제31');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 16 ,'2022-06-23','실기','문제32');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,17  ,'2022-07-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 17,'2022-08-18','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,17  ,'2022-07-18','필기','문제33');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 17,'2022-08-18','실기','문제34');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 18 ,'2022-09-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 18 ,'2022-10-20','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 18 ,'2022-09-18','필기','문제35');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 18 ,'2022-10-20','실기','문제36');
 
 --과정7
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,19 ,'2022-06-28','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,19,'2022-07-23','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,19 ,'2022-06-28','필기','문제37');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,19,'2022-07-23','실기','문제38');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 20 ,'2022-08-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 20 ,'2022-09-18','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 20 ,'2022-08-18','필기','문제39');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 20 ,'2022-09-18','실기','문제40');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,21  ,'2022-10-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,  21,'2022-11-01','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,21  ,'2022-10-18','필기','문제41');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,  21,'2022-11-01','실기','문제42');
 
 --과정8
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,  22,'2022-07-13','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 22 ,'2022-08-13','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,  22,'2022-07-13','필기','문제43');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 22 ,'2022-08-13','실기','문제44');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 23 ,'2022-09-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 23 ,'2022-10-18','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 23 ,'2022-09-18','필기','문제45');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 23 ,'2022-10-18','실기','문제46');
 
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 24 ,'2022-11-18','필기');
-insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal,24 ,'2022-12-22','실기');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal, 24 ,'2022-11-18','필기','문제47');
+insert into tblTest (seq,osseq,testdate,testtype,question) values (seq_test.nextVal,24 ,'2022-12-22','실기','문제48');
 
 --과정9
 insert into tblTest (seq,osseq,testdate,testtype) values (seq_test.nextVal, 25 ,'2022-09-13','필기');
@@ -1311,44 +1311,16 @@ insert into tblAttendence values(seq_attendence.nextval, 14, '2022-02-22', '외�
 insert into tblAttendence values(seq_attendence.nextval, 19, '2022-02-28', '지각');
 insert into tblAttendence values(seq_attendence.nextval, 19, '2022-03-17', '기타');
 
-
 --배점
 insert into tblScoring values(seq_Scoring.nextVal, 1, 0.2, 0.33, 0.47);
 insert into tblScoring values(seq_Scoring.nextVal, 2, 0.2, 0.57, 0.23);
 insert into tblScoring values(seq_Scoring.nextVal, 3, 0.2, 0.47, 0.33);
 insert into tblScoring values(seq_Scoring.nextVal, 4, 0.2, 0.71, 0.09);
 insert into tblScoring values(seq_Scoring.nextVal, 5, 0.2, 0.25, 0.55);
-insert into tblScoring values(seq_Scoring.nextVal, 6, 0.2, 0.68, 0.12);
 insert into tblScoring values(seq_Scoring.nextVal, 7, 0.2, 0.45, 0.35);
-insert into tblScoring values(seq_Scoring.nextVal, 8, 0.2, 0.25, 0.55);
-insert into tblScoring values(seq_Scoring.nextVal, 9, 0.2, 0.53, 0.27);
 insert into tblScoring values(seq_Scoring.nextVal, 10, 0.2, 0.74, 0.06);
-insert into tblScoring values(seq_Scoring.nextVal, 11, 0.2, 0.15, 0.65);
-insert into tblScoring values(seq_Scoring.nextVal, 12, 0.2, 0.53, 0.27);
 insert into tblScoring values(seq_Scoring.nextVal, 13, 0.2, 0.52, 0.28);
 insert into tblScoring values(seq_Scoring.nextVal, 14, 0.2, 0.33, 0.47);
-insert into tblScoring values(seq_Scoring.nextVal, 15, 0.2, 0.57, 0.23);
-insert into tblScoring values(seq_Scoring.nextVal, 16, 0.2, 0.52, 0.28);
-insert into tblScoring values(seq_Scoring.nextVal, 17, 0.2, 0.52, 0.28);
-insert into tblScoring values(seq_Scoring.nextVal, 18, 0.2, 0.58, 0.22);
-insert into tblScoring values(seq_Scoring.nextVal, 19, 0.2, 0.6, 0.2);
-insert into tblScoring values(seq_Scoring.nextVal, 20, 0.2, 0.46, 0.34);
-insert into tblScoring values(seq_Scoring.nextVal, 21, 0.2, 0.38, 0.42);
-insert into tblScoring values(seq_Scoring.nextVal, 22, 0.2, 0.13, 0.67);
-insert into tblScoring values(seq_Scoring.nextVal, 23, 0.2, 0.59, 0.21);
-insert into tblScoring values(seq_Scoring.nextVal, 24, 0.2, 0.28, 0.52);
-insert into tblScoring values(seq_Scoring.nextVal, 25, 0.2, 0.32, 0.48);
-insert into tblScoring values(seq_Scoring.nextVal, 26, 0.2, 0.42, 0.38);
-insert into tblScoring values(seq_Scoring.nextVal, 27, 0.2, 0.75, 0.05);
-insert into tblScoring values(seq_Scoring.nextVal, 28, 0.2, 0.66, 0.14);
-insert into tblScoring values(seq_Scoring.nextVal, 29, 0.2, 0.18, 0.62);
-insert into tblScoring values(seq_Scoring.nextVal, 30, 0.2, 0.63, 0.17);
-insert into tblScoring values(seq_Scoring.nextVal, 31, 0.2, 0.16, 0.64);
-insert into tblScoring values(seq_Scoring.nextVal, 32, 0.2, 0.29, 0.51);
-insert into tblScoring values(seq_Scoring.nextVal, 33, 0.2, 0.41, 0.39);
-insert into tblScoring values(seq_Scoring.nextVal, 34, 0.2, 0.66, 0.14);
-insert into tblScoring values(seq_Scoring.nextVal, 35, 0.2, 0.47, 0.33);
-insert into tblScoring values(seq_Scoring.nextVal, 36, 0.2, 0.68, 0.12);
 
 --프로젝트 참여자 모집 공고
 insert into tblProjectRecruitment values (seq_ProjectRecruitment.nextVal, 30, '자바 프로젝트', '자바를 이용한 자바 프로젝트 인원을 모집합니다.', to_date('2022-06-01', 'yyyy-mm-dd'), to_date('2022-06-07', 'yyyy-mm-dd'), 3, to_date('2022-05-29', 'yyyy-mm-dd'));
@@ -1420,7 +1392,7 @@ insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment)
 insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (12, 3, 1, '대구', '3800000', '대졸', 'n');
 insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (13, 3, 2, '부산', '3500000', '대졸', 'n');
 insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (14, 5, 13, '서울', '4500000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (15, 8, 14, '서울', '4500000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (15, 5, 14, '서울', '4500000', '대졸', 'n');
 insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (16, 1, 15, '서울', '3500000', '고졸', 'y');
 insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (17, 3, 16, '경기', '3000000', '고졸', 'y');
 insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (18, 2, 17, '경기', '2500000', '고졸', 'y');
@@ -1851,14 +1823,14 @@ insert into tblRecruitment (seq, cseq, jseq, workingArea, annulIncome, recruitme
     
     
 --취업연계(취업연계번호/수료생번호f/모집번호f)
-insert into tblEmploymentLink (seq, gseq, rseq) values (1, 10, 5)
-insert into tblEmploymentLink (seq, gseq, rseq) values (2, 5, 4)
-insert into tblEmploymentLink (seq, gseq, rseq) values (3, 15, 3)
-insert into tblEmploymentLink (seq, gseq, rseq) values (4, 20, 2)
-insert into tblEmploymentLink (seq, gseq, rseq) values (5, 11, 1)
-insert into tblEmploymentLink (seq, gseq, rseq) values (6, 12, 1)
-insert into tblEmploymentLink (seq, gseq, rseq) values (7, 13, 2)
-insert into tblEmploymentLink (seq, gseq, rseq) values (8, 17, 3)
+insert into tblEmploymentLink (seq, gseq, rseq) values (1, 10, 5);
+insert into tblEmploymentLink (seq, gseq, rseq) values (2, 5, 4);
+insert into tblEmploymentLink (seq, gseq, rseq) values (3, 15, 3);
+insert into tblEmploymentLink (seq, gseq, rseq) values (4, 20, 2);
+insert into tblEmploymentLink (seq, gseq, rseq) values (5, 11, 1);
+insert into tblEmploymentLink (seq, gseq, rseq) values (6, 12, 1);
+insert into tblEmploymentLink (seq, gseq, rseq) values (7, 13, 2);
+insert into tblEmploymentLink (seq, gseq, rseq) values (8, 17, 3);
 
 
 --Q&A 게시판
@@ -1867,7 +1839,6 @@ insert into tblQna values(seq_Qna.nextVal, 31, 'SI 질문입니다.', 'SI 업체
 insert into tblQna values(seq_Qna.nextVal, 30, '비전공자 공부 이렇게 해도 되나요????????', '현재 유튜브 생활코딩으로 WEB(html,스프링)/자바 강의로 간단한 예습을 하는 중이고', '2022-05-11');
 insert into tblQna values(seq_Qna.nextVal, 29, '전공자 백엔드 신입 컷이 몇살정도일까요?', '선배님들 대략 이정도면 보통 초봉 어느정도인가요? 요즘 신입스프링 취직은 잘되나요', '2022-05-07');
 insert into tblQna values(seq_Qna.nextVal, 28, 'visual studio code 설정', 'visual studio에서 코드 색깔을 설정을 할수 있다고하는데 알려주세요', '2022-05-01');
-
 
 --댓글
 insert into tblComments values(seq_Comments.nextVal, 1, 2, 'vscode 는 모듈러 방식이라 확장을 설치해야 할 것입니다.', '2022-05-13');

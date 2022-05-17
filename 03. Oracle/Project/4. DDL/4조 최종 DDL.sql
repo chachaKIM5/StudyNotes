@@ -327,7 +327,7 @@ create sequence seq_graduate;
 --수령방법
 create table tblDelivery (
     seq number not null,
-    suseq number not null,
+    suseq number unique not null,
     delivery varchar2(10) not null,
     receipt char not null,
     
@@ -436,3 +436,16 @@ create table tblComments (
 );
 
 create sequence seq_Comments;
+
+-- 공휴일
+create table tblHoliday (
+    seq number not null,
+    holiday date not null,
+    name varchar(30) not null,
+    
+    constraint tblHoliday_seq_pk primary key(seq)
+)
+
+create sequence seq_Holiday;
+
+

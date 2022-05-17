@@ -1348,56 +1348,56 @@ insert into tblProjectParticipant values (seq_ProjectParticipant.nextVal, 5, 44)
 insert into tblProjectParticipant values (seq_ProjectParticipant.nextVal, 5, 45);
 
 --대면/비대면 수업등록내역(등록번호/수강정보번호 (21~140)/수업일/대면,비대면여부)
-insert into tblHomeStudent (seq, suseq, classday, home) values (1, 21, '2022-05-20', '대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (2, 25, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (3, 21, '2022-05-20', '대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (4, 25, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (5, 35, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (6, 41, '2022-05-20', '대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (7, 45, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (8, 61, '2022-05-20', '대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (9, 55, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (10, 75, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (11, 81, '2022-05-20', '대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (12, 95, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (13, 101, '2022-05-20', '대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (14, 111, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (15, 122, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (16, 105, '2022-05-20', '대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (17, 113, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (18, 126, '2022-05-20', '대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (19, 136, '2022-05-20', '비대면');
-insert into tblHomeStudent (seq, suseq, classday, home) values (20, 109, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 21, '2022-05-20', '대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 25, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 21, '2022-05-20', '대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 25, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 35, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 41, '2022-05-20', '대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 45, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 61, '2022-05-20', '대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 55, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 75, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 81, '2022-05-20', '대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 95, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 101, '2022-05-20', '대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 111, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 122, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 105, '2022-05-20', '대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 113, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 126, '2022-05-20', '대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 136, '2022-05-20', '비대면');
+insert into tblHomeStudent (seq, suseq, classday, home) values (seq_HomeStudent.nextVal, 109, '2022-05-20', '비대면');
 
 --직무(직무번호/직무명)
-insert into tblJob (seq, jobName) values (1, '소프트웨어 개발자');
-insert into tblJob (seq, jobName) values (2, '모바일앱 개발자');
-insert into tblJob (seq, jobName) values (3, '데이터베이스 관리자');
-insert into tblJob (seq, jobName) values (4, '웹 개발자');
-insert into tblJob (seq, jobName) values (5, '빅데이터 개발자');
+insert into tblJob (seq, jobName) values (seq_Job.nextVal, '소프트웨어 개발자');
+insert into tblJob (seq, jobName) values (seq_Job.nextVal, '모바일앱 개발자');
+insert into tblJob (seq, jobName) values (seq_Job.nextVal, '데이터베이스 관리자');
+insert into tblJob (seq, jobName) values (seq_Job.nextVal, '웹 개발자');
+insert into tblJob (seq, jobName) values (seq_Job.nextVal, '빅데이터 개발자');
 
 
 --수료생(수료생번호/직무번호f/수강정보번호f/희망근무지/희망연봉/학력/취업여부)
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (1, 1, 2, '서울', '3500000', '고졸', 'y');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (2, 3, 12, '경기', '3000000', '고졸', 'y');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (3, 2, 11, '대구', '2500000', '고졸', 'y');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (4, 3, 10, '부산', '2800000', '고졸', 'y');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (5, 5, 9, '서울', '2700000', '고졸', 'y');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (6, 1, 8, '서울', '4000000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (7, 3, 7, '경기', '4300000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (8, 2, 6, '대구', '3800000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (9, 3, 5, '부산', '3500000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (10, 5, 4, '서울', '4500000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (11, 4, 3, '경기', '4300000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (12, 3, 1, '대구', '3800000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (13, 3, 2, '부산', '3500000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (14, 5, 13, '서울', '4500000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (15, 5, 14, '서울', '4500000', '대졸', 'n');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (16, 1, 15, '서울', '3500000', '고졸', 'y');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (17, 3, 16, '경기', '3000000', '고졸', 'y');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (18, 2, 17, '경기', '2500000', '고졸', 'y');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (19, 3, 18, '부산', '2800000', '고졸', 'y');
-insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (20, 4, 19, '서울', '2700000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 1, 2, '서울', '3500000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 3, 12, '경기', '3000000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 2, 11, '대구', '2500000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 3, 10, '부산', '2800000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 5, 9, '서울', '2700000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 1, 8, '서울', '4000000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 3, 7, '경기', '4300000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 2, 6, '대구', '3800000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 3, 5, '부산', '3500000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 5, 4, '서울', '4500000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 4, 3, '경기', '4300000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 3, 1, '대구', '3800000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 3, 2, '부산', '3500000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 5, 13, '서울', '4500000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 5, 14, '서울', '4500000', '대졸', 'n');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 1, 15, '서울', '3500000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 3, 16, '경기', '3000000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 2, 17, '경기', '2500000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 3, 18, '부산', '2800000', '고졸', 'y');
+insert into tblGraduate (seq, jseq, suseq, place, salary, education, employment) values (seq_Graduate.nextVal, 4, 19, '서울', '2700000', '고졸', 'y');
 
 
 --수령방법
@@ -1802,35 +1802,35 @@ insert into tblCerStudent (seq,stuseq,cseq,adate) values (seq_cerStudent.nextVal
 
 
 --기업(기업번호/기업이름/주소/전화번호)
-insert into tblCompany (seq, companyName, address, tel) values (1, '삼성', '서울시 강남구', '1588-1211');
-insert into tblCompany (seq, companyName, address, tel) values (2, '애플', '서울시 서초구', '1577-1235');
-insert into tblCompany (seq, companyName, address, tel) values (3, '구글', '서울시 강남구', '1588-3265');
-insert into tblCompany (seq, companyName, address, tel) values (4, '카카오', '경기도 성남시', '1577-3633');
-insert into tblCompany (seq, companyName, address, tel) values (5, '네이버', '경기도 성남시', '1588-1478');
+insert into tblCompany (seq, companyName, address, tel) values (seq_Company.nextVal, '삼성', '서울시 강남구', '1588-1211');
+insert into tblCompany (seq, companyName, address, tel) values (seq_Company.nextVal, '애플', '서울시 서초구', '1577-1235');
+insert into tblCompany (seq, companyName, address, tel) values (seq_Company.nextVal, '구글', '서울시 강남구', '1588-3265');
+insert into tblCompany (seq, companyName, address, tel) values (seq_Company.nextVal, '카카오', '경기도 성남시', '1577-3633');
+insert into tblCompany (seq, companyName, address, tel) values (seq_Company.nextVal, '네이버', '경기도 성남시', '1588-1478');
 
 
 --채용모집(모집번호/기업번호f/직무번호f/근무지/연봉/채용인원/채용시작날짜/채용종료날짜
 insert into tblRecruitment (seq, cseq, jseq, workingArea, annulIncome, recruitmentNum, startregdate, endregdate)
-    values (1, 3, 5,'서울', 2500000, 10, '2022-05-25', '2022-05-30');
+    values (seq_Recruitment.nextVal, 3, 5,'서울', 2500000, 10, '2022-05-25', '2022-05-30');
 insert into tblRecruitment (seq, cseq, jseq, workingArea, annulIncome, recruitmentNum, startregdate, endregdate)
-    values (2, 4, 4,'경기', 3000000, 5, '2022-05-26', '2022-05-31');
+    values (seq_Recruitment.nextVal, 4, 4,'경기', 3000000, 5, '2022-05-26', '2022-05-31');
 insert into tblRecruitment (seq, cseq, jseq, workingArea, annulIncome, recruitmentNum, startregdate, endregdate)
-    values (3, 5, 3,'서울', 3500000, 3, '2022-05-27', '2022-06-03');
+    values (seq_Recruitment.nextVal, 5, 3,'서울', 3500000, 3, '2022-05-27', '2022-06-03');
 insert into tblRecruitment (seq, cseq, jseq, workingArea, annulIncome, recruitmentNum, startregdate, endregdate)
-    values (4, 1, 2,'부산', 3700000, 20, '2022-06-07', '2022-06-14');
+    values (seq_Recruitment.nextVal, 1, 2,'부산', 3700000, 20, '2022-06-07', '2022-06-14');
 insert into tblRecruitment (seq, cseq, jseq, workingArea, annulIncome, recruitmentNum, startregdate, endregdate)
-    values (5, 2, 1,'대구', 4000000, 15, '2022-06-20', '2022-06-27');
+    values (seq_Recruitment.nextVal, 2, 1,'대구', 4000000, 15, '2022-06-20', '2022-06-27');
     
     
 --취업연계(취업연계번호/수료생번호f/모집번호f)
-insert into tblEmploymentLink (seq, gseq, rseq) values (1, 10, 5);
-insert into tblEmploymentLink (seq, gseq, rseq) values (2, 5, 4);
-insert into tblEmploymentLink (seq, gseq, rseq) values (3, 15, 3);
-insert into tblEmploymentLink (seq, gseq, rseq) values (4, 20, 2);
-insert into tblEmploymentLink (seq, gseq, rseq) values (5, 11, 1);
-insert into tblEmploymentLink (seq, gseq, rseq) values (6, 12, 1);
-insert into tblEmploymentLink (seq, gseq, rseq) values (7, 13, 2);
-insert into tblEmploymentLink (seq, gseq, rseq) values (8, 17, 3);
+insert into tblEmploymentLink (seq, gseq, rseq) values (seq_EmploymentLink.nextVal, 10, 5);
+insert into tblEmploymentLink (seq, gseq, rseq) values (seq_EmploymentLink.nextVal, 5, 4);
+insert into tblEmploymentLink (seq, gseq, rseq) values (seq_EmploymentLink.nextVal, 15, 3);
+insert into tblEmploymentLink (seq, gseq, rseq) values (seq_EmploymentLink.nextVal, 20, 2);
+insert into tblEmploymentLink (seq, gseq, rseq) values (seq_EmploymentLink.nextVal, 11, 1);
+insert into tblEmploymentLink (seq, gseq, rseq) values (seq_EmploymentLink.nextVal, 12, 1);
+insert into tblEmploymentLink (seq, gseq, rseq) values (seq_EmploymentLink.nextVal, 13, 2);
+insert into tblEmploymentLink (seq, gseq, rseq) values (seq_EmploymentLink.nextVal, 17, 3);
 
 
 --Q&A 게시판
@@ -1846,3 +1846,20 @@ insert into tblComments values(seq_Comments.nextVal, 2, 3, '아니욘 헛소리 
 insert into tblComments values(seq_Comments.nextVal, 3, 4, '정처기 준비하셔서 후반기 노려보시는 걸 추천드립니다', '2022-05-11');
 insert into tblComments values(seq_Comments.nextVal, 4, 5, '포토플리오를 올려주세요. 평가해드립니다.', '2022-05-07');
 insert into tblComments values(seq_Comments.nextVal, 5, 6, '보통 요런거 플러그인 깔아서 해결하지 않나 싶어요', '2022-05-01');
+
+-- 공휴일
+insert into tblHoliday values (seq_Holiday.nextVal, '2021-12-25', '크리스마스');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-01-01', '새해');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-01-31', '설날');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-02-01', '설날');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-02-02', '설날');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-03-01', '삼일절');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-05-05', '어린이날');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-05-08', '석가탄신일');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-06-06', '현충일');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-08-15', '광복절');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-09-09', '추석');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-09-12', '추석 대체공휴일');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-10-03', '개천절');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-10-10', '한글날 대체공휴일');
+insert into tblHoliday values (seq_Holiday.nextVal, '2022-12-25', '크리스마스');

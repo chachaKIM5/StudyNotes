@@ -1,9 +1,19 @@
 --3. 배점 입출력
+-- 3-1. 강의를 마친 과목에 한해 특정 과목 선택, 배점 정보를 출결, 필기, 실기로 구분해 등록
+-- 3-2. 시험 날짜와 시험 문제 추가
+
+-- 3-3. 과목 목록 전체 출력: (해당 교사가 맡은) 과목번호, 과정명, 과정기간(시작,끝), 강의실, 과목명, 과목기간(시작,끝), 교재명, 출결배점, 필기배점, 실기배점
+-- vwTeacherOSList
+
+-- 3-4. 특정 과목 선택해 배점 출력(개설과목번호로): 출결배점, 필기배점, 실기배점, 시험날짜, 시험문제
+-- vwTeacherScoring
+
 
 
 
 --3.1 강의를 마친 과목에 한해 특정 과목 선택, 배점 정보를 출결, 필기, 실기로 구분해 등록
 -- 프로시저: 입력, 수정, 삭제 -> 출결+필기+실기배점 = 1이 아니면 에러 나도록
+
 
 --배점 정보 등록
 insert into tblscoring(seq, osseq, attrate, wtestrate, ptestrate)
@@ -14,6 +24,9 @@ update tblScoring set attrate = 수정할 출결배점, wtestrate = 수정할 �
 
 --배점 정보 삭제
 delete from tblScoring where osseq = 삭제할 개설과목번호;
+
+
+
 
 
 --3.2 시험 날짜와 시험 문제 추가
@@ -40,10 +53,19 @@ update tblTest set question is null where osseq = 수정할 개설과목번호;
 
 
 
+
+
 --3.3 과목 목록 전체 출력: (해당 교사가 맡은) 과목번호, 과정명, 과정기간(시작,끝), 강의실, 과목명, 과목기간(시작,끝), 교재명, 출결배점, 필기배점, 실기배점
 --    배점 미등록 시 null로 출력
+-- vwTeacherOSList
+-- vwGetTseq
 
+
+-- view 생성
+create or replace view vwTeacherOSList
+as
 select
+    os.tseq as "교사번호",
     os.seq as "개설과목번호",
     c.courseName as "과정명",
     oc.startdate as "과정시작일",
@@ -67,13 +89,29 @@ from tblOpenedSubject os
     inner join tblBookSubject bs on os.seq = bs.osseq
     inner join tblBook b on bs.bseq = b.seq
     left outer join tblScoring score on os.seq = score.osseq
-        where os.tseq = (select seq from tblTeacher where jumin = '조회할 교사 주민등록번호 뒷자리')
                 order by oc.startdate, os.startdate asc;
-                
+ 
+ 
+create or replace view vwGetTseq
+as
+select seq as "교사번호", jumin as "주민등록번호" from tblTeacher;
 
---3.4 특정 과목 선택 출력(개설과목번호로): 출결배점, 필기배점, 실기배점, 시험날짜, 시험문제
+
+-- view 실행
+select * from vwTeacherOSList where "교사번호" = (select "교사번호" from vwGetTseq where "주민등록번호" = '1534921');
+
+
+
+
+
+--3.4 특정 과목 선택해 배점 출력(개설과목번호로): 출결배점, 필기배점, 실기배점, 시험날짜, 시험문제
 --    배점, 시험문제 미등록 시 null로 출력
+--vwTeacherScoring
 
+
+-- view 생성
+create or replace view vwTeacherScoring
+as
 select
     os.seq as "개설과목번호",
     score.attrate as "출결배점",
@@ -86,6 +124,8 @@ select
 from tblScoring score
     right outer join tblOpenedSubject os on score.osseq = os.seq
     inner join tblTest t on os.seq = t.osseq
-        where os.seq = 개설과목번호
             order by t.testdate asc;
         
+
+-- view 실행
+select * from vwTeacherScoring where "개설과목번호" = 1;

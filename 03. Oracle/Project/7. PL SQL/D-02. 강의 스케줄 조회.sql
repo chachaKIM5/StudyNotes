@@ -42,9 +42,21 @@ as
 select seq as "교사번호", jumin as "주민등록번호" from tblTeacher;
 
 
--- view 실행 (vwGetTseq 없을 때, vwGetTseq 있을 때)
-select * from vwTeacherSchedule where "교사번호" = (select seq from tblTeacher where jumin = '1534921');
-select * from vwTeacherSchedule where "교사번호" = (select "교사번호" from vwGetTseq where "주민등록번호" = '1534921');
+-- view 실행
+select
+    "개설과목번호",
+    "과정명",
+    "과정시작일",
+    "과정종료일",
+    "강의실명",
+    "과목명",
+    "과목시작일",
+    "과목종료일",
+    "강의진행여부",
+    "교재명",
+    "교육생 등록 인원"
+from vwTeacherSchedule
+    where "교사번호" = (select "교사번호" from vwGetTseq where "주민등록번호" = '1534921');
 
 
 
@@ -74,5 +86,12 @@ from tblOpenedSubject os inner join tblOpenedCourse oc on os.ocseq = oc.seq
 
 
 -- view 실행
-select * from vwTeacherStudentInfo where "개설과목번호" = 1;   
+select
+    "이름",
+    "전화번호",
+    "등록일",
+    "현재 상태"
+from vwTeacherStudentInfo
+    where "개설과목번호" = 1;   
+
 

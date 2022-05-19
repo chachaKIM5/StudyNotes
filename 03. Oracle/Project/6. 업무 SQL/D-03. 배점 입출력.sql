@@ -24,19 +24,19 @@ insert into tblTest(seq, osseq, testdate, testtype, question)
     values (seq_Test.nextVal, '개설과목번호', '원하는 날짜', '필기/실기 중 하나의 값', '시험문제');
 
 -- 시험 날짜 수정
-update tblTest set testdate = '수정할 날짜' where osseq = 수정할 개설과목번호;
+update tblTest set testdate = '수정할 날짜' where seq = 수정할 시험 번호;
 
 -- 시험 유형 수정
-update tblTest set testtype = '수정할 시험유형' where osseq = 수정할 개설과목번호;
+update tblTest set testtype = '수정할 시험유형' where seq = 수정할 시험 번호;
 
 -- 시험 문제 수정
-update tbltest set question = '수정할 시험문제' where osseq = 수정할 개설과목번호;
+update tbltest set question = '수정할 시험문제' where seq = 수정할 시험 번호;
 
 -- 시험 삭제 (시험 자체를 삭제)
-delete from tblTest where osseq = 삭제할 개설과목번호;
+delete from tblTest where seq = 삭제할 시험 번호;
 
 -- 시험문제 삭제(null)
-update tblTest set question is null where osseq = 수정할 개설과목번호;
+update tblTest set question is null where seq = 삭제할 시험 번호;
 
 
 

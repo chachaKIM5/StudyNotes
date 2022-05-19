@@ -4,40 +4,31 @@
 
 
 -- procedure 생성
+
 create or replace procedure procTeacherLogin(
     pname varchar2,
     pjumin varchar2
 )
 is
-
-    cursor vcursor
-    is select name, jumin from tblTeacher;
     vname tblTeacher.name%type;
-    vjumin tblTeacher.jumin%type;
-    vresult number;
+    vseq tblTeacher.seq%type;
 begin
-    open vcursor;
-    loop
-        fetch vcursor into vname, vjumin;
-        exit when vcursor%notfound;
-    
-        if pname = vname and pjumin = vjumin then
-            vresult := 1;
-        end if;
-    end loop;
-    
-    if vresult = 1 then
-        dbms_output.put_line('로그인에 성공했습니다.');
-    else 
+    select name, seq into vname, vseq from tblTeacher where name = pname and jumin = pjumin;
+    dbms_output.put_line(vname || '(교사번호 ' || vseq || ') 님, 환영합니다.');
+    dbms_output.put_line('로그인에 성공했습니다.');
+
+exception
+    when others then
+        dbms_output.put_line('입력한 이름: ' || pname || ', 입력한 주민등록번호: ' || pjumin);
         dbms_output.put_line('로그인에 실패했습니다.');
-    end if;
 end;
 
 
 
-select * from tblTeacher;
 
 -- procedure 실행
+select * from tblTeacher;
+
 begin
-    procTeacherLogin('나윤철', 1785425);
+    procTeacherLogin('한광훈', 1534921);
 end;

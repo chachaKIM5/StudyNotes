@@ -1,11 +1,14 @@
 package com.project.cafe;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
+import com.project.cafe.admin.AdminMain;
 import com.project.cafe.dataClass.Customer;
 import com.project.cafe.dataClass.Stamp;
 import com.project.cafe.order.CartOrder;
-import com.project.cafe.order.NormalOrder;
 
 
 public class Main {
@@ -16,6 +19,7 @@ public class Main {
 		
 		Data.load(); 
 		
+
 		String input = null; 
 		boolean error = false;
 		boolean loop = true;
@@ -40,7 +44,7 @@ public class Main {
 			
 		
 			if(input.equals("1")) {
-				NormalOrder.work();
+				//TODO 일반주문진입
 			} else if (input.equals("2")) {
 				//TODO 빠른주문진입
 			} else if (input.equals("3")) { //XXX 수정
@@ -49,8 +53,9 @@ public class Main {
 			} else if (input.startsWith("#")) {
 				
 				if(adminLogin(input)) {
-					//TODO 관리자모드진입
-					Output.sizeTest();
+					AdminMain m = new AdminMain();
+					m.main();
+					
 				} else {
 					input = "⚠️ 관리자모드 로그인에 실패하였습니다.";
 					error = true;
@@ -66,8 +71,8 @@ public class Main {
 		}
 			
 	}
-
 	
+
 	/**
 	 * 고객의 전화번호가 올바른지 확인하여 저장하는 메소드입니다.
 	 */
@@ -85,7 +90,7 @@ public class Main {
 			if('0' <= c && c <='9') { tel += c; }
 			if(tel.length() == 8) {	tel += "-"; }
 		}
-
+	
 		if(tel.length() == 13) {
 			
 			for(Customer c : Data.clist) {
@@ -93,50 +98,27 @@ public class Main {
 			}
 			
 			if(currentLogin == null) {
-				currentLogin = new Customer(findMaxSeq(), tel);
+				
+				currentLogin = new Customer(FindData.nextSeq(Data.clist), tel);
 				Data.clist.add(currentLogin);
-				Data.slist.add(new Stamp(findMaxSeq_slist(), currentLogin.getSeq(), "0"));
-				//Data.save(DataPath.고객);
-				//Data.save(DataPath.적립);
+				Data.slist.add(new Stamp(FindData.nextSeq(Data.slist), currentLogin.getSeq(), "0"));
+				Data.save(DataPath.고객);
+				Data.save(DataPath.적립);
 			}
 			return true;
 		}
 		
 		return false;
-	}
+	}	
 
-	private static String findMaxSeq_slist() {
-		int max = 0;
-		
-		for(Stamp s : Data.slist) {
-			if(Integer.parseInt(s.getSeq()) > max) { 
-				max = Integer.parseInt(s.getSeq());
-			}
-		}
-		return "" + (max + 1);
-	}
-
-
-	private static String findMaxSeq() {
-		
-		int max = 0;
-		
-		for(Customer c : Data.clist) {
-			if(Integer.parseInt(c.getSeq()) > max) { 
-				max = Integer.parseInt(c.getSeq());
-			}
-		}
-		return "" + (max + 1);
-	}
-
-
+	
 	/**
 	 * 관리자 모드로 진입하기 위해 입력한 비밀번호가 올바른지 확인하는 메소드입니다.
 	 */
 	public static boolean adminLogin(String password) {
-//		if(password = ?) {
-//			return true;
-//		}
+		if(password.replace("#","").equals("admin")) {
+			return true;
+		}
 		return false; //틀릴경우
 	}
 
@@ -180,6 +162,6 @@ public class Main {
 		
 	}
 	
-
+	
 
 }

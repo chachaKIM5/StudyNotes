@@ -320,7 +320,7 @@ public class NormalOrder extends Payment {
 		
 	}
 	
-	private static void addCart() {
+	public static void addCart() {
 		//CartOrder.addToCart와 연결해 currentMenu를 장바구니에 추가하는 메소드
 		
 		boolean subloop = true;
@@ -388,6 +388,7 @@ public class NormalOrder extends Payment {
 	         }
 	      }
 	      return "" + (max + 1);
+				
 	}
 	
 	private static void printLetter() {

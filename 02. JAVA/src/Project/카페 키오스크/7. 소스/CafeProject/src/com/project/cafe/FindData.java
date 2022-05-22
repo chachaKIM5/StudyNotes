@@ -1,5 +1,7 @@
 package com.project.cafe;
 
+import java.util.ArrayList;
+import java.util.stream.Stream;
 import com.project.cafe.dataClass.Category;
 import com.project.cafe.dataClass.Menu;
 import com.project.cafe.dataClass.Option;
@@ -95,7 +97,27 @@ public class FindData {
 		}
 		return null;
 	}
+
+	/**
+	 * ArrayList<T>의 기본키 값을 탐색하여 적절한 다음 기본키 값을 반환하는 메소드입니다.
+	 * @param arr ArrayList
+	 * @return 다음 기본키 값
+	 */
+	public static String nextSeq(ArrayList<?> arr) {
+		
+		Stream<String> temp = null;
+		
+		if (arr == Data.clist) {
+			temp = Data.clist.stream().map(s->s.getSeq());
+		} else if (arr == Data.slist) {
+			temp = Data.slist.stream().map(s->s.getSeq());
+		} else if (arr == Data.cmlist) {
+			temp = Data.cmlist.stream().map(s->s.getSeq());
+			
+		}
 	
+		return "" + (temp.mapToInt(Integer::parseInt).max().getAsInt() + 1);
+	}
 	
 	
 }

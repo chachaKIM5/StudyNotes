@@ -25,14 +25,11 @@ public class NormalOrder extends Payment {
 		currentMenu = new Cart(null, "0", "2", "0", "0", "0", "0");
 	}
 	
-	//핫 메뉴 얼음량 선택시 경고 메시지 선택 후 다시 입력하게 하기
-	//각종 유효성검사 추가
 	public static void work() {
 	
-
-		//BestMenu는 추후에...추가 어떤식으로 추가해야할지 모르겠다 ㅜ
+		//TODO Best Menu 추가하기
 		new NormalOrder();
-		//while (loop) {			
+		while (loop) {			
 			
 			MenuCategory.printBestMenuCategory();
 			
@@ -46,7 +43,11 @@ public class NormalOrder extends Payment {
 				//BestMenu 선택 시(12345)
 				//bestMenu 메소드 만들면 연결
 				
-			} else { //ABCDEabcde 선택 시
+			} else if (MenuCategory.chosenCategory.toLowerCase().equals("a")
+					   || MenuCategory.chosenCategory.toLowerCase().equals("b")
+					   || MenuCategory.chosenCategory.toLowerCase().equals("c")
+					   || MenuCategory.chosenCategory.toLowerCase().equals("d")
+					   || MenuCategory.chosenCategory.toLowerCase().equals("e")) { //ABCDEabcde 선택 시
 			CategoryTrans();
 			findMenu(MenuCategory.chosenCategory, MenuCategory.chosenMenu);
 			addOption();
@@ -55,8 +56,14 @@ public class NormalOrder extends Payment {
 			
 			loop = false;
 			
+			} else {
+				
+				System.out.println("올바른 형식으로 다시 입력해 주세요. ([Enter]: 계속)");
+				Scanner scan = new Scanner(System.in);
+				scan.nextLine();
+				
 			}
-		//}
+		}
 			
 	}
 	
@@ -113,8 +120,8 @@ public class NormalOrder extends Payment {
 
 	private static void chooseOption(String optionName) {
 		
+
 		printLetter();
-		
 		
 		if (optionName.equals(option[0])) {
 			for (int i=0 ; i<option.length ; i++) {
@@ -151,29 +158,101 @@ public class NormalOrder extends Payment {
 		System.out.println();
 		Output.toolEnd();
 		System.out.println();
-		System.out.printf("   %s 옵션 번호를 입력하세요.: ", optionName);
 		
-		if (optionName.equals(option[0])) {
-			inputIce = scan.nextLine();
-			currentMenu.setIceSeq(inputIce);
+		boolean subLoop = true;
+		
+		while (subLoop) {
+			System.out.printf("   %s 옵션 번호를 입력하세요.: ", optionName);
 			
+			if (optionName.equals(option[0])) {
+	
+				inputIce = scan.nextLine();
+	
+				if (FindData.findMenu(currentMenu.getMenuSeq()).getName().startsWith("핫")) {
+					if (!inputIce.equals("0")) {
+						System.out.println("   핫 음료는 '얼음없음' 기본값이 자동 적용됩니다. ([Enter]: 계속)");
+						scan.nextLine();
+						inputIce = "0";
+						subLoop = false;
+					}
+				} else {
+					
+					if (inputIce.equals("0") || inputIce.equals("1") || inputIce.equals("2") || inputIce.equals("3")) {
+						currentMenu.setIceSeq(inputIce);		
+						subLoop = false;
+					} else if (inputIce.equals("")) {
+						inputIce = "2";
+						currentMenu.setIceSeq(inputIce);
+						subLoop = false;
+					} else {
+						System.out.println("   올바른 형식으로 다시 입력해 주세요. ([Enter]: 계속)");
+					}
+				}
+			
+		
 		} else if (optionName.equals(option[1])) {
+			
 			inputSyrup = scan.nextLine();
-			currentMenu.setSyrupSeq(inputSyrup);
+			
+			if (inputSyrup.equals("0") || inputSyrup.equals("1") || inputSyrup.equals("2") || inputSyrup.equals("3")
+				|| inputSyrup.equals("3") || inputSyrup.equals("4")) {
+				currentMenu.setSyrupSeq(inputSyrup);
+				subLoop = false;
+			} else if (inputSyrup.equals("")) {
+				inputSyrup = "0";
+				currentMenu.setSyrupSeq(inputSyrup);
+				subLoop = false;
+			} else {
+				System.out.println("   올바른 형식으로 다시 입력해 주세요. ([Enter]: 계속)");
+			}
 			
 		} else if (optionName.equals(option[2])) {
-			inputShot = scan.nextLine(); 
-			currentMenu.setShotSeq(inputShot);
+			
+			inputShot = scan.nextLine();
+			
+			if (inputShot.equals("0") || inputShot.equals("1") || inputShot.equals("2") || inputShot.equals("3")
+				|| inputShot.equals("4") || inputShot.equals("5") || inputShot.equals("6") || inputShot.equals("7")
+				|| inputShot.equals("8") || inputShot.equals("9")) {
+				currentMenu.setShotSeq(inputShot);
+				subLoop = false;
+			} else if (inputShot.equals("")) {
+				inputShot = "0";
+				currentMenu.setShotSeq(inputShot);
+				subLoop = false;
+			} else {
+				System.out.println("   올바른 형식으로 다시 입력해 주세요. ([Enter]: 계속)");
+			}
 			
 		} else if (optionName.equals(option[3])) {
 			inputWhipping = scan.nextLine(); 
-			currentMenu.setWhippingSeq(inputWhipping);
+
+			if (inputWhipping.equals("0") || inputWhipping.equals("1") || inputWhipping.equals("2")) {
+				currentMenu.setWhippingSeq(inputWhipping);
+				subLoop = false;
+			} else if (inputWhipping.equals("")) {
+				inputWhipping = "0";
+				currentMenu.setWhippingSeq(inputWhipping);
+				subLoop = false;
+			} else {
+				System.out.println("   올바른 형식으로 다시 입력해 주세요. ([Enter]: 계속)");				
+			}
 			
 		} else if (optionName.equals(option[4])) {
 			inputTopping = scan.nextLine();
-			currentMenu.setToppingSeq(inputTopping);
+
+			if (inputTopping.equals("0") || inputTopping.equals("1") || inputTopping.equals("2") || inputTopping.equals("3")) {
+				currentMenu.setToppingSeq(inputTopping);
+				subLoop = false;
+			} else if (inputTopping.equals("")) {
+				inputTopping = "0";
+				currentMenu.setToppingSeq(inputTopping);
+				subLoop = false;
+			} else {
+				System.out.println("   올바른 형식으로 다시 입력해 주세요. ([Enter]: 계속)");				
+			}
 		}
 	
+		}
 	}
 	
 	
@@ -181,8 +260,14 @@ public class NormalOrder extends Payment {
 		//얼음량, 시럽, 샷추가... arraylist에서 옵션명 및 가격 뽑아와서 출력하려 했으나 예쁘게 정렬이 어렵다...!
 		
 		if (option.equals("얼음량")) {
-			return String.format("\t\t 얼음량 (기본값: 보통)\r\n\t     ０ 없음, １ 적게, ２ 보통, ３ 많이"
-								  + "\r\n   •·············································•");
+			
+			if (FindData.findMenu(currentMenu.getMenuSeq()).getName().startsWith("핫")) {
+				return String.format("\t\t 얼음량 (기본값: 없음)\r\n\t     ０ 없음, １ 적게, ２ 보통, ３ 많이"
+									  + "\r\n   •·············································•");
+			} else {
+				return String.format("\t\t 얼음량 (기본값: 보통)\r\n\t     ０ 없음, １ 적게, ２ 보통, ３ 많이"
+						+ "\r\n   •·············································•");
+			}
 			
 		} else if (option.equals("시럽")) {
 			return String.format("\t     시럽 추가 (500원, 기본값: 없음)\r\n    ０ 없음, １ 설탕(무료), ２ 바닐라, ３ 헤이즐넛, ４ 카라멜"
@@ -223,8 +308,14 @@ public class NormalOrder extends Payment {
 					replace = numTemp[i];
 				}
 			}
-			return String.format("\t\t 얼음량 (기본값: 보통)\r\n\t     ０ 없음, １ 적게, ２ 보통, ３ 많이"
-					+ "\r\n   •·············································•").replace(replace, "☑");
+			
+			if (FindData.findMenu(currentMenu.getMenuSeq()).getName().startsWith("핫")) {				
+				return String.format("\t\t 얼음량 (기본값: 없음)\r\n\t     ０ 없음, １ 적게, ２ 보통, ３ 많이"
+						+ "\r\n   •·············································•").replace(replace, "☑");
+			} else {
+				return String.format("\t\t 얼음량 (기본값: 보통)\r\n\t     ０ 없음, １ 적게, ２ 보통, ３ 많이"
+						+ "\r\n   •·············································•").replace(replace, "☑");
+			}
 			
 		} else if (option.equals("시럽")) {
 			for (int i=0 ; i<num.length ; i++) {
@@ -314,7 +405,9 @@ public class NormalOrder extends Payment {
 			} else if (answer.equals("N") || answer.equals("n")) {
 				subLoop = false;
 			} else {
-				System.out.println("\"Y\" 혹은 \"N\" 형식으로 입력해 주세요.");
+				System.out.println("\"Y\" 혹은 \"N\" 형식으로 입력해 주세요. ([Enter]: 계속)");
+				scan.nextLine();
+				
 			}
 		}
 		
@@ -369,7 +462,8 @@ public class NormalOrder extends Payment {
 				subloop = false;
 				
 			} else {
-				System.out.println("\"Y\" 혹은 \"N\" 형식으로 입력해 주세요.");
+				System.out.println("\"Y\" 혹은 \"N\" 형식으로 입력해 주세요. ([Enter]: 계속)");
+				scan.nextLine();
 			}
 			
 		}

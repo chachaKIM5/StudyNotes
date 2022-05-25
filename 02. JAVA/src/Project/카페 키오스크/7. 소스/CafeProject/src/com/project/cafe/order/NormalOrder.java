@@ -12,6 +12,11 @@ import com.project.cafe.dataClass.CustomMenu;
 import com.project.cafe.dataClass.Customer;
 import com.project.cafe.Main;
 
+/**
+ * 사용자 기능 중 일반 주문 기능을 구현한 클래스입니다.
+ * @author 김승연
+ *
+ */
 public class NormalOrder extends Payment {
 	public static boolean loop; 
 	public static Cart currentMenu;
@@ -25,6 +30,9 @@ public class NormalOrder extends Payment {
 		currentMenu = new Cart(null, "0", "2", "0", "0", "0", "0");
 	}
 	
+	/**
+	 * public 메인 메소드입니다.
+	 */
 	public static void work() {
 	
 		//TODO Best Menu 추가하기
@@ -67,7 +75,10 @@ public class NormalOrder extends Payment {
 			
 	}
 	
-
+	
+	/**
+	 * 앞서 ABCDE로 선택받은 카테고리값을 카테고리 번호로 바꿔주는 메소드입니다.
+	 */
 	private static void CategoryTrans() {
 		
 		switch (MenuCategory.chosenCategory) {
@@ -83,6 +94,13 @@ public class NormalOrder extends Payment {
 				MenuCategory.chosenCategory = "5"; break;
 		}
 	}
+	
+	
+	/**
+	 * 사용자가 입력한 카테고리 번호 및 메뉴 번호를 바탕으로 메뉴 데이터 파일에서 음료 번호를 찾고, currentMenu의 MenuSeq에 추가하는 메소드입니다.
+	 * @param category
+	 * @param menu
+	 */
 	private static void findMenu(String category, String menu) {
 		
 		//Cart currentMenu = 지금 현재 고르는 중인 메뉴의 속성을 임시저장할 카트 객체.
@@ -107,8 +125,11 @@ public class NormalOrder extends Payment {
 	}
 	
 	
+	
+	/**
+	 * currentMenu 객체에 각종 옵션을 사용자 선택으로 업데이트해 주는 메소드입니다.
+	 */
 	private static void addOption() {
-		//currentMenu 객체에 얼음량, 시럽, 샷추가, 휘핑, 토핑 옵션을 사용자 선택으로 update
 		
 		chooseOption("얼음량");
 		chooseOption("시럽");
@@ -118,6 +139,11 @@ public class NormalOrder extends Payment {
 		
 	}
 
+	
+	/**
+	 * 옵션 이름을 넣으면 각 옵션 선택 화면을 출력, 옵션을 선택받는 메소드입니다. 
+	 * @param optionName 옵션명
+	 */
 	private static void chooseOption(String optionName) {
 		
 
@@ -256,6 +282,11 @@ public class NormalOrder extends Payment {
 	}
 	
 	
+	/**
+	 * 옵션 이름을 매개변수로 받은 후 각 옵션별 선택 화면에 출력할 값을 반환하는 메소드입니다.
+	 * @param option 옵션명
+	 * @return 출력값
+	 */
 	private static String printOption(String option) {
 		//얼음량, 시럽, 샷추가... arraylist에서 옵션명 및 가격 뽑아와서 출력하려 했으나 예쁘게 정렬이 어렵다...!
 		
@@ -293,7 +324,11 @@ public class NormalOrder extends Payment {
 	}
 		
 		
-	
+	/**
+	 * 사용자의 선택을 받은 후에 변경될 화면 구현을 위해 출력값을 반환하는 메소드입니다.
+	 * @param option 옵션명
+	 * @return 출력값
+	 */
 	private static String printResult(String option) {
 		
 		String[] num = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -359,6 +394,9 @@ public class NormalOrder extends Payment {
 	}
 	
 	
+	/**
+	 * 옵션 선택을 마친 currentMenu 객체를 커스텀(빠른 주문) 등록할지 여부와 휴대폰 번호를 입력받는 메소드입니다.
+	 */
 	private static void saveOption() {
 		
 		boolean subLoop = true;
@@ -391,7 +429,26 @@ public class NormalOrder extends Payment {
 													  currentMenu.getMenuSeq(),
 													  inputIce, inputSyrup, inputShot, inputWhipping, inputTopping);
 						//커스텀메뉴번호,고객번호,메뉴번호,얼음량번호,시럽번호,샷추가번호,휘핑번호,토핑번호
-						Data.cmlist.add(m);
+						
+
+						if (Data.cmlist.stream()
+								.filter(cmMenu -> FindData.findCustomer(cmMenu.getClientSeq()).getTel().equals(tel))
+								.count() < 5) {
+						
+							Data.cmlist.add(m);
+						
+						} else {
+							
+							for (int i=0 ; i<Data.cmlist.size() ; i++) {
+								if (FindData.findCustomer(Data.cmlist.get(i).getClientSeq()).getTel().equals(tel)) {
+									Data.cmlist.remove(i);
+									break;
+								}
+							}
+							
+							Data.cmlist.add(m);
+						}
+						
 						System.out.printf("[%s](이)가 커스텀 메뉴에 저장되었습니다. ([Enter]: 다음으로)\r\n", FindData.findMenu(currentMenu.getMenuSeq()).getName());
 						scan.nextLine();
 						subLoop = false;
@@ -413,8 +470,11 @@ public class NormalOrder extends Payment {
 		
 	}
 	
+	
+	/**
+	 * CartOrder.addToCart와 연결해 currentMenu를 장바구니에 추가하는 메소드입니다.
+	 */
 	public static void addCart() {
-		//CartOrder.addToCart와 연결해 currentMenu를 장바구니에 추가하는 메소드
 		
 		boolean subloop = true;
 		
@@ -431,15 +491,8 @@ public class NormalOrder extends Payment {
 			String answer = scan.nextLine();
 			
 			if (answer.equals("Y") || answer.equals("y")) {
-				int max = 0;
 				
-				for(Cart c : CartOrder.cart) {
-					if(Integer.parseInt(c.getSeq()) > max) { 
-						max = Integer.parseInt(c.getSeq());
-					}
-				}
-				
-				String CartSeq = "" + (max + 1);
+				String CartSeq = findMaxSeq_cart();
 				currentMenu.setSeq(CartSeq);
 				
 				if (CartOrder.addToCart(currentMenu)) {
@@ -473,6 +526,10 @@ public class NormalOrder extends Payment {
 	
 
 
+	/**
+	 * 커스텀메뉴 데이터 파일에 새 데이터를 추가하기 위해 가장 큰 메뉴번호를 구하는 메소드입니다.
+	 * @return 가장 큰 메뉴번호+1
+	 */
 	private static String findMaxSeq_cmlist() {
 	      int max = 0;
 	      
@@ -485,6 +542,9 @@ public class NormalOrder extends Payment {
 				
 	}
 	
+	/**
+	 * 일반 주문 카테고리의 화면 구현에 공통으로 사용되는 문자들을 출력하는 메소드입니다.
+	 */
 	private static void printLetter() {
 		
 		MenuCategory.printStart();
@@ -495,5 +555,21 @@ public class NormalOrder extends Payment {
 				+ "\t    \\_/ |_|   |_| |_| \\_/ |_|\\_|");
 		System.out.printf("\r\n\t\t  [%s]", FindData.findMenu(currentMenu.getMenuSeq()).getName());
 		System.out.println("\r\n   •·············································•");
+	}
+
+	/**
+	 * 장바구니 데이터 파일에 새 데이터를 추가하기 위해 가장 큰 메뉴번호를 구하는 메소드입니다.
+	 * @return 가장 큰 장바구니번호+1
+	 */
+	public static String findMaxSeq_cart() {
+		int max = 0;
+		
+		for(Cart c : CartOrder.cart) {
+			if(Integer.parseInt(c.getSeq()) > max) { 
+				max = Integer.parseInt(c.getSeq());
+			}
+		}
+		
+		return "" + (max + 1);
 	}
 }

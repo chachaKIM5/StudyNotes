@@ -3,6 +3,7 @@ package com.project.cafe;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import com.project.cafe.dataClass.Category;
+import com.project.cafe.dataClass.Customer;
 import com.project.cafe.dataClass.Menu;
 import com.project.cafe.dataClass.Option;
 
@@ -119,7 +120,20 @@ public class FindData {
 		return "" + (temp.mapToInt(Integer::parseInt).max().getAsInt() + 1);
 	}
 	
-	
+	/**
+	 * 고객 번호를 매개변수로 받아서 해당 고객(Customer) 객체를 반환하는 메소드입니다.
+	 * @param CSeq 고객번호
+	 * @return Customer객체
+	 */
+	public static Customer findCustomer(String CSeq) {
+		
+		for (Customer c : Data.clist) {
+			if(c.getSeq().equals(CSeq)) { return c; }
+		}
+		return null;
+	}
+		
+
 }
 
 

@@ -8,6 +8,11 @@ import com.project.cafe.MenuCategory;
 import com.project.cafe.Output;
 import com.project.cafe.dataClass.Menu;
 
+/**
+ * 관리자 모드의 판매 통계 기능을 구현한 클래스입니다. 일주일 단위로 기간을 선택받고 카테고리별 판매 개수를 출력합니다.
+ * @author 김승연
+ *
+ */
 public class SalesStats {
 	
 	public static String inputDate;
@@ -17,6 +22,9 @@ public class SalesStats {
 	public static Calendar endDate;
 	
 
+	/**
+	 * public 메인 메소드입니다.
+	 */
 	public static void main() {
 		
 		chooseStatsDate();
@@ -24,6 +32,9 @@ public class SalesStats {
 
 	}
 
+	/**
+	 * 지금으로부터 가장 가까운 지나간 일요일을 찾고, 일주일 단위(월요일~일요일)로 4주의 기간을 나누어 출력 후 사용자에게 선택받는 메소드입니다. 
+	 */
 	private static void chooseStatsDate() {
 
 		boolean loop = true;
@@ -126,6 +137,11 @@ public class SalesStats {
 		}
 	}
 
+	/**
+	 * 숫자값에 따라 요일 이름을 반환하는 메소드입니다.
+	 * @param i 숫자
+	 * @return 요일
+	 */
 	private static String getDayOfWeek(int i) {
 		
 		switch (i) {
@@ -142,6 +158,10 @@ public class SalesStats {
 		
 	}
 
+	
+	/**
+	 * 사용자에게 판매 통계를 조회할 음료 카테고리를 선택받는 메소드입니다. 
+	 */
 	private static void chooseStatsCate() {
 
 	boolean loop = true;
@@ -181,6 +201,9 @@ public class SalesStats {
 	}	
 }
 
+	/**
+	 * 앞서 입력받은 기간, 카테고리를 바탕으로 판매 통계를 출력하는 메소드입니다.
+	 */
 	private static void printStats() {
 		
 
@@ -255,6 +278,9 @@ public class SalesStats {
 		
 	}
 	
+	/**
+	 * 판매 통계 기능 화면 구현에 공통으로 사용되는 문자들을 출력하는 메소드입니다.
+	 */
 	private static void printLetter() {
 		
 		System.out.println("   ____        __                 __              \r\n"
@@ -268,6 +294,11 @@ public class SalesStats {
 	}
 
 	
+	/**
+	 * 판매 통계 출력을 위해 메뉴별로 해당 기간의 판매 개수를 구하는 메소드입니다.
+	 * @param m 메뉴
+	 * @return 판매개수
+	 */
 	private static long countOrder(Menu m) {
 	
 		return 

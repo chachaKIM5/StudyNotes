@@ -42,15 +42,15 @@ public class AdminMain {
 //				SoldoutMenu o = new SoldoutMenu();
 //				o.main();
 				
-			} else if (input.equals("3")) { //TODO 판매통계
+			} else if (input.equals("3")) { 
 				
 				SalesStats s = new SalesStats();
 				s.main();
 				
-			} else if (input.equals("4")) { //TODO 암호변경
+			} else if (input.equals("4")) { 
 				
-//				ResetPW r = new ResetPW();
-//				r.main();
+				ResetPW r = new ResetPW();
+				r.work();
 			
 			} else if (input.equals("0")) {
 			

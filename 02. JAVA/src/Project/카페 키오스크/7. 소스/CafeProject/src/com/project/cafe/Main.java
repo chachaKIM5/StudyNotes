@@ -1,5 +1,7 @@
 package com.project.cafe;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -9,11 +11,14 @@ import com.project.cafe.admin.AdminMain;
 import com.project.cafe.dataClass.Customer;
 import com.project.cafe.dataClass.Stamp;
 import com.project.cafe.order.CartOrder;
+import com.project.cafe.order.FastOrder;
+import com.project.cafe.order.NormalOrder;
 
 
 public class Main {
 
 	public static Customer currentLogin;
+	public static String adminPW;
 	
 	public static void main(String[] args) {
 		
@@ -44,9 +49,11 @@ public class Main {
 			
 		
 			if(input.equals("1")) {
-				//TODO 일반주문진입
+				NormalOrder n = new NormalOrder();
+				n.work();
 			} else if (input.equals("2")) {
-				//TODO 빠른주문진입
+				FastOrder f = new FastOrder();
+				f.work();
 			} else if (input.equals("3")) { //XXX 수정
 				CartOrder c = new CartOrder();
 				c.main();
@@ -116,8 +123,25 @@ public class Main {
 	 * 관리자 모드로 진입하기 위해 입력한 비밀번호가 올바른지 확인하는 메소드입니다.
 	 */
 	public static boolean adminLogin(String password) {
-		if(password.replace("#","").equals("admin")) {
-			return true;
+		try {
+			
+			BufferedReader reader = new BufferedReader(new FileReader("src\\com\\project\\cafe\\data\\관리자.txt"));
+			
+			String line = null;
+			
+			while ((line = reader.readLine()) != null) {
+				adminPW = line;
+			}
+			
+			if(password.replace("#","").equals(adminPW)) {
+				return true;
+			}
+			
+			reader.close();
+		
+		} catch (Exception e) {
+			System.out.println("Main.adminLogin");
+			e.printStackTrace();
 		}
 		return false; //틀릴경우
 	}

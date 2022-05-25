@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /* 
+
+            ID 선택자
+            - 태그에 명시된 id 속성을 찾아서 태그를 검색
+            - 태그명#ID
+            - 원하는 태그를 직접 선택할 수 있다
+            - 일괄 적용할 수 없다 -> ID는 유일하기 때문에(Unique)
+
+        */
+
+        
+        #title {
+            color: orange;
+        }
+
+
+        /*
+
+            클래스 선택자
+            - 태그에 명시된 CLASS 속성을 사용해서 태그를 검색
+            - 태그명.클래스명
+            - 
+
+        */
+
+        /* p.test {
+            color: cyan;
+        } */
+
+        .test {
+            color: blueviolet;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>h1 입니다.</h1>
+
+    <p class="test">p 입니다.</p>
+    <p>p 입니다.</p>
+    <p>p 입니다.</p>
+    <p class="test">p 입니다.</p>
+    <p>p 입니다.</p>
+
+    <div class="test">div 입니다.</div>
+    <div>div 입니다.</div>
+    <div>div 입니다.</div>
+
+    <h2>h2 입니다.</h2>
+    <p>p 입니다.</p>
+    <!-- <p id="title">p 입니다.</p> -->
+
+    <!-- 식별자 종류 3개 name, id, class가 있다 -> name은 순수 html에서만 사용 -->
+    <h2 id="title">h2 입니다.</h2>
+    <p>p 입니다.</p>
+
+    <hr>
+
+    <h2>회사소개</h2>
+    <p>오시는 길: 블라블라...</p>
+
+
+</body>
+</html>

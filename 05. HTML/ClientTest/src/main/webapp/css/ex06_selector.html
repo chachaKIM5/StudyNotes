@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /*
+            
+            선택자
+            1. 전체 선택자: * {}
+            2. 태그 선택자: tag {}
+            3. ID 선택자: #id {}
+            4. Class 선택자: .class {}
+            5. 그룹 선택자: sel1, sel2, sel3 {}
+            6. 자식 선택자: parent > child {}
+            7. 자손 선택자: parent child {}
+            
+
+            자식 선택자, Child Selector
+            - 부모 선택자 > 자식 선택자 { 구현부; }
+            - 정밀도가 높다, but 범위가 좁고 불편하다
+
+
+            자손 선택자, Descendant Selector
+            - 부모선택자 자식선택자 {}
+            - 범용성, 검색률이 높다
+
+        */
+
+        /* [커리큘럼에만 서식을 적용하고 싶을 때] */
+        /* li { color: blue; } */
+        /* .item { color: red; } */
+        /* ol > li { color: orange; } */
+        /* ul > li { color:aqua; }   */
+
+
+        ul > li > span { color:red; }
+        ol span { font-style: italic; }
+        
+        /* ol > li > span > b { color: darkgrey; } */
+        ol b { color: darkgray; }
+        .item b { font-family: 궁서체; }
+
+    </style>
+</head>
+<body>
+    <!-- ex06_selector.html -->
+
+    <!-- 
+
+        아무 기능이 없는 태그
+        <div>: block 태그
+        <span>: Inline 태그
+
+     -->
+
+
+
+    <h1>커리큘럼</h1>
+
+    <ol>
+        <li class="item">JDBC <span>Programming</span></li>
+        <li class="item">Oracle Database</li>
+        <li class="item">Java <span>Programming</span></li>
+        <li class="item">Client <span>Programming(<b>HTML</b>)</span></li>
+        <li class="item">Client <span>Programming(<b>CSS</b>)</span></li>
+        <li class="item">Client <span>Programming(<b>JavaScript</b>)</span></li>
+    </ol>
+
+    <h2>공지 사항</h2>
+
+    <ul>
+        <li>구글 드라이브에 <span>백업본</span>을 다운로드 받으세요.</li>
+        <li>과제는 <span>금요일까지</span> 제출하세요.</li>
+        <li>VS Code 설정을 백업하세요.</li>
+    </ul>
+
+    <b>test</b>
+
+</body>
+</html>

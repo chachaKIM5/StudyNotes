@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .one { font-size: small; }
+        .two { text-decoration: underline; }
+        .three { font-style: italic; }
+
+        /* class 선택자 활용 방법! */
+        .red { color : red;}
+        .blue { color : blue;}
+        .yellow { color : yellow;}
+
+    </style>
+</head>
+<body>
+    <!-- ex10_class.html -->
+
+    <p class="one">문단입니다.</p>
+    <p class="two">문단입니다.</p>
+    <p class="three red">문단입니다.</p>
+
+
+    <!--
+        요구사항) 4번째 '문단'에 파란 글씨+밑줄을 적용 (class one + class two)
+        방법 1. .four 서식 정의 { color : blue; text-decoration: underline; }
+        방법 2. 클래스 두 개 동시 적용 <p class="one two">
+    -->
+    <p class="one two">문단입니다.</p>
+    
+    <p class="one two three">문단입니다.</p>
+
+</body>
+</html>

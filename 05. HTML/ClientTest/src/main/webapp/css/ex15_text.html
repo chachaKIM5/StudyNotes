@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+
+        .txt {
+
+            /*
+            텍스트 색상, 전경색(Fore Color)
+            color: red;
+            */
+            color: #444444;
+            /* color: #444로 줄일 수 있다 (#44AAFF = #4AF) */
+        
+        
+            /* 텍스트 정렬(수평 정렬): left | right | center | justify */
+            text-align: left;
+
+            /* 텍스트 크기 */
+            /* 10pt ~ 11pt, 12px ~ 16px */
+            font-size: 16px;
+
+
+            /*
+
+                HTML 수치 표현법
+                1. 숫자 (px, 문자수, 셀병합)
+                2. 백분율(%)
+
+                CSS 수치 표현법
+                - 수치 데이터는 반드시 단위 표기를 해야 한다 (단위 생략 불가능!)
+                1. pt: 포인트(글꼴), 절대값, 1/72인치
+                2. px: 픽셀(크기, 여백, 위치, 글꼴 등 다양한 곳에 쓰임), 절대값
+                3. em: 기본 글꼴 크기를 기준으로 하는 상대 크기 (%), 상대값, 알파벳 대문자 M의 높이를 100% 기준으로 하는 상대 크기, 가장 많이 쓰임 -> 모바일 환경 고려의 중요성이 높아지면서... px과 함께 많이 쓰인다, 상속을 받는다
+                4. rem: em과 동일, 상속을 받지 않는다
+                5. %: 백분율(크기, 여백, 위치, 정렬 등에 쓰임), 상대값
+                ------------------------ ▲ 반드시 기억 ▼ 잘 쓰이지 않는다
+                6. ex: 알파벳 소문자 x의 높이를 100%로 기준하는 상대 크기
+                7. mm: 밀리미터 (높이 기준)
+                8. cm: 센티미터
+                9. in: 인치
+                10. pc: 파이카(12pt) 예전에 많이 쓰임
+                11. 기타 등등...
+
+            */
+
+            /*
+                줄간격
+                - 주로 %, em(rem) 사용
+                - px
+                - 보통 1.4em ~ 1.8em, 많으면 2em까지
+
+            */
+            line-height: 1.6em;
+        
+
+            /* 스타일(normal, italic (** oblique는 영문 전용 옵션)) */
+            /* font-style: italic; */
+            font-style: normal;
+
+            /* 두께 normal | lighter | bold | bolder 폰트들이 많은 두께 옵션들을 지원하지 않는다 */
+            /* font-weight: bold; */
+            font-weight: normal;
+            
+            /* 단어 간격(스페이스 크기) */
+            word-spacing: 0em;
+
+            /* 자간(문자 간격) */
+            letter-spacing: -1px;
+
+            /* 꾸밈 */
+            text-decoration: dashed;
+        }
+
+        
+    
+
+    </style>
+</head>
+<body>
+    <!-- ex15_text.html -->
+
+    <h1>텍스트 관련 속성</h1>
+
+    <p>국회에서는 지난해 9월 세계 최초로 앱 마켓 사업자의 인앱 결제 강제 행위를 금지하는 내용의 일명 '구글 갑질 방지법(전기통신사업법 개정안)'이 통과됐다. 그러나 구글은 법의 허점을 파고들어 인앱 결제 강제 정책을 시행하고 있다. 이에 국내 출판·콘텐츠 업계에서는 불만이 이어지고 있으며 앱 개발사들은 줄줄이 이용료를 올리고 있는 상황이다. 김 의원실에 따르면 구글은 인앱 결제 강제 정책으로 올 한해에만 최대 4100억원의 막대한 수수료 수익을 추가로 가져갈 것으로 추산된다.</p>
+
+    <p class="txt">김 의원은 앱 마켓 시장에서 글로벌 플랫폼의 지배력 남용행위를 근본적으로 차단하기 위해 국내 앱 마켓 육성책이 마련돼야 한다고 강조했다. 그러면서 토종 앱 마케 사업자인 원스토어의 앱 수수료 인하에도 환영의 뜻을 나타냈다. 원스토어는 전날 OTT(온라인동영상서비스), 음원 스트리밍 등 미디어·콘텐츠 앱에 기본 수수료 10%를 적용하고 거래액 규모와 구독 비중에 따라 수수료를 최저 6%까지 적용한다고 발표했다.</p>
+
+    <p>김 의원은 "구글의 인앱 결제 강제화로 증가한 수수료만큼 콘텐츠 요금 인상이 불가피한 상황에서 방송통신위원회의 단기적 조치와 함께 장기적 안목에서 국내 경쟁 앱 마켓을 육성하는 방안을 고민해야 할 시점"이라며 "이번 원스토어 수수료 인하를 계기로 정부와 국내 콘텐츠 업계, 앱마켓 업계 모두 거대 플랫폼의 횡포에 왜곡돼 가는 콘텐츠 생태계 정상화에 노력을 기울여야 한다"고 말했다.</p>
+
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci possimus enim nostrum odit corporis. Modi illo qui deserunt magni repellat quam a ab delectus impedit tenetur. Maxime ipsa, asperiores mollitia voluptatibus nulla a explicabo dolorem ab at sint, perferendis praesentium, similique commodi quia non. Assumenda ad alias eius quod culpa.</p>
+
+    <p class="txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, dolorem voluptatibus? Culpa quasi ducimus laborum dignissimos ad, magni ipsum ipsa accusantium, corrupti totam ea dolores sunt porro architecto ex natus cupiditate ut obcaecati impedit, veniam rerum. Velit fugiat animi hic quis, vel libero pariatur placeat corrupti, aspernatur reiciendis delectus itaque.</p>
+
+    <p>Aliquid quos minima numquam quo, dolore molestiae quibusdam rem alias et odio ducimus esse eveniet laudantium perspiciatis, aut asperiores doloremque temporibus ex magni. Rem tenetur nostrum quasi debitis quos. Tenetur esse qui eligendi distinctio, laudantium quo quisquam deserunt ullam? Molestias a, doloribus aut nam atque dolore dolorem libero. Nam, repudiandae?</p>
+
+</body>
+</html>

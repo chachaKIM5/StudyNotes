@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ex12_emmet.html -->
+
+    <!-- 
+
+        Emmet, Zen-Coding
+        - CSS 선택자 문법을 사용해서 HTML/CSS 코드를 손쉽게 작성하는 기능
+        - 생산성 도구
+        - https://emmet.io
+        - 선택자를 입력하고 엔터 or 탭을 누르면 자동완성
+
+     -->
+
+     <h1>태그 선택자</h1>
+     
+     a
+     <a href=""></a>
+     
+     img
+     <img src="" alt="">
+
+     input
+     <input type="text">
+
+     
+     <h1>ID 선택자</h1>
+
+     <div id="box"></div>
+
+     div#box {}
+     <div id="box"></div>
+
+     h1#title
+     <h1 id="title"></h1>
+
+
+     <h1>클래스 선택자</h1>
+
+
+     h1.title
+     <h1 class="title"></h1>
+
+     div.box {}
+     <div class="box"></div>
+
+     a.link
+     <a href="" class="link"></a>
+
+     img.cat
+     <img src="" alt="" class="cat">
+
+     div one.two.three {}
+     <div class="one two three"></div>
+
+
+     <h1>ID+클래스 선택자</h1>
+     div#box1.box
+     <div id="box1" class="box"></div>
+
+     img#cat1.pic.animal
+     <img src="" alt="" id="cat1" class="pic animal">
+
+
+
+     <h1>속성 선택자</h1>
+
+     div[title] {}
+     <div title=""></div>
+
+     div[title=상자]
+     div <div title="상자"></div>
+
+     img[width height]
+     <img src="" alt="" width="" height="">
+
+     img[width=250 height=200]
+     <img src="" alt="" width="250" height="200">
+
+     img[src=images/dog01.jpg alt=강아지 width=250 height=200]
+     <img src="images/dog01.jpg" alt="강아지" width="250" height="200">
+
+     img#dog01.dog[width=200]
+     <img src="" alt="" id="dog01" class="dog" width="200">
+
+
+
+     <h1>PCDATA</h1>
+
+     div {}
+     <div></div>
+
+     div#box1.box[title=상자]{상자입니다.}
+     <div id="box1" class="box" title="상자">상자입니다.</div>
+
+     div*5
+     <div></div>
+     <div></div>
+     <div></div>
+     <div></div>
+     <div></div>
+
+     div{상자}*5
+     <div>상자</div>
+     <div>상자</div>
+     <div>상자</div>
+     <div>상자</div>
+     <div>상자</div>
+
+     div.item*5
+     <div class="item"></div>
+     <div class="item"></div>
+     <div class="item"></div>
+     <div class="item"></div>
+     <div class="item"></div>
+
+     div.item[title]{아이템}*5
+     <div class="item" title="">아이템</div>
+     <div class="item" title="">아이템</div>
+     <div class="item" title="">아이템</div>
+     <div class="item" title="">아이템</div>
+     <div class="item" title="">아이템</div>
+
+     div#box$${상자$}*5
+     <div id="box01">상자1</div>
+     <div id="box02">상자2</div>
+     <div id="box03">상자3</div>
+     <div id="box04">상자4</div>
+     <div id="box05">상자5</div>
+
+
+
+     <h1>형제 선택자</h1>
+     - a + b: 바로 위의 형제
+     - a ~ b: 위의 형제
+
+     div+p
+     <div></div>
+     <p></p>
+
+     div~p
+     만들 수 없다!
+
+     div+i+b+p
+     <div></div>
+     <i></i>
+     <b></b>
+     <p></p>
+
+     h1+p+p+p
+     <h1></h1>
+     <p></p>
+     <p></p>
+     <p></p>
+
+     h1+p*3
+     <h1></h1>
+     <p></p>
+     <p></p>
+     <p></p>
+
+     (h1+p)*3
+     <h1></h1>
+     <p></p>
+     <h1></h1>
+     <p></p>
+     <h1></h1>
+     <p></p>
+
+     h1#title1.title{제목입니다.}+p.content{설명입니다.}*3
+     <h1 id="title1" class="title">제목입니다.</h1>
+     <p class="content">설명입니다.</p>
+     <p class="content">설명입니다.</p>
+     <p class="content">설명입니다.</p>
+
+     요구사항] cat01.jpg ~ cat06.jpg를 만들어라!
+     (img[src=images/cat0$.jpg alt=고양이$ title=고양이$ width=250]+br)*6
+     <img src="images/cat01.jpg" alt="고양이1" title="고양이1" width="250"><br>
+     <img src="images/cat02.jpg" alt="고양이2" title="고양이2" width="250"><br>
+     <img src="images/cat03.jpg" alt="고양이3" title="고양이3" width="250"><br>
+     <img src="images/cat04.jpg" alt="고양이4" title="고양이4" width="250"><br>
+     <img src="images/cat05.jpg" alt="고양이5" title="고양이5" width="250"><br>
+     <img src="images/cat06.jpg" alt="고양이6" title="고양이6" width="250"><br>
+
+
+     
+     <h1>자식 선택자</h1>
+     a > b: 자식
+     a   b: 자손
+
+     div>a
+     <div><a href=""></a></div>
+
+     div a
+     만들 수 없다!
+
+     ul>li*5
+     <ul>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+     </ul>
+
+     h1{오늘의 할 일}+ul#list>li.item{항목$}*5
+     <h1>오늘의 할 일</h1>
+     <ul id="list">
+         <li class="item">항목1</li>
+         <li class="item">항목2</li>
+         <li class="item">항목3</li>
+         <li class="item">항목4</li>
+         <li class="item">항목5</li>
+     </ul>
+
+
+     table>tr>td*5
+     <table>
+         <tr>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+         </tr>
+     </table>
+
+     table#tbl1>tr*5>td.cell${항목$}*5
+     <table id="tbl1">
+         <tr>
+             <td class="cell1">항목1</td>
+             <td class="cell2">항목2</td>
+             <td class="cell3">항목3</td>
+             <td class="cell4">항목4</td>
+             <td class="cell5">항목5</td>
+         </tr>
+         <tr>
+             <td class="cell1">항목1</td>
+             <td class="cell2">항목2</td>
+             <td class="cell3">항목3</td>
+             <td class="cell4">항목4</td>
+             <td class="cell5">항목5</td>
+         </tr>
+         <tr>
+             <td class="cell1">항목1</td>
+             <td class="cell2">항목2</td>
+             <td class="cell3">항목3</td>
+             <td class="cell4">항목4</td>
+             <td class="cell5">항목5</td>
+         </tr>
+         <tr>
+             <td class="cell1">항목1</td>
+             <td class="cell2">항목2</td>
+             <td class="cell3">항목3</td>
+             <td class="cell4">항목4</td>
+             <td class="cell5">항목5</td>
+         </tr>
+         <tr>
+             <td class="cell1">항목1</td>
+             <td class="cell2">항목2</td>
+             <td class="cell3">항목3</td>
+             <td class="cell4">항목4</td>
+             <td class="cell5">항목5</td>
+         </tr>
+     </table>
+
+     Lorem Ipsum 기능
+
+     h1{제목입니다.}
+     <h1>제목입니다.</h1>
+
+     p>lorem
+     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, asperiores! Cumque, quia corporis sapiente nulla provident exercitationem quam quibusdam libero, assumenda in quidem ipsa velit ex. Provident ab vero tenetur.</p>
+
+
+     (h1{제목입니다})+(p>lorem50)*3
+     <h1>제목입니다</h1>
+     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi est vel sequi obcaecati dolor modi nihil voluptate repudiandae incidunt distinctio minus ipsam, inventore autem fuga, quasi aperiam laudantium laboriosam voluptas, beatae consequuntur debitis dolorem? Rerum fugit pariatur minima repellat cumque exercitationem et consequuntur dolor aliquid beatae repellendus nihil, enim in?</p>
+     <p>Assumenda odio nobis dolores voluptatum labore corporis reprehenderit officiis eum exercitationem distinctio blanditiis porro voluptatem, tempora alias itaque tenetur quos laudantium nulla maiores? Sunt dolores, accusamus aliquam veniam molestias reiciendis id dignissimos quisquam eveniet reprehenderit tempora. Veritatis et quas, obcaecati doloribus perferendis iusto soluta alias architecto magnam, neque unde dignissimos?</p>
+     <p>Officia natus ipsa, minus, molestiae voluptatibus cumque hic rerum, laborum maiores tempore aliquid iste earum eaque illo et! Tempore fugiat illo cum nobis blanditiis. At ducimus dolorem, magni dolor veritatis quos nulla, harum error placeat eum explicabo eaque. Fugit unde ipsa pariatur illum ea rem magni doloribus sint, ad aliquam.</p>
+
+
+
+</body>
+</html>

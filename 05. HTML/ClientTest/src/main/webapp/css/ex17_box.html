@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /*
+        박스 모델
+        1. border
+        2. width, height
+        */
+
+        .box {
+            border: 1px solid black;
+        }
+
+        #box2 {
+            border-color: orange;
+            background-color: bisque;
+            width: 200px;
+        }
+        
+        /*
+
+            div
+            : 블럭 태그
+            1. 너비: 100%
+            2. 높이: 내용물의 크기만큼
+
+            너비, 높이
+            - width, height
+            - 단위 > px(절대값), %(상대값)
+            - ***** 하지만 일반적으로 태그의 높이는 상대 크기(%)를 지정할 수 없다
+        */
+
+
+        #div1 {
+            background-color: tomato;
+            width: 200px;
+            height: 200px;
+        }
+
+        #span1 {
+            background-color:dodgerblue;
+            width: 200px;
+            height: 200px;
+        }
+
+        /*
+            블럭 태그
+            - 너비: 100%
+            - 높이: 내용물
+
+            인라인 태그
+            - 너비: 내용물
+            - 높이: 내용물
+
+            -----> Box Model의 width, height는 블럭 태그에만 적용된다!
+            ****** 단, 인라인 태그 중 일부는 적용이 가능하다 -> 처음부터 영역이 눈에 보이는 태그들 (ex. img, input)
+
+        */
+
+        #word {
+            /* display: inline-block; 강제로 인라인 태그를 블럭 태그처럼 */
+            width: 200px;
+            height: 200px;
+        }
+
+        #cat01 {
+            width: 150px;
+            height: 150px;
+        }
+
+        #txt1 {
+            width: 200px;
+            height: 100px;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- ex17_box.html -->
+
+
+    <h1>박스 모델</h1>
+
+    <div id="box1" class="box">상자1</div>
+    <div id="box2" class="box">상자2 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용 상자2내용</div>
+    <div id="box3" class="box">상자3</div>
+    
+    <h1>블럭 태그</h1>
+    <div id="div1">블럭 태그</div>
+
+    <h1>인라인 태그</h1>
+    <span id="span1">인라인 태그</span>
+
+
+    <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus omnis nobis numquam impedit voluptatem alias ab. Perferendis earum sequi numquam vero rerum porro blanditiis! Laboriosam porro, saepe harum consectetur ab itaque beatae qui possimus nesciunt, alias sapiente molestiae, laborum optio cupiditate iure totam delectus ea suscipit aut asperiores. Dolorem inventore sint illo reiciendis vel ad est, non labore illum commodi amet a consectetur, itaque provident. <span id="word" class="words">Odit atque dicta assumenda</span> vel veritatis. Voluptatum totam tempore consectetur nobis repudiandae exercitationem amet illo, dolor eum! Non qui molestias quaerat odit ea optio, eius quis nesciunt blanditiis adipisci saepe iusto! Corrupti nesciunt voluptas officia quasi eius ex excepturi, hic, in asperiores non blanditiis accusamus quidem soluta doloremque! Ipsam similique corrupti optio odio vitae est repellendus suscipit. Nobis quasi distinctio incidunt in sint inventore corrupti et suscipit, quod repellendus repellat porro fugiat? Cumque laudantium officiis nulla ut, molestiae nobis, alias voluptatibus a necessitatibus eos tenetur? Dolor id fuga qui, saepe praesentium veritatis molestiae facilis nesciunt adipisci temporibus quia blanditiis? Explicabo incidunt nulla omnis in voluptatibus quae odit sapiente accusamus, enim soluta quasi officia id sed corrupti quod? Eaque, atque natus. Ea alias porro odio sit harum! Magni, quaerat veritatis officia eum sunt quia earum obcaecati.
+    </p>
+
+    <hr>
+
+    앞의 내용
+    <img src="images/cat01.jpg" id="cat01">
+    뒤의 내용
+
+    <hr>
+
+    이름: <input type="text" id="txt1">님
+
+    <br><br><br><br><br><br><br><br><br><br>
+
+    
+</body>
+</html>

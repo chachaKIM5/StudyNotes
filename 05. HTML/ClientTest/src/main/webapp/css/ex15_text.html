@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-
-
-        .txt {
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            
+            @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+            
+            .txt {
 
             /*
             텍스트 색상, 전경색(Fore Color)
@@ -74,11 +75,44 @@
             letter-spacing: -1px;
 
             /* 꾸밈 */
-            text-decoration: dashed;
-        }
+            text-decoration: none;
 
+            /* 들여쓰기 */
+            text-indent: 1em;
+            
+            /*
+                글꼴
+                - 페이지의 폰트는 서버측 X, 브라우저가 동작중인 컴퓨터에 설치된 폰트를 사용
+
+                폰트 예약어
+                - 폰트의 종류를 나타내는 용어
+                1. serif: 획 끝에 장식이 있는 폰트(궁서체, 바탕체...)
+                2. sans-serif: 획 끝에 장식이 없는 폰트(돋움체, 고딕체...)
+                3. monospace: 문자 폭이 균일(궁서(monospace X), 궁서체(monospace))
+                4. cursive: 장식체
+                5. fantasy: 장식체
+
+                웹폰트
+                - 폰트를 서버로부터 다운로드 받아서 사용하는 기술
+                - 사용 기간은 일시적 > 서핑 중에 해당 페이지에서만 적용
+                - 자체 제작 (*.eof...)
+                - 서비스 업체를 사용: 구글 폰트, 눈누(우리나라 업체!)
+
+                구글 폰트 사용법
+                - 원하는 폰트 골라서 select this style
+                - 오른쪽 상단 메뉴
+                - @import 탭의 <style></style> 속 태그 복사
+                - 적용하고 싶은 페이지의 CSS 태그 맨 처음에 붙여넣기
+                - CSS rules to specify families의 방법으로 사용하기
+                
+            */
+            /* font-family: '맑은 고딕', monospace; */
+            font-family: 'Black Han Sans', sans-serif;
+
+            
+        }
         
-    
+      
 
     </style>
 </head>

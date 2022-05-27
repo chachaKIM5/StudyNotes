@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #menu {
+            background-color: orange;
+            width: 800px;
+            height: 100px;
+        }
+
+        #submenu{
+            background-color:lemonchiffon;
+            width: 200px;
+            height: 500px;
+            float: left;
+        }
+
+        #content {
+            background-color: cornflowerblue;
+            width: 600px;
+            height: 500px;
+            float: left;
+            /* content도 같이 float해주지 않으면 submenu에 겹쳐 가려진다 */
+            
+        }
+
+        #footer {
+            background-color: yellowgreen;
+            width: 800px;
+            height: 50px;
+            clear: both;
+            /* 앞의 요소가 float되어서 지금 요소가 위로 말려 올라가는 현상을 제거*/
+
+            /* float를 걸게 되면, 인라인 태그처럼 부모의 영역을 넘어서면 overflow -> 밑으로 내려간다 */
+            /* 이를 방지하기 위해 부모인 div#main의 width를 고정시켜 주기*/
+        }
+
+        #main {
+            /* border: 10px solid gray; */
+            width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ex25_float.html -->
+
+    <h1>페이지 레이아웃</h1>
+
+    <div id="main">
+        <div id="menu">주메뉴(orange)</div>
+        <div id="submenu">보조메뉴(yellow)</div>
+        <div id="content">콘텐츠(blue)</div>
+        <div id="footer">하단(green)</div>
+    </div>
+</body>
+</html>

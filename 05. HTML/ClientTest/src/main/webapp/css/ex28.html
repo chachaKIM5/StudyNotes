@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #bar {
+            background-color: black;
+            height: 10px;
+            width: 200px;
+        }
+
+        #box {
+            /*
+                width, height > 콘텐츠 영역의 크기 (테두리는 포함 X, padding 포함 X)
+
+                실제 눈에 보이는 사각형의 너비 (높이)
+                = width + padding + border + margin
+                = height + padding + border + margin
+
+            */
+            background-color: gold;
+            width: 200px;
+            height: 200px;
+            border: 10px solid tomato;
+            margin: 30px;
+
+            /* box-sizing: content-box; */
+            box-sizing: border-box;
+
+            /*
+                'CSS3에서 추가된 box-sizing'
+                
+                width, height
+                - content-box(기본값): content 영역의 크기
+                - border-box: content 영역 + border의 크기
+                
+            */
+        }
+    </style>
+
+</head>
+<body>
+    <!-- ex28.html -->
+
+    <div id="bar"></div>
+    <div id="box">상자입니다.</div>
+</body>
+</html>

@@ -5,11 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://kit.fontawesome.com/404d069474.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    
+
     <style>
 
         body {
             width: 750px;
-            margin: auto;
+            margin: 50px auto;
         }
         #part1 {
             font-weight: bold;
@@ -25,6 +29,7 @@
             outline: 1px solid #DDD;  
             padding-bottom: 5px;
             margin-bottom: 20px;
+            background-color: #F7F9FA;
         }
 
         header ul {
@@ -95,6 +100,8 @@
         }
 
         #title {
+            display: block;
+            float: left;
             margin-top: 30px;
             margin-bottom: 30px;
             font-size: 14px;
@@ -102,8 +109,12 @@
         }
 
         .song {
+            float: left;
             width: 360;
             height: 76;
+            border-bottom: 1px solid #DDD;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
         }
 
         .rank {
@@ -114,6 +125,27 @@
             font-weight: bold;
             text-align: center;
             float: left;
+        }
+
+        .rank {
+            width: 50px;
+            height: 48px;
+            color: #000000;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 5px;
+            float: left;
+        }
+
+
+
+        #rank-up {
+            color: #FF1250;
+        }
+
+        #rank-down {
+            color: #CCC;
         }
 
         .rank p {
@@ -142,10 +174,59 @@
             color: #808080;
         }
 
-        .engSinger {
+        .album {
             font-size: 12px;
             color: #808080;
         }
+
+        .info_box {
+            float: left;
+            width: 243px;
+            height: 48px;
+        }
+
+        .playbutton {
+            display: block;
+            float: left;
+            color: #FF1250;
+            margin-top: 10px;
+        }
+
+        span + .material-symbols-outlined {
+            display: block;
+            margin: 9px 10px 0px 0px;
+            float: right;
+            color: #BBB;
+        }
+
+        h1 + .material-symbols-outlined {
+            display: block;
+            float: left;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 32px 0px 0px 5px;
+        }
+
+        .play_box {
+            /* border: 1px solid black; */
+            float: left;
+            width: 67px;
+            height: 48px;
+        }
+
+        #chart {
+            width: 750px;
+            height: 460px;
+            column-count: 2;
+            padding: 0px;
+            border-bottom: 1px solid #DDD;
+        }
+
+        #song5, #song10 {
+            border: none;
+        }
+
+        
 
     </style>
 </head>
@@ -251,16 +332,183 @@
 
 
     <div id="part2">
-        <h1 id="title">뮤직 급상승 차트 &gt;</h1>
+        <h1 id="title">뮤직 급상승 차트</h1><span class="material-symbols-outlined">
+            arrow_forward_ios
+            </span>
         
-        <div class="song">
-            <div class="rank"><p>1</p></div>
-            <img src="images/cover1.jpg">
-            <div class="songTitle">우리들의 블루스</div>
-            <span class="singer">임영웅</span>
-            <span class="dot">·</span>
-            <span class="engSinger">IM HERO</span>
+        <div id="chart">
+            <div class="song">
+                <div class="rank"><div>1</div></div>
+                <div class="info_box">
+                    <img src="images/cover1.jpg">
+                    <div class="songTitle">Beatbox</div>
+                    <span class="singer">NCT DREAM</span>
+                    <span class="dot">·</span>
+                    <span class="album">Beatbox - ...</span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
+            <div class="song">
+                <div class="rank"><div>2</div></div>
+                <div class="info_box">
+                    <img src="images/cover2.jpg">
+                    <div class="songTitle">마지막 인사 (To My First)</div>
+                    <span class="singer">NCT DREAM</span>
+                    <span class="dot">·</span>
+                    <span class="album">Beatbox - ...</span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
+            <div class="song">
+                <div class="rank"><div>3</div></div>
+                <div class="info_box">
+                    <img src="images/cover3.jpg">
+                    <div class="songTitle">나의 봄은</div>
+                    <span class="singer">이수현</span>
+                    <span class="dot">·</span>
+                    <span class="album">나의 해방일지 O...</span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
+            <div class="song">
+                <div class="rank"><div>4</div><span class="material-symbols-outlined" id="rank-up">
+                    arrow_drop_up
+                    </span></div>
+                <div class="info_box">
+                    <img src="images/cover4.jpg">
+                    <div class="songTitle">안녕이란 말도 함께 (Ho...</div>
+                    <span class="singer">WOODZ (조승연)</span>
+                    <span class="dot">·</span>
+                    <span class="album">COLO...</span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
+            <div class="song" id="song5">
+                <div class="rank" ><div>5</div></div>
+                <div class="info_box">
+                    <img src="images/cover5.jpg">
+                    <div class="songTitle">우리들의 블루스</div>
+                    <span class="singer">임영웅</span>
+                    <span class="dot">·</span>
+                    <span class="album">IM HERO</span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
+            <div class="song">
+                <div class="rank"><div>6</div><span class="material-symbols-outlined" id="rank-down">
+                    arrow_drop_down
+                    </span></div>
+                <div class="info_box">
+                    <img src="images/cover6.jpg">
+                    <div class="songTitle">사랑의 인사</div>
+                    <span class="singer">WSG워너비 조별경연(비로...</span>
+                    <span class="album"></span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
+            <div class="song">
+                <div class="rank"><div>7</div><span class="material-symbols-outlined" id="rank-down">
+                    arrow_drop_down
+                    </span></div>
+                <div class="info_box">
+                    <img src="images/cover7.jpg">
+                    <div class="songTitle">ONCE AGAIN</div>
+                    <span class="singer">윈터(WINTER), 닝닝(NING...</span>
+                    <span class="album"></span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
+            <div class="song">
+                <div class="rank"><div>8</div><span class="material-symbols-outlined" id="rank-down">
+                    arrow_drop_down
+                    </span></div>
+                <div class="info_box">
+                    <img src="images/cover8.jpg">
+                    <div class="songTitle">Here We Are</div>
+                    <span class="singer">김필</span>
+                    <span class="dot">·</span>
+                    <span class="album">김필 나의 해방일지 OST...</span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
+            <div class="song">
+                <div class="rank"><div>9</div><span class="material-symbols-outlined" id="rank-up">
+                    arrow_drop_up
+                    </span></div>
+                <div class="info_box">
+                    <img src="images/cover9.jpg">
+                    <div class="songTitle">일종의 고백 (Male Ver.)</div>
+                    <span class="singer">곽진언</span>
+                    <span class="dot">·</span>
+                    <span class="album">나의 해방일지 O...</span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
+            <div class="song" id="song10">
+                <div class="rank"><div>10</div><span class="material-symbols-outlined" id="rank-up">
+                    arrow_drop_up
+                    </span></div>
+                <div class="info_box">
+                    <img src="images/cover10.jpg">
+                    <div class="songTitle">늦은 밤 헤어지긴 너무 ...</div>
+                    <span class="singer">케이시(Kassy)</span>
+                    <span class="dot">·</span>
+                    <span class="album">LOVE & H...</span>
+                </div>
+                <div class="play_box">
+                    <span class="playbutton"><i class="fa-solid fa-play"></i></span>
+                    <span class="material-symbols-outlined">
+                        queue_music
+                    </span>
+                </div>
+            </div>
         </div>
+
 
     </div>
 </body>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+
+            CSS 선택자
+            1. :first-child
+                - 가상 클래스
+
+            2. ::before
+                - 가상 요소
+
+
+            전후 선택자
+            - 선택한 요소의 앞이나 뒤에 추가로 내용을 생성하는 역할
+            1. ::before = :before
+            2. ::after = :after
+
+
+            content 속성
+            - before, after에서만 사용 가능
+        */        
+
+        p > span {
+            color: blue;
+        }
+
+        p > span::before {
+            content: '[';
+            color: orange;
+            font-weight: bold;
+        }
+
+        p > span::after {
+            content: ']';
+            color: orange;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- ex37_selector.html -->
+
+    <p>
+        Lorem ipsum dolor sit <span>amet</span> consectetur adipisicing elit. Aut quam itaque <span>illum</span> reiciendis, excepturi eligendi maxime, cum tempora sit, ea corrupti non repudiandae impedit nostrum quia at. Itaque, laudantium? Perferendis explicabo itaque, dignissimos quas consequuntur quasi ut? Iusto, pariatur, sequi voluptatem a facilis <span>illo</span> ullam iste saepe temporibus autem totam.
+    </p>
+
+
+
+
+</body>
+</html>

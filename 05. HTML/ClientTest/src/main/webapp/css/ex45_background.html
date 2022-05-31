@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            border: 1px solid black;
+            width: 700px;
+            height: 200px;
+            margin: 20px;
+        }
+
+        #box1 {
+            /* 선형 그래디언트 */
+            /* background: linear-gradient(yellow, green); 기본값 bottom */
+            /* background: linear-gradient(to right, yellow, green); */
+            /* background: linear-gradient(to top right, yellow, green); */
+            /* background: linear-gradient(45deg, yellow, green); 각도로 조절 */
+            background: linear-gradient(to right, yellow, green, red, orange, cornflowerblue);
+        }
+
+        #box2 {
+            /* 원형 그래디언트 */
+            background: radial-gradient(yellow, green); /* 기본값(생략)은 해당 컨테이너를 꽉 채우는 원 */
+            /* background: radial-gradient(circle, yellow, green, yellow); */ /* circle = 그라데이션 모양을 원으로 */
+        }
+    </style>
+</head>
+<body>
+    <!-- ex45_background.html -->
+
+    <div id="box1" class="box"></div>
+    <div id="box2" class="box"></div>
+
+
+
+</body>
+</html>

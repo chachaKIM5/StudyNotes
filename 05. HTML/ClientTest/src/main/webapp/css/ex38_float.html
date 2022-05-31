@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        span:nth-child(1) {
+            color: tomato;
+            float: left;
+            /* position을 주기 전까지는 요소와 요소를 겹칠 수 없다! */
+        }
+        
+        span:nth-child(2) {
+            color: aqua;
+            float: left;
+        }
+        
+        span:nth-child(3) {
+            color: violet;
+            float: right;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            /* display: inline-block; */
+            float: left;
+        }
+
+        #box1 {
+            background-color: red;
+        }
+        #box2 {
+            background-color: orange;
+        }
+        #box3 {
+            background-color: yellow;
+        }
+        #box4 {
+            background-color: green;
+        }
+        #box5 {
+            background-color: blue;
+        }
+        #box6 {
+            background-color: navy;
+        }
+        #box7 {
+            background-color: purple;
+        }
+
+        /* #list {
+            font-size: 0;
+        }
+
+        #list .box {
+            font-size: 1rem;
+        } */
+
+
+        #list::after {
+            content: ' ';
+            display: block;
+            clear: both;
+            /* 삽입 위치는 #list의 내용물 마지막! = 형제 코드 X, 자식 코드 O */
+        }
+
+        #list {
+            width: 700px;
+            /* 브라우저 창 사이즈가 줄어서 스크롤이 생겨도 .box들이 개행되지 않도록... */
+        }
+
+        /*
+            요구사항) #box1 ~ #box7을 수평 한 줄로 만들기: inline-block (2-1, 2-2) / float(2-3, 2-4)
+            요구사항2) #box1 ~ #box7 사이의 공백 없애기
+                1) body 태그의 div#box1~div#box7 사이의 엔터를 지우는 방법 -> 번거롭고 가독성 나빠 쓸 수 없다
+                2) #list의 font-size를 0으로 만들고(글자가 사라진다) #list > .box의 font-size를 키워주는 방법('빨주노초파남보' 출력)
+                3) .box에 float: left 속성 주는 방법 -> 보라색 옆에 h1이 딸려 올라오는 문제 발생 -> 보라색과 h1 사이에 div 태그를 추가, clear 속성 추가
+                   clear는 '블럭 태그에서' float의 흐름을 끊어 준다(left | right | both) -> CSS를 위해 불필요한 태그를 body에 추가하는 것은 이질적임
+                4) 3)을 보완하기 위해 after 선택자 사용, 끊어주고 싶은 곳 바로 뒤에 빈 문자열을 추가하고 display: block과 clear: both를 추가
+                   -> 가장 많이 쓰는 방법!
+        */
+
+    </style>
+</head>
+<body>
+    <!-- ex38_float.html -->
+
+    <p>
+        Lorem ipsum dolor sit, <span>amet</span> consectetur adipisicing <span>elit.</span> Hic facilis iusto in? Earum odio soluta vitae vel est facere aut recusandae quidem a fugiat. Tempore eos <span>dolores</span> obcaecati, ut itaque maxime est quae sed fuga architecto nihil qui repellat voluptatibus nobis animi dolore repellendus? Maiores dolor harum temporibus itaque natus!
+    </p>
+
+    <hr style="margin-bottom: 50px;">
+     
+    <div id="list"> 
+    <!-- 같은 태그가 여러 개 나올 때 부모 태그를 만들어 두는 것이 좋은 습관! -->
+        <div id="box1" class="box">빨</div>
+        <div id="box2" class="box">주</div>
+        <div id="box3" class="box">노</div>
+        <div id="box4" class="box">초</div>
+        <div id="box5" class="box">파</div>
+        <div id="box6" class="box">남</div>
+        <div id="box7" class="box">보</div>
+        <!-- <div style="clear: both"></div> -->
+    </div>
+
+    <h1>다른 내용들...</h1>
+</body>
+</html>

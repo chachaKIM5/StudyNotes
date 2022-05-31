@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #news {
+            width: 648px;
+            border-left: 1px solid #CCC;
+            border-right: 1px solid #CCC;
+            margin: 0 auto;
+            font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue","Apple SD Gothic Neo","Malgun Gothic","맑은 고딕",Dotum,"돋움",sans-serif;
+            padding: 50px 26px;
+        }
+        
+        #news > h1 {
+            color: #3F63BF;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        #news > div > img {
+            float: left;
+            margin-right: 16px;
+        }
+
+        #news > div > div {
+            float: left;
+            width: 500px;
+        }
+
+        #news > div::after {
+            content: ' ';
+            display: block;
+            clear: both;
+        }
+
+        #news > div > div > h2 {
+            font-size: 15px;
+            margin: 4px 0px 4px 0px;
+        }
+
+        #news > div > div > div:nth-child(2) {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 7px;
+        }
+
+        #news > div > div > div:nth-child(3) {
+            font-size: 12px;
+            color: #888;
+        }
+
+        #news > div {
+            margin-bottom: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #EEE;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="news">
+        <h1>구글 인앱결제 본격화 D-1 결국 피해는 소비자의 몫</h1>
+
+        <div>
+            <img src="images/news1.jpg" alt="뉴스1">
+            <div>
+                <h2>결국 못 막은 구글 인앱결제…소비자 부담액 年2300억원</h2>
+                <div>내일부터 구글 인앱결제 정책을 따르지 않은 애플리케이션(앱)은 플레이 스토어에서 퇴출된다. 이미 구글은 지난달부터 플레이스토어에서 외부 결제 페이지로 연 …</div>
+                <div>아시아경제</div>
+            </div>
+        </div>
+
+        <div>
+            <img src="images/news2.jpg" alt="뉴스2">
+            <div>
+                <h2>구글 '인앱결제' 본격화 D-1…무릎 꿇은 韓 플랫폼</h2>
+                <div>기사내용 요약 구글, 6월부터 인앱결제 의무화 정책 본격 시행 구글플레이 결제 정책 미준수 앱, 1일부터 마켓서 삭제 OTT 등 콘텐츠 업계, 평균 20 …</div>
+                <div>뉴시스</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

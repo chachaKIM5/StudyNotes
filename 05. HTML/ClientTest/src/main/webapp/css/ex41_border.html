@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://kit.fontawesome.com/404d069474.js" crossorigin="anonymous"></script>
+    <style>
+
+        .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+        }
+        /*
+            모서리 둥글기
+            - border-radius: px,%
+            - (px)곡률 최대치 계산 방법: 사각형의 단축(짧은 변)의 1/2까지 가능
+            - (%) 50%
+        */
+
+        body {
+            margin: 100px;
+        }
+        #box {
+            border: 1px solid black;
+            width: 400px;
+            height: 300px;
+            margin: 50px;
+            /* border-radius: 50%; */
+
+            /* 좌상, 우상, 좌하, 우하 */
+            /* border-top-left-radius: 30px;
+            border-top-right-radius: 100px;
+            border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 30px; */
+
+            border-radius: 30px;
+            padding: 15px;
+        }
+
+
+        #txt-search {
+            border: 1px solid #777;
+            border-radius: 50px;
+            padding: 5px 10px;
+            outline: none;
+            color: #555;
+        }
+
+        #btn-search {
+            border: 1px solid #777;
+            border-radius: 50px;
+            padding: 5px 10px;
+        }
+
+        #btn-search i {
+            font-size: 1em;
+            /* 이모지를 이미지가 아니라 폰트 형식으로 넣는 이유? -> 폰트는 벡터 방식으로 그려져서 확대해도 품질 손상이 없기 때문에 & 색깔 지정도 가능!
+            font-size: 100em; */
+        }
+
+        #list > img:hover {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- ex41_border.html -->
+
+    <div id="box">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum numquam dolorem quod unde eveniet molestias, repellendus perspiciatis laborum aut error quos soluta possimus praesentium, omnis accusantium vitae eum odio nostrum itaque! Aliquid explicabo veniam deleniti doloribus mollitia! Dolorum atque, optio saepe ullam est obcaecati asperiores velit impedit. Esse, ab id?</div>
+
+    <hr>
+
+    <h1>검색</h1>
+    <input type="text" id="txt-search" placeholder="검색어를 입력하세요.">
+    <button id="btn-search">
+        <!-- <span class="material-symbols-outlined">search</span> -->
+        <i class="fa-solid fa-magnifying-glass-arrow-right"></i>
+    Search</button>
+
+
+    <hr>
+
+    <div id="list">
+        <img src="images/dog01.jpg">
+        <img src="images/dog02.jpg">
+        <img src="images/dog03.jpg">
+        <img src="images/dog04.jpg">
+        <img src="images/dog05.jpg">
+    </div>
+</body>
+</html>

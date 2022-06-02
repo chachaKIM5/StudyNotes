@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body {
+            margin-left: 200px;
+        }
+        /*
+
+            transform, 변형
+            - 위치, 크기(배율), 회전, 왜곡
+
+            1. translate(): 위치 변형(이동)
+            2. scale(): 배율 변형(확대, 축소)
+            3. rotate(): 회전 변형
+            ---
+            4. skew(): 왜곡(비틀기)
+            5. matrix(): 1~4번 포함, 사용자 정의형 행렬
+
+        */
+
+        .box {
+            border: 1px solid black;
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+        }
+
+        #box1 {
+            background-color: tomato;
+
+            /* transform: translate(좌우 이동할 거리, 상하 이동할 거리); */
+            /* transform: scale(배율, 배율); */
+            /* transform: rotate(각도deg); */
+            /* transform: skew(x축 각도deg, y축 각도deg) */
+        }
+
+        #box1:hover {
+            transform: translate(100px, 100px);
+        }
+
+        #box2:hover {
+            /* transform: scale(0.1, 0.1); */
+            transform: scale(-1, -1);
+            /* 음수값 -> 뒤집는 역할도 가능 */
+        }
+
+        #cat > img:hover {
+            transform:  translate(0px, -30px) scale(1.2, 1.2);
+        }
+
+        #box3:hover {
+            transform: rotate(30deg);
+            /* 양수: 시계 방향, 음수: 반시계 방향 */
+        }
+
+        input[type=text] {
+            font-size: 2em;
+            padding: 5px;
+            outline: none;
+            margin: 50px 0px 50px;
+            /* transform: scale(5); */
+        }
+
+        #box4:hover {
+            transform: skew(30deg, 10deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- ex50_transform.html -->
+    <!--
+         Ctrl + Shift + L
+         Ctrl + D (***) > Ctrl + K (선택)
+    -->
+
+    <div id="box1" class="box">상자1</div>
+    <div id="box2" class="box">상자2</div>
+    <div id="box3" class="box">상자3</div>
+    <div id="box4" class="box">상자4</div>
+    
+    <hr>
+
+    <h1>고양이</h1>
+    <div id="cat">
+        <img src="images/catty01.png">
+        <img src="images/catty02.png">
+        <img src="images/catty03.png">
+        <img src="images/catty04.png">
+        <img src="images/catty05.png">
+    </div>
+
+    <input type="text">
+</body>
+</html>

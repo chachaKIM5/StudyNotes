@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #list {
+            border: 1px solid black;
+            width: 800px;
+        }
+
+        #list .box {
+            width: 100px;
+            height: 50px;
+            margin: 15px 0;
+            transition-property: all;
+            transition-duration: 3s;
+            /* transition-delay: 1s; */
+            
+            transition-timing-function: ;
+
+            /* -o-transition-duration: 1s;
+            -moz-transition-duration: 1s;
+            -webkit-transition-duration: 1s; */
+        }
+
+        #box1 {
+            background-color: tomato; 
+            /* transition-delay: 0s; */
+            transition-timing-function: linear;
+        }
+        
+        #box2 {
+            background-color: gold;
+            /* transition-delay: 1s; */
+            transition-timing-function: ease;
+        }
+        
+        #box3 {
+            background-color: orange;
+            /* transition-delay: 2s; */
+            transition-timing-function: ease-in;
+        }
+        
+        #box4 {
+            background-color: cornflowerblue;
+            /* transition-delay: 3s; */
+            transition-timing-function: ease-out;
+        }
+        
+        #box5 {
+            background-color: greenyellow;
+            /* transition-delay: 4s; */
+            transition-timing-function: ease-in-out;
+        }
+
+        #list:hover .box {
+            width: 800px;
+        }
+
+        #box6 {
+            width: 200px;
+            height: 200px;
+            background-color: coral;
+            transition: 3s all ease;
+        }
+
+        body:hover #box6 {
+            margin-left: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ex54_transition.html -->
+    <div id="list">
+        <div id="box1" class="box">linear</div>
+        <div id="box2" class="box">ease(default)</div>
+        <div id="box3" class="box">상자ease-in</div>
+        <div id="box4" class="box">상자ease-out</div>
+        <div id="box5" class="box">ease-in-out</div>
+    </div> 
+
+    <hr>
+
+    <div id="box6"></div>
+</body>
+</html>

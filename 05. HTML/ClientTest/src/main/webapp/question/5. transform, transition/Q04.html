@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       
+       #main {
+            width: 700px;
+            margin: 50px auto;
+       }
+
+       .boxes {
+           height: 146px;
+           margin-bottom: 10px;
+           clear: both;
+        }
+        
+        .box {
+           width: 126px;
+           height: 126px;
+           float: left;
+           overflow: hidden;
+
+           border: 10px solid black;
+           margin-left: -10px;
+        }
+        
+        #one img {
+            transform: translate(-126px, 0px);
+            transition: 0.5s all;
+        }
+
+        #one div:hover img {
+            transform: translate(0px, 0px);
+        }
+
+        #two img {
+            opacity: 0;
+            transition: 0.5s all;
+        }
+
+        #two div:hover img {
+            opacity: 1;
+        }
+
+        #three img {
+            transform: scale(0, 0);
+            transition: 0.5s all;
+        }
+
+        #three div:hover img {
+            transform: scale(1, 1);
+        }
+
+        #four img {
+            position: relative;
+            top: -126px;
+            transform: rotate(0deg) scale(0, 0);
+            transition: 0.5s all;
+            opacity: 0;
+        }
+        
+        #four div:hover img {
+            transform: rotate(360deg) scale(1, 1);
+            transform-origin: 50%, 100%;
+            opacity: 1;
+            position: relative;
+            top: 0px;
+            
+        }
+
+       </style>
+
+</head>
+
+<body>
+    <div id="main">
+        
+        <div id="one" class="boxes">
+            <div class="box"><img src="/css/images/rect_icon01.png"></div>
+            <div class="box"><img src="/css/images/rect_icon02.png"></div>
+            <div class="box"><img src="/css/images/rect_icon03.png"></div>
+            <div class="box"><img src="/css/images/rect_icon04.png"></div>
+            <div class="box"><img src="/css/images/rect_icon05.png"></div>
+        </div>
+
+        <div id="two" class="boxes">
+            <div class="box"><img src="/css/images/rect_icon01.png"></div>
+            <div class="box"><img src="/css/images/rect_icon02.png"></div>
+            <div class="box"><img src="/css/images/rect_icon03.png"></div>
+            <div class="box"><img src="/css/images/rect_icon04.png"></div>
+            <div class="box"><img src="/css/images/rect_icon05.png"></div>
+        </div>
+
+        <div id="three" class="boxes">
+            <div class="box"><img src="/css/images/rect_icon01.png"></div>
+            <div class="box"><img src="/css/images/rect_icon02.png"></div>
+            <div class="box"><img src="/css/images/rect_icon03.png"></div>
+            <div class="box"><img src="/css/images/rect_icon04.png"></div>
+            <div class="box"><img src="/css/images/rect_icon05.png"></div>
+        </div>
+
+        <div id="four" class="boxes">
+            <div class="box"><img src="/css/images/rect_icon01.png"></div>
+            <div class="box"><img src="/css/images/rect_icon02.png"></div>
+            <div class="box"><img src="/css/images/rect_icon03.png"></div>
+            <div class="box"><img src="/css/images/rect_icon04.png"></div>
+            <div class="box"><img src="/css/images/rect_icon05.png"></div>
+        </div>
+
+    </div>
+</body>
+</html>

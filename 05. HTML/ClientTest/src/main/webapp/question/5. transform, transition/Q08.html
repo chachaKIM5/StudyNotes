@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #main {
+            width: 770px;
+            height: 1000px;
+            margin: 0 auto;
+        }
+
+        #numbox {
+            width: 770px;
+            height: 50px;
+            border-bottom: 1px solid black;
+        }
+
+        .num {
+            display: inline-block;
+            width: 150px;
+            height: 50px;
+            border: 1px solid black;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 35px;
+            margin-right: 2px;
+            margin-bottom: 10px;
+            float: left;
+        }
+
+        #boxfive::after {
+            content: ' ';
+            display: block;
+            clear: both;
+        }
+
+        .imgbox {
+            width: 74px;
+            height: 74px;
+            border: 1px solid black;
+            float: left;
+
+            background-image: url(/css/images/rect_icon07.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            transition: 0.6s all;
+        }
+
+        #main hr {
+            border-top: 1px solid black;
+        }
+
+        #boxone:hover~.one {
+            background-position: center 74px;
+        }
+        #boxtwo:hover~.two {
+            background-position: center 74px;
+        }
+        #boxthree:hover~.three {
+            background-position: center 74px;
+        }
+        #boxfour:hover~.four {
+            background-position: center 74px;
+        }
+        #boxfive:hover~.five {
+            background-position: center 74px;
+        }
+
+
+
+
+
+    </style>
+
+</head>
+<body>
+    
+    <div id="main">
+
+            <div id="boxone" class="num">1</div>
+            <div id="boxtwo" class="num">2</div>
+            <div id="boxthree" class="num">3</div>
+            <div id="boxfour" class="num">4</div>
+            <div id="boxfive" class="num">5</div>
+
+            <hr>
+
+            <div class="imgbox row1"></div>
+            <div class="imgbox row1"></div>
+            <div class="imgbox row1"></div>
+            <div class="imgbox row1"></div>
+            <div class="imgbox row1"></div>
+            <div class="imgbox row1"></div>
+            <div class="imgbox row1"></div>
+            <div class="imgbox row1"></div>
+            <div class="imgbox row1"></div>
+            <div class="imgbox row1"></div>
+            
+            <div class="imgbox row2"></div>
+            <div class="imgbox row2 two three four five"></div>
+            <div class="imgbox row2 two three four five"></div>
+            <div class="imgbox row2 two three five"></div>
+            <div class="imgbox row2 one two three five"></div>
+            <div class="imgbox row2 one two three five"></div>
+            <div class="imgbox row2 two three four five"></div>
+            <div class="imgbox row2 two three four five"></div>
+            <div class="imgbox row2 two three five"></div>
+            <div class="imgbox row2"></div>
+            
+            <div class="imgbox row3"></div>
+            <div class="imgbox row3 two three four five"></div>
+            <div class="imgbox row3 two three four five"></div>
+            <div class="imgbox row3 two three five"></div>
+            <div class="imgbox row3 one two three five"></div>
+            <div class="imgbox row3 one two three five"></div>
+            <div class="imgbox row3 two three four five"></div>
+            <div class="imgbox row3 two three four five"></div>
+            <div class="imgbox row3 two three five"></div>
+            <div class="imgbox row3"></div>
+
+            <div class="imgbox row4"></div>
+            <div class="imgbox row4 four five"></div>
+            <div class="imgbox row4 four five"></div>
+            <div class="imgbox row4"></div>
+            <div class="imgbox row4 one"></div>
+            <div class="imgbox row4 one"></div>
+            <div class="imgbox row4 four"></div>
+            <div class="imgbox row4 two three four"></div>
+            <div class="imgbox row4 two three"></div>
+            <div class="imgbox row4"></div>
+
+            <div class="imgbox row5"></div>
+            <div class="imgbox row5 two three four five"></div>
+            <div class="imgbox row5 two three four five"></div>
+            <div class="imgbox row5 two three five"></div>
+            <div class="imgbox row5 one two three five"></div>
+            <div class="imgbox row5 one two three five"></div>
+            <div class="imgbox row5 two three four five"></div>
+            <div class="imgbox row5 two three four five"></div>
+            <div class="imgbox row5 two three five"></div>
+            <div class="imgbox row5"></div>
+
+            <div class="imgbox row6"></div>
+            <div class="imgbox row6 two three four five"></div>
+            <div class="imgbox row6 two three four five"></div>
+            <div class="imgbox row6 two three four five"></div>
+            <div class="imgbox row6 one two three four five"></div>
+            <div class="imgbox row6 one two three four five"></div>
+            <div class="imgbox row6 two three four five"></div>
+            <div class="imgbox row6 two three four five"></div>
+            <div class="imgbox row6 two three four five"></div>
+            <div class="imgbox row6"></div>
+            
+            <div class="imgbox row7"></div>
+            <div class="imgbox row7 two four"></div>
+            <div class="imgbox row7 two four"></div>
+            <div class="imgbox row7 four"></div>
+            <div class="imgbox row7 one four"></div>
+            <div class="imgbox row7 one four"></div>
+            <div class="imgbox row7 four"></div>
+            <div class="imgbox row7 three four five"></div>
+            <div class="imgbox row7 three four five"></div>
+            <div class="imgbox row7"></div>
+            
+            <div class="imgbox row8"></div>
+            <div class="imgbox row8 two three five"></div>
+            <div class="imgbox row8 two three five"></div>
+            <div class="imgbox row8 two three five"></div>
+            <div class="imgbox row8 one two three five"></div>
+            <div class="imgbox row8 one two three five"></div>
+            <div class="imgbox row8 two three four five"></div>
+            <div class="imgbox row8 two three four five"></div>
+            <div class="imgbox row8 two three five"></div>
+            <div class="imgbox row8"></div>
+
+            <div class="imgbox row9"></div>
+            <div class="imgbox row9 two three five"></div>
+            <div class="imgbox row9 two three five"></div>
+            <div class="imgbox row9 two three five"></div>
+            <div class="imgbox row9 one two three five"></div>
+            <div class="imgbox row9 one two three five"></div>
+            <div class="imgbox row9 two three four five"></div>
+            <div class="imgbox row9 two three four five"></div>
+            <div class="imgbox row9 two three five"></div>
+            <div class="imgbox row9"></div>
+
+            <div class="imgbox row10"></div>
+            <div class="imgbox row10"></div>
+            <div class="imgbox row10"></div>
+            <div class="imgbox row10"></div>
+            <div class="imgbox row10"></div>
+            <div class="imgbox row10"></div>
+            <div class="imgbox row10"></div>
+            <div class="imgbox row10"></div>
+            <div class="imgbox row10"></div>
+            <div class="imgbox row10"></div>
+    </div>
+
+</body>
+</html>

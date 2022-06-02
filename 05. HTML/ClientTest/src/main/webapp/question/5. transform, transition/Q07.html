@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        #clock {
+            width: 700px;
+            height: 700px;
+            border: 30px dashed #999;
+        }
+
+        #clock div {
+            width: 50px;
+            border: 15px solid #777;
+            border-radius: 60px;
+            text-align: center;
+            color: #FFF;
+            font-variant: small-caps;
+            font-weight: bold;
+            padding-top: 20px;
+            
+            position: absolute;
+            left: 350px;
+
+            transition-property: all;
+            transform-origin: center bottom;
+            transition-timing-function: linear;
+        }
+
+        #hour {
+            height: 120px;
+            background-color: #FF6347;
+            top: 215px;
+            transition-duration: 21600s;
+        }
+        
+        #min {
+            height: 180px;
+            background-color: #6495ED;
+            top: 155px;
+            transition-duration: 360s;
+        }
+        #sec {
+            height: 280px;
+            background-color: #FFD700;
+            top: 55px;
+            transition-duration: 60s;
+        }
+
+        #clock:hover div {
+            transform: rotate(36000deg);
+        }
+
+
+        
+
+    </style>
+
+</head>
+<body>
+    <div id="main">
+        <div id="clock">
+            <div id="hour">Hour</div>
+            <div id="min">Min</div>
+            <div id="sec">Sec</div>
+        </div>
+    </div>
+</body>
+</html>

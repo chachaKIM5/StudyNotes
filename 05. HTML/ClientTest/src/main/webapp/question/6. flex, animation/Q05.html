@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body {
+            background-color: #8FD1D8;
+        }
+
+        #main {
+            width: 570px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            font-variant: small-caps;
+            font-size: 48px;
+            color: #4E4E4E;
+        }
+
+        #tape {
+            width: 569px;
+            height: 359px;
+            background-image: url(/css/images/tape.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+
+            position: relative;
+            left: 0px;
+            top: 0px;
+        }
+
+        #left {
+            position: absolute;
+            left: 125px;
+            top: 120px;
+        }
+
+        #right {
+            position: absolute;
+            left: 362px;
+            top: 120px;
+        }
+
+        #tapeline {
+            position: absolute;
+            left: 218px;
+            top: 128px;
+            background-image: url(/css/images/tapeline.png);
+            background-repeat: no-repeat;
+            background-position: right center;
+            width: 132px;
+            height: 63px;
+
+            animation-name: key-tapeline;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-direction: alternate;
+        }
+
+        @keyframes key-tapeline {
+            from {
+                background-position: right center;
+            }
+            to {
+                background-position: left center;
+            }
+        }
+
+        #tapehole img {
+            animation-name: key-tapehole;
+            animation-duration: 1.3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes key-tapehole {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+    <script src="https://kit.fontawesome.com/404d069474.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="main">
+        <h1><i class="fa-solid fa-headphones-simple"></i> Music</h1>
+
+        <div id="item">
+            <div id="tape">
+                <div id="tapehole"><img src="/css/images/tapehole.png" id="left"><img src="/css/images/tapehole.png" id="right"></div>
+                <div id="tapeline"></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

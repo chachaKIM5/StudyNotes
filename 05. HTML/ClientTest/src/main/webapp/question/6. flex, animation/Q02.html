@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #222;
+        }
+
+        #letterbox {
+            display: flex;
+            justify-content: center;
+        }
+
+        .letter {
+            font-size: 112px;
+            font-variant: small-caps;
+            font-family: Arial;
+            color: #FFFFFF;
+            margin: 3px;
+            margin-top: 300px;
+
+            opacity: 0;
+
+            animation-name: key-letter;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-out;
+            animation-iteration-count: 1;
+        }
+
+        #letter1 {
+            animation-delay: 0s;
+        }
+        #letter2 {
+            animation-delay: 0.2s;
+        }
+        #letter3 {
+            animation-delay: 0.4s;
+        }
+        #letter4 {
+            animation-delay: 0.6s;
+        }
+        #letter5 {
+            animation-delay: 0.8s;
+        }
+        #letter6 {
+            animation-delay: 1s;
+        }
+        #letter7 {
+            animation-delay: 1.2s;
+        }
+        #letter8 {
+            animation-delay: 1.4s;
+        }
+        #letter9 {
+            animation-delay: 1.6s;
+        }
+        #letter10 {
+            animation-delay: 1.8s;
+        }
+        #letter11 {
+            color: #FED600;
+            animation-delay: 2s;
+        }
+
+        @keyframes key-letter {
+            from {
+                opacity: 0;
+                transform: scale(100, 100);
+            }
+
+            to {
+                opacity: 1;
+                transform: sclae(1, 1);
+            }
+        }
+
+
+
+    </style>
+    <script src="https://kit.fontawesome.com/404d069474.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    
+    <div id="main">
+        <div id="letterbox">
+            <div id="letter1" class="letter">H</div>
+            <div id="letter2" class="letter">e</div>
+            <div id="letter3" class="letter">l</div>
+            <div id="letter4" class="letter">l</div>
+            <div id="letter5" class="letter">o</div>
+            <div id="letter6" class="letter">!</div>
+            <div id="letter7" class="letter">H</div>
+            <div id="letter8" class="letter">T</div>
+            <div id="letter9" class="letter">M</div>
+            <div id="letter10" class="letter">L</div>
+            <div id="letter11" class="letter"><i class="fa-brands fa-html5 icon"></i></div>
+        </div>
+    </div>
+
+</body>
+</html>

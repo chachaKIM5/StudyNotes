@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        body h1 {
+            font-variant: small-caps;
+        }
+
+        #main {
+            width: 500px;
+            height: 800px;
+            margin: 0 auto;
+        }
+
+        input[type="radio"] {
+           display: none; 
+        }
+
+        #records .box {
+            width: 350px;
+            height: 150px;
+            border: 1px solid #AAA;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+            display: flex;
+        }
+
+        .box label {
+            display: block;
+            width: 150px;
+            height: 150px;
+            padding-top: 20px;
+            background-color: #EEE;
+            font-size: 48px;
+            font-variant: small-caps;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .lp {
+            width: 200px;
+            height: 150px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 25px;
+            z-index: 1;
+        }
+
+        input[type=radio]:checked~.lp {
+            animation-name: key-lp;
+            animation-duration: 1.3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes key-lp {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        input[type=radio]:checked+label {
+            background-color: #FF6347;
+            color: white;
+        }
+
+        #lp1 {
+            background-image: url(/css/images/lp01.png);
+        }
+        #lp2 {
+            background-image: url(/css/images/lp02.png);
+        }
+        #lp3 {
+            background-image: url(/css/images/lp03.png);
+        }
+        #lp4 {
+            background-image: url(/css/images/lp04.png);
+        }
+
+    </style>
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <h1>Music</h1>
+        <div id="records">
+            <div class="box">
+                <input type="radio" name="record" id="button1">
+                <label for="button1">Play</label>
+                <div id="lp1" class="lp"></div>
+            </div>  
+            <div class="box">
+                <input type="radio" name="record" id="button2">
+                <label for="button2">Play</label>
+                <div id="lp2" class="lp"></div>
+            </div>
+            <div class="box">
+                <input type="radio" name="record" id="button3">
+                <label for="button3">Play</label>
+                <div id="lp3" class="lp"></div>
+            </div>
+            <div class="box">
+                <input type="radio" name="record" id="button4">
+                <label for="button4">Play</label>
+                <div id="lp4" class="lp"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

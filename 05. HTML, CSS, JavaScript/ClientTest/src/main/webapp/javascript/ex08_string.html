@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ex08_string.html -->
+
+    <script>
+
+        //문자열 함수
+        var txt = 'Hello~ Hong~';
+
+        //1. 문자열 길이
+        console.log(txt.length); //프로퍼티(Property)
+
+        //2. 검색
+        //- indexOf()
+        //- lastIndexOf()
+        console.log(txt.indexOf('~'));      //5
+        console.log(txt.indexOf('~', 6));   //11
+        console.log(txt.lastIndexOf('~'));  //11
+
+        //3. 대소문자 변환
+        console.log(txt.toUpperCase());
+        console.log(txt.toLowerCase());
+
+        //4. 추출
+        console.log(txt.substring(2, 8)); //시작위치, 끝위치 -> llo~ H
+        console.log(txt.substring(2));    //시작위치부터 끝까지 -> llo~ Hong~
+        console.log(txt.substr(2, 4));    //시작위치, 글자수 -> llo~
+        console.log(txt.substr(2));       //시작위치부터 끝까지 -> llo~ Hong~
+        console.clear();
+        console.log(txt.charAt(2));       //n번째 글자 가져오기
+        console.log(txt.charCodeAt(2));   //n번째 글자의 문자코드값 가져오기
+
+        //5. 치환
+        //처음 만나는 요소만 치환한다. (반복 X)
+        //정규 표현식 사용해 반복 가능 (추후 수업)
+        var txt2 = 'Hello~ Hong~ Bye~ Hong~'
+        console.log(txt2.replace('Hong', 'Lee'));   //Hello~ Lee~ Bye~ Hong~
+        console.log(txt2.replace(/Hong/gi, 'Lee')); //Hello~ Lee~ Bye~ Lee~
+
+        //6. 공백 제거
+        txt = '    하나    둘    셋     '; //@하나    둘    셋@
+        console.log('@' + txt.trim() + '@');    
+
+        //7. 분할
+        txt = '홍길동,아무개,하하하,테스트,하하하'; //(5) ['홍길동', '아무개', '하하하', '테스트', '하하하']
+        console.log(txt.split(','));
+
+        //8. 검색
+        txt = '홍길동';
+        console.log(txt.startsWith('홍'));  //true
+        console.log(txt.endsWith('동'));    //true
+
+    </script>
+</body>
+</html>

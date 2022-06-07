@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ex07_casting.html -->
+
+    <script>
+
+        /*
+
+            내장 함수, Built-in Function
+            - parseInt()
+            - parseFloat()
+            - isNaN()
+            - ..
+
+        */
+
+        /*
+            형변환, Type Casting -> 함수로 제공
+            1. number praseInt(value)
+            2. number parseFloat(value)
+
+        */
+
+        var n1 = 3.14;
+        console.log(parseInt(n1)); //3, 실수 -> 정수
+
+        console.log(typeof n1);
+        console.log(typeof parseInt(n1));
+
+        var n2 = '300';
+        console.log(parseInt(n2)); //문자열 -> 정수
+
+        console.log(typeof parseInt(n2)); //number
+        console.log(typeof n2);           //string
+
+        var n3 = '100점';
+        console.log(parseInt(n3)); //100, 숫자만 떼서 string -> number로 형변환
+
+        var n4 = '스코어90';
+        console.log(parseInt(n4)); //NaN > Not a Number, 숫자로 시작해야 함
+
+        var n5 = '100점이 아니라 90점입니다.';
+        console.log(parseInt(n5)); //100, 숫자만 떼내고 숫자가 아닌 것을 만나면 모두 버린다
+
+        //JavaScript -> CSS 조작
+        var width = '200px';
+        console.log(width + 100);           //200px100
+        console.log(parseInt(width) + 100); //300
+
+        var size = '1.5em';
+        console.log(parseInt(size));        //1
+        console.log(parseFloat(size));      //1.5
+
+        
+
+        //boolean isNaN(value)
+        //= value가 숫자가 아닙니까?
+        // 1. true(네 = 숫자 X)
+        // 2. false(아니오 = 숫자 O)
+
+        //사용자 나이 입력 <input type="number">
+        var age = '20';
+
+        if (isNaN(age)) {
+            console.log('나이가 올바르지 않습니다.');
+        } else {
+            console.log(age + '세입니다.');
+        }
+
+    </script>
+</body>
+</html>

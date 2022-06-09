@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ex29_select.html -->
+
+    <h1>셀렉트 박스</h1>
+
+    <select name="sel1" multiple size="7">
+        <option value="f1">사과</option>
+        <option value="f2">바나나</option>
+        <option value="f3">파인애플</option>
+        <option value="f4">망고</option>
+        <option value="f5">키위</option>
+        <option value="f6">배</option>
+        <option value="f7">포도</option>
+    </select>
+
+    <hr>
+    <input type="button" value="버튼1" name="btn1">
+    <input type="button" value="버튼2" name="btn2">
+    <input type="button" value="버튼3" name="btn3">
+    <input type="button" value="버튼4" name="btn4">
+    <input type="button" value="버튼5" name="btn5">
+
+
+
+    <script>
+
+        document.all.btn1.onclick = m1;
+        document.all.btn2.onclick = m2;
+        document.all.btn3.onclick = m3;
+        document.all.btn4.onclick = m4;
+        document.all.btn5.onclick = m5;
+
+        var sel1 = document.all.sel1;
+
+        function m1() {
+            //사용자가 어떤 과일을 선택했는지? 모든 컨트롤 > value
+            
+            //읽기
+            alert(sel1.value);    
+            
+            //쓰기
+            //주의점: 셀렉트 박스의 value는 반드시 '존재하는' option의 value 중 하나를 적는다. -> 열거형 취급
+            // sel1.value = 'f5';
+        }
+        function m2() {
+            
+            //프로퍼티
+            //1. HTML 속성을 그대로 만들어 놓은 프로퍼티 (ex. value)
+            //2. JavaScript에서 필요해 의해 만들어 놓은 프로퍼티 (ex. selectedIndex)
+
+            // alert(sel1.selectedIndex);
+
+            // sel1.selectedIndex = 2; //파인애플
+            sel1.value = 'f3';         //파인애플
+        }
+        function m3() {
+            
+
+            //2) '수박' 중복 추가 막기 위해 중복 검사
+            for (var i=0 ; i<sel1.options.length ; i++) {
+                if (sel1.options[i].text == '수박') {
+                    return;
+                }
+            }
+            //동적으로 항목 추가
+            //- <option> 태그 생성하기
+            //- <option value='f8'>수박</option>
+
+            var op = new Option(); //<option></option> , option 오브젝트 만들기
+            op.value = 'f8';       //<option value='f8'></option>
+            op.text = '수박';      //<option value='f8'>수박</option>
+            
+            //<select> + <option> 연결
+            //1) 버튼을 누르면 계속해서 '수박' 추가됨
+            sel1.options.add(op);
+
+            
+        }
+        function m4() {
+
+            //<option> 삭제
+            // sel1.options.remove(3); //삭제할 <option>의 index
+
+            //선택한 과일을 삭제하고 싶을 때
+            sel1.options.remove(sel1.selectedIndex);
+
+        }
+        function m5() {
+
+            //단일 선택 > 읽기, 다중 선택 > 첫 번째 요소만 돌려준다
+            //alert(sel1.value);
+
+            //선택 후 버튼 누르면 선택된 옵션 alert 띄우기
+            // for (var i=0 ; i<sel1.options.length ; i++) {
+            //     if (sel1.options[i].selected) {
+            //         alert(sel1.options[i].text + '(' + sel1.options[i].value + ')');
+            //     }
+            // }
+
+            //버튼을 누르면 옵션 선택하기
+            sel1.options[1].selected = true;
+            sel1.options[2].selected = true;
+            sel1.options[3].selected = true;
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        @font-face {
+            font-family: 'ACCchildrenheartOTF-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112-2@1.0/ACCchildrenheartOTF-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        input[type=button] {
+            width: 150px;
+            height: 40px;
+            margin: 5px 0px;
+            font-family: 'ACCchildrenheartOTF-Regular';
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            border: 1px solid #999;
+        }
+
+        input[type=button]:hover {
+            cursor: pointer;
+        }
+
+        table {
+            margin: 30px;
+            border-collapse: collapse;
+        }
+
+        td { 
+            border: 1px solid #BBB;
+            padding: 5px 0px;
+        }
+
+        tr td:nth-child(1) {
+            width: 170px;
+            text-align: center;
+        }
+
+        tr td:nth-child(2) {
+            width: 430px;
+            text-align:center;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <form name="form1">
+
+        <table>
+            <tr>
+                <td>
+                    <input type="button" name="btn" value="강아지1">
+                    <input type="button" name="btn" value="강아지2">
+                    <input type="button" name="btn" value="강아지3">
+                    <input type="button" name="btn" value="강아지4">
+                    <input type="button" name="btn" value="강아지5">
+                </td>
+                <td>
+                    <img src="/javascript/images/dog01.jpg">
+                </td>
+            </tr>
+        </table>
+
+    </form>
+
+
+    <script>
+
+        var btns;
+
+        for (var i=0 ; i<document.form1.btn.length ; i++) {
+            btns = document.form1.btn[i];
+            btns.onmouseover = changeimg; 
+            btns.onclick = origin;           
+        }
+
+        function changeimg() {
+            document.images[0].src = "/javascript/images/dog0" + event.target.value.substr(3) + ".jpg";
+        }
+
+        function origin() {
+            window.open('/javascript/images/dog0' + event.target.value.substr(3) + '_big.jpg', 'dog', '_blank left=0 top=0 width=1500');
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        @font-face {
+            font-family: 'SuncheonB';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        form {
+            font-family: 'SuncheonB';
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <form name="form1">
+        <h1>고양이</h1>
+        <img src="/javascript/images/catty01.png" name="cat1">
+        <img src="/javascript/images/catty02.png" name="cat2">
+        <img src="/javascript/images/catty03.png" name="cat3">
+        <img src="/javascript/images/catty04.png" name="cat4">
+        <img src="/javascript/images/catty05.png" name="cat5">
+    </form>
+
+    <script>
+
+
+
+        for (var i=0 ; i<document.images.length ; i++) {
+            if (document.images[i].name.substr(0, 3) == 'cat') {
+                document.images[i].onmouseover = pluscat;
+                document.images[i].onclick = resetcat;
+            }
+        }
+
+        window.onkeydown = keyevt;
+        
+        function keyevt(evt) {
+            if (evt.keyCode == 27) {
+                for (var i=1 ; i <= 5 ; i++) {
+                    document.images['cat' + i].width = 128;
+                }
+            } else if (evt.keyCode >= 49 && evt.keyCode <= 53) {
+                document.images['cat' + (evt.keyCode - 48)].width += 5;
+            }
+        }
+
+        function pluscat(evt) {
+            evt.target.width += 5;
+        }
+
+        function resetcat(evt) {
+            evt.target.width = 128;
+        }
+
+    </script>
+</body>
+</html>

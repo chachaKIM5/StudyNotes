@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        form {
+            width: 550px;
+            margin: 0 auto;
+        }
+        body, input, select {
+            font-family: 'GmarketSansMedium';
+            color: #888;
+        }
+
+        table {
+            width: 550px;
+            height: 430px;
+            border-collapse: collapse;
+        }
+
+        tr {
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid #888;
+        }
+
+        #cell2 {
+            width: 100px; 
+            padding: 15px;
+        }
+
+        h1 {
+            font-size: 16px;    
+            margin-bottom: 20px;
+            display: block;
+        }
+        input[type=text] {
+            display: block;
+        }
+
+        select {
+            width: 140px;
+            height: 335px;
+            margin-bottom: 30px;
+        }
+
+        option {
+            height: 17px;
+            padding: 5px;
+        }
+
+        input[type=button] {
+            width: 130px;
+            height: 35px;
+            margin-top: 10px;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <form name="form1">
+        
+        <table>
+            <tr>
+                <td id="cell1"><h1>차단된 친구</h1>
+                    <select name="left" size="12">
+                        <option value="f1">권예진</option>
+                        <option value="f1">권준혁</option>
+                        <option value="f1">김동식</option>
+                        <option value="f1">김세진</option>
+                        <option value="f1">김여정</option>
+                        <option value="f1">노형준</option>
+                        <option value="f1">박민선</option>
+                        <option value="f1">백강현</option>
+                        <option value="f1">변기현</option>
+                    </select></td>
+
+                <td id="cell2">
+                    <input type="button" name="add" value="Add ▷" onclick="changeBuddy(leftSel, rightSel)">
+                    <input type="button" name="remove" value="◁ Remove" onclick ="changeBuddy(rightSel, leftSel)">
+                    <input type="button" name="addAll" value="Add All ▷▷" onclick="changeAll(leftSel, rightSel)">
+                    <input type="button" name="removeAll" value="◁◁ Remove All" onclick="changeAll(rightSel, leftSel)">
+                </td>
+
+                <td id="cell3"><h1>허용된 친구</h1>
+                    <select name="right" size="12">
+
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+
+        var leftSel = document.form1.left;
+        var rightSel = document.form1.right;
+
+        add.onclick = changeBuddy(leftSel, rightSel);
+
+        function changeBuddy(sel1, sel2) {
+            sel2.options.add(sel1.options[sel1.selectedIndex]);
+            sel1.options.remove(sel1.selectedIndex);
+        }
+
+        function changeAll(sel1, sel2) {
+            for (var i=0 ; i<sel1.options.length ; i++) {
+                var op = sel1.options[i];
+                sel2.options.add(new Option(op.text, op.value));
+            }
+
+            for (var i=0 ; i<sel2.options.length ; i++) {
+                sel1.options.remove(0);
+            }
+        }
+
+
+
+    </script>
+
+</body>
+</html>

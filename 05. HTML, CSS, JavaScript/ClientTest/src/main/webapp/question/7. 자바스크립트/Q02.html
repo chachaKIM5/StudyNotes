@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        @font-face {    
+            font-family: 'SuncheonB';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;       
+        }
+
+        #main {
+            width: 170px;
+            margin: 0 auto;
+            font-family: 'SuncheonB';
+            color: #888;
+        }
+
+        input[type=text] {
+            margin-top: 5px;
+            font-family: 'SuncheonB';
+            color: #888;
+        }
+
+        #msgbox {
+            border: none;
+            color: red;
+            outline: none;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div id="main">
+        <form name="form1">
+            <h1>회원 가입</h1>
+
+            <div>아이디: </div>
+            <input type="text" name="typing">
+            <input type="text" id="msgbox" name="message" value="" readonly>
+        </form>
+    </div>
+
+    <script>
+
+        var id = document.form1.typing;
+        var msg = document.form1.message;
+        
+        id.onkeyup = m1;
+
+        function m1() {
+            if (id.value.length == 0) {
+                msg.value = "";
+            } else if (id.value.length < 4) {
+                msg.value = "아이디가 너무 짧습니다.";
+            } else if (id.value.length > 12) {
+                msg.value = "아이디가 너무 깁니다.";
+            } else {
+                msg.value = "아이디가 적합합니다.";
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>

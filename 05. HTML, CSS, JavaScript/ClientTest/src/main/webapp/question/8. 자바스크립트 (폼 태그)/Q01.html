@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        @font-face {
+            font-family: 'SuncheonB';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h1, #main {
+            color: #777;
+            font-family: 'SuncheonB';
+        }
+
+        table {
+            width: 600px;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+
+        tr td:nth-child(1) {
+            text-align: center;
+            width: 120px;
+            height: 50px;
+            background-color: #DDD;
+        }
+
+        input[type=text] {
+            margin-left: 10px;
+            font-family: 'SuncheonB';
+            outline: none;
+            width: 440px;
+            height: 18px;
+            margin-right: 10px;
+        }
+
+        input[type=button] {
+            font-family: 'SuncheonB';
+            color: #777;
+        }
+
+        #small {
+            width: 60px;
+        }
+            
+    </style>
+</head>
+<body>
+    
+    <h1>우편 번호 검색</h1>
+
+    <div id="main">
+        <table>
+            <tr>
+                <td>우편번호</td>
+                <td><input type="text" id="small" name="zip" readonly><input type="button" name="btn" value="우편번호검사하기"></td>
+            </tr>
+
+            <tr>
+                <td>주소</td>
+                <td><input type="text" name="address1" readonly></td>
+            </tr>
+            
+            <tr>
+                <td>상세주소</td>
+                <td><input type="text" name="address2"></td>
+            </tr>
+        </table>
+    </div>
+
+
+    <script>
+
+        document.all.btn.onclick = m1;
+        var child;
+    
+        function m1() {
+            child = window.open('/question/7/Q01_popup.html', 'popup', '_blank left=0 top=0 width=300 height=200');
+        }
+        
+    </script>
+</body>
+</html>

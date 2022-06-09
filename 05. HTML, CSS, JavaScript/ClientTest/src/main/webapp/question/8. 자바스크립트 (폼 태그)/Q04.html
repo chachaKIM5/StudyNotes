@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h1, span, fieldset {
+            font-family: 'GmarketSansMedium';
+            color: #888;
+        }
+
+        fieldset {
+            border: 1px solid #888;
+        }
+
+        input[type=checkbox] {
+            margin: 20px 5px 20px 20px;
+        }
+
+        div {
+            margin: 5px;
+        }
+
+        input[type=text] {
+            outline: none;
+            font-family: 'GmarketSansMedium';
+            color: #888;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>주문하기</h1>
+    <fieldset>
+        <legend>주문하시는 분</legend>
+        <div>이름: <input type="text" name="bname"></div>
+        <div>주소: <input type="text" name="baddress"></div>
+    </fieldset>
+    
+    <input type="checkbox" name="cb"> <span>주문하시는 분과 정보가 동일합니다.</span>
+    
+    <fieldset>
+        <legend>받으시는 분</legend>
+        <div>이름: <input type="text" name="aname"></div>
+        <div>주소: <input type="text" name="aaddress"></div>
+    </fieldset>
+
+
+
+    <script>
+
+        var cb = document.all.cb;
+
+        var bname = document.all.bname;
+        var baddress = document.all.baddress;
+
+        var aname = document.all.aname;
+        var aaddress = document.all.aaddress;
+
+        cb.onchange = m1;
+
+        function m1() {
+            if (cb.checked) {
+                aname.value = bname.value;
+                aaddress.value = baddress.value;
+            
+            } else if (!cb.checked) {
+                aname.value = '';
+                aaddress.value = '';
+            }
+        }
+
+    </script>
+
+</body>
+</html>

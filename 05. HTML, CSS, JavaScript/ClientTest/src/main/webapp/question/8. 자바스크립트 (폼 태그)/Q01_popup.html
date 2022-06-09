@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'SuncheonB';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        input[type=button] {
+            display: block;
+            height: 25px;
+            margin: 10px 0px;
+            font-family: 'SuncheonB';
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    
+    <input type="button" name="btn" value="서울시 강남구 역삼동" onclick="input('06232', '서울시 강남구 역삼동');">
+    <input type="button" name="btn" value="서울시 강남구 대치동" onclick="input('06291', '서울시 강남구 대치동');">
+    <input type="button" name="btn" value="서울시 강남구 도곡동" onclick="input('06267', '서울시 강남구 도곡동');">
+    
+    <script>
+
+        function input(czip, caddress) {
+            opener.document.all.zip.value = czip;
+            opener.document.all.address1.value = caddress;
+            opener.document.all.address2.focus();
+            window.close();
+        }
+    </script>
+</body>
+</html>

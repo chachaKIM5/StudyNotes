@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #main {
+            width: 1300px;
+            margin: 50px auto;
+        }
+
+        img {
+            width: 250px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="main">
+        <img src="/javascript/images/cat01.jpg" name="img01"> 
+        <img src="/javascript/images/cat02.jpg" name="img02"> 
+        <img src="/javascript/images/cat03.jpg" name="img03"> 
+        <img src="/javascript/images/cat04.jpg" name="img04"> 
+        <img src="/javascript/images/cat05.jpg" name="img05"> 
+    </div>
+
+    <script>
+
+        for (var i=0 ; i<document.images.length ; i++) {
+            if (document.images[i].name.substr(0, 3) == 'img') {
+                document.images[i].onmouseover = changeimg;
+                document.images[i].onmouseout = resetimg;
+            }
+        }
+
+        function changeimg() {
+            event.target.src = "/javascript/images/dog" + event.target.name.substr(3) + ".jpg";
+        }
+        
+        function resetimg() {
+            event.target.src = "/javascript/images/cat" + event.target.name.substr(3) + ".jpg";
+        }
+        
+    </script>
+    
+</body>
+</html>

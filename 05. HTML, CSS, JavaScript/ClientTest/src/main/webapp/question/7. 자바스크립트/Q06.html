@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        @font-face {
+            font-family: 'ACCchildrenheartOTF-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112-2@1.0/ACCchildrenheartOTF-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #main {
+            width: 550px;
+            border: 1px solid #aaa;
+            text-align: center;
+            margin: 30px 30px 10px 30px;
+            display: flex;
+            justify-content:space-evenly;
+        }
+
+        img {
+            margin: 5px 0px;
+            
+        }
+
+        input[type=text] {
+            width: 550px;
+            margin: 0px 30px;
+            font-size: 30px;
+            font-weight: bold;
+            outline: none;
+            border: none;
+            font-family: 'ACCchildrenheartOTF-Regular';
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <img src="/javascript/images/img01.jpg" name="img01">
+        <img src="/javascript/images/img02.jpg" name="img02">
+        <img src="/javascript/images/img03.jpg" name="img03">
+
+    </div>
+    <input type="text" name="txtmessage" value="" readonly>
+
+
+    <script>
+
+        var msg = document.all.txtmessage;
+        var msg01 = "'스키' 타는 사람이 '당근'으로 변했습니다.";
+        var msg02 = "'해바라기'가 '피망'으로 변했습니다.";
+        var msg03 = "'나무'가 '개'가 됐습니다.";
+
+        for (var i=0 ; i<document.images.length ; i++) {
+            document.images[i].onmouseover = changeimg;
+            document.images[i].onmouseout = resetimg;
+        }
+
+        function changeimg() {
+            event.target.src = '/javascript/images/img0' + (parseInt(event.target.name.substr(4)) + 3) + '.jpg';
+            
+            if (event.target.name.endsWith('01')) {
+                msg.value = msg01;
+            } else if (event.target.name.endsWith('02')) {
+                msg.value = msg02;
+            } else {
+                msg.value = msg03;
+            }
+        }
+
+        function resetimg() {
+            event.target.src = '/javascript/images/' + event.target.name + '.jpg';
+            msg.value = '';
+        }
+
+        
+
+    </script>
+</body>
+</html>

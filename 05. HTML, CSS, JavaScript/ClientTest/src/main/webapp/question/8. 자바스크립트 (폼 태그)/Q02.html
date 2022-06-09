@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 600px;
+    }
+
+    tr td:nth-child(1) {
+        background-color: #EEE;
+        width: 140px;
+        height: 30px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    td {
+        border: 1px solid black;
+        padding: 10px;
+    }
+    
+    h1, form, input {
+        font-family: 'GmarketSansMedium';
+        color: #777;
+    }
+
+
+    input {
+        outline: none;
+        border-radius: 0;
+        border: 1px solid #888;
+    }
+    input[name="ssn1"], input[name="ssn2"] {
+        width: 70px;
+    }
+    
+    input[name="birth1"] {
+        width: 50px;
+    }
+    
+    input[name="birth2"], input[name="birth3"] {
+        width: 40px;
+    }
+
+    </style>
+</head>
+<body>
+    
+    <h1>회원 가입</h1>
+    <form name="form1">
+
+        <table>
+            <tr>
+                <td>주민번호</td>
+                <td><input type="text" name="ssn1" maxlength = "6"> - <input type="text" name="ssn2" maxlength = "7"></td>
+            </tr>
+
+            <tr>
+                <td>생년월일</td>
+                <td><input type="text" name="birth1"> 년 <input type="text" name="birth2"> 월 <input type="text" name="birth3"> 일 </td>
+            </tr>
+
+            <tr>
+                <td>성별</td>
+                <td>
+                    <input type="radio" name="gender" value="male"> 남자
+                    <input type="radio" name="gender" value="female"> 여자
+                </td>
+            </tr>
+        </table>
+
+        <script>
+
+            var ssn1 = document.form1.ssn1;
+            var ssn2 = document.form1.ssn2;
+            ssn1.onkeyup = birthday;
+            ssn2.onkeyup = gender;
+
+            function birthday() {
+
+                if (event.keyCode < '0' && event.keyCode > '9') {
+                    return;
+                
+                }
+
+                if (ssn1.value.length == 6) {
+                    document.form1.birth1.value = '19' + ssn1.value.substr(0, 2);
+                    document.form1.birth2.value = ssn1.value.substr(2, 2);
+                    document.form1.birth3.value = ssn1.value.substr(4, 2);
+                    ssn2.focus();
+                }
+            }
+
+            function gender() {
+
+                if (ssn2.value.length == 1) {
+                    if (ssn2.value == '1') {
+                        document.form1.gender[0].checked = true;
+                    } else if (ssn2.value == '2') {
+                        document.form1.gender[1].checked = true;
+                    }
+                }
+            }
+
+        </script>
+
+    </form>
+
+</body>
+</html>

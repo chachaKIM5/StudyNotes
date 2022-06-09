@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+
+        @font-face {
+        font-family: 'SuncheonB';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        }
+        
+        body {
+            font-family: 'SuncheonB';
+            color: #888;
+        }
+
+        input[type=text] {
+            font-family: 'SuncheonB';
+            color: #888;
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+    </style>
+
+<body>
+    
+    <h1>데이터 입력</h1>
+    <form name="form1">
+        <div>이름: <input type="text" name="txt"></div>
+        <div>나이: <input type="text" name="txt"></div>
+        <div>별명: <input type="text" name="txt"></div>
+
+        <input type="button" name="btnLong" value="Long">
+        <input type="button" name="btnShort" value="Short">
+    </form>
+
+
+    <script>
+
+        document.form1.btnLong.onclick = m1;
+        document.form1.btnShort.onclick = m2;
+
+        function m1() {
+            document.form1.txt[0].size = 50;
+            document.form1.txt[1].size = 50;
+            document.form1.txt[2].size = 50;
+        }
+        
+        function m2() {
+            document.form1.txt[0].size = 20;
+            document.form1.txt[1].size = 20;
+            document.form1.txt[2].size = 20;
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h1, form {
+            font-family: 'GmarketSansMedium';
+            color: #888;
+        }
+        table {
+            width: 600px;
+        }
+        td {
+            text-align: center;
+            /* border: 1px solid black; */
+        }
+        
+        th {
+            width: 40px;
+            padding: 5px;
+        }
+        
+        td input[type=text] {
+            width: 450px;
+            height: 23px;
+            margin: 0px;
+            font-family: 'GmarketSansMedium';
+            font-size: 13px;
+            outline: none;
+            border: 1px solid #777;
+            color: #888;
+        }
+
+        input[type=text]:read-only {
+            cursor: not-allowed;
+            background-color: #DDD;
+        }
+        </style>
+</head>
+<body>
+    <h1>입력하기</h1>
+
+    <form name="form1">
+
+        <table>
+            <tr>
+                <th>번호</th>
+                <th>입력</th>
+                <th>잠금</th>
+            </tr>
+
+            <!-- (tr>(td{$}+(td>input[type="text"name="txt$"])+(td>input[type="checkbox"name="cb$"])))*10 -->
+            <tr>
+                <td>1</td>
+                <td>
+                    <input type="text" name="txt" data-num="1">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="1">
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>
+                    <input type="text" name="txt" data-num="2">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="2">
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>
+                    <input type="text" name="txt" data-num="3">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="3">
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>
+                    <input type="text" name="txt" data-num="4">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="4">
+                </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>
+                    <input type="text" name="txt" data-num="5">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="5">
+                </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>
+                    <input type="text" name="txt" data-num="6">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="6">
+                </td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>
+                    <input type="text" name="txt" data-num="7">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="7">
+                </td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>
+                    <input type="text" name="txt" data-num="8">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="8">
+                </td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>
+                    <input type="text" name="txt" data-num="9">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="9">
+                </td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>
+                    <input type="text" name="txt" data-num="10">
+                </td>
+                <td>
+                    <input type="checkbox" name="cb" data-num="10">
+                </td>
+            </tr>
+            
+
+        </table>
+
+            
+        <script>
+
+            var txt = document.all.txt;
+            var cb = document.all.cb;
+
+            for (var i=0 ; i<cb.length ; i++) {
+                cb[i].onchange = change;
+                txt[i].onkeydown = enter;
+                txt[i].ondblclick = dblclick;
+            }
+
+            function change() {
+                
+                if (event.target.checked) {
+                    txt[event.target.dataset["num"]-1].readOnly = true;
+                } else {
+                    txt[event.target.dataset["num"]-1].readOnly = false;
+                }
+            }
+
+            function enter() {
+                if (event.keyCode == 13) {
+                    cb[event.target.dataset["num"]-1].click();
+                }
+            }
+            
+            function dblclick() {
+                cb[event.target.dataset["num"]-1].click();
+            }
+        </script>
+
+    </form>
+</body>
+</html>

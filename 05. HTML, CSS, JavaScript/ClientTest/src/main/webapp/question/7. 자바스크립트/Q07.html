@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        h1 {
+            font-family: 'GmarketSansMedium';
+            color: #888;
+        }
+
+
+        #main {
+            width: 550px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .image {
+            border: 10px solid #999;
+            margin: 10px;
+        }
+
+        input[type="button"] {
+            width: 260px;
+            height: 70px;
+            border: 10px solid #999;
+            font-family: 'GmarketSansMedium';
+            font-size: 27px;
+            color: #666;
+            margin: 15px 5px;
+        }
+    </style>
+</head>
+<body>
+    <form name="form1">
+        <h1>Pattern Lock</h1>
+
+        <div id="main">
+
+            <img src="/javascript/images/rect_icon01.png" class="image" name="images" data-num="1">
+            <img src="/javascript/images/rect_icon02.png" class="image" name="images" data-num="2">
+            <img src="/javascript/images/rect_icon03.png" class="image" name="images" data-num="3">
+            <img src="/javascript/images/rect_icon04.png" class="image" name="images" data-num="4">
+            <img src="/javascript/images/rect_icon05.png" class="image" name="images" data-num="5">
+            <img src="/javascript/images/rect_icon06.png" class="image" name="images" data-num="6">
+            <img src="/javascript/images/rect_icon07.png" class="image" name="images" data-num="7">
+            <img src="/javascript/images/rect_icon08.png" class="image" name="images" data-num="8">
+            <img src="/javascript/images/rect_icon09.png" class="image" name="images" data-num="9">
+
+            <input type="button" name="reset" value="RESET">
+            <input type="button" name="input" value="INPUT">
+        </div>
+
+    </form>
+
+    <script>
+
+        var img = document.form1.images;
+        var pw = "";
+
+        var reset = document.form1.reset;
+        var input = document.form1.input;
+
+        for (var i=0 ; i<img.length ; i++) {
+            img[i].onmouseover = change;
+        }
+
+        reset.onclick = resetpw;
+        input.onclick = inputpw;
+
+        function change() {
+            event.target.src="/javascript/images/rect_icon10.png";
+            pw += event.target.dataset["num"];
+        }
+
+        function resetpw() {
+            for (var i=0 ; i<img.length ; i++) {
+                if (i < 10) {
+                    img[i].src = "/javascript/images/rect_icon0" + (i+1) + ".png";
+                } else {
+                    img[i].src = "/javascript/images/rect_icon" + (i+1) + ".png";
+                }
+            }
+            pw = "";
+        }
+        
+        function inputpw() {
+            if (pw == "14789") {
+                location.href = "https://google.com";
+                pw = "";
+            } else {
+                alert("Error!!");
+                resetpw();
+            }
+        }
+
+        
+
+    </script>
+
+</body>
+</html>

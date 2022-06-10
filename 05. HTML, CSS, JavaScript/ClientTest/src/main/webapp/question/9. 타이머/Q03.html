@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        form {
+            margin: 50px;
+        }
+
+        #watch, #btns {
+            width: 540px;
+            border: 1px solid #777;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        #btns {
+            border: none;
+        }
+        
+
+        #watch span {
+            font-size: 100px;
+            color: #555;
+        }
+
+        input[type=text] {
+            width: 150px;
+            text-align: center;
+            font-size: 110px;
+            font-family: 'GmarketSansMedium';
+            color: #555;
+            border: none;
+        }
+
+        input[type=button] {
+            width: 150px;
+            height: 50px;
+            border: 1px solid #777;
+            background-color: white;
+            font-size: 20px;
+            font-family: 'GmarketSansMedium';
+            color: #555;
+            cursor: pointer;
+        }
+
+        input[type=button]:disabled {
+            background-color: #DDD;
+            color: #555;
+            cursor:not-allowed;
+        }
+    </style>
+</head>
+<body>
+    
+    <form name="form1">
+        <div id="watch">
+            <input type="text" name="min" value="00">
+            <span>:</span>
+            <input type="text" name="sec" value="00">
+            <span>:</span>
+            <input type="text" name="msec" value="00">
+        </div>
+        <div id="btns">
+            <input type="button" name="start" value="시작">
+            <input type="button" name="stop" value="멈춤" disabled>
+            <input type="button" name="reset" value="종료" disabled>
+        </div>
+    </form>
+    
+    <script>
+
+        var start = document.form1.start;
+        var stop = document.form1.stop;
+        var reset = document.form1.reset;
+        
+        var min = document.form1.min;
+        var sec = document.form1.sec;
+        var msec = document.form1.msec;
+
+        var timer;
+        var letmin = 0;
+        var letsec = 0;
+        var letmsec = 0;
+
+        start.onclick = wstart;
+        stop.onclick = wstop;
+        reset.onclick = wreset;
+
+        function wstart() {
+            start.disabled = true;
+            stop.disabled = false;
+            reset.disabled = false;
+            
+            timer = setInterval(f1, 10);
+        }
+
+        function f1() {
+
+            msec.value = format(letmsec);
+            sec.value = format(letsec);
+            min.value = format(letmin);
+            letmsec++;
+
+            calnum();
+
+        }
+
+        function calnum() {
+            
+            if (letmsec == 100) {
+                letsec++;
+                letmsec -= 100;
+            }
+
+            if (letsec == 60) {
+                letmin++;
+                letsec -= 60;
+            }
+        }
+
+        function format(num) {
+            if (num < 10) {
+                return "0" + num;
+            } else {
+                return num;
+            }
+        }
+
+
+        function wstop() {
+            start.disabled = false;
+            stop.disabled = true;
+            reset.disabled = false;
+            clearInterval(timer);
+        }
+
+
+        function wreset() {
+            start.disabled = false;
+            stop.disabled = true;
+            reset.disabled = true;
+
+            clearInterval(timer);
+            letmin = 0;
+            letsec = 0;
+            letmsec = 0;
+            min.value = "00";
+            sec.value = "00";
+            msec.value = "00";
+        }
+
+
+
+    </script>
+</body>
+</html>

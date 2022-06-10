@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        #main {
+            border: 1px solid #999;
+            width: 100%;
+            min-height: 146px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="main">
+
+    </div>
+
+    <script>
+
+        var main = document.getElementById('main');
+        window.onkeydown = m1;
+
+        function m1() {
+            //48~57, 96~105, 27
+            if (event.keyCode >= 48 && event.keyCode <= 57) {
+                main.innerHTML += "<img src = '/images/" + (event.keyCode - 48) + ".png'>";
+                
+            } else if (event.keyCode >= 96 && event.keyCode <= 105) {
+                main.innerHTML += "<img src = '/images/" + (event.keyCode - 96) + ".png'>";
+
+            } else if (event.keyCode == 27) {
+                main.innerHTML = "";
+            }
+
+        }
+
+    </script>
+</body>
+</html>

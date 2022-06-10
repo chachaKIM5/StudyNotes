@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    h1 {
+        font-family: 'GmarketSansMedium';
+        color: #777;
+    }
+
+    fieldset {
+        font-family: 'GmarketSansMedium';
+        color: #777;
+        width: 200px;
+    }
+
+    div { 
+        margin-top: 10px;
+    }
+
+    input[type=button] {
+        font-family: 'GmarketSansMedium';
+        color: #777;
+        margin-top: 5px;
+    }
+
+    #name {
+        outline: none;
+        font-family: 'GmarketSansMedium';
+        width: 150px;
+        color: #777;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 400px;
+        margin: 20px 0px 0px 0px;
+        text-align: center;
+        font-family: 'GmarketSansMedium';
+        color: #777;
+        font-size: 16px;
+    }
+
+    table td, table th {
+        border: 1px solid #777;
+    }
+
+    table th {
+        font-weight: bold;
+    }
+
+    #tbl th:last-child {
+        border-left: none;
+    }
+
+    #tbl th:first-child {
+        border-right: none;
+        width: 170px;
+    }
+
+    table td {
+        height: 25px;
+    }
+    </style>
+</head>
+<body>
+
+    <h1>테이블</h1>
+
+    <fieldset>
+        <legend>색상 입력</legend>
+        <span>색상: </span><input type="color" id="color">
+        <div>이름: </div><input type="text" id="name">
+        <input type="button" value="추가하기" id="add">
+    </fieldset>
+
+    <table id="tbl">
+        <tr>
+            <th>색상명</th>
+            <th>미리보기</th>
+        </tr>
+
+        <tr>
+            <td>노랑</td>
+            <td style="background-color: #FFFF00;">#FFFF00</td>
+        </tr>
+
+        <tr>
+            <td>풀색</td>
+            <td style="background-color: #ACEF12;">#ACEF12</td>
+        </tr>
+    </table>
+    
+
+    <script>
+
+        var color = document.getElementById('color');
+        var txtname = document.getElementById('name');
+        var add = document.getElementById('add');
+        var tbl = document.getElementById('tbl');
+
+        add.onclick = addColor;
+        window.onkeydown = keydown;
+
+        function addColor() {
+            tbl.innerHTML += '<tr><td>' + txtname.value + '</td><td style="background-color: ' + color.value + '">' + color.value + '</td></tr>';
+
+            txtname.value = "";
+            color.value = '#000000';
+        }
+
+        function keydown() {
+            if (event.keyCode == 13) {
+                addColor();
+            }
+        }
+
+
+    </script>
+</body>
+</html>

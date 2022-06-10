@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #tbl {
+            border-collapse: collapse;
+            width: auto;
+            height: auto;
+            margin: 30px auto;
+            text-align:center;
+            font-size: 80px;
+            font-weight: bold;
+        }
+
+        #tbl td {
+            border: 1px solid #999;
+            width: 125px;
+            height: 125px;
+            cursor: pointer;
+            color: #444;
+            font-family: 'GmarketSansMedium';
+        }
+
+    </style>
+</head>
+<body oncontextmenu = 'return false'>
+
+    <table id="tbl">
+        <tr>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+        </tr>
+        <tr>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+        </tr>
+        <tr>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+        </tr>
+        <tr>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+        </tr>
+        <tr>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+            <td class="box">0</td>
+        </tr>
+    </table>
+
+    
+    <script>
+        
+        var boxes = document.getElementsByClassName('box');
+
+        for (var i=0 ; i<boxes.length ; i++) {
+            boxes[i].onmousedown = change;
+        }
+
+
+        function change() {
+            if (event.buttons == 1) {
+                if (event.target.bgColor != "#CCC") {
+                    event.target.innerHTML++;
+                }
+            } else if (event.buttons == 2) {
+                if (event.target.innerHTML != 0) {
+                    event.target.innerHTML--;
+                } else {
+                    event.target.bgColor = "#CCC";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

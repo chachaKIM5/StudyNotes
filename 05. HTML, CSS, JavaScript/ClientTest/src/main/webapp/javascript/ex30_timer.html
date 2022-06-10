@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        fieldset {
+            border: 1px solid #777;
+            border-radius: 5px;
+            padding: 20px;
+            width: 500px;
+        }
+
+        fieldset input {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form[name=form2] > input {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h1>타이머</h1>
+
+    <form name="form1">
+        <fieldset>
+            <legend>setTimeout</legend>
+            <input type="button" value="버튼" name="btn1">
+            <input type="text" name="txt1">
+        </fieldset>
+        <fieldset>
+            <legend>setTimeout</legend>
+            <input type="button" value="버튼" name="btn2">
+            <input type="text" name="txt2">
+        </fieldset>
+        <fieldset>
+            <legend>setTimeout</legend>
+            <input type="button" value="시작" name="btn3">
+            <input type="button" value="멈춤" name="btn4">
+            <input type="text" name="txt3">
+        </fieldset>
+    </form>
+
+    <img src="images/catty01.png" name="cat">
+
+    <h2>데이터 입력</h2> 
+
+    <form name="form2">
+        
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+        <input type="text" name="txt">
+    </form>
+
+    <script>
+
+        /*
+
+            타이머, Timer
+
+            1. id setTimeout(할일, 시간)
+                - 1회성 타이머
+
+            2. id setInterval(할일, 시간)
+                - 반복 타이머
+
+            
+            타이머 종료
+            1. void clearTimeout(id)
+
+            2. void clearInterval(id)
+
+        */
+
+
+        document.form1.btn1.onclick = m1;
+        
+        function m1() {
+            // setTimeout(할일=함수, 시간=밀리초);
+            setTimeout(f1, 3000);
+        }
+
+        function f1() {
+            // alert('따르릉');
+            document.form1.txt1.value = (new Date()).toLocaleTimeString();
+
+            //재귀  호출
+            setTimeout(f1, 1000);
+        }
+
+
+        document.form1.btn2.onclick = m2;
+
+        function m2() {
+            setInterval(f2, 1000);
+        }
+
+        function f2() {
+            document.form1.txt2.value = (new Date()).toLocaleTimeString();
+        }
+
+
+
+        var n = 1;
+        var timer = 0;
+        var timerlist = [];
+        document.form1.btn3.onclick = m3;
+        
+        function m3() {
+            
+            //시작 버튼 여러 번 못 누르도록
+            // if (timer == 0) {
+            //     timer = setInterval(f3, 10);
+            // }
+            // alert(timer);
+
+            timer = setInterval(f3, 10);
+            //시작 버튼이 눌릴 때마다 timerlist 배열 안에 timer 넣기
+            timerlist.push(timer);
+        }
+
+        function f3() {
+            document.form1.txt3.value = n;
+            n++;
+        }
+
+
+        document.form1.btn4.onclick = m4;
+
+        function m4() {
+            // clearInterval(timer);
+            //한번 멈춘 후 다시 시작 가능하도록
+            // timer = 0;
+            // alert(timer);
+
+            //순차 중지
+            // timer = timerlist.pop();
+            // clearInterval(timer);
+
+            //일괄 중지
+            for (var i=0 ; i<timerlist.length ; i++) {
+                clearInterval(timerlist[i]);
+            }
+
+        }
+
+
+        var cat = document.images['cat'];
+        cat.onclick = m5;
+
+        var m = 1;
+        var ctimer = 0;
+
+        function m5() {
+
+            if (ctimer == 0) {
+                ctimer = setInterval(f5, 100);
+            } else { 
+                clearInterval(ctimer);
+                ctimer = 0;
+            }
+        }
+
+
+        function f5() {
+            m++;
+            if (m > 9) m = 1;
+            cat.src = 'images/catty0' + m + '.png';
+        }
+
+
+
+        var txt = document.form2.txt;
+        var temp;
+        var ttimer;
+
+        //텍스트 박스 > 데이터 입력 > 데이터 입력 완료 시 편집 불가능하게 막기(readOnly)
+
+        for (var i=0 ; i<txt.length ; i++) {
+            txt[i].onblur = m6;
+            txt[i].onfocus = m7;
+            
+        }
+        
+        function m6() {
+            //event > 이벤트 매핑 함수(onXXX)에서만 제공
+            
+            temp = event.target;
+            ttimer = setTimeout(f6, 1000);
+        }
+        
+        function f6() {
+            //편집이 끝난 텍스트박스를 읽기 전용으로 만들기
+            //입력값이 존재할 때만
+
+            //Cannot read properties of undefined (reading 'target')
+            //== JAVA의 NullPointer Exception
+            // if (event.target.value.trim() != '') {
+            //     event.target.readOnly = true;
+            // }
+
+            if (temp.value.trim() != '') {
+                temp.disabled = true;
+            }
+        }
+
+        function m7() {
+            clearTimeout(ttimer);
+        }
+
+    </script>
+</body>
+</html>

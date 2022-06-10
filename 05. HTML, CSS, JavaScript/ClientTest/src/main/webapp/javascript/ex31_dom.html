@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ex31_dom.html -->
+
+    <h1>DOM</h1>
+    <form name="form1">
+        <h2 id="title">Control</h2>
+        <div>
+            <input type="text" name="txt1" id="txt1" class="txts">
+            <input type="text" name="txt2" id="txt2" class="txts">
+            <input type="text" name="txt3" id="txt3" class="txts">
+            <input type="button" value="버튼">
+        </div>
+
+    </form>
+    <script>
+
+        /*
+            Node.js
+            - EMCAScript
+
+            JavaScript
+            1. Core(=EMCAScript)
+            2. BOM: html 속성들을 이용해 태그를 조작 및 내장 객체, 추가 프로퍼티들 이용
+                - 한계: 태그 중 일부만 접근 가능, 기능 부족
+                - 트리 구조 > 고정(정적) > 태그 접근 방식 고정
+            3. DOM
+                - 트리 구조 > 문서의 태그를 보고 직접 생성 > 태그 접근 방식 다양
+
+            DOM, Document Object Model
+            - 모든 태그 제어 가능
+            - 기능 많음
+            - 식별 가능 > name, id, class
+            - DOM Level 1 > DOM Level 2 > DOM Level 3
+            - 태그 검색 도구 > 많음
+
+
+            DOM에서 제공하는 태그 검색 도구
+            1. id 검색      > document.getElementById('id')
+            2. class 검색   > document.getElementsByClassName('class');
+            3. name 검색    > document.getElementsByName('name');
+            4. 태그명 검색   > document.getElementsByTagName('tag');
+            5. 선택자 검색   > document.querySelector('CSS selector');    > 단수 반환
+                            > document.querySelectorAll('CSS selector'); > 복수 반환
+
+        */
+
+
+        //1. ID
+        //BOM
+        // document.form1.txt1.value = "확인";
+        //DOM
+        // document.getElementById('txt1').value = "check";
+
+
+        //BOM이든 DOM이든, 검색 도구에 상관없이 찾고 난 후 결과는 동일한 객체
+        // alert(document.form1.txt1 === document.getElementById('txt1')); //true
+        // document.getElementById('title').align = 'center'; //BOM은 h1, h2태그를 못 찾지만, DOM은 찾을 수 있다!
+
+
+        //2. Class
+        //배열 반환
+        // var txts = document.getElementsByClassName('txts');
+        // alert(txts.length); //3
+
+        // for (var i=0 ; i<txts.length ; i++) {
+        //     txts[i].value = i;
+        // }
+        
+
+        //3. Name
+        //배열 반환, name이 단 하나 있어도 무조건 방 1개짜리 배열로 반환된다! (주의)
+        //document.getElementsByName('txt1').value = 'BOM'; (X, 배열에 바로 value 삽입?)
+        // document.getElementsByName('txt1')[0].value = 'BOM';
+
+
+        //4. Tag
+        //배열 반환
+        // var list = document.getElementsByTagName('input');
+
+        // for (var i=0; i<list.length ; i++) {
+        //     list[i].value = i;
+        // }
+
+
+        //5. Selector 선택자
+        //CSS 선택자를 사용해서 JavaScript 검색을 지원
+        document.querySelector('#txt1').value = 'OK';
+        document.querySelector('h1').align = 'center';
+        document.querySelector('input:last-child').value = 'Last';
+        
+        alert(document.querySelectorAll('.txts').length);
+    </script>
+</body>
+</html>

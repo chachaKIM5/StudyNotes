@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #sample {
+            border: 1px solid black;
+            background-color: #EEE;
+            padding: 20px;
+            width: 780px;
+        }
+
+        #sample img {
+            width: 150px;
+            border-radius: 10px;
+            opacity: .3;
+        }
+
+        #sample img:hover {
+            opacity: .7;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- ex35_content.html -->
+
+    <div id="sample">
+        <img src="images/cat01.jpg" class="pic">
+        <img src="images/cat02.jpg" class="pic">
+        <img src="images/cat03.jpg" class="pic">
+        <img src="images/cat04.jpg" class="pic">
+        <img src="images/cat05.jpg" class="pic">
+        <img src="images/dog01.jpg" class="pic">
+        <img src="images/dog02.jpg" class="pic">
+        <img src="images/dog03.jpg" class="pic">
+        <img src="images/dog04.jpg" class="pic">
+        <img src="images/dog05.jpg" class="pic">
+    </div>
+    <hr>
+    <input type="button" value="전체 삭제" id="btnclear">
+    <hr>
+    <div id="output"></div>
+
+    <script>
+        var pic = document.getElementsByClassName('pic');
+
+        for (var i=0 ; i<pic.length ; i++) {
+            pic[i].onclick = m1;
+        }
+
+        function m1() {
+            var filename = getFileName(event.target.src);
+
+            document.getElementById('output').innerHTML += '<img src="images/' + filename + '">';
+
+        }
+
+
+        function getFileName(path) {
+            //경로를 매개변수로 받아 파일명만 구해내는 메소드
+            
+            var index = path.lastIndexOf('/');
+            return path.substr(index + 1);
+        }
+
+
+        document.getElementById('btnclear').onclick = m2;
+
+        function m2() {
+            
+            if (document.getElementById('output').innerHTML != '') {
+
+                if (confirm('정말 삭제하시겠습니까?')) {
+                    document.getElementById('output').innerHTML = '';
+                }
+
+            } else {
+                alert('목록이 비었습니다.');
+            }
+
+        }
+
+
+    </script>
+</body>
+</html>

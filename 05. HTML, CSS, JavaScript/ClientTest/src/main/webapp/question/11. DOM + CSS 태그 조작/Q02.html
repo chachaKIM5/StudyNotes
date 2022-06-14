@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        
+        window.addEventListener('mousedown', function(event) {
+            
+            let icon;
+            let first = null;
+            let n = Math.floor(Math.random()*9) + 1;
+            let totalImg = 0;
+
+            icon = document.createElement('img');
+            icon.setAttribute('src', '/javascript/images/m0' + n + '.png');
+            icon.style.position = 'absolute';
+            icon.style.left = event.clientX - 50 + 'px';
+            icon.style.top = event.clientY - 50 + 'px';
+            
+            document.body.appendChild(icon);
+
+        
+            for (let i=0 ; i<document.body.children.length ; i++) {
+                if (document.body.children[i].nodeName == 'IMG') {
+                    if (first == null) {
+                        first = document.body.children[i];
+                    }
+                    totalImg++;
+                }
+            }
+            
+            if (totalImg > 10) {
+                document.body.removeChild(first);
+                first = null;
+            }
+
+        });
+
+    </script>
+    
+</body>
+</html>

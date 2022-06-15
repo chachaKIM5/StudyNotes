@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/javascript/CSS/main.css">
+    <style>
+
+        #btnList, #imgView {
+			margin: 20px;
+			text-align: center;
+		}
+		#imgView img {
+			border: 1px solid #999;
+		}
+		#btnList input {
+			border: 1px solid #ccc;
+			background-color: white;
+			width: 80px;
+			height: 45px;
+		}
+		#btnList #btnstart {
+			background-color: tomato;
+			color: white;
+		}
+		#btnList input {
+			cursor: pointer;
+			outline: none;
+		}
+
+    </style>
+
+</head>
+<body>
+    <h1>이미지 뷰어</h1>
+
+	<div>
+		<div id="btnList">
+			<input type="button" name="btnstart" id="btnstart" value="▷">
+			<input type="button" name="btn" value="[1]" data-index="0">
+			<input type="button" name="btn" value="2"  data-index="1">
+			<input type="button" name="btn" value="3"  data-index="2">
+			<input type="button" name="btn" value="4"  data-index="3">
+			<input type="button" name="btn" value="5"  data-index="4">
+			<input type="button" name="btn" value="6"  data-index="5">
+			<input type="button" name="btn" value="7"  data-index="6">
+			<input type="button" name="btn" value="8"  data-index="7">
+			<input type="button" name="btn" value="9"  data-index="8">
+			<input type="button" name="btn" value="10"  data-index="9">
+		</div>
+		<div id="imgView"><img src="/javascript/images/wall01.jpg" name="img1"></div>
+	</div>
+
+    <script>
+
+        const btn = document.getElementsByName('btn');
+        const btnstart = document.getElementById('btnstart');
+        const bird = document.getElementsByName('img1');
+        let oldnum = 1;
+        let n = 0;
+        let timer = 0;
+
+        for (let i=0 ; i<btn.length ; i++) {
+
+            btn[i].addEventListener('click', function(event) {
+                if (i == 9) {
+                    bird[0].src = "/javascript/images/wall" + (i+1) + ".jpg";
+                } else {
+                    bird[0].src = "/javascript/images/wall0" + (i+1) + ".jpg";
+                }
+                document.all.btn[oldnum-1].value = `${oldnum}`;
+                oldnum = event.target.value;
+                event.target.value = '[' + event.target.value + ']';
+            });
+        }
+
+
+        btnstart.addEventListener('click', function() {
+
+            if (btnstart.value == "∥") {
+                    btnstart.value = "▷";
+                    clearInterval(timer);
+            
+            } else {
+                
+                    btnstart.value = "∥";
+                    timer = setInterval(function() {
+
+                        btn[n].click();
+                        n++;   
+
+                        if (n == 10) { n = 0; }
+
+                    }, 1000);
+            }
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/javascript/CSS/main.css">
+    <style>
+
+        body {
+            font-size: 20px;;
+        }
+        input[type=text] {
+            width: 100%;
+            font-size: 3em;
+        }
+
+        .table {
+            width: 700px;
+            height: 560px;
+        }
+
+        .table td {
+            width: 140px;
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h1>제목입니다.</h1>
+    <input type="text" id="txt">
+    <hr>
+
+    <h2>다른 내용입니다.</h2>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis optio, dignissimos nemo earum iure, rem in aut alias ut vitae sequi reiciendis maxime est nisi minus totam, quae neque et?
+    </p>
+    <p>
+        Voluptatum, omnis? Nihil animi temporibus quisquam exercitationem, illum asperiores totam numquam quas ad et aperiam rem officia quod fugit quos a consequuntur porro amet repellat nam ipsam dolor accusamus laborum!
+    </p>
+    <p>
+        Rem consectetur necessitatibus blanditiis doloribus dicta fugit odit, dignissimos nobis dolore quaerat praesentium corrupti quod laboriosam reprehenderit unde. Necessitatibus asperiores possimus tempora corrupti ipsa quae error a alias, impedit illo.
+    </p>
+    <p>
+        Repudiandae libero minus totam blanditiis, ipsa tempora incidunt delectus perspiciatis est quis neque consectetur, dignissimos, voluptatum tenetur illum! Facilis sequi suscipit quam omnis! Vero eum iusto exercitationem, veritatis maxime dolorum.
+    </p>
+
+    
+    <h1>Table</h1>
+
+    <table class="table">
+        <tr>
+            <td>
+                Lorem, ipsum dolor.
+            </td>
+            <td>
+                Odio, nam adipisci.
+            </td>
+            <td>
+                Omnis, necessitatibus odio.
+            </td>
+            <td>
+                Sed, asperiores aliquam.
+            </td>
+            <td>
+                Sequi, distinctio illo?
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Lorem, ipsum dolor.
+            </td>
+            <td>
+                Velit, dicta cupiditate!
+            </td>
+            <td>
+                Distinctio, molestias doloremque.
+            </td>
+            <td>
+                Expedita, eos nam.
+            </td>
+            <td>
+                Iusto, vitae cupiditate!
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lorem, ipsum dolor.
+            </td>
+            <td>
+                Suscipit, architecto odio.
+            </td>
+            <td>
+                Ullam, tenetur voluptas.
+            </td>
+            <td>
+                Quo, veniam iste.
+            </td>
+            <td>
+                Voluptate, repellat cupiditate?
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lorem, ipsum dolor.
+            </td>
+            <td>
+                Dolor, commodi cum?
+            </td>
+            <td>
+                At, laboriosam maxime!
+            </td>
+            <td>
+                Dolore, culpa doloribus.
+            </td>
+            <td>
+                Doloremque, saepe impedit!
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lorem, ipsum dolor.
+            </td>
+            <td>
+                Error, animi facere?
+            </td>
+            <td>
+                Voluptatum, necessitatibus quisquam?
+            </td>
+            <td>
+                Doloremque, odio veritatis.
+            </td>
+            <td>
+                Iste, ullam mollitia!
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lorem, ipsum dolor.
+            </td>
+            <td>
+                Fuga, ducimus sed.
+            </td>
+            <td>
+                Consequuntur, repellendus ullam.
+            </td>
+            <td>
+                Dignissimos, totam ullam.
+            </td>
+            <td>
+                Ab, provident unde?
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lorem, ipsum dolor.
+            </td>
+            <td>
+                Voluptatum, cum rerum?
+            </td>
+            <td>
+                Quo, natus aperiam.
+            </td>
+            <td>
+                Delectus, placeat magnam.
+            </td>
+            <td>
+                Et, in animi.
+            </td>
+        </tr>
+
+    </table>
+
+
+    <script>
+
+        const txt = document.getElementById('txt');
+        // let x = Math.random() * 5;
+        // let y = Math.random() * 5;
+
+        txt.addEventListener('keydown', function() {
+            // document.body.style.transform = `translate(-${x}px, -${y}px)`;
+
+            var m = [-5, 5, 0];
+		
+            document.body.style.transform = "translate(" + (m[parseInt(Math.random() * 2)]) + "px, " + (m[parseInt(Math.random() * 2)]) + "px)";
+            setTimeout(function() {
+                document.body.style.transform = "translate(" + (m[parseInt(Math.random() * 2)]) + "px, " + (m[parseInt(Math.random() * 2)]) + "px)";
+            }, 5);
+            setTimeout(function() {
+                document.body.style.transform = "translate(0px, 0px)";
+            }, 20);
+
+        });
+    
+    </script>
+
+</body>
+</html>

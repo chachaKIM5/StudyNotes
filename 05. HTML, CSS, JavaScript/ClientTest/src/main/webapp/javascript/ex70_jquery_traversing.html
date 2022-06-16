@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/scroll.js"></script>
+    <style>
+
+        div {
+            border: 1px solid black;
+            padding: 15px;
+            margin: 15px;
+        }
+
+        #me {
+            border-width: 10px;
+        }
+
+        .check {
+            background-color: gold;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- ex70_jquery_traversing.html -->
+    <h1>traversing</h1>
+
+    <input type="button" value="버튼" id="btn">
+
+    <div>
+        할아버지
+        <div>
+            큰아버지
+            <div>
+                사촌
+            </div>
+        </div>
+        <div>
+            아버지
+            <div>
+                형
+            </div>
+            <div id="me">
+                나
+                <div>자식</div>
+                <span>자식추가</span>
+                <div>
+                    자식
+                    <div>손자</div>
+                    <span class="one">손자추가</span>
+                </div>
+                <div class="one">자식</div>
+            </div>
+            <div>
+                동생
+            </div>
+        </div>
+        <div>
+            작은아버지
+            <div>
+                사촌
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        $('#btn').click(function() {
+
+            //자식 탐색: children([조건]), find(조건)
+            // - DOM: childNodes, children()
+
+            // $('#me').children().addClass('check');
+            // $('#me').children().css('border-width', '10px');
+
+            // $('#me').children().first().addClass('check');
+            // $('#me').children().last().addClass('check');
+
+            // =nth-child처럼 n번째 자식을 찾아 준다
+            // $('#me').children().eq(0).addClass('check');
+            // $('#me').children().eq(-1).addClass('check'); //음수 인덱스 지원: 거꾸로 1번째!
+            
+            // jQuery 사용 시 CSS 선택자로 최대한 범위를 좁힌 후에 자바스크립트를 사용하면 좋다
+            // $('#me').children().children().addClass('check');
+            // $('#me > * > *').addClass('check');
+
+
+            //$('table').children().children()
+            //$('table td')
+
+            //나 > span 검색
+            //나 > .one 검색
+
+            //children() > for > if(질문) > children() > for > if(질문) > ... 반복
+
+            //jQuery의 find 메소드
+            // $('#me').find('span').css('border', '20px solid tomato');
+            // $('#me').find('.one').css('border', '20px solid tomato');
+
+            // $('#me').children('div').css('border', '20px solid tomato');
+
+
+
+
+
+            // 조상 탐색: parent([조건]), parents([조건]), parentsUntil(조건)
+            // - DOM: parentNode, parentElement
+
+            // $('#me').parent().css('border', '20px solid tomato');
+            // $('#me').parents().css('border', '20px solid tomato');
+            // $('#me').parentsUntil('body > div').css('border', '20px solid tomato');
+            // body > div는 '할아버지' -> 할아버지 전까지 찾아준다
+
+
+
+            //형제 탐색: prev([조건]), next([조건]), prevAll([조건]), nextAll([조건]), siblings([조건])
+            //- DOM: previousSibling, nextSibling
+
+            // 형, 동생 태그 1개씩만
+            // $('#me').prev().css('border', '20px solid tomato');
+            // $('#me').next().css('border', '20px solid tomato');
+            
+            // $('#me').prev().prev().css('border', '20px solid tomato');
+
+            // 모든 형, 모든 동생
+            // $('#me').prevAll().css('border', '20px solid tomato');
+            // $('#me').nextAll().css('border', '20px solid tomato');
+            
+            // 조건에 닿을 때까지 만나는 모든 형제(형, 동생)
+            // $('#me').prevUntil('조건').css('border', '20px solid tomato');
+            // $('#me').nextUntil('조건').css('border', '20px solid tomato');
+
+            // 모든 형제
+            // $('#me').siblings().css('border', '20px solid tomato');
+        });
+    </script>
+
+</body>
+</html>

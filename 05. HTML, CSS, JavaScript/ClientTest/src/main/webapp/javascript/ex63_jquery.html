@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- jQuery CDN 설치 -->
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script> -->
+
+    <!-- jQuery 로컬 설치 -->
+    <script src="js/jquery-1.12.4.js"></script>
+
+</head>
+<body>
+    <!-- ex63.jquery.html -->
+
+    <input type="text" name="txt1" id="txt1">
+
+
+    <script>
+
+        /*
+        
+            jQuery
+            - http://jquery.com
+            - jQuery is a fast, small, and feature-rich JavaScript library.
+            - 자바스크립트 라이브러리 > 기능 집합
+            - Lightweight Footprint (작은 용량)
+            - CSS3 Compliant (CSS 선택자 지원)
+                    - ES6: document.querySelector(CSS선택자)
+            - Cross-Browser (크로스 브라우저를 지원한다 = 모든 브라우저에서 동일한 동작을 한다)
+
+
+            jQuery 설치
+            1. 로컬 설치 > 직접 파일 다운로드 + 참조
+            2. CDN 설치 > URL + 참조
+            3. Node > NPM(yarn) > 로컬 설치
+
+
+            2. https://jquery.com/download/에서 CDN 검색, Using jQuery with a CDN 카테고리
+                - https://code.jquery.com/
+                - jQuery 1.x uncompressed
+                    - CDN 설치법: 좌클릭 - 코드 복사 - 상단에 설치
+                    - 로컬 설치법: 우클릭 - C:\class\client\ClientTest\src\main\webapp\javascript\js에 파일 저장
+
+                    - CDN과 로컬 설치 둘은 충돌이 있기 때문에 한 페이지에는 둘 중 하나만 하면 됨!
+        
+        */
+
+
+        
+        //텍스트 박스 찾아서 Value 조작
+        //1. BOM > BOM 트리
+        document.all.txt1.value = 'BOM';
+
+        //2. DOM > getXXX or DOM 트리(Axis = 부모자식 관계)
+        document.getElementById('txt1').setAttribute('value', 'DOM');
+
+        //3. jQuery > jQuery 함수
+        // jQuery('#txt1').val('jQuery');
+        
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/jquery-ui.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+    <!-- ex82_chart.html -->
+    <h1>차트 만들기</h1>
+
+        <div id="container"></div>
+
+    
+    <script>
+        Highcharts.chart('container', {
+
+            title: {
+                text: '몸무게 변화, 2021년'
+            },
+
+            subtitle: {
+                text: '측정 시간: 기상 직후'
+            },
+
+            yAxis: {
+                title: {
+                    text: '몸무게'
+                }
+            },
+
+            xAxis: {
+                accessibility: {
+                    rangeDescription: 'Range: 2010 to 2017'
+                }
+            },
+
+            legend: {
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom'
+            },
+
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    pointStart: 1
+                }
+            },
+
+            series: [{
+                name: '홍길동',
+                data: [70, 72, 75, 77, 78, 79, 76, 73, 72, 70, 68, 67]
+            }, {
+                name: '아무개',
+                data: [44, 45, 45, 43, 43, 46, 47, 47, 48, 50, 48, 46]
+            }, {
+                name: '하하하',
+                data: [55, 58, 57, 57, 59, 60, 61, 60, 58, 58, 59, 58]
+            }],
+
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+
+        });
+    </script>
+
+</body>
+</html>

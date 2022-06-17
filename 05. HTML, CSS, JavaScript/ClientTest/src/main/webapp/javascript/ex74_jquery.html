@@ -37,6 +37,7 @@
             height: 50px;
             text-align: center;
             border-top: 1px solid #DCE2F0;
+            background-color: #50586C;
         }
 
         #menu > span {
@@ -296,9 +297,62 @@
         $('#menu > span').click(function(event) {
             // alert(this.dataset['item']);
             //jQuery 버전 -> jQuery로 형변환 후 .data('item')
-            alert($(this).data('item'));
+           
+            // alert($(this).data('item'));
+
+            //각각 itemN의 스크롤 위치?
+            //alert($('#item1').position().top);
+
+            // let time = 현재위치 - 이동할 위치 * 배율;
+
+            let time = Math.abs($(document).scrollTop() - $($(this).data('item')).position().top) * 0.5;
+            // alert(time);
+            $('html,body').animate({
+                scrollTop: $($(this).data('item')).position().top - 60
+            }, time);
         });
 
+
+        $('.back > a').click(function(event) {
+            //이동 액션
+            //console.log(100);
+
+            //각 태그별 > 고유 동작 취소
+            event.preventDefault();
+
+            let time = Math.abs($(document).scrollTop()) * 0.5;
+
+            $('html,body').animate({
+                scrollTop: 0
+            }, 1000);
+
+        });
+
+
+
+        $(document).scroll(function(event) {
+
+            //메뉴가 시야에서 사라지는 순간 < 메뉴를 붙박이로 만들기
+            // console.log($(document).scrollTop(), $('#menu').position().top);
+
+            if ($(document).scrollTop() >= $('#menu').position().top) {
+                
+                $('#menu').css({
+                   position: 'fixed',
+                   top: '0px',
+                   bottom: ''
+                });
+            
+            }
+            
+            if ($(document).scrollTop() <= $('header').outerHeight() - $('#menu').outerHeight()) {
+                $('#menu').css({
+                    position: 'absolute',
+                    top: '',
+                    bottom: '0px'
+                });
+            };
+        });
 
 
     </script>

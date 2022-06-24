@@ -1,0 +1,72 @@
+
+/* CSS > address.css */
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: #EBE8FF;
+	font-family: 'IBMPlexSansKR-Regular';
+}
+
+
+main > header {
+/* 	border-bottom: 1px solid black; */
+	height: 100px;
+/* 	background-color: #CDCDCD; */
+}
+
+main > header > div {
+	display: flex;
+	justify-content: space-between;	
+	height: 100px;
+	border-bottom: 1px dashed #DEDEDE;
+}
+
+main > header h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 30px;
+	padding-top: 38px;
+	padding-left: 25px;
+}
+
+main > header > div > div {
+	padding-right: 20px;
+	padding-top: 46px;
+	
+}
+
+main > section {
+	/* background-color: gold; */
+}
+
+main > section > div {
+	height: calc(100vh - 100px);
+	padding: 20px;
+}
+
+
+main .content {
+	width: 700px;
+	margin: 0px auto;
+	border-left: 1px solid #BBB;	
+	border-right: 1px solid #BBB;
+/* 	box-shadow: 0px 0px 3px #777; */
+	background-color: white;
+}
+
+
+.form-control.short {
+	width: 120px;
+}
+
+.form-control.middle {
+	width: 200px;
+}

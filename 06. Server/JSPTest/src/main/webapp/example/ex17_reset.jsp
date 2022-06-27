@@ -22,7 +22,8 @@
 	<div class="container">
 		<h1>세션 초기화하기</h1>
 		<%
-			session.invalidate();
+			//세션 자체를 처음 모습으로 초기화
+			session.invalidate(); //모든 저장했던 데이터가 삭제
 		%>
 		<a href="ex17_session.jsp">시작 페이지</a>
 	</div>

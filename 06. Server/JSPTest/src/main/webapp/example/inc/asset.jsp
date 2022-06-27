@@ -22,6 +22,6 @@
 
 <!-- <link rel="stylesheet" href="../CSS/bootstrap.css" /> -->
 
-<link rel="stylesheet" href="/JSPTest/example/CSS/bootstrap.css" />
-<script src="/JSPTest/example/js/jquery-1.12.4.js"></script>
-<script src="/JSPTest/example/js/bootstrap.js"></script>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/example/CSS/bootstrap.css" />
+<script src="<%= request.getContextPath() %>/example/js/jquery-1.12.4.js"></script>
+<script src="<%= request.getContextPath() %>/example/js/bootstrap.js"></script>

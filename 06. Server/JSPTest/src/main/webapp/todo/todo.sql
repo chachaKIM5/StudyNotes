@@ -25,17 +25,18 @@ insert into tblTodo (seq, todo, regdate, priority, complete) values (seqTodo.nex
 
 
 
+
 -- 완료 유무 수정
 
 -- n -> y
-update tblTodo set complete = 'y' where seq = 1;
+update tblTodo set complete = 'y' where seq = 4;
 
 -- y -> n
 update tblTodo set complete = 'n' where seq = 1;
 
 
 
-
+commit;
 
 
 

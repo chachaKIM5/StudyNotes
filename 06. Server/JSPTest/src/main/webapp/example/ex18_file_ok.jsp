@@ -105,8 +105,8 @@
 		<h2>파일 다운로드</h2>
 		
 		<div>
-			<%-- <a href="/jsp/example/files/<%= filename %>"><%= filename %></a> --%>
-			<a href="<%= request.getContextPath() %>/example/files/<%= filename %>"><%= filename %></a>
+			<a href="/jsp/example/files/<%= filename %>"><%= filename %></a>
+			<%-- <a href="<%= request.getContextPath() %>/example/files/<%= filename %>"><%= filename %></a> --%>
 		</div>
 		<div>
 			<a href="<%= request.getContextPath() %>/example/files/<%= filename %>" download><%= filename %></a>

@@ -37,7 +37,6 @@
 		public int compare(File a, File b) {
 			return Long.compare(a.lastModified(), b.lastModified());
 		}
-		
 	});
 
 %>

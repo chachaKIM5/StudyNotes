@@ -115,8 +115,8 @@
 		%>
 		
 		<ol>
-			<c:forEach var="names" items="${names}">
-				<li> ${names} </li>
+			<c:forEach var="name" items="${names}">
+				<li> ${name} </li>
 			</c:forEach>
 		</ol>
 		

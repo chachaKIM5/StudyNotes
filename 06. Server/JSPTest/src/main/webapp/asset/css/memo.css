@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+main {
+	font-family: 'IBMPlexSansKR-Regular';
+	width: 600px;
+	margin: 0 auto;
+}
+
+
+header h1 {
+	border-bottom: 1px dashed #BBB;
+	padding-bottom: 15px;
+}
+
+section {
+	margin-top: 30px;
+}
+
+.add {
+	
+}
+
+.table.add th {
+	width: 120px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.table.add textarea {
+	height: 200px;
+	resize: none;
+}
+
+
+.table.item {
+	
+}
+
+.table.item th {
+	text-align: center;
+	vertical-align: middle;
+	
+}
+
+.table.item th:nth-child(1),
+.table.item th:nth-child(3),
+.table.item th:nth-child(5) {
+	width: 70px;
+}
+
+.table.item td:nth-child(2),
+.table.item td:nth-child(4) {
+	width: 105px;
+}
+
+.table.item td:nth-child(6) {
+	width: 160px;
+}
+
+.table.item tr:nth-child(3) td:nth-child(2) {
+	height: 100px;
+	vertical-align: middle;
+}
+
+.table.item {
+	margin-bottom: 10px;
+}
+
+
+.btns {
+	margin-bottom: 30px;
+	float: right;
+}
+

@@ -19,7 +19,7 @@
 	<!-- template.jsp > list.jsp -->
 	
 	<main>
-		<%@ include file="/WEB-INF/views/memo/inc/header.jsp" %>
+		<%@ include file="/WEB-INF/views/memo/inc/headerList.jsp" %>
 		<section>
 			
 			<c:forEach items="${list}" var="dto">
@@ -45,8 +45,8 @@
 				</table>
 				
 				<div class="btns">
-					<input type="button" value="수정하기" class="btn btn-primary" onclick="location.href='/jsp/memo/edit.do?seq=${dto.seq}';">
-					<input type="button" value="삭제하기" class="btn btn-primary" onclick="location.href='/jsp/memo/del.do?seq=${dto.seq}';">
+					<input type="button" value="수정하기" class="btn btn-secondary" onclick="location.href='/jsp/memo/edit.do?seq=${dto.seq}';">
+					<input type="button" value="삭제하기" class="btn btn-secondary" onclick="location.href='/jsp/memo/del.do?seq=${dto.seq}';">
 				</div>
 			
 			</c:forEach>

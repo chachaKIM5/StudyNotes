@@ -15,9 +15,18 @@ main {
 }
 
 
-header h1 {
+
+header div {
 	border-bottom: 1px dashed #BBB;
 	padding-bottom: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header input {
+	height: 34.18px;
+ 	margin-top: 15px;
 }
 
 section {

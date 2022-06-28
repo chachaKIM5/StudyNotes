@@ -9,20 +9,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/example/inc/asset.jsp" %>
+<%@ include file="/WEB-INF/views/memo/inc/asset.jsp" %>
 <style>
 
 </style>
 </head>
 <body>
 	
-	<!--  -->
-	<div class="container">
-		
-	</div>
+	<!-- template.jsp > addok.jsp > editok.jsp -->
 	
+	<main>
+		<%@ include file="/WEB-INF/views/memo/inc/header.jsp" %>
+		<section>
+			
+		</section>
+	</main>
 	<script>
 	
+		<c:if test="${result == 1}">
+		location.href = "/jsp/memo/list.do";
+		</c:if>
+		
+		<c:if test="${result == 0}">
+		alert('메모 삭제에 실패했습니다. 암호를 다시 확인해 주세요.');
+		history.back();
+		</c:if>
 	</script>
 
 </body>

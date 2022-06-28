@@ -45,7 +45,7 @@
 				
 				<div class="btns">
 					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/jsp/memo/list.do';">
-					<input type="submit" value="수정하기" class="btn btn-primary">				
+					<input type="submit" value="메모삭제" class="btn btn-primary">				
 				</div>
 				
 				<input type="hidden" name="seq" value="${dto.seq}">

@@ -50,4 +50,39 @@ create table tblBoard (
 create sequence seqBoard;
 
 
-select * from tblBoard;
+select * from vwBoard;
+
+
+
+create or replace view vwBoard
+as
+select seq, subject, content, id, (select name from tblUser where id = tblBoard.id) as name, regdate, readcount from tblBoard order by seq desc;
+
+select * from vwBoard;
+
+
+
+
+
+
+
+-- 댓글
+
+
+create sequence seqComment;
+drop sequence seqComment;
+
+create table tblComment (
+    seq number primary key,                             -- 댓글 번호(PK)
+    content varchar2(1000) not null,                    -- 내용
+    id varchar2(30) not null,                           -- 아이디(FK)
+    regdate date default sysdate not null,              -- 날짜
+    pseq number not null references tblBoard(seq)       -- 부모글번호(FK)
+);
+
+create sequence seqComment;
+
+select * from tblComment;
+delete from tblComment where seq = 13;
+
+

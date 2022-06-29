@@ -120,3 +120,19 @@ DB 설계
  				 > "editok.jsp"
  				 > "del.jsp"
  				 > "delok.jsp" 
+ 				 
+ 				 
+-------------------------------------
+
+추가 기능
+- 검색
+- 댓글쓰기
+	- com.test.toy.board > "AddCommentOk.java"
+						 > "CommentDTO.java"
+
+
+- 페이징
+- 답변쓰기
+- 파일업로드
+- 태그(#)
+- 싫어요/좋아요

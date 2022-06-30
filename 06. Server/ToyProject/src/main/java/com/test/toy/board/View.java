@@ -60,6 +60,11 @@ public class View extends HttpServlet {
 				
 		ArrayList<CommentDTO> clist = dao.listComment(seq);
 		
+		for (CommentDTO cdto : clist) {
+			
+			cdto.setContent(cdto.getContent().replace("<", "&lt;").replace(">", "&gt;"));
+			cdto.setContent(cdto.getContent().replace("\r\n", "<br>"));
+		}
 		
 				
 		//4. JSP 호출 + 결과 전달

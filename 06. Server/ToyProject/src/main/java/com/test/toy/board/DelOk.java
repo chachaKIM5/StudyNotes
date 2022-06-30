@@ -58,6 +58,11 @@ public class DelOk extends HttpServlet {
 		int result = 0;
 		
 		if (temp == 2 || temp == 3) {
+			
+			//댓글 삭제
+			dao.delCommentAll(seq);
+
+			//원글 삭제
 			result = dao.del(seq);
 		}
 		

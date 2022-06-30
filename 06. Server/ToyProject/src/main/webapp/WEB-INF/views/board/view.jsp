@@ -50,6 +50,7 @@
 				
 				<div class="btns">
 					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/board/list.do?column=${column}&word=${word}';">
+					<!-- <input type="button" value="돌아가기" class="btn btn-secondary" onclick="history.back();"> -->
 					
 				 	<c:if test="${not empty auth}">
 				 	
@@ -63,7 +64,7 @@
 				             삭제하기
 				        </button>
 				    </c:if>
-						<button class="btn btn-primary">
+						<button class="btn btn-primary" onclick="location.href='/toy/board/add.do?reply=1&thread=${dto.thread}&depth=${dto.depth}';">
 				             <i class="fas fa-pen"></i>
 				             답변하기
 				        </button>
@@ -104,17 +105,89 @@
 							<div>
 								<span>${cdto.regdate}</span>
 								<span>${cdto.name} (${cdto.id})</span>
+								<c:if test="${cdto.id == auth || cdto.id == 'admin'}">
+								<span class="btnspan"><a href="#!" onclick="delcomment(${cdto.seq});">[삭제]</a></span>
+								<span class="btnspan"><a href="#!" onclick="editcomment(${cdto.seq});">[수정]</a></span>
+								</c:if>
 							</div>
 						</td>
 					</tr>
 					</c:forEach>
+
 				</table>
 		 	
 		</section>
 	</main>
 	
-	<script>
-	
+	<script>	
+
+			$('.table.comment td').mouseover(function() {
+				$(this).find('.btnspan').show();	
+			});
+			
+			$('.table.comment td').mouseout(function() {
+				$(this).find('.btnspan').hide();	
+			});
+
+			function delcomment(seq) {
+			
+				if (confirm('삭제하시겠습니까?')) {
+					location.href = 'delcommentok.do?seq=' + seq + '&pseq=${dto.seq}&isSearch=${isSearch}&column=${column}&word=${word}';
+				}
+			};
+			
+			
+			let isEdit = false;
+			function editcomment(seq) {
+			
+				if (!isEdit) {
+					const tempStr = $(event.target).parent().parent().prev().text();
+					
+					$(event.target).parents('tr').after(temp);
+					isEdit = true;				
+					
+					$('#editRow').find('textarea').val(tempStr);
+					$('#editRow').find('input[name=seq]').val(seq);
+				}
+				
+			}
+			
+			const temp = `<tr id="editRow" style="background-color: #D8D8D8;">
+				<td>
+				<form method="POST" action="/toy/board/editcommentok.do">
+					<table class="tblEditComment">
+						<tr>
+							<td>
+								<textarea class="form-control" name="content" required"></textarea>
+							</td>
+							<td>
+								<button class="btn btn-secondary" type="button" onclick="cancelForm();">
+									취소하기
+								</button>
+								<button class="btn btn-primary">
+									<i class="fas fa-pen"></i>
+									수정하기
+								</button>
+							</td>
+						</tr>
+					</table>
+					
+					<input type="hidden" name="pseq" value="${dto.seq}">
+					
+					<input type="hidden" name="isSearch" value="${isSearch}">
+					<input type="hidden" name="column" value="${column}">
+					<input type="hidden" name="word" value="${word}">
+					
+					<input type="hidden" name="seq">
+				</form>
+				</td>
+			</tr>`;
+			
+		function cancelForm() {
+			$('#editRow').remove();
+			isEdit = false;
+		}
+		
 	</script>	
 	
 </body>

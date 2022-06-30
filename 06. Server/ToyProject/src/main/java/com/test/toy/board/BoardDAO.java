@@ -28,12 +28,14 @@ public class BoardDAO {
 
 		try {
 			
-			String sql = "insert into tblBoard(seq, subject, content, id, regdate, readcount) values (seqBoard.nextVal, ?, ?, ?, default, default)";
+			String sql = "insert into tblBoard(seq, subject, content, id, regdate, readcount, thread, depth) values (seqBoard.nextVal, ?, ?, ?, default, default, ?, ?)";
 			pstat = conn.prepareStatement(sql);
 			
 			pstat.setString(1, dto.getSubject());
 			pstat.setString(2, dto.getContent());
 			pstat.setString(3, dto.getId());
+			pstat.setInt(4, dto.getThread());
+			pstat.setInt(5, dto.getDepth());
 			
 			return pstat.executeUpdate();
 			
@@ -58,8 +60,7 @@ public class BoardDAO {
 				where = String.format("where %s like '%%%s%%'", map.get("column"), map.get("word"));
 			}
 			
-			String sql = "select * from vwBoard " + where;
-
+			String sql = String.format("select * from (select a.*, rownum as rnum from vwBoard a %s) where rnum between %s and %s", where, map.get("begin"), map.get("end"));
 			
 			stat = conn.createStatement();
 			
@@ -77,6 +78,8 @@ public class BoardDAO {
 				dto.setName(rs.getString("name"));
 				dto.setRegdate(rs.getString("regdate"));
 				dto.setReadcount(rs.getString("readcount"));
+				dto.setCommentcount(rs.getString("commentcount"));
+				dto.setDepth(rs.getInt("depth"));
 				
 				list.add(dto);
 				
@@ -118,6 +121,9 @@ public class BoardDAO {
 				dto.setName(rs.getString("name"));
 				dto.setRegdate(rs.getString("regdate"));
 				dto.setReadcount(rs.getString("readcount"));
+				
+				dto.setThread(rs.getInt("thread"));
+				dto.setDepth(rs.getInt("depth"));
 			}
 			
 			return dto;
@@ -255,5 +261,147 @@ public class BoardDAO {
 		}
 		
 		return null;
+	}
+
+
+	//DelCommentOk > seq > 댓글 삭제
+	public int delcomment(String seq) {
+		
+		try {
+			
+			String sql = "delete from tblComment where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("BoardDAO.delcomment");
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+	}
+
+
+	//EditCommentOk > dto(seq, content) > 댓글 수정
+	public int editComment(CommentDTO dto) {
+		
+		try {
+
+			String sql = "update tblComment set content = ? where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getContent());
+			pstat.setString(2, dto.getSeq());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.editComment");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+
+	//DelOk > seq > 딸린 댓글들 모두 지우기
+	public void delCommentAll(String seq) {
+		
+		try {
+			
+			String sql = "delete from tblComment where pseq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.delCommentAll");
+			e.printStackTrace();
+		}
+	}
+
+
+	//List 서블릿 > 총 게시물 수 구하기
+	public int getTotalCount(HashMap<String, String> map) {
+		
+		try {
+			
+			String where = "";
+			
+			if (map.get("isSearch").equals("y")) {
+				where = String.format("where %s like '%%%s%%'", map.get("column"), map.get("word"));
+			}
+			
+			
+			String sql = "select count(*) as cnt from tblBoard " + where;
+			
+			pstat = conn.prepareStatement(sql);
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt("cnt");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.getTotalCount");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	
+	
+	//AddOk 서블릿 > Thread 최대값 반환
+	public int getMaxThread() {
+
+		try {
+			
+			String sql = "select nvl(max(thread), 0) as thread from tblBoard";
+			
+			stat = conn.createStatement();
+			
+			rs = stat.executeQuery(sql);
+			
+			if (rs.next()) {
+				return rs.getInt("thread");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.getMaxThread");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+
+	
+	//AddOk > map(부모 thread, 이전 새글 thread) > thread 업데이트
+	public void updateThread(HashMap<String, Integer> map) {
+
+		try {
+			
+			String sql = "update tblBoard set thread = thread - 1 where thread > ? and thread < ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setInt(1, map.get("previousThread"));
+			pstat.setInt(2, map.get("parentThread"));
+			
+			pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.updateThread");
+			e.printStackTrace();
+		}
+		
 	}
 }

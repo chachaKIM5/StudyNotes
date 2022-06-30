@@ -54,13 +54,16 @@ select * from vwBoard;
 
 
 
+-- 게시판 뷰
 create or replace view vwBoard
 as
-select seq, subject, content, id, (select name from tblUser where id = tblBoard.id) as name, regdate, readcount from tblBoard order by seq desc;
-
-select * from vwBoard;
+select seq, subject, content, id, (select name from tblUser where id = tblBoard.id) as name, regdate, readcount, (select count(*) from tblComment where pseq = tblBoard.seq) as commentcount, depth from tblBoard order by thread desc;
 
 
+-- 페이징
+select * from (select a.*, rownum as rnum from vwBoard a) where rnum between 1 and 10;
+select * from (select a.*, rownum as rnum from vwBoard a) where rnum between 11 and 20;
+select * from (select a.*, rownum as rnum from vwBoard a) where rnum between 21 and 30;
 
 
 
@@ -86,3 +89,31 @@ select * from tblComment;
 delete from tblComment where seq = 13;
 
 
+
+--답변
+--테이블 다시 만들기!
+
+drop table tblComment;
+drop table tblBoard;
+drop sequence seqComment;
+drop sequence seqBoard;
+
+create table tblBoard (
+    seq number primary key,                             -- 번호(PK)
+    subject varchar2(300) not null,                     -- 제목
+    content varchar2(4000) not null,                    -- 내용
+    id varchar2(30) not null references tblUser(id),    -- 아이디(FK)
+    regdate date default sysdate not null,              -- 작성시각
+    readcount number default 0 not null,                -- 읽음
+    thread number not null,                             -- 답변형 게시판
+    depth number not null                               -- 답변형 게시판
+);
+
+create sequence seqBoard;
+
+commit;
+
+
+select nvl(max(thread), 0) as thread from tblBoard
+
+select * from tblBoard order by thread;

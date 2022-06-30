@@ -35,7 +35,14 @@
 				</table>
 				
 				<div class="btns">
-					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/board/view.do?seq=${dto.seq}';">
+					<!--  
+						
+						location.href > 서버에 항상 페이지를 요청
+						history.back() > 서버와 통신 없이 클라이언트가 이전에 보고 있는 페이지를 그대로 복구해서 이동
+					
+					-->
+					<%-- <input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/board/view.do?seq=${dto.seq}';"> --%>
+					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="history.back();">
 					<input type="submit" value="수정하기" class="btn btn-primary" onclick="location.href='/toy/board/editok.do';">
 				</div>
 				

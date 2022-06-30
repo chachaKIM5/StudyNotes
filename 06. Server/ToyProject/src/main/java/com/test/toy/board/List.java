@@ -61,6 +61,40 @@ public class List extends HttpServlet {
 		map.put("isSearch", isSearch);
 		
 		
+		
+		//페이징
+		
+		int nowPage = 0; 		//현재 페이지 번호
+		int begin = 0;			
+		int end = 0;
+		int pageSize = 10;		//한 페이지 당 출력할 게시물 수
+		
+		int totalCount = 0;		//총 게시물 수
+		int totalPage = 0; 		//총 페이지 수
+		
+		
+		//list.do > list.do?page=1
+		//list.do?page=3
+		
+		String page = req.getParameter("page");
+		
+		if (page == null || page == "") {
+			nowPage = 1;
+		} else {
+			nowPage = Integer.parseInt(page);
+		}
+		
+		//nowPage > 현재 보게 될 페이지 번호
+		//list.do?page=1 > where rnum between 1 and 10
+		//list.do?page=2 > where rnum between 11 and 20...
+		
+		begin = ((nowPage - 1 ) * pageSize) + 1;
+		end = begin + pageSize - 1;
+		
+		map.put("begin", begin + "");
+		map.put("end", end + "");
+		
+		
 		HttpSession session = req.getSession();
 		
 		
@@ -96,6 +130,131 @@ public class List extends HttpServlet {
 			
 		}
 		
+		//2.6 총 페이지 수 구하기
+		
+		// - 2.6.1 총 게시물 수 -> 262
+		totalCount = dao.getTotalCount(map);
+		
+		// - 2.6.2 총 페이지 수 -> 262 / 10 = 26.2페이지
+		totalPage = (int)Math.ceil((double)totalCount / pageSize);
+		
+		
+		String pagebar = "";
+		
+		int blockSize = 10;		//한번에 보여질 페이지 개수
+		int n = 0;			//페이지 번호
+		int loop = 0;		//루프
+		
+		pagebar = "";
+		
+		loop = 1;
+		n = ((nowPage - 1) / blockSize) * blockSize + 1;
+		
+//		for (n = 1 ; n<=totalPage ; n++) {
+//			
+//			if (n == nowPage) {
+//				
+//				pagebar += String.format(" <a href='#!' style='color: #D6C7ED;'>%d</a> ", n, n);
+//			
+//			} else {
+//				pagebar += String.format(" <a href='/toy/board/list.do?page=%d'>%d</a> ", n, n);
+//				
+//			}
+//		}
+		
+		
+	  
+		
+		
+		pagebar += "<ul class=\"pagination\">";
+		
+		//이전 10페이지 버튼
+		
+//		if (n == 1) {
+//			
+//			pagebar += String.format("<a href='#!'><i class=\"fa-solid fa-angle-left\"></i></a>");
+//			
+//		} else {
+//			pagebar += String.format("<a href='/toy/board/list.do?page=%d'><i class=\"fa-solid fa-angle-left\"></i></a>", n - 1);
+//		
+//		}
+		
+		if (n == 1) {
+			
+			pagebar += String.format("		    <li class=\"page-item\">\r\n"
+					+ "		      <a class=\"page-link\" href=\"#\" aria-label=\"Previous\">\r\n"
+					+ "		        <span aria-hidden=\"true\">&laquo;</span>\r\n"
+					+ "		      </a>\r\n"
+					+ "		    </li>");
+			
+		} else {
+			pagebar += String.format("		    <li class=\"page-item\">\r\n"
+					+ "		      <a class=\"page-link\" href=\"/toy/board/list.do?page=%d\" aria-label=\"Previous\">\r\n"
+					+ "		        <span aria-hidden=\"true\">&laquo;</span>\r\n"
+					+ "		      </a>\r\n"
+					+ "		    </li>", n - 1);
+			
+		}
+		
+//		while (!(loop > blockSize || n > totalPage)) {
+//			
+//			if (n == nowPage) {
+//			
+//			pagebar += String.format(" <a href='#!' style='color: #D6C7ED;'>%d</a> ", n);
+//		
+//			} else {
+//				pagebar += String.format(" <a href='/toy/board/list.do?page=%d'>%d</a> ", n, n);
+//				
+//			}
+//			
+//			loop++;
+//			n++;
+//		}
+		while (!(loop > blockSize || n > totalPage)) {
+			
+			if (n == nowPage) {
+				
+				pagebar += String.format(" <li class=\"page-item active\"><a class=\"page-link\" href=\"#!\">%d</a></li> ", n);
+				
+			} else {
+				pagebar += String.format(" <li class=\"page-item\"><a class=\"page-link\" href=\"/toy/board/list.do?page=%d\">%d</a></li> ", n, n);
+				
+			}
+			
+			loop++;
+			n++;
+		}
+		
+		
+		//다음 10페이지 버튼
+//		if (n > totalPage) {
+//			
+//			pagebar += String.format("<a href='#!'><i class=\"fa-solid fa-angle-right\"></i></a>");
+//
+//		} else {
+//			
+//			pagebar += String.format("<a href='/toy/board/list.do?page=%d'><i class=\"fa-solid fa-angle-right\"></i></a>", n);
+//		}
+		if (n > totalPage) {
+			
+			pagebar += String.format("		    <li class=\"page-item\">\r\n"
+					+ "		      <a class=\"page-link\" href=\"#!\" aria-label=\"Next\">\r\n"
+					+ "		        <span aria-hidden=\"true\">&raquo;</span>\r\n"
+					+ "		      </a>\r\n"
+					+ "		    </li>");
+			
+		} else {
+			
+			pagebar += String.format("		    <li class=\"page-item\">\r\n"
+					+ "		      <a class=\"page-link\" href=\"/toy/board/list.do?page=%d\" aria-label=\"Next\">\r\n"
+					+ "		        <span aria-hidden=\"true\">&raquo;</span>\r\n"
+					+ "		      </a>\r\n"
+					+ "		    </li>", n);
+		}
+		
+		
+		pagebar += "</ul>";
+		
 		
 		//2.7 새로고침으로 인한 조회수 증가 방지
 		session.setAttribute("read", "n");
@@ -105,6 +264,10 @@ public class List extends HttpServlet {
 		
 		req.setAttribute("map", map);
 		
+		req.setAttribute("totalCount", totalCount);
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("nowPage", nowPage);
+		req.setAttribute("pagebar", pagebar);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
 		dispatcher.forward(req, resp);

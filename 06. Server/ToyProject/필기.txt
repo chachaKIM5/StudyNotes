@@ -129,10 +129,31 @@ DB 설계
 - 댓글쓰기
 	- com.test.toy.board > "AddCommentOk.java"
 						 > "CommentDTO.java"
+- 댓글삭제
+	- com.test.toy.board > "DelCommentOk.java"
 
+- 댓글수정
+	- com.test.toy.board > "EditCommentOk.java"
 
 - 페이징
-- 답변쓰기
+	- 가상으로 일정 단위의 게시물을 가져오는 기법 > SQL 사용
+	
+- 답변쓰기 (계층형 게시판, 답변 게시판)
+	- 테이블 수정 > thread, depth 추가
+	
+	- thread, depth 컬럼의 규칙!
+		1. 새글일 때
+			- /toy/board/add.do
+			a. 현존하는 모든 게시물 중에서 가장 큰 thread 값을 찾아서, 그 값에 +1000을 한 값을 새 글의 thread 값으로 사용한다.
+			b. 새 글의 depth는 항상 0을 넣는다.
+		
+		2. 답변글일 때
+			- /toy/board/add.do?reply=1
+			a. 현존하는 모든 게시물의 thread 값을 대상으로 현재 작성 중인 답변글의 부모글 thread값보다 작고, 이전 새글의 thread값보다 큰 thread를 모두 찾아서 -1을 한다.
+			b. 현재 답변글의 thread값은 부모글의 thread-1을 넣는다.
+			c. 현재 답변글의 depth 값은 부모글의 depth+1을 넣는다.
+	
+	
 - 파일업로드
 - 태그(#)
 - 싫어요/좋아요

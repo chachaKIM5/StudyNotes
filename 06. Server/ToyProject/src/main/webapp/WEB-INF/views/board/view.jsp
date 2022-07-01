@@ -10,6 +10,8 @@
 <meta charset="UTF-8">
 <title>Toy Project</title>
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
+<link rel="stylesheet" href="/toy/asset/css/tagify.css" />
+<script src="/toy/asset/js/jQuery.tagify.min.js"></script>
 <style>
 
 </style>
@@ -46,16 +48,48 @@
 						<th>번호</th>
 						<td>${dto.seq}</td>
 					</tr>
-					<tr>
 						<c:if test="${not empty dto.orgfilename}">
+					<tr>
 						<th>파일</th>
 						<td><a href="download.do?filename=${dto.filename}&orgfilename=${dto.orgfilename}">${dto.orgfilename}</a></td>
-						</c:if>
 					</tr>
+						</c:if>
 					
+						<c:if test="${not empty dto.taglist}">
 					<tr>
 						<th>태그</th>
-						<td>게시판 프로필 사진 공부 휴식</td>
+						<td><input type="text" name="tags" readonly style="border: none;"></td>
+					</tr>
+						</c:if>
+						
+					<tr>
+						<th>좋아요/싫어요</th>
+						<td>
+							<form method="GET" action="/toy/board/goodbad.do">
+								<button class="btn btn-danger">
+									<i class="fa-solid fa-heart"></i>
+									좋아요
+									<span class="badge badge-primary">15</span>
+								</button>
+								<input type="hidden" name="seq" value="${dto.seq}">
+								<input type="hidden" name="isSearch" value="${isSearch}">
+								<input type="hidden" name="column" value="${column}">
+								<input type="hidden" name="word" value="${word}">
+								<input type="hidden" name="goodbad" value="good">
+							</form>
+							<form method="GET" action="/toy/board/goodbad.do">
+								<button class="btn btn-dark">
+									<i class="fa-solid fa-heart-crack"></i>
+									싫어요
+									<span class="badge badge-primary">5</span>
+								</button>
+								<input type="hidden" name="seq" value="${dto.seq}">
+								<input type="hidden" name="isSearch" value="${isSearch}">
+								<input type="hidden" name="column" value="${column}">
+								<input type="hidden" name="word" value="${word}">
+								<input type="hidden" name="goodbad" value="bad">
+							</form>
+						</td>
 					</tr>
 				</table>
 				
@@ -209,6 +243,28 @@
 			
 			$('#imgAttach').show();
 		}); */
+		
+		
+		let tag = '';
+		
+		<c:forEach items="${dto.taglist}" var="tag">
+			tag +=' ${tag},';	
+		</c:forEach>
+	
+		
+		$('input[name=tags]').val(tag);
+		/* $('input[name=tags]').tagify(); */
+		
+		$('.tagify').css("border", "none");
+		
+		
+		const tagify = new Tagify(document.querySelector('input[name=tags]'), {});
+	      
+	    tagify.on('click', test);
+	      
+	      function test(e) {
+	    	  location.href = '/toy/board/list.do?tag=' + e.detail.data.value;
+	      }
 		
 	</script>	
 	

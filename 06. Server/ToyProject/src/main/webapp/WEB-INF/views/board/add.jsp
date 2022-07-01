@@ -10,8 +10,29 @@
 <meta charset="UTF-8">
 <title>Toy Project</title>
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
+<link rel="stylesheet" href="/toy/asset/css/tagify.css" />
+<script src="/toy/asset/js/jQuery.tagify.min.js"></script>
 <style>
-
+	.tags-look .tagify__dropdown__item{
+	  display: inline-block;
+	  border-radius: 3px;
+	  padding: .3em .5em;
+	  border: 1px solid #CCC;
+	  background: #F3F3F3;
+	  margin: .2em;
+	  font-size: .85em;
+	  color: black;
+	  transition: 0s;
+	}
+	 
+	.tags-look .tagify__dropdown__item--active{
+	  color: black;
+	}
+	 
+	.tags-look .tagify__dropdown__item:hover{
+	  background: lightyellow;
+	  border-color: gold;
+	}
 </style>
 </head>
 <body>
@@ -35,6 +56,10 @@
 						<th>파일</th>
 						<td><input type="file" name="attach" class="form-control"></td>
 					</tr>
+					<tr>
+						<th>태그</th>
+						<td><input name="tags" class="form-control"></td>
+					</tr>
 				</table>
 				
 				<div class="btns">
@@ -50,7 +75,28 @@
 		</section>
 	</main>
 	
+	
+	
 	<script>
+	
+	
+		const obj = {
+	         dropdown: {
+	            classname: 'tags-look',
+	            enabled: 0,
+	            closeOnSelect: false
+	         }
+	      };
+	   
+	      let temp = [];
+	      
+	      <c:forEach items="${taglist}" var="tag">
+	         temp.push('${tag}');
+	      </c:forEach>
+	      
+	      obj.whitelist = temp;
+	      
+	      $('input[name=tags]').tagify(obj);
 	
 	</script>	
 	

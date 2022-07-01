@@ -62,6 +62,11 @@ public class List extends HttpServlet {
 		
 		
 		
+		//해시 태그 클릭
+		String tag = req.getParameter("tag");
+		map.put("tag", tag);
+		
+		
 		//페이징
 		
 		int nowPage = 0; 		//현재 페이지 번호

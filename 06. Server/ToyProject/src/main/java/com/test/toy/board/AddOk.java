@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -139,6 +143,86 @@ public class AddOk extends HttpServlet {
 		if (session.getAttribute("auth") != null) {
 			result = dao.add(dto);
 		}
+		
+		
+		
+		
+		
+		
+		//3.5 해시 태그 작업
+		
+		
+		//방금 등록된 글번호 알아내기
+		String seq = dao.getSeq();
+		
+		
+		String tags = multi.getParameter("tags");
+		
+		//게시물 1개 + 해시태그 3개
+		// - 게시물 1개 insert
+		// - 게시물 1개 PK select
+		// (
+		// - 해시 태그 1개 insert
+		// - 해시 태그 PK select
+		// - 게시물 해시태그 1개 insert
+		// ) x 3개
+		
+		
+		//System.out.println("tags: " + tags);
+		//tags: [{"value":"aaa"},{"value":"bbb"},{"value":"ccc"}]
+			
+		//Java > JSON format > JSON Simple
+		//https://search.maven.org/search?q=Json%20simple 에서 jar 파일 받기
+		
+		//org.json.simple.parser.JSONParser;
+		JSONParser parser = new JSONParser();
+		
+		try {
+			
+			JSONArray list = (JSONArray)parser.parse(tags);
+			//System.out.println(list);
+			//[{"value":"aaa"},{"value":"bbb"},{"value":"ccc"}]
+			
+			for (Object obj : list) {
+				//System.out.println(obj);
+				//System.out.println(((JSONObject)obj).get("value"));
+				
+				String tag = (String)((JSONObject)obj).get("value");
+				
+				
+				//** HashTag > insert
+				dao.addHashTag(tag);
+				
+				
+				//**에서 방금 추가한 해시태그 seq 알아내기
+				String hseq = dao.getHashTagSeq();
+				
+				
+				//Tagging > insert해서 글과 해시태그들을 연결
+				
+				HashMap<String, String> map = new HashMap<String, String>();
+				
+				map.put("bseq", seq);
+				map.put("hseq", hseq);
+				
+				dao.addTagging(map);
+			
+			}
+			
+		} catch (Exception e) {
+			System.out.println("AddOk.doPost");
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//4.
 		req.setAttribute("result", result);

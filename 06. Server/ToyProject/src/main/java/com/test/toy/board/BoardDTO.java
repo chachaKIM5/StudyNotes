@@ -1,5 +1,7 @@
 package com.test.toy.board;
 
+import java.util.ArrayList;
+
 import lombok.Data;
 
 @Data
@@ -22,4 +24,6 @@ public class BoardDTO {
 	
 	private String filename;
 	private String orgfilename;
+	
+	private ArrayList<String> taglist;
 }

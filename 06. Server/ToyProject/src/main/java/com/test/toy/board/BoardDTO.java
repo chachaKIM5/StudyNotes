@@ -18,4 +18,8 @@ public class BoardDTO {
 	private int thread;
 	private int depth;
 	
+	private double isNew;
+	
+	private String filename;
+	private String orgfilename;
 }

@@ -57,7 +57,9 @@ select * from vwBoard;
 -- 게시판 뷰
 create or replace view vwBoard
 as
-select seq, subject, content, id, (select name from tblUser where id = tblBoard.id) as name, regdate, readcount, (select count(*) from tblComment where pseq = tblBoard.seq) as commentcount, depth from tblBoard order by thread desc;
+select seq, subject, content, id, (select name from tblUser where id = tblBoard.id) as name, regdate, readcount,
+    (select count(*) from tblComment where pseq = tblBoard.seq) as commentcount, depth,
+    (sysdate - regdate) as isnew from tblBoard order by thread desc;
 
 
 -- 페이징
@@ -114,6 +116,29 @@ create sequence seqBoard;
 commit;
 
 
-select nvl(max(thread), 0) as thread from tblBoard
+select nvl(max(thread), 0) as thread from tblBoard;
 
 select * from tblBoard order by thread;
+
+
+
+
+
+-- 파일 업로드, 테이블 다시 만들기
+
+drop table tblComment;
+drop table tblBoard;
+
+create table tblBoard (
+    seq number primary key,                             -- 번호(PK)
+    subject varchar2(300) not null,                     -- 제목
+    content varchar2(4000) not null,                    -- 내용
+    id varchar2(30) not null references tblUser(id),    -- 아이디(FK)
+    regdate date default sysdate not null,              -- 작성시각
+    readcount number default 0 not null,                -- 읽음
+    thread number not null,                             -- 답변형 게시판
+    depth number not null,                              -- 답변형 게시판
+    filename varchar2(100) null,                        -- 첨부파일
+    orgfilename varchar2(100) null                      -- 첨부파일(원본 이름 for 다운로드)
+);
+

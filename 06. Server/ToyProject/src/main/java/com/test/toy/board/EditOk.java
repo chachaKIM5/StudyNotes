@@ -1,5 +1,6 @@
 package com.test.toy.board;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @WebServlet("/board/editok.do")
 public class EditOk extends HttpServlet {
@@ -30,10 +34,36 @@ public class EditOk extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		
+		//1.5
+		String path = req.getRealPath("/files");
+		int size = 1024 * 1024 * 100;
+		
+		
+		MultipartRequest multi = null;
+		
+		try {
+			
+			multi = new MultipartRequest (
+								req,
+								path,
+								size,
+								"UTF-8",
+								new DefaultFileRenamePolicy());
+			
+		} catch (Exception e) {
+			System.out.println("EditOk.doPost");
+			e.printStackTrace();
+		}
+		
+		
 		//2.
-		String subject = req.getParameter("subject");
-		String content = req.getParameter("content");
-		String seq = req.getParameter("seq");
+		String subject = multi.getParameter("subject");
+		String content = multi.getParameter("content");
+		String seq = multi.getParameter("seq");
+		
+		String isSearch = multi.getParameter("isSearch");
+		String column = multi.getParameter("column");
+		String word = multi.getParameter("word");
 		
 		
 		//3.
@@ -44,6 +74,46 @@ public class EditOk extends HttpServlet {
 		dto.setSeq(seq);
 		
 		BoardDAO dao = new BoardDAO();
+		
+		
+		
+		//3.5 첨부 파일 처리
+		//3.5.1 기존 파일 O > 새로운 파일로 교체
+		
+		//새 파일
+		String filename = multi.getFilesystemName("attach");
+		String orgfilename = multi.getOriginalFileName("attach");
+		
+		//기존 파일
+		BoardDTO tempdto = dao.get(seq); 
+		
+		
+		if (tempdto.getFilename() != null && filename != null) {
+			//기존 파일 O -> 기존 파일 삭제, 새 파일 추가
+			File file = new File(path + "\\" + tempdto.getFilename());
+			file.delete();
+			
+			dto.setFilename(filename);
+			dto.setOrgfilename(orgfilename);
+			
+		} else if (filename == null && multi.getParameter("delfile").equals("y")) {
+			//기존 파일만 삭제하고, 새로운 파일은 추가 X
+			File file = new File(path + "\\" + tempdto.getFilename());
+			file.delete();
+			
+		} else if (filename == null) {
+			//기존 파일 유무와 상관없이 새로운 파일을 추가 안 했을 경우
+			// = 옛날 파일명/상태를 그대로 가져가겠다
+			dto.setFilename(tempdto.getFilename());
+			dto.setOrgfilename(tempdto.getOrgfilename());
+			
+		} else if (tempdto.getFilename() == null && filename != null) {
+			//기존 파일 없음 -> 새로운 파일 추가
+			dto.setFilename(filename);
+			dto.setOrgfilename(orgfilename);
+			
+		}
+		
 		
 		
 		
@@ -78,6 +148,10 @@ public class EditOk extends HttpServlet {
 		//4.
 		req.setAttribute("result", result);
 		req.setAttribute("seq", seq);
+		
+		req.setAttribute("isSearch", isSearch);
+		req.setAttribute("column", column);
+		req.setAttribute("word", word);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/board/editok.jsp");

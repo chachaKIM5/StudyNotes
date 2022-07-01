@@ -21,7 +21,7 @@
 		
 		 	<h2>Board</h2>
 		 	
-			<form method="POST" action="/toy/board/addok.do">
+			<form method="POST" action="/toy/board/addok.do" enctype="multipart/form-data">
 				<table class="table table-bordered vertical">
 					<tr>
 						<th>제목</th>
@@ -30,6 +30,10 @@
 					<tr>
 						<th>내용</th>
 						<td><textarea name="content" class="form-control" required></textarea></td>
+					</tr>
+					<tr>
+						<th>파일</th>
+						<td><input type="file" name="attach" class="form-control"></td>
 					</tr>
 				</table>
 				

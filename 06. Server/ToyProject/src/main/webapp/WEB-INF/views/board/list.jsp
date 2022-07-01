@@ -55,10 +55,19 @@
 		 					<i class="fa-solid fa-caret-right" style="margin-left: ${dto.depth * 20}px;"></i>
 		 				</c:if>
 		 			
+		 				<c:if test="${not empty dto.filename}">
+		 					<span style="font-size: 12px;"><i class="fa-solid fa-paperclip"></i></span>
+		 				</c:if>
+		 				
 		 				<a href="/toy/board/view.do?seq=${dto.seq}&isSearch=${map.isSearch}&column=${map.column}&word=${map.word}">${dto.subject}</a>
 		 				<c:if test="${dto.commentcount > 0}">
 		 				<span class="badge">${dto.commentcount}</span>
 		 				</c:if>
+		 				
+		 				<c:if test="${(dto.isNew * 24) < 3}">
+		 					<span style="color: #FF6C6C; font-size: 3px;">&nbsp;<i class="fa-solid fa-n"></i><i class="fa-solid fa-e"></i><i class="fa-solid fa-w"></i></span>
+		 				</c:if>
+		 				
 		 			</td>
 		 			<td>${dto.name}</td>
 		 			<td>${dto.regdate}</td>

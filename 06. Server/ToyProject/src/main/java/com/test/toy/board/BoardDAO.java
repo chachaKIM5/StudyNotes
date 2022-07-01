@@ -28,7 +28,7 @@ public class BoardDAO {
 
 		try {
 			
-			String sql = "insert into tblBoard(seq, subject, content, id, regdate, readcount, thread, depth) values (seqBoard.nextVal, ?, ?, ?, default, default, ?, ?)";
+			String sql = "insert into tblBoard(seq, subject, content, id, regdate, readcount, thread, depth, filename, orgfilename) values (seqBoard.nextVal, ?, ?, ?, default, default, ?, ?, ?, ?)";
 			pstat = conn.prepareStatement(sql);
 			
 			pstat.setString(1, dto.getSubject());
@@ -36,6 +36,8 @@ public class BoardDAO {
 			pstat.setString(3, dto.getId());
 			pstat.setInt(4, dto.getThread());
 			pstat.setInt(5, dto.getDepth());
+			pstat.setString(6, dto.getFilename());
+			pstat.setString(7, dto.getOrgfilename());
 			
 			return pstat.executeUpdate();
 			
@@ -80,6 +82,8 @@ public class BoardDAO {
 				dto.setReadcount(rs.getString("readcount"));
 				dto.setCommentcount(rs.getString("commentcount"));
 				dto.setDepth(rs.getInt("depth"));
+				dto.setIsNew(rs.getDouble("isnew"));
+				dto.setFilename(rs.getString("filename"));
 				
 				list.add(dto);
 				
@@ -124,6 +128,9 @@ public class BoardDAO {
 				
 				dto.setThread(rs.getInt("thread"));
 				dto.setDepth(rs.getInt("depth"));
+				
+				dto.setFilename(rs.getString("filename"));
+				dto.setOrgfilename(rs.getString("orgfilename"));
 			}
 			
 			return dto;
@@ -162,12 +169,14 @@ public class BoardDAO {
 
 		try {
 			
-			String sql = "update tblBoard set subject = ?, content = ? where seq = ?";
+			String sql = "update tblBoard set subject = ?, content = ?, filename = ?, orgfilename = ? where seq = ?";
 			pstat = conn.prepareStatement(sql);
 			
 			pstat.setString(1, dto.getSubject());
 			pstat.setString(2, dto.getContent());
-			pstat.setString(3, dto.getSeq());
+			pstat.setString(3, dto.getFilename());
+			pstat.setString(4, dto.getOrgfilename());
+			pstat.setString(5, dto.getSeq());
 			
 			return pstat.executeUpdate();			
 			

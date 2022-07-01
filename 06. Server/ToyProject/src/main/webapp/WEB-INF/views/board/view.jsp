@@ -46,6 +46,17 @@
 						<th>번호</th>
 						<td>${dto.seq}</td>
 					</tr>
+					<tr>
+						<c:if test="${not empty dto.orgfilename}">
+						<th>파일</th>
+						<td><a href="download.do?filename=${dto.filename}&orgfilename=${dto.orgfilename}">${dto.orgfilename}</a></td>
+						</c:if>
+					</tr>
+					
+					<tr>
+						<th>태그</th>
+						<td>게시판 프로필 사진 공부 휴식</td>
+					</tr>
 				</table>
 				
 				<div class="btns">
@@ -55,7 +66,7 @@
 				 	<c:if test="${not empty auth}">
 				 	
 				 	<c:if test="${dto.id == auth || auth == 'admin'}">
-						<button class="btn btn-primary" onclick="location.href='/toy/board/edit.do?seq=${dto.seq}';">
+						<button class="btn btn-primary" onclick="location.href='/toy/board/edit.do?seq=${dto.seq}&isSearch=${isSearch}&column=${column}&word=${word}';">
 				             <i class="fas fa-pen"></i>
 				             수정하기
 				        </button>
@@ -187,6 +198,17 @@
 			$('#editRow').remove();
 			isEdit = false;
 		}
+		
+		
+/* 		$('#imgAttach').ready(function() {
+			//alert($('#imgAttach').width());
+	
+			if ($('#imgAttach').width() > 630) {
+				$('#imgAttach').width(630);
+			}
+			
+			$('#imgAttach').show();
+		}); */
 		
 	</script>	
 	

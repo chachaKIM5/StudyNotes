@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 @WebServlet("/board/addok.do")
 public class AddOk extends HttpServlet {
 
@@ -31,15 +34,39 @@ public class AddOk extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		
+		
+		//1.5 파일 업로드
+		String path = req.getRealPath("/files");
+		int size = 1024 * 1024 * 100;
+		
+		System.out.println(path);
+		MultipartRequest multi = null;
+		
+		try {
+		
+			multi = new MultipartRequest (
+								req,
+								path,
+								size,
+								"UTF-8",
+								new DefaultFileRenamePolicy());
+			
+		} catch (Exception e) {
+			System.out.println("AddOk.doPost");
+			e.printStackTrace();
+		}
+		
+		
+		
 		//2.
-		String subject = req.getParameter("subject");
-		String content = req.getParameter("content");
+		String subject = multi.getParameter("subject");
+		String content = multi.getParameter("content");
 		
 		
 		
 		
 		//2.5 답변 - 현재 새글 작성중인지, 답변글 작성중인지 판단
-		String reply = req.getParameter("reply");
+		String reply = multi.getParameter("reply");
 		
 		int thread = -1;
 		int depth = -1;
@@ -59,8 +86,8 @@ public class AddOk extends HttpServlet {
 			//c. 현재 답변글의 depth 값은 부모글의 depth+1을 넣는다.
 			
 			//부모 글의 thread, depth
-			int parentThread = Integer.parseInt(req.getParameter("thread"));
-			int parentDepth = Integer.parseInt(req.getParameter("depth"));
+			int parentThread = Integer.parseInt(multi.getParameter("thread"));
+			int parentDepth = Integer.parseInt(multi.getParameter("depth"));
 			
 			
 			//'이전 새글의 thread'
@@ -85,6 +112,12 @@ public class AddOk extends HttpServlet {
 
 		}
 		
+		
+		
+		
+		//2.7 업로드 파일 처리
+		String filename = multi.getFilesystemName("attach");
+		String orgfilename = multi.getOriginalFileName("attach");
 
 		
 		//3.
@@ -96,6 +129,8 @@ public class AddOk extends HttpServlet {
 		
 		dto.setThread(thread);
 		dto.setDepth(depth);
+		dto.setFilename(filename);
+		dto.setOrgfilename(orgfilename);
 		
 		
 		int result = 0;

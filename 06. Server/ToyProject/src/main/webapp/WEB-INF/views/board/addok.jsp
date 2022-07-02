@@ -23,9 +23,14 @@
 	</main>
 	
 	<script>
+
 	
-		<c:if test="${result == 1}">	
+		<c:if test="${result == 1 && empty pseq}">	
 			location.href= '/toy/board/list.do';
+		</c:if>
+		
+		<c:if test="${result == 1 && not empty pseq}">
+			location.href= '/toy/board/list.do?isSearch=${isSearch}&column=${column}&word=${word}&page=${page}';
 		</c:if>
 		
 		<c:if test="${result == 0}">

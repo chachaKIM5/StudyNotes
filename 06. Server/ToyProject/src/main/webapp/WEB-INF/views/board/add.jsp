@@ -63,13 +63,27 @@
 				</table>
 				
 				<div class="btns">
-					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/index.do';">
+					<c:if test="${reply == 1}">
+					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/board/view.do?seq=${pseq}&isSearch=${isSearch}&column=${column}&word=${word}&page=${page}';">
+					</c:if>
+					
+					<c:if test="${empty reply}">
+					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/board/list.do';">
+					</c:if>
+					
 					<input type="submit" value="글쓰기" class="btn btn-primary">
 				</div>
 				
 				<input type="hidden" name="reply" value="${reply}">
 				<input type="hidden" name="thread" value="${thread}">
 				<input type="hidden" name="depth" value="${depth}">
+				
+				<input type="hidden" name="pseq" value="${pseq}">
+				<input type="hidden" name="isSearch" value="${isSearch}">
+				<input type="hidden" name="column" value="${column}">
+				<input type="hidden" name="word" value="${word}">
+				<input type="hidden" name="page" value="${page}">
+				
 			</form>
 		 	
 		</section>

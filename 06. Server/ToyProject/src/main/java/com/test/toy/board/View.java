@@ -25,6 +25,7 @@ public class View extends HttpServlet {
 		//View.java
 		//1. 데이터 가져오기(글번호) + 검색 정보
 		String seq = req.getParameter("seq");
+		String page = req.getParameter("page");
 		
 			//검색 정보
 		String isSearch = req.getParameter("isSearch");
@@ -103,6 +104,7 @@ public class View extends HttpServlet {
 		req.setAttribute("column", column);
 		req.setAttribute("word", word);
 		req.setAttribute("clist", clist);
+		req.setAttribute("page", page);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/board/view.jsp");

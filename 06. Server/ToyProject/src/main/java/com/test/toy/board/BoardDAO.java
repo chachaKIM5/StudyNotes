@@ -382,8 +382,8 @@ public class BoardDAO {
 			}
 			
 			
-			String sql = "select count(*) as cnt from tblBoard " + where;
-			
+			String sql = "select count(*) as cnt from vwBoard " + where;			
+
 			pstat = conn.prepareStatement(sql);
 			
 			rs = pstat.executeQuery();
@@ -496,15 +496,16 @@ public class BoardDAO {
 		
 	}
 
-	//AddOk 서블릿 > 방금 insert한(addHashTag(tag) 해시태그 pk 반환
-	public String getHashTagSeq() {
+	//AddOk 서블릿 > 매개변수 tag의 (addHashTag(tag)로 추가한 해시태그) pk 반환
+	public String getHashTagSeq(String tag) {
 		
 
 		try {
 			
-			String sql = "select max(seq) as seq from tblHashTag";
+			String sql = "select seq from tblHashTag where tag = ?";
 			
-			stat = conn.createStatement();
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, tag);
 			
 			rs = stat.executeQuery(sql);
 			

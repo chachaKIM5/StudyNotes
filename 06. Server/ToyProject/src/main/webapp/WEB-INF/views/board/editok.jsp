@@ -25,7 +25,7 @@
 	<script>
 	
 		<c:if test="${result == 1}">	
-			location.href= '/toy/board/view.do?seq=${seq}&isSearch=${isSearch}&column=${column}&word=${word}';
+			location.href= '/toy/board/view.do?seq=${seq}&isSearch=${isSearch}&column=${column}&word=${word}&page=${page}';
 		</c:if>
 		
 		<c:if test="${result == 0}">

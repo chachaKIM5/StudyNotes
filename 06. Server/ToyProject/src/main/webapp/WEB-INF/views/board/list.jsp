@@ -23,7 +23,7 @@
 		 	
 		 	<c:if test="${map.isSearch == 'y'}">
 		 	<div style="text-align: center; margin-bottom: 10px; color: #999">
-		 		'${map.word}'으로 검색한 결과 총 ${list.size()}개의 게시물이 발견되었습니다.
+		 		'${map.word}'으로 검색한 결과 총 ${totalCount}개의 게시물이 발견되었습니다.
 		 	</div>
 		 	</c:if>
 		 	<table class="table table-bordered horizontal">
@@ -59,7 +59,7 @@
 		 					<span style="font-size: 12px;"><i class="fa-solid fa-paperclip"></i></span>
 		 				</c:if>
 		 				
-		 				<a href="/toy/board/view.do?seq=${dto.seq}&isSearch=${map.isSearch}&column=${map.column}&word=${map.word}">${dto.subject}</a>
+		 				<a href="/toy/board/view.do?seq=${dto.seq}&isSearch=${map.isSearch}&column=${map.column}&word=${map.word}&page=${nowPage}">${dto.subject}</a>
 		 				<c:if test="${dto.commentcount > 0}">
 		 				<span class="badge">${dto.commentcount}</span>
 		 				</c:if>

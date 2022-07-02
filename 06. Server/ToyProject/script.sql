@@ -142,3 +142,60 @@ create table tblBoard (
     orgfilename varchar2(100) null                      -- 첨부파일(원본 이름 for 다운로드)
 );
 
+
+
+-- 해시 태그 테이블
+create table tblHashTag (
+    seq number primary key,                 -- 번호(PK)
+    tag varchar2(100) unique not null       -- 해시 태그(UQ)
+);
+
+
+create sequence seqHashTag;
+
+
+-- 게시판 < (연결) > 해시 태그
+create table tblTagging (
+    seq number primary key,                             -- 번호(PK)
+    bseq number not null references tblBoard(seq),      -- 게시물(FK)
+    hseq number not null references tblHashTag(seq)     -- 해시태그(FK)
+);
+
+create sequence seqTagging;
+
+
+select * from tblBoard order by seq desc;
+select * from tblHashTag;
+select * from tblTagging;
+
+drop table tblTagging;
+drop sequence seqTagging;
+
+drop table tblHashTag;
+drop sequence seqHashTag;
+
+
+select * from tblHashTag h inner join tblTagging t on h.seq = t.hseq where bseq = 1;
+
+
+
+-- 해시태그를 클릭했을 때 같은 해시태그의 글만 조회할 수 있도록 해시태그를 where절에 넣기
+select b.* from vwBoard b
+    inner join tblTagging t
+        on b.seq = t.bseq
+            inner join tblHashTag h
+                on h.seq = t.hseq
+                    where h.tag = '수업';
+                    
+  
+
+create table tblGoodBad (
+    seq number primary key,                                 -- 번호(PK)
+    id varchar2(30) not null references tblUser(id),        -- 아이디(FK)
+    bseq number not null references tblBoard(seq),          -- 글번호(FK)
+    good number default 0 not null,                         -- 좋아요
+    bad number default 0 not null                           -- 싫어요
+);
+
+
+create sequence seqGoodBad;

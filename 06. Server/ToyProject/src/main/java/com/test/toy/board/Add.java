@@ -30,6 +30,13 @@ public class Add extends HttpServlet {
 		String thread = req.getParameter("thread");
 		String depth = req.getParameter("depth");
 		
+		String pseq = req.getParameter("pseq");
+		String isSearch = req.getParameter("isSearch");
+		String column = req.getParameter("column");
+		String word = req.getParameter("word");
+		String page = req.getParameter("page");
+		
+		
 		
 		
 		//해시태그 목록 가져오기(for 자동완성)
@@ -41,6 +48,13 @@ public class Add extends HttpServlet {
 		req.setAttribute("thread", thread);
 		req.setAttribute("depth", depth);
 		req.setAttribute("taglist", taglist);
+		
+		req.setAttribute("pseq", pseq);
+		req.setAttribute("isSearch", isSearch);
+		req.setAttribute("column", column);
+		req.setAttribute("word", word);
+		req.setAttribute("page", page);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/board/add.jsp");
 		dispatcher.forward(req, resp);
 

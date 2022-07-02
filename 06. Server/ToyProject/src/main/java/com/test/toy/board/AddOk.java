@@ -66,6 +66,11 @@ public class AddOk extends HttpServlet {
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
 		
+		String pseq = multi.getParameter("pseq");
+		String isSearch = multi.getParameter("isSearch");
+		String column = multi.getParameter("column");
+		String word = multi.getParameter("word");
+		String page = multi.getParameter("page");		
 		
 		
 		
@@ -195,7 +200,7 @@ public class AddOk extends HttpServlet {
 				
 				
 				//**에서 방금 추가한 해시태그 seq 알아내기
-				String hseq = dao.getHashTagSeq();
+				String hseq = dao.getHashTagSeq(tag);
 				
 				
 				//Tagging > insert해서 글과 해시태그들을 연결
@@ -226,6 +231,12 @@ public class AddOk extends HttpServlet {
 		
 		//4.
 		req.setAttribute("result", result);
+		
+		req.setAttribute("pseq", pseq);
+		req.setAttribute("isSearch", isSearch);
+		req.setAttribute("column", column);
+		req.setAttribute("word", word);
+		req.setAttribute("page", page);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/board/addok.jsp");
 		dispatcher.forward(req, resp);

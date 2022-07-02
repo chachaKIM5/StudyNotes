@@ -193,11 +193,23 @@ public class List extends HttpServlet {
 					+ "		    </li>");
 			
 		} else {
-			pagebar += String.format("		    <li class=\"page-item\">\r\n"
-					+ "		      <a class=\"page-link\" href=\"/toy/board/list.do?page=%d\" aria-label=\"Previous\">\r\n"
-					+ "		        <span aria-hidden=\"true\">&laquo;</span>\r\n"
-					+ "		      </a>\r\n"
-					+ "		    </li>", n - 1);
+
+			if (isSearch.equals("y")) {
+
+				pagebar += String.format("		    <li class=\"page-item\">\r\n"
+						+ "		      <a class=\"page-link\" href=\"/toy/board/list.do?page=%d&column=%s&word=%s\" aria-label=\"Previous\">\r\n"
+						+ "		        <span aria-hidden=\"true\">&laquo;</span>\r\n"
+						+ "		      </a>\r\n"
+						+ "		    </li>", n - 1, column, word);
+				
+			} else {
+				
+				pagebar += String.format("		    <li class=\"page-item\">\r\n"
+						+ "		      <a class=\"page-link\" href=\"/toy/board/list.do?page=%d\" aria-label=\"Previous\">\r\n"
+						+ "		        <span aria-hidden=\"true\">&laquo;</span>\r\n"
+						+ "		      </a>\r\n"
+						+ "		    </li>", n - 1);
+			}
 			
 		}
 		
@@ -222,7 +234,14 @@ public class List extends HttpServlet {
 				pagebar += String.format(" <li class=\"page-item active\"><a class=\"page-link\" href=\"#!\">%d</a></li> ", n);
 				
 			} else {
-				pagebar += String.format(" <li class=\"page-item\"><a class=\"page-link\" href=\"/toy/board/list.do?page=%d\">%d</a></li> ", n, n);
+				
+				if (isSearch.equals("y")) {
+					pagebar += String.format(" <li class=\"page-item\"><a class=\"page-link\" href=\"/toy/board/list.do?page=%d&column=%s&word=%s\">%d</a></li> ", n, column, word, n);
+					
+				} else {
+					pagebar += String.format(" <li class=\"page-item\"><a class=\"page-link\" href=\"/toy/board/list.do?page=%d\">%d</a></li> ", n, n);
+					
+				}
 				
 			}
 			
@@ -250,11 +269,22 @@ public class List extends HttpServlet {
 			
 		} else {
 			
+			if (isSearch.equals("y")) {
+				pagebar += String.format("		    <li class=\"page-item\">\r\n"
+						+ "		      <a class=\"page-link\" href=\"/toy/board/list.do?page=%d&column=%s&word=%s\" aria-label=\"Next\">\r\n"
+						+ "		        <span aria-hidden=\"true\">&raquo;</span>\r\n"
+						+ "		      </a>\r\n"
+						+ "		    </li>", n, column, word);
+				
+			} else {
+				
 			pagebar += String.format("		    <li class=\"page-item\">\r\n"
 					+ "		      <a class=\"page-link\" href=\"/toy/board/list.do?page=%d\" aria-label=\"Next\">\r\n"
 					+ "		        <span aria-hidden=\"true\">&raquo;</span>\r\n"
 					+ "		      </a>\r\n"
 					+ "		    </li>", n);
+			
+			}
 		}
 		
 		

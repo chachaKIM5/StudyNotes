@@ -26,7 +26,7 @@
 				<div style="margin-bottom: 15px;">정말 삭제하시겠습니까?</div>
 				
 				<div class="btns">
-					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/board/view.do?seq=${seq}';">
+					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/board/view.do?seq=${seq}&isSearch=${isSearch}&column=${column}&word=${word}';">
 					<button class="btn btn-primary" onclick="location.href='/toy/board/delok.do';">
 		               <i class="fas fa-pen"></i>
 		               삭제하기
@@ -34,6 +34,8 @@
 				</div>
 				
 				<input type="hidden" name="seq" value="${seq}">
+
+				
 				
 			</form>
 		 	

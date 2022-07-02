@@ -62,6 +62,7 @@
 				<input type="hidden" name="word" value="${word}">
 				
 				<input type="hidden" name="delfile" value="n">
+				<input type="hidden" name="page" value="${page}">
 			</form>
 		 	
 		</section>

@@ -65,6 +65,8 @@ public class EditOk extends HttpServlet {
 		String column = multi.getParameter("column");
 		String word = multi.getParameter("word");
 		
+		String page = multi.getParameter("page");
+		
 		
 		//3.
 		BoardDTO dto = new BoardDTO();
@@ -152,6 +154,8 @@ public class EditOk extends HttpServlet {
 		req.setAttribute("isSearch", isSearch);
 		req.setAttribute("column", column);
 		req.setAttribute("word", word);
+		
+		req.setAttribute("page", page);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/board/editok.jsp");

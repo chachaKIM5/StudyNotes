@@ -94,22 +94,22 @@
 				</table>
 				
 				<div class="btns">
-					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/board/list.do?column=${column}&word=${word}';">
+					<input type="button" value="돌아가기" class="btn btn-secondary" onclick="location.href='/toy/board/list.do?column=${column}&word=${word}&page=${page}';">
 					<!-- <input type="button" value="돌아가기" class="btn btn-secondary" onclick="history.back();"> -->
 					
 				 	<c:if test="${not empty auth}">
 				 	
 				 	<c:if test="${dto.id == auth || auth == 'admin'}">
-						<button class="btn btn-primary" onclick="location.href='/toy/board/edit.do?seq=${dto.seq}&isSearch=${isSearch}&column=${column}&word=${word}';">
+						<button class="btn btn-primary" onclick="location.href='/toy/board/edit.do?seq=${dto.seq}&isSearch=${isSearch}&column=${column}&word=${word}&page=${page}';">
 				             <i class="fas fa-pen"></i>
 				             수정하기
 				        </button>
-						<button class="btn btn-primary" onclick="location.href='/toy/board/del.do?seq=${dto.seq}';">
+						<button class="btn btn-primary" onclick="location.href='/toy/board/del.do?seq=${dto.seq}&isSearch=${isSearch}&column=${column}&word=${word}';">
 				             <i class="fas fa-pen"></i>
 				             삭제하기
 				        </button>
 				    </c:if>
-						<button class="btn btn-primary" onclick="location.href='/toy/board/add.do?reply=1&thread=${dto.thread}&depth=${dto.depth}';">
+						<button class="btn btn-primary" onclick="location.href='/toy/board/add.do?reply=1&thread=${dto.thread}&depth=${dto.depth}&pseq=${dto.seq}&isSearch=${isSearch}&column=${column}&word=${word}&page=${page}';">
 				             <i class="fas fa-pen"></i>
 				             답변하기
 				        </button>
@@ -186,7 +186,11 @@
 			function editcomment(seq) {
 			
 				if (!isEdit) {
-					const tempStr = $(event.target).parent().parent().prev().text();
+					let tempStr = $(event.target).parent().parent().prev().html();
+					
+					while (tempStr.indexOf('<br>') > 0) {
+						tempStr = tempStr.replace('<br>', '\r\n');
+					}
 					
 					$(event.target).parents('tr').after(temp);
 					isEdit = true;				

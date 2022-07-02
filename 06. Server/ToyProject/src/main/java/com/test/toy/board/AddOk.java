@@ -1,6 +1,7 @@
 package com.test.toy.board;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -195,11 +196,17 @@ public class AddOk extends HttpServlet {
 				String tag = (String)((JSONObject)obj).get("value");
 				
 				
-				//** HashTag > insert
-				dao.addHashTag(tag);
 				
+				//현재 taglist를 불러와 unique 제약을 위반하는 tag가 있는지 검사하기
+				//** 새로운 HashTag라면? > insert
 				
-				//**에서 방금 추가한 해시태그 seq 알아내기
+				ArrayList<String> taglist = dao.taglist();
+				
+				if (!taglist.contains(tag)) {					
+					dao.addHashTag(tag);
+				}
+				
+				//현재 tag 해시태그 seq 알아내기
 				String hseq = dao.getHashTagSeq(tag);
 				
 				

@@ -507,7 +507,7 @@ public class BoardDAO {
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, tag);
 			
-			rs = stat.executeQuery(sql);
+			rs = pstat.executeQuery();
 			
 			if (rs.next()) {
 				

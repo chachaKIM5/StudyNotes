@@ -193,3 +193,8 @@ a:hover {
 .tblEditComment button {
 	margin: 2px;
 }
+
+#goodbad button {
+	float: left;
+	margin-right: 10px;
+}

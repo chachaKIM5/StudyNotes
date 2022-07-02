@@ -23,7 +23,7 @@
 		
 		 	<h2>Board</h2>
 		 	
-				<table class="table table-bordered vertical">
+				<table class="table table-bordered vertical"s>
 					<tr>
 						<th>제목</th>
 						<td>${dto.subject}</td>
@@ -64,7 +64,7 @@
 						
 					<tr>
 						<th>좋아요/싫어요</th>
-						<td>
+						<td id="goodbad">
 							<form method="GET" action="/toy/board/goodbad.do">
 								<button class="btn btn-danger">
 									<i class="fa-solid fa-heart"></i>

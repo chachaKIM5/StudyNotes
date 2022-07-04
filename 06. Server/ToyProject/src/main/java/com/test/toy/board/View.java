@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.GpsDirectory;
+
 @WebServlet("/board/view.do")
 public class View extends HttpServlet {
 
@@ -43,7 +47,13 @@ public class View extends HttpServlet {
 					session.setAttribute("read", "y");
 				}
 		
-		BoardDTO dto = dao.get(seq);
+				
+				
+		BoardDTO tempdto = new BoardDTO();
+		tempdto.setSeq(seq);
+		tempdto.setId((String)session.getAttribute("auth"));
+
+		BoardDTO dto = dao.get(tempdto);
 		
 				//- 엔터를 <br>로, 태그를 비활성화할 수 있게 "<", ">"를 entity로
 				dto.setSubject(dto.getSubject().replace("<", "&lt;").replace(">", "&gt;"));
@@ -80,6 +90,38 @@ public class View extends HttpServlet {
 							//String.format("<div style='margin-top: 15px;'><img src='/toy/files/%s' id='imgAttach' style='display:none;'></div>", dto.getFilename()));
 							String.format("<div style='margin-top: 15px;'><img src='/toy/files/%s' id='imgAttach' %s></div>", dto.getFilename(), temp));
 					//style='max-width: 630px;'
+					
+					
+					
+					//사진의 GPS
+					File file = new File(req.getRealPath("files") + "\\" + dto.getFilename());
+		            
+		            String pdsLat = "";
+		            String pdsLon = "";
+		      
+		            try {
+						
+		            	Metadata metadata = ImageMetadataReader.readMetadata(file);
+		            	GpsDirectory gpsDirectory = metadata.getFirstDirectoryOfType(GpsDirectory.class);
+		            	
+		            	// 위도,경도 호출
+		            	if (gpsDirectory.containsTag(GpsDirectory.TAG_LATITUDE)
+		            			&& gpsDirectory.containsTag(GpsDirectory.TAG_LONGITUDE)) {
+		            		
+		            		pdsLat = String.valueOf(gpsDirectory.getGeoLocation().getLatitude());
+		            		pdsLon = String.valueOf(gpsDirectory.getGeoLocation().getLongitude());
+		            		
+		            		if (pdsLat != null && pdsLon != null) {
+		            			req.setAttribute("lat", pdsLat);
+		            			req.setAttribute("lng", pdsLon);
+		            		}
+		            	
+		            	}
+		            	
+					} catch (Exception e) {
+						System.out.println("View.doGet");
+						e.printStackTrace();
+					}
 				}
 				
 				

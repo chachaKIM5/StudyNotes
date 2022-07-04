@@ -199,3 +199,72 @@ create table tblGoodBad (
 
 
 create sequence seqGoodBad;
+
+
+select * from tblGoodBad;
+
+
+select tblBoard.*, (select name from tblUser where id = tblBoard.id) as name, () as good, () as bad from tblBoard where seq = 29;
+
+select tblBoard.*,
+    (select name from tblUser where id = tblBoard.id) as name,
+    nvl((select sum(good) from tblGoodBad where bseq = tblBoard.seq), 0) as good,
+    nvl((select sum(bad) from tblGoodBad where bseq = tblBoard.seq), 0) as bad,
+    (select
+        case
+            when good = 1 then 1
+            when bad = 1 then 2
+            else 3
+        end
+        from tblGoodBad where bseq = tblBoard.seq and id = 'yoni') as goodbad    
+from tblBoard where seq = 29;
+
+
+
+
+
+
+
+select u.id, (select name from tblUser where id = u.id) as name, (select count(*) from tblBoard where id = u.id) as cnt from tblBoard b right outer join tblUser u on u.id = b.id group by u.id;
+
+select u.id, (select name from tblUser where id = u.id) as name, (select count(*) from tblComment where id = u.id) as cnt from tblComment b right outer join tblUser u on u.id = b.id group by u.id;
+
+
+select h.tag, (select count(*) from tblTagging where hseq = h.seq) as cnt from tblHashTag h left outer join tblTagging t on h.seq = t.hseq group by h.tag, h.seq;
+
+
+
+
+-- 맛집 즐겨찾기
+create table tblFood (
+    
+    seq number primary key,                                 -- 번호(PK)
+    name varchar2(100) not null,                            -- 상호명
+    lat number not null,                                    -- 위도(Latitude)
+    lng number not null,                                    -- 경도(Longitude)
+    star number(3) not null,                                -- 별점(1~5)
+    category number not null references tblCategory(seq)    -- 업종
+);
+
+
+create sequence seqFood;
+
+
+create table tblCategory (
+    
+    seq number primary key,
+    name varchar2(100) not null,
+    marker varchar2(100) not null,
+    icon varchar2(100) not null
+
+);
+
+
+
+insert into tblCategory values (1, '한식', 'm1', 'fa-solid fa-bowl-food');
+insert into tblCategory values (2, '양식', 'm2', 'fa-solid fa-pizza-slice');
+insert into tblCategory values (3, '카페', 'm3', 'fa-solid fa-mug-hot');
+
+commit;
+
+select * from tblFood;

@@ -12,8 +12,29 @@
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 <link rel="stylesheet" href="/toy/asset/css/tagify.css" />
 <script src="/toy/asset/js/jQuery.tagify.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64e03f8eab3f22763f41f9cc8a75445d"></script>
 <style>
 
+	<c:if test="${not empty dto.goodbad}">
+	#btngood, #btnbad {
+		opacity: .5;
+	}
+	</c:if>
+
+	<c:if test="${empty dto.goodbad}">
+	#btngood, #btnbad {
+		opacity: 1;
+	}
+	</c:if>
+	
+	<c:if test="${not empty lat}">
+	#map {
+		width: 100%;
+		height: 400px;	
+	}
+	</c:if>
+	
+	
 </style>
 </head>
 <body>
@@ -66,31 +87,41 @@
 						<th>좋아요/싫어요</th>
 						<td id="goodbad">
 							<form method="GET" action="/toy/board/goodbad.do">
-								<button class="btn btn-danger">
+								<button class="btn btn-danger" id="btngood">
 									<i class="fa-solid fa-heart"></i>
 									좋아요
-									<span class="badge badge-primary">15</span>
+									<span class="badge badge-primary">${dto.good}</span>
 								</button>
 								<input type="hidden" name="seq" value="${dto.seq}">
 								<input type="hidden" name="isSearch" value="${isSearch}">
 								<input type="hidden" name="column" value="${column}">
 								<input type="hidden" name="word" value="${word}">
-								<input type="hidden" name="goodbad" value="good">
+								<input type="hidden" name="good" value="1">
+								<input type="hidden" name="bad" value="0">
 							</form>
 							<form method="GET" action="/toy/board/goodbad.do">
-								<button class="btn btn-dark">
+								<button class="btn btn-dark" id="btnbad">
 									<i class="fa-solid fa-heart-crack"></i>
 									싫어요
-									<span class="badge badge-primary">5</span>
+									<span class="badge badge-primary">${dto.bad}</span>
 								</button>
 								<input type="hidden" name="seq" value="${dto.seq}">
 								<input type="hidden" name="isSearch" value="${isSearch}">
 								<input type="hidden" name="column" value="${column}">
 								<input type="hidden" name="word" value="${word}">
-								<input type="hidden" name="goodbad" value="bad">
+								<input type="hidden" name="good" value="0">
+								<input type="hidden" name="bad" value="1">
 							</form>
 						</td>
 					</tr>
+					
+					
+					<c:if test="${not empty lat}">
+						<tr>
+							<th>위치</th>
+							<td><div id="map"></div></td>
+						</tr>
+					</c:if>
 				</table>
 				
 				<div class="btns">
@@ -269,6 +300,26 @@
 	      function test(e) {
 	    	  location.href = '/toy/board/list.do?tag=' + e.detail.data.value;
 	      }
+	      
+
+	      
+		<c:if test="${not empty lat}">
+			
+			var container = document.getElementById('map');
+			var options = {
+				center: new kakao.maps.LatLng(${lat}, ${lng}),
+				level: 3
+			};
+			
+			var map = new kakao.maps.Map(container, options);
+			
+			var m = new kakao.mpas.Marker({
+				position: new kakao.maps.LatLng(${lat}, ${lng})
+			});
+			
+			m.setMap(map);
+				
+		</c:if>   
 		
 	</script>	
 	

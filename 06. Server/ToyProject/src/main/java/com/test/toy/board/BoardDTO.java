@@ -26,4 +26,11 @@ public class BoardDTO {
 	private String orgfilename;
 	
 	private ArrayList<String> taglist;
+	
+	private String good;
+	private String bad;
+	private String goodbad;
+
+	
+	
 }

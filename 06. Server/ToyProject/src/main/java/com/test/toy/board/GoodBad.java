@@ -1,6 +1,8 @@
 package com.test.toy.board;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/board/goodbad.do")
 public class GoodBad extends HttpServlet {
@@ -21,7 +24,51 @@ public class GoodBad extends HttpServlet {
 		//2. DB 작업 > DAO 위임 > update
 		//3. 결과
 		//4. 피드백
+		
+		HttpSession session = req.getSession();
+		
+		//1.
+		String seq = req.getParameter("seq");
+		String isSearch = req.getParameter("isSearch");
+		String column = req.getParameter("column");
+		String word = req.getParameter("word");
+		String good = req.getParameter("good");
+		String bad = req.getParameter("bad");
+		
+		
+		//2.
+		BoardDAO dao = new BoardDAO();
+		GoodBadDTO dto = new GoodBadDTO();
+		
+		dto.setBseq(seq);
+		dto.setGood(good);
+		dto.setBad(bad);
+		dto.setId((String)(session.getAttribute("auth")));
+		
+		int result = dao.updateGoodBad(dto);
 
+		
+		if (result == 1) {
+		
+		resp.sendRedirect(String.format(
+		"/toy/board/view.do?seq=%s&isSearch=%s&column=%s&word=%s", seq, isSearch,
+		column, URLEncoder.encode(word, "UTF-8")));
+		
+		} else {
+		
+		resp.setCharacterEncoding("UTF-8"); PrintWriter writer = resp.getWriter();
+		
+		writer.print("<html>"); writer.print("<head>");
+		writer.print("<meta charset='UTF-8'>"); writer.print("</head>");
+		writer.print("<body>"); writer.print("<script>");
+		writer.print("alert('오류');"); writer.print("history.back();");
+		writer.print("</script>"); writer.print("</body>"); writer.print("</html>");
+		
+		writer.close();
+		
+		}
+		
+		
 	}
 
 }

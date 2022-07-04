@@ -169,3 +169,32 @@ DB 설계
 - 싫어요/좋아요
  	- 좋아요 카운트, 싫어요 카운트
  	- com.test.toy.board > "GoodBad.java"
+ 	
+ 	
+ 	
+- 차트 연동
+	- 회원 > 게시물 생산 > 차트 출력
+	- 회원별 글, 댓글 횟수, 태그별 카운트...
+	
+	- com.test.toy.etc > "Chart.java"
+	- views > etc > "chart.jsp"
+	
+	
+- 지도 연동
+	- 지도 API 수업
+	- 게시물 + 첨부파일 (이미지 > 메타 정보 > 위도,경도) > 지도 출력
+	
+	- com.test.toy.etc > "Map.java"
+	- views > etc > "map01.jsp"
+	
+	- 장소 CRUD
+		- 장소 즐겨찾기 + 지도 연동
+		- com.test.toy.etc > "Food.java" //목록
+						   > "AddFood.java"
+						   > "AddFoodOk.java"
+						   > "EtcDAO.java"
+						   > "FoodDTO.java"
+						   > "CategoryDTO.java"
+						   
+		- view > etc > "food.jsp"
+					 > "addfood.jsp"

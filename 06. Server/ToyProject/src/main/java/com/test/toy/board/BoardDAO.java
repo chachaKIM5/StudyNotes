@@ -10,6 +10,9 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import com.test.toy.DBUtil;
+import com.test.toy.etc.ChartDTO1;
+import com.test.toy.etc.ChartDTO2;
+import com.test.toy.etc.ChartDTO3;
 
 public class BoardDAO {
 
@@ -116,12 +119,23 @@ public class BoardDAO {
 	//View 서블릿 > 글번호 받아서 글 전체 정보를 가진 dto를 반환
 	public BoardDTO get(String seq) {
 		
+		return getService(seq, "");
+	}
+	
+	public BoardDTO get(BoardDTO dto) {
+		
+		return getService(dto.getSeq(), dto.getId());
+	}
+
+
+	private BoardDTO getService(String seq, String id) {
 		try {
 			
-			String sql = "select tblBoard.*, (select name from tblUser where id = tblBoard.id) as name from tblBoard where seq = ?";
+			String sql = "select tblBoard.*, (select name from tblUser where id = tblBoard.id) as name, nvl((select sum(good) from tblGoodBad where bseq = tblBoard.seq), 0) as good, nvl((select sum(bad) from tblGoodBad where bseq = tblBoard.seq), 0) as bad, (select  case when good = 1 then 1 when bad = 1 then 2 else 3 end from tblGoodBad where bseq = tblBoard.seq and id = ?) as goodbad from tblBoard where seq = ?";
 			
 			pstat = conn.prepareStatement(sql);
-			pstat.setString(1, seq);
+			pstat.setString(1, id);
+			pstat.setString(2, seq);
 			
 			rs = pstat.executeQuery();
 			
@@ -142,6 +156,10 @@ public class BoardDAO {
 				
 				dto.setFilename(rs.getString("filename"));
 				dto.setOrgfilename(rs.getString("orgfilename"));
+				
+				dto.setGood(rs.getString("good"));
+				dto.setBad(rs.getString("bad"));
+				dto.setGoodbad(rs.getString("goodbad"));
 			}
 			
 			
@@ -568,6 +586,246 @@ public class BoardDAO {
 			System.out.println("BoardDAO.taglist");
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+
+	//GoodBad 서블릿 > dto > 좋아요/싫어요 반영
+	public int updateGoodBad(GoodBadDTO dto) {
+		
+		try {
+			
+			//1. 참여(X) > 참여(O)
+			//2. 참여(O) > 같은 항목 참여 > 방지!! > XXX
+			//3. 참여(O) > 다른 항목 참여 > 변경
+			//4. 참여(O) > 같은 항목 참여 > 취소!!
+			
+			int state = 0;
+			String good = "";
+			String bad = "";
+			String seq = "";
+			
+			String sql = "select * from tblGoodBad where bseq = ? and id = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getBseq());
+			pstat.setString(2, dto.getId());
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				//참여함
+				
+				
+				if (!dto.getGood().equals(rs.getString("good"))) {
+					state = 2;
+					
+					//반대 의견 선택
+					
+					//좋아요를 눌렀나, 싫어요를 눌렀나?
+					good = rs.getString("good");
+					bad = rs.getString("bad");
+					seq = rs.getString("seq");
+					
+					if (good.equals("1")) {
+						good = "0";
+						bad = "1";
+					} else { 
+						good = "1";
+						bad = "0";
+					}
+					
+				} else {
+					//이미 선택한 의견을 다시 선택 > 취소
+					state = 3;
+					seq = rs.getString("seq");
+				}
+				
+			} else {
+				//참여안함
+				state = 1;
+			}
+			
+			rs.close();
+			pstat.close();
+			
+			
+			
+			if (state == 1 ) {
+				
+				sql = "insert into tblGoodBad (seq, id, bseq, good, bad) values (seqGoodBad.nextVal, ?, ?, ?, ?)";
+				
+				pstat = conn.prepareStatement(sql);
+				
+				pstat.setString(1, dto.getId());
+				pstat.setString(2, dto.getBseq());
+				pstat.setString(3, dto.getGood());
+				pstat.setString(4, dto.getBad());
+				
+				return pstat.executeUpdate();
+			
+			} else if (state == 2) {
+				sql = "update tblGoodBad set good = ?, bad = ? where seq = ?";
+				
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, good);
+				pstat.setString(2, bad);
+				pstat.setString(3, seq);
+				
+				return pstat.executeUpdate();
+				
+			} else if (state == 3) {
+				sql = "delete from tblGoodBad where seq = ?";
+				
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, seq);
+				
+				return pstat.executeUpdate();
+				
+			}
+		} catch (Exception e) {
+			System.out.println("BoardDAO.updateGoodBad");
+			e.printStackTrace();
+		} 
+		
+		return 0;
+	}
+
+
+	public void delTag(String seq) {
+		try {
+			
+			String sql = "delete from tblTagging where bseq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.delTag");
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public void delGoodBad(String seq) {
+		try {
+			
+			String sql = "delete from tblGoodbad where bseq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.delGoodBad");
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public ArrayList<ChartDTO1> chart1() {
+
+		try {
+			
+			String sql = "select u.id, (select name from tblUser where id = u.id) as name, (select count(*) from tblBoard where id = u.id) as cnt from tblBoard b right outer join tblUser u on u.id = b.id group by u.id";
+			
+			stat = conn.createStatement();
+			
+			rs = stat.executeQuery(sql);
+			
+			ArrayList<ChartDTO1> list = new ArrayList<ChartDTO1>();
+			
+			while (rs.next()) {
+				
+				ChartDTO1 dto = new ChartDTO1();
+				
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setCnt(rs.getString("cnt"));
+				
+				list.add(dto);
+				
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.chart1");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	public ArrayList<ChartDTO2> chart2() {
+
+		try {
+			
+			String sql = "select u.id, (select name from tblUser where id = u.id) as name, (select count(*) from tblComment where id = u.id) as cnt from tblComment b right outer join tblUser u on u.id = b.id group by u.id";
+			
+			stat = conn.createStatement();
+			
+			rs = stat.executeQuery(sql);
+			
+			ArrayList<ChartDTO2> list = new ArrayList<ChartDTO2>();
+			
+			while (rs.next()) {
+				
+				ChartDTO2 dto = new ChartDTO2();
+				
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setCnt(rs.getString("cnt"));
+				
+				list.add(dto);
+				
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.chart2");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public ArrayList<ChartDTO3> chart3() {
+		try {
+			
+			String sql = "select h.tag, (select count(*) from tblTagging where hseq = h.seq) as cnt from tblHashTag h left outer join tblTagging t on h.seq = t.hseq group by h.tag, h.seq";
+			
+			stat = conn.createStatement();
+			
+			rs = stat.executeQuery(sql);
+			
+			ArrayList<ChartDTO3> list = new ArrayList<ChartDTO3>();
+			
+			while (rs.next()) {
+				
+				ChartDTO3 dto = new ChartDTO3();
+				
+				dto.setTag(rs.getString("tag"));
+				dto.setCnt(rs.getString("cnt"));
+				
+				list.add(dto);
+				
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println("BoardDAO.chart3");
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 }

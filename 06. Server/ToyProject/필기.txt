@@ -198,3 +198,77 @@ DB 설계
 						   
 		- view > etc > "food.jsp"
 					 > "addfood.jsp"
+					 
+					 
+					 
+					 
+
+					 
+---------------------------------------------
+
+
+서버 갱신 데이터 > 브라우저 전달
+1. 새로 고침 > 프로그램으로 만듦
+2. <frame>, <iframe> 사용
+3. Ajax <-> ActiveX, Applet
+4. WebSocket
+
+
+
+
+
+
+Ajax, Asynchronous JavaScript and XML
+ - 비동기 자바스크립트 and XML
+ - 자바스크립트 기반 비동기 통신 기법
+ - 브라우저와 웹 서버 간에서 자바스크립트를 사용한 데이터를 주고받는 기술
+ - ~ 현재: 브라우저(크롬) - 웹 서버(아파치 톰캣)
+ 
+ 
+네트워크 통신 방식
+ - 동기 통신
+ - 비동기 통신
+ 
+ 
+ 
+Ajax 구현 방식
+1. XMLHttpRequest 사용
+2. jQuery Ajax 사용
+3. fetch 사용
+ 
+ 
+ 
+ 
+ - "com.test.toy.ajax" > "AjaxDAO.java"
+ 					   > "Ex01.java"
+ - views > "ajax" > "ex01.jsp"
+
+
+DB
+ - script.sql
+ 
+ 
+ 
+ 
+ 
+ - com.test.toy.ajax  > "Ex02.java"
+ 					  > "Ex02Data.java"
+ 					  > "Ex02Data2.java"
+ - views > ajax > "ex02.jsp"
+ 				> "ex02data.jsp"
+ 				> "ex02data2.jsp"
+ 				
+ 				
+
+ 				
+ajax 예제: 아이디 중복 검사
+ - com.test.toy.ajax > "Ex03.java"
+ 					 > "IdCheck.java"
+ 					 > "IdCheckOk.java"
+ 					 > "IdCheckOk2.java"
+ - views > ajax > "ex03.jsp"
+ 				> "idcheck.jsp"
+ 				
+ - com.test.toy.ajax > "Ex04.java"
+ 					 > "Ex04Data.java"
+ - views > ajax > "ex04.jsp"

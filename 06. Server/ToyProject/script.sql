@@ -268,3 +268,49 @@ insert into tblCategory values (3, '카페', 'm3', 'fa-solid fa-mug-hot');
 commit;
 
 select * from tblFood;
+
+
+
+
+
+
+
+
+
+
+-- Ajax
+
+-- 설문(질문) <-> 설문(항목)
+-- ^
+-- |
+-- 선택
+
+
+-- 설문 조사
+create table tblResearch (
+    seq number primary key,                     -- 번호(PK)
+    question varchar2(500) not null,            -- 질문
+    item1 varchar2(300) not null,               -- 항목
+    item2 varchar2(300) not null,               -- 항목
+    item3 varchar2(300) not null,               -- 항목
+    item4 varchar2(300) not null,               -- 항목
+    cnt1 number default 0 not null,             -- 선택
+    cnt2 number default 0 not null,             -- 선택
+    cnt3 number default 0 not null,             -- 선택
+    cnt4 number default 0 not null             -- 선택
+);
+
+
+insert into tblResearch values (1, '가장 잘 사용하는 프로그래밍 언어는?', 'JAVA', 'Python', 'Visual C++', 'Node.js', default, default, default, default);
+
+select * from tblResearch;
+
+
+update tblResearch set
+    cnt1 = 10,
+    cnt2 = 17,
+    cnt3 = 5,
+    cnt4 = 10
+    where seq = 1;
+    
+commit;

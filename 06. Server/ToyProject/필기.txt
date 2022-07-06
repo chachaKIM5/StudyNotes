@@ -272,3 +272,50 @@ ajax 예제: 아이디 중복 검사
  - com.test.toy.ajax > "Ex04.java"
  					 > "Ex04Data.java"
  - views > ajax > "ex04.jsp"
+ 
+ 
+ 
+ 
+ 
+ - com.test.toy.ajax > "Ex05.java"		> "/ajax/ex05.do"
+					 > "Ex05Text.java"	> "/ajax/ex05text.do"
+					 > "Ex05XML.java"	> "/ajax/ex05xml.do"
+					 > "Ex05JSON.java"  > "/ajax/ex05json.do"
+
+ - views > ajax > "ex05.jsp"
+ 
+ 
+ 
+
+---------------------------
+ 
+ 
+ajax로 tblInsa 목록 페이지 뷰어 만들기
+
+ - com.test.toy.ajax > "Ex06.java"
+ 					 > "Ex06Data.java"
+ - views > ajax > "ex06.jsp"
+ 
+ 
+ 
+Ajax + 읽기/쓰기/삭제 문제
+ - tblAddress 테이블 (번호, 이름, 나이, 주소, 성별, 연락처)
+ - com.test.toy.ajax > "Ex07.java"
+ 					 > "Ex07Add.java"
+ 					 > "Ex07Del.java"
+ 					 > "AddressDTO.java"
+ - views > ajax > "ex07.jsp"
+ 
+ 
+ 
+요구사항
+- 모든 행동이 페이지 새로고침 없이 진행되게 구현하시오.
+1. ex07.do 접속 시 > tblAddress의 모든 항목을 테이블에 출력하시오. > MVC 방식
+2. 입력 폼 > 데이터 작성 > 등록하기 버튼 클릭 > DB에 insert :: Ajax 방식
+									  > 방금 등록한 데이터를 테이블에 반영
+									  > "Ex07Add.java"
+3. 삭제 버튼 클릭 > DB에 delete :: Ajax 방식
+			   > 방금 삭제된 데이터를 테이블에 반영
+			   > "Ex07Del.java"
+4. 상단 성별 버튼 클릭 > 클릭한 성별만 테이블에 반영 :: Ajax 방식
+				   > "Ex07Search.java"

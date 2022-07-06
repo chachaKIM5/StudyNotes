@@ -1,12 +1,13 @@
 package com.test.toy.ajax;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;w
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/ajax/ex04data4.do")
@@ -22,6 +23,11 @@ public class Ex04Data4 extends HttpServlet {
 		
 		System.out.println("GET: " + name1);
 		System.out.println("POST: " + name2);
+		
+		PrintWriter writer = resp.getWriter();
+		
+		writer.print(name1 + " " + name2);
+		writer.close();
 	}
 
 }

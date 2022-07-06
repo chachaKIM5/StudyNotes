@@ -314,3 +314,9 @@ update tblResearch set
     where seq = 1;
     
 commit;
+
+
+select * from tblAddress;
+delete from tblAddress where seq = 13;
+
+create sequence seqAddress;

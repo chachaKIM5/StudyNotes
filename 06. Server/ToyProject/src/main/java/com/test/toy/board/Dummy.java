@@ -34,7 +34,7 @@ public class Dummy {
 			pstat = conn.prepareStatement(sql);
 			Random rnd = new Random();
 			
-			for (int i=0; i<256; i++) {
+			for (int i=0; i<30; i++) {
 				
 				pstat.setString(1, subject[rnd.nextInt(subject.length)] + " " + subject[rnd.nextInt(subject.length)] + " " + subject[rnd.nextInt(subject.length)] + " " + subject[rnd.nextInt(subject.length)] + " " + subject[rnd.nextInt(subject.length)]);
 				pstat.setString(2, content);

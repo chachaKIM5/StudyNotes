@@ -24,6 +24,15 @@
 	form input[type=text]:nth-child(4) { width: 200px; }
 	form input[type=text]:nth-child(5) { width: 400px; }
 	form select.form-control { width: 120px; }
+	
+	.btnGender {
+		opacity: .5;
+	}
+	
+	.btnchoose {
+		opacity: 1;
+	}
+	
 </style>
 </head>
 <body>
@@ -33,9 +42,9 @@
 		 	<h2>
 		 		주소록
 		 		<small>
-		 			<input type="button" value="남자" class="btn btn-primary">	
-		 			<input type="button" value="여자" class="btn btn-danger">	
-		 			<input type="button" value="전체" class="btn btn-info">	
+		 			<input type="button" value="남자" class="btn btn-primary btnGender">	
+		 			<input type="button" value="여자" class="btn btn-danger btnGender">	
+		 			<input type="button" value="전체" class="btn btn-info btnGender">	
 		 		</small>
 		 	</h2>
 		 	
@@ -156,6 +165,47 @@
 			$(event.target).parent().parent().remove();
 		};
 		
+		
+		$('.btnGender').click(function() {
+		
+			$('.btnGender').removeClass('btnchoose');
+			$(this).addClass('btnchoose');
+			$(this).blur();
+			
+			let choice = $(this).val();
+			
+			$.ajax({
+					
+				type: 'GET',
+				url: '/toy/ajax/ex07search.do',
+				data: 'choice=' + choice,
+				dataType: 'json',
+				success: function(result) {
+					
+					$('tbody').find('tr').remove();
+					
+					$(result).each(function(index, item) {						
+											
+						let temp = '';
+						temp += '<tr>';	
+						temp += '<td>' + item.name + '</td>';	
+						temp += '<td>' + item.age + '</td>';	
+						temp += '<td>' + item.gender + '</td>';	
+						temp += '<td>' + item.tel + '</td>';	
+						temp += '<td>' + item.address + '</td>';	
+						temp += '<td><input type="button" value="삭제" class="btn btn-warning btnDel" onclick="f1();" data-num= \"' + item.seq + '\"></td>';	
+						temp += '</tr>';
+						
+						$('tbody').append(temp);
+					});
+					
+				},
+				error: function(a,b,c) {
+					console.log(a,b,c);
+				}
+			
+			})
+		});
 	</script>	
 	
 </body>

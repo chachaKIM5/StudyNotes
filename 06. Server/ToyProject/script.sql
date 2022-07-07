@@ -2,6 +2,26 @@
 
 
 drop table tblUser;
+drop sequence seqUser;
+
+drop table tblComment;
+drop sequence seqComment;
+
+drop table tblHashTag;
+drop sequence seqHashTag;
+
+drop table tblTagging;
+drop sequence seqTagging;
+
+drop table tblGoodBad;
+drop sequence seqGoodBad;
+
+drop table tblBoard;
+drop sequence seqBoard;
+
+commit;
+
+
 
 
 -- 회원 테이블
@@ -57,7 +77,7 @@ select * from vwBoard;
 -- 게시판 뷰
 create or replace view vwBoard
 as
-select seq, subject, content, id, (select name from tblUser where id = tblBoard.id) as name, regdate, readcount,
+select seq, subject, content, id, (select name from tblUser where id = tblBoard.id) as name, regdate, readcount, filename,
     (select count(*) from tblComment where pseq = tblBoard.seq) as commentcount, depth,
     (sysdate - regdate) as isnew from tblBoard order by thread desc;
 
@@ -141,7 +161,7 @@ create table tblBoard (
     filename varchar2(100) null,                        -- 첨부파일
     orgfilename varchar2(100) null                      -- 첨부파일(원본 이름 for 다운로드)
 );
-
+create sequence seqBoard;
 
 
 -- 해시 태그 테이블
@@ -177,6 +197,7 @@ drop sequence seqHashTag;
 
 select * from tblHashTag h inner join tblTagging t on h.seq = t.hseq where bseq = 1;
 
+create sequence seqHashTag;
 
 
 -- 해시태그를 클릭했을 때 같은 해시태그의 글만 조회할 수 있도록 해시태그를 where절에 넣기
@@ -316,7 +337,26 @@ update tblResearch set
 commit;
 
 
-select * from tblAddress;
-delete from tblAddress where seq = 13;
+select * from tblAddress order by seq;
+select * from tblAddress where gender = 'm' or gender = 'f' order by seq asc;
+delete from tblAddress where seq between 17 and 25; 
 
 create sequence seqAddress;
+
+
+
+
+
+
+-- Ajax + Draggable
+create table tblDraggable(
+    id varchar2(30) primary key,        -- 태그id(PK)
+    left number not null,               -- x좌표
+    top number not null                 -- y좌표
+);
+
+insert into tblDraggable (id, left, top) values ('cat01', 0, 0);
+insert into tblDraggable (id, left, top) values ('cat02', 0, 0);
+insert into tblDraggable (id, left, top) values ('cat03', 0, 0);
+
+select * from tblDraggable;

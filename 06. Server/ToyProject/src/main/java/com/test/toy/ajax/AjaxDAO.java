@@ -263,4 +263,100 @@ public class AjaxDAO {
 		
 		return 0;
 	}
+
+	public ArrayList<AddressDTO> getSearchList(String choice) {
+
+		try {
+
+			String sql = "";
+			if (choice.equals("m,f")) {
+				sql = "select * from tblAddress where gender = ? or gender = ? order by seq asc";
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, choice.split(",")[0]);
+				pstat.setString(2, choice.split(",")[1]);
+			} else {
+				sql = "select * from tblAddress where gender = ? order by seq asc";
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, choice);
+				
+			}
+			
+			rs = pstat.executeQuery();
+			ArrayList<AddressDTO> slist = new ArrayList<AddressDTO>();
+			
+			while (rs.next()) {
+				AddressDTO dto = new AddressDTO();
+				
+				dto.setSeq(rs.getString("seq"));
+				dto.setName(rs.getString("name"));
+				dto.setGender(rs.getString("gender"));
+				dto.setAge(rs.getString("age"));
+				dto.setAddress(rs.getString("address"));
+				dto.setTel(rs.getString("tel"));
+				
+				slist.add(dto);
+			}
+			System.out.println(slist);
+			return slist;
+			
+		} catch (Exception e) {
+			System.out.println("AjaxDAO.getSearchList");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public int updatePosition(DraggableDTO dto) {
+		
+		try {
+			
+			String sql = "update tblDraggable set left = ?, top = ? where id = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getLeft());
+			pstat.setString(2, dto.getTop());
+			pstat.setString(3, dto.getId());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("AjaxDAO.updatePosition");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public ArrayList<DraggableDTO> listDraggable() {
+		
+		try {
+			
+			String sql = "select * from tblDraggable";
+			
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			
+			ArrayList<DraggableDTO> list = new ArrayList<DraggableDTO>();
+			
+			while (rs.next()) {
+				
+				DraggableDTO dto = new DraggableDTO();
+				dto.setId(rs.getString("id"));
+				dto.setLeft(rs.getString("left"));
+				dto.setTop(rs.getString("top"));
+				
+				list.add(dto);
+				
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println("AjaxDAO.listDraggable");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

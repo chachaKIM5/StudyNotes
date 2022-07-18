@@ -8,19 +8,22 @@
 <title>TripNow(트립나우)</title>
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 <style>
-
+	
+	
 </style>
 </head>
 <body>
-   <main>
-      <%@ include file="/WEB-INF/views/inc/header.jsp" %>
-      <div id="back"></div>
-      
-   </main>
-   
-   <script>
-   
-   </script>
+	<main>
+		<%@ include file="/WEB-INF/views/inc/header.jsp" %>
+		<section>
+		
+		</section>
+	</main>
+		<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
+	
+	<script>
+	
+	</script>
 
 </body>
 </html>

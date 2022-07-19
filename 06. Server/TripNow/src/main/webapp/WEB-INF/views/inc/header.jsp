@@ -4,19 +4,33 @@
 <header>
 	<span id="logo"><a href="/tripnow/home/main.do">TripNow</a></span>
 	<ul id="membermenu">
-		<li>로그인</li>
-		<li>회원가입</li>
-		<li>로그아웃</li>
-		<li>마이페이지</li>
+	
+	
+		<c:if test="${empty auth}">
+			<li><a href="/tripnow/member/login.do">로그인</a></li>
+			<li><a href="/tripnow/member/memberadd.do">회원가입</a></li>
+		</c:if>
+
+		<c:if test="${not empty auth}">
+			<li><a href="/tripnow/member/logout.do">로그아웃</a></li>
+		</c:if>
+		
+		<li>
+			마이페이지
+		</li>
 		<li>쿠폰함</li>
-		<li>[Admin Mode]</li>
+		<c:if test="${not empty auth and grade == 1}">
+			<li>[Admin Mode]</li>
+		</c:if>
 	</ul>
 	<ul id="mainmenu">
-		<li>국내숙소</li>
+		<li><a href="/tripnow/home/main.do">국내숙소</a></li>
 		<li>액티비티</li>
 		<li>렌터카</li>
 		<li>커뮤니티</li>
 		<li>이벤트</li>
-		<li>내 상품 확인</li>
+		<c:if test="${not empty auth and grade == 2}">
+			<li>내 상품 확인</li>
+		</c:if>
 	</ul>
 </header>

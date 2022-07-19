@@ -38,9 +38,9 @@ public class SendEmail {
 
 			
 			String receiver = email;
-			String title = "TripNow 가입을 환영합니다!";
+			String title = "TripNow 인증 코드";
 			String authNum = authNum();
-			String content = "<h2>TripNow 회원가입을 위한 인증번호는 [" + authNum + "] 입니다.</h2>";
+			String content = "<h2>안녕하세요, TripNow 인증 번호는 [" + authNum + "] 입니다.</h2>";
 			
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("tripnowauth@gmail.com", "관리자", "utf-8"));

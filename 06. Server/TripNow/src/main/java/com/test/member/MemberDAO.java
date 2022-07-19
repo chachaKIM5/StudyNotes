@@ -69,6 +69,142 @@ public class MemberDAO {
 		
 		return 0;
 	}
+
+	public MemberDTO logincheck(MemberDTO dto) {
+
+		try {
+			
+			String sql = "select * from tblUser where id = ? and pw = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getPw());
+			
+			rs = pstat.executeQuery();
+			
+			
+			if (rs.next()) {
+				dto.setName(rs.getString("name"));
+				dto.setGseq(rs.getString("gseq"));
+				return dto;
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("MemberDAO.logincheck");
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+
+	public MemberDTO findId(MemberDTO dto) {
+		
+		try {
+			
+			String sql = "select * from tblUser where name = ? and tel = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getName());
+			pstat.setString(2, dto.getTel());
+			
+			rs = pstat.executeQuery();
+			System.out.println("2번");
+			if (rs.next()) {
+				
+				dto.setId(rs.getString("id"));
+				return dto;
+				
+			} else {
+				
+				dto.setId("null");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("MemberDAO.findId");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	public int idemailcheck(MemberDTO dto) {
+		
+		try {
+			
+			String sql = "select count(*) as cnt from tblUser where id = ? and email = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getEmail());
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt("cnt");
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("MemberDAO.idemailcheck");
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+	}
+
+	public int changePW(MemberDTO dto) {
+
+		try {
+			
+			String sql = "update tblUser set pw = ? where id = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getPw());
+			pstat.setString(2, dto.getId());
+			
+			int result = pstat.executeUpdate();
+			
+			return result;
+			
+		} catch (Exception e) {
+			System.out.println("MemberDAO.changePW");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public int pwCheck(MemberDTO dto) {
+		
+		try {
+			
+			String sql = "select count(*) as cnt from tblUser where id = ? and pw = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getPw());
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				
+				return 1;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("MemberDAO.pwCheck");
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
 	
 	

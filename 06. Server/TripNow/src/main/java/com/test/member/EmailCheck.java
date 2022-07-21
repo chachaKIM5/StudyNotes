@@ -26,7 +26,7 @@ public class EmailCheck extends HttpServlet {
 		
 		PrintWriter writer = resp.getWriter();
 		
-		writer.printf("{ \"code\": %s }", code);
+		writer.printf("{ \"code\": %s, \"email\": \"%s\" }", code, email);
 		
 		writer.close();
 	}

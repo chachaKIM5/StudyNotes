@@ -74,7 +74,7 @@ public class MemberDAO {
 
 		try {
 			
-			String sql = "select * from tblUser where id = ? and pw = ?";
+			String sql = "select * from tblUser where id = ? and pw = ? and gseq not in (4, 5)";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -181,30 +181,6 @@ public class MemberDAO {
 		return 0;
 	}
 
-	public int pwCheck(MemberDTO dto) {
-		
-		try {
-			
-			String sql = "select count(*) as cnt from tblUser where id = ? and pw = ?";
-			
-			pstat = conn.prepareStatement(sql);
-			
-			pstat.setString(1, dto.getId());
-			pstat.setString(2, dto.getPw());
-			
-			rs = pstat.executeQuery();
-			
-			if (rs.next()) {
-				
-				return 1;
-			}
-			
-		} catch (Exception e) {
-			System.out.println("MemberDAO.pwCheck");
-			e.printStackTrace();
-		}
-		return 0;
-	}
 	
 	
 	

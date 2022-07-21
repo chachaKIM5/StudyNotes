@@ -13,5 +13,8 @@ public class MemberDTO {
 	private String birth;
 	private String gender;
 	private String email;
+	private String tel1;
+	private String tel2;
+	private String tel3;
 	
 }

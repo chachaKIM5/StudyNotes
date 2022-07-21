@@ -16,7 +16,16 @@
 		</c:if>
 		
 		<li>
+		<c:if test="${empty auth}">
+			<a href="/tripnow/member/login.do">
 			마이페이지
+			</a>
+		</c:if>
+		<c:if test="${not empty auth}">
+			<a href="/tripnow/mypage/mypagemain.do">
+			마이페이지
+			</a>
+		</c:if>
 		</li>
 		<li>쿠폰함</li>
 		<c:if test="${not empty auth and grade == 1}">
@@ -30,7 +39,7 @@
 		<li>커뮤니티</li>
 		<li>이벤트</li>
 		<c:if test="${not empty auth and grade == 2}">
-			<li>내 상품 확인</li>
+			<li><a href="/tripnow/partner/partnermain.do">내 상품 확인</a></li>
 		</c:if>
 	</ul>
 </header>

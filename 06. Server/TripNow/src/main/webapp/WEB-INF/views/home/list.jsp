@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,196 +116,93 @@
 			</div>
 			<div id="optionlist">
 				<h3>옵션리스트</h3>
-				<p><label><input type="checkbox">옵션</label></p>
-				<p><label><input type="checkbox">옵션</label></p>
-				<p><label><input type="checkbox">옵션</label></p>
-				<p><label><input type="checkbox">옵션</label></p>
-				<p><label><input type="checkbox">옵션</label></p>
-				<p><label><input type="checkbox">옵션</label></p>
-				<p><label><input type="checkbox">옵션</label></p>
-				<p><label><input type="checkbox">옵션</label></p>
-				<p><label><input type="checkbox">옵션</label></p>
-				<p><label><input type="checkbox">옵션</label></p>
+				<p><label><input type="checkbox" id="bath">욕조</label></p>
+				<p><label><input type="checkbox" id="pet">애견동반</label></p>
+				<p><label><input type="checkbox" id="smoke">흡연</label></p>
+				<p><label><input type="checkbox" id="pool">수영장</label></p>
+				<p><label><input type="checkbox" id="parking">주차</label></p>
+				<p><label><input type="checkbox" id="cook">취사</label></p>
+				<p><label><input type="checkbox" id="wifi">와이파이</label></p>
 			</div>
 		</nav>
 		<section>
-		<form method="GET" action="/tripnow/home/view.do">
+		<c:forEach items="${hif}" var="hif">
 		<div class="homelist">
+		<input type="hidden" class="bedvalue" value="${hif.bedvalue}">
 			<div class="card mb-3">
 	  			<div class="row no-gutters">
 	    			<div class="col-md-4">
-	      				<img src="/tripnow/images/jeju.jpg" alt="..." class="thumbnail">
+	      				<img src="/tripnow/${hif.path}" alt="..." class="thumbnail">
 	    			</div>
 	    			<div class="col-md-8">
 	      			<div class="card-body">
-	        			<h3 class="card-title">숙소명</h3>
-	        			<p class="card-text">★★★★★ (리뷰개수)</p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text money"> ￦ 66,666원</p>
-	        			<input type="submit" class="btn btn-primary booking" value="객실 선택하기"/>
+	        			<h3 class="card-title">${hif.name}</h3>
+	        			<p class="card-text">${hif.location}</p>
+	        			<p class="card-text">★★★★★
+	        				<span id="starval">	
+	        			(평균 : ${hif.star})</span> (${hif.reviewcount})</p>
+	        			<c:if test="${hif.bath eq 'y'}">
+	        			<p class="card-text badge badge-light"><span>욕조</span></p>
+	        			</c:if>
+	        			<c:if test="${hif.pet eq 'y'}">
+	        			<p class="card-text badge badge-light"><span>애견동반 가능</span></p>
+	        			</c:if>
+	        			<c:if test="${hif.smoke eq 'y'}">
+	        			<p class="card-text badge badge-light"><span>흡연 가능</span></p>
+	        			</c:if>
+	        			<c:if test="${hif.pool eq 'y'}">
+	        			<p class="card-text badge badge-light"><span>수영장 있음</span></p>
+	        			</c:if>
+	        			<c:if test="${hif.parking eq 'y'}">
+	        			<p class="card-text badge badge-light"><span>주차 가능</span></p>
+	        			</c:if>
+	        			<c:if test="${hif.cook eq 'y'}">
+	        			<p class="card-text badge badge-light"><span>취사 가능</span></p>
+	        			</c:if>
+	        			<c:if test="${hif.wifi eq 'y'}">
+	        			<p class="card-text badge badge-light"><span>와이파이</span></p>
+	        			</c:if>
+	        			<div></div>
+	        			<p class="card-text money"> ￦ <fmt:formatNumber value="${hif.price}" pattern="#,###,###" /> 원</p>
+	        			<input type="hidden" name="seq" value="${hif.seq}">
+	        			<button class="btn btn-primary booking" onclick="location.href='/tripnow/home/view.do?seq=${hif.seq}';">객실 선택하기</button>
 	      			</div>
 	    		</div>
 	  		 </div>
 		</div>
 	</div>
-	<div class="homelist">
-			<div class="card mb-3">
-	  			<div class="row no-gutters">
-	    			<div class="col-md-4">
-	      				<img src="/tripnow/images/jeju.jpg" alt="..." class="thumbnail">
-	    			</div>
-	    			<div class="col-md-8">
-	      			<div class="card-body">
-	        			<h3 class="card-title">숙소명</h3>
-	        			<p class="card-text">★★★★★ (리뷰개수)</p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text money"> ￦ 66,666원</p>
-	        			<input type="submit" class="btn btn-primary booking" value="객실 선택하기"/>
-	      			</div>
-	    		</div>
-	  		 </div>
-		</div>
-	</div>
-	<div class="homelist">
-			<div class="card mb-3">
-	  			<div class="row no-gutters">
-	    			<div class="col-md-4">
-	      				<img src="/tripnow/images/jeju.jpg" alt="..." class="thumbnail">
-	    			</div>
-	    			<div class="col-md-8">
-	      			<div class="card-body">
-	        			<h3 class="card-title">숙소명</h3>
-	        			<p class="card-text">★★★★★ (리뷰개수)</p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text money"> ￦ 66,666원</p>
-	        			<input type="submit" class="btn btn-primary booking" value="객실 선택하기"/>
-	      			</div>
-	    		</div>
-	  		 </div>
-		</div>
-	</div>
-	<div class="homelist">
-			<div class="card mb-3">
-	  			<div class="row no-gutters">
-	    			<div class="col-md-4">
-	      				<img src="/tripnow/images/jeju.jpg" alt="..." class="thumbnail">
-	    			</div>
-	    			<div class="col-md-8">
-	      			<div class="card-body">
-	        			<h3 class="card-title">숙소명</h3>
-	        			<p class="card-text">★★★★★ (리뷰개수)</p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text money"> ￦ 66,666원</p>
-	        			<input type="submit" class="btn btn-primary booking" value="객실 선택하기"/>
-	      			</div>
-	    		</div>
-	  		 </div>
-		</div>
-	</div>
-	<div class="homelist">
-			<div class="card mb-3">
-	  			<div class="row no-gutters">
-	    			<div class="col-md-4">
-	      				<img src="/tripnow/images/jeju.jpg" alt="..." class="thumbnail">
-	    			</div>
-	    			<div class="col-md-8">
-	      			<div class="card-body">
-	        			<h3 class="card-title">숙소명</h3>
-	        			<p class="card-text">★★★★★ (리뷰개수)</p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text badge badge-light"><span>숙소 타입</span></p>
-	        			<p class="card-text money"> ￦ 66,666원</p>
-	        			<input type="submit" class="btn btn-primary booking" value="객실 선택하기"/>
-	      			</div>
-	    		</div>
-	  		 </div>
-		</div>
-	</div>
-	
-	</form>
+	</c:forEach>
 	</section>
 	</main>
 	<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	
 	<script>
 		$(".badoption [type=button]").click(function() {
+			
+			if ($(".bedvalue").val() === ($(this).text())) {
+				$(".bedvalue").parent().addClass("show");
+				$(".bedvalue").parent().removeClass("hide");
+				
+				if($(".bedvalue").val() != ($(this).text())) {
+					$(".bedvalue").parent().addClass("hide");
+					$(".bedvalue").parent().removeClass("show");
+				}
+				
+			} else {
+				$(".bedvalue").parent().addClass("hide");
+				$(".bedvalue").parent().removeClass("show");
+			}
+			
+			
 			$(".badoption [type=button]").removeClass("btn-primary");
 			$(this).addClass("btn-primary");
+				
 		});
+		
+		$("#bath").change(function() {
+			console.log($(this).is(":checked"));
+		});
+		
 	</script>
 
 </body>

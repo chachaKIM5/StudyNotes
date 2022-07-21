@@ -143,14 +143,50 @@
 				data: 'pw=' + $('#pw').val(),
 				dataType: 'json',
 				success: function(result) {
-					code = result.code;
+					if (result.result == 1) {
+						checkbooklist();
+					} else {
+						$('#msg').css('visibility', 'visible');
+					}
 				},
 				error: function(a,b,c) {
 					console.log(a,b,c);
 				}
 				
 			});
+   		
+   			return false;
    		}
+   		
+   		
+   		function checkbooklist() {
+   			
+   			$.ajax({
+				
+				type: 'POST',
+				url: '/tripnow/mypage/checkbooklist.do',
+				data: 'id=' + "${auth}",
+				dataType: 'json',
+				success: function(result) {
+					if (result.result == 1) {
+						location.href="/tripnow/mypage/unregistercheck.do?id=${auth}";
+					} else {
+						if (confirm('정말 탈퇴하시겠습니까?') == true) {
+							location.href="/tripnow/mypage/unregisterok.do?id=${auth}";
+						} else {
+							return;
+						};
+						
+					}
+				},
+				error: function(a,b,c) {
+					console.log(a,b,c);
+				}
+				
+			});
+   			
+   			
+   		};
    </script>
 
 </body>

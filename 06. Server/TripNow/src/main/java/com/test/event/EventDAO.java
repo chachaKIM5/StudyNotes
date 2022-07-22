@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.test.activity.ActivityDTO;
+import com.test.activitiy.ActivityDTO;
 import com.test.tripnow.DBUtil;
 
 public class EventDAO {
@@ -104,7 +104,6 @@ public class EventDAO {
 			
 			
 		} catch (Exception e) {
-			System.out.println("EventDAO.getCoupon");
 			e.printStackTrace();
 		}
 		
@@ -150,6 +149,36 @@ public class EventDAO {
 			System.out.println("EventDAO.couponlist");
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	public CouponDTO getEvent(CouponDTO cdto) {
+		
+		try {
+			
+			String sql ="select * from tblEvent where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, cdto.getEseq());
+			
+			rs = pstat.executeQuery();
+			
+			while(rs.next()) {
+				
+				cdto.setRate(rs.getInt("rate"));
+				
+				
+			}
+			
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("EventDAO.getEvent");
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 

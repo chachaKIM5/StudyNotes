@@ -14,7 +14,7 @@
 		margin-right: 15px;
 		float: left;
 		width: 250px;
-		height: 1500px;
+		height: 2200px;
 		/* background-color: #999; */
 	}
 	
@@ -88,6 +88,10 @@
 		margin-bottom: 8px;
 	}
 	
+	.fontup {
+		font-size: 18px;
+	}
+	
 </style>
 </head>
 <body>
@@ -137,10 +141,10 @@
 	    			<div class="col-md-8">
 	      			<div class="card-body">
 	        			<h3 class="card-title">${hif.name}</h3>
-	        			<p class="card-text">${hif.location}</p>
-	        			<p class="card-text">★★★★★
+	        			<p class="card-text fontup">${hif.location}</p>
+	        			<p class="card-text fontup">★★★★★
 	        				<span id="starval">	
-	        			(평균 : ${hif.star})</span> (${hif.reviewcount})</p>
+	        			(평균 : <fmt:formatNumber value="${hif.star}" pattern=".0"/>)</span> (${hif.reviewcount})</p>
 	        			<c:if test="${hif.bath eq 'y'}">
 	        			<p class="card-text badge badge-light"><span>욕조</span></p>
 	        			</c:if>
@@ -165,7 +169,7 @@
 	        			<div></div>
 	        			<p class="card-text money"> ￦ <fmt:formatNumber value="${hif.price}" pattern="#,###,###" /> 원</p>
 	        			<input type="hidden" name="seq" value="${hif.seq}">
-	        			<button class="btn btn-primary booking" onclick="location.href='/tripnow/home/view.do?seq=${hif.seq}';">객실 선택하기</button>
+	        			<a class="btn btn-primary booking" href="/tripnow/home/view.do?seq=${hif.seq}">객실 선택하기</a>
 	      			</div>
 	    		</div>
 	  		 </div>
@@ -202,6 +206,11 @@
 		$("#bath").change(function() {
 			console.log($(this).is(":checked"));
 		});
+		
+		$(".booking").click(function(event) {
+	 		var aaa = event.target + "&loca=" + $("#loca").val() + "&dates=" + $(".flatpickr-input").val() + "&count=" + $(".count").val();
+	 		$(".booking").attr("href", aaa);;
+	 	});
 		
 	</script>
 

@@ -30,13 +30,14 @@ public class UnregisterCheck extends HttpServlet {
 		carList = dao.getCarBookingList(id, "cb");
 		actList = dao.getActBookingList(id, "ab");
 		
-		req.setAttribute("homeList", homeList);
-		req.setAttribute("carList", carList);
-		req.setAttribute("actList", actList);
-		
 		System.out.println(homeList);
 		System.out.println(carList);
 		System.out.println(actList);
+		
+		
+		req.setAttribute("homeList", homeList);
+		req.setAttribute("carList", carList);
+		req.setAttribute("actList", actList);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mypage/unregistercheck.jsp");
 		dispatcher.forward(req, resp);

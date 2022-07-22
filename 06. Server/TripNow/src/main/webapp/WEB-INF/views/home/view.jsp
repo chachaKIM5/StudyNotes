@@ -182,7 +182,7 @@
 
 			<div id="homeinfo">
 				<div>
-					<span>${rimdto.name}</span> <span> ★ ${rimdto.avgstar} (${rimdto.count}) </span>
+					<span>${rimdto.name}</span> <span> ★ <fmt:formatNumber value="${rimdto.avgstar}" pattern=".0"/> (${rimdto.count}) </span>
 				</div>
 				<div id="b_text1">
 	        			<c:if test="${rldto.bath eq 'y'}">
@@ -242,13 +242,13 @@
 			
 				<h2 id="mainreview">숙소 리뷰</h2>
 				
-				<c:if test="${result > 0}">
+				<c:if test="${bookid == auth and auth != null}">
 				<h3 id="reviewstart">리뷰 작성</h3>
 				
 				<form id="addCommentForm">
 				<input type="hidden" name="seq" value="${seq}">
 				<div id="radiostar">
-					<label><input type="radio" name="star" value="5">&nbsp;<span class="star5"></span></label>
+					<label><input type="radio" name="star" value="5" required>&nbsp;<span class="star5"></span></label>
 					<label><input type="radio" name="star" value="4">&nbsp;<span class="star4"></span></label>
 					<label><input type="radio" name="star" value="3">&nbsp;<span class="star3"></span></label>
 					<label><input type="radio" name="star" value="2">&nbsp;<span class="star2"></span></label>
@@ -257,14 +257,20 @@
 				
 				<div id="reviewWrite">
 					<textarea rows="3" cols="110px" name="content" placeholder="댓글 내용을 작성하세요."></textarea>
-					<button class="btn btn-primary write" onclick="addComment();">작성하기</button>
+					<button class="btn btn-primary write" type="button" onclick="addComment();">작성하기</button>
 					<input type="hidden" name="hseq" value="${seq}">
-					<input type="hidden" name="loca" value="${loca}">
-					<input type="hidden" name="dates" value="${dates}">
-					<input type="hidden" name="count" value="${count}">
 				</div>
 				</form>
 				</c:if>
+				
+				
+				
+				
+				
+				
+				
+				
+				<div id="reviewbox"> 
 				
 				<c:if test="${not empty hrlist}">
 				<c:forEach items="${hrlist}" var="hrlist">
@@ -297,19 +303,17 @@
 				</div>
 				</c:forEach>
 				</c:if>
+				</div>
 		</section>
 	</main>
 	<%@ include file="/WEB-INF/views/inc/footer.jsp"%>
 	
-	
-	
-<!-- weather widget start --><div id="m-booked-bl-simple-week-vertical-2136"> <div class="booked-wzs-160-275 weather-customize" style="background-color:#137AE9; width:160px;" id="width1 " > <div class="booked-wzs-160-275_in"> <div class="booked-wzs-160-275-data"> <div class="booked-wzs-160-275-left-img wrz-18"></div> <div class="booked-wzs-160-275-right"> <div class="booked-wzs-day-deck"> <div class="booked-wzs-day-val"> <div class="booked-wzs-day-number"><span class="plus">+</span>28</div> <div class="booked-wzs-day-dergee"> <div class="booked-wzs-day-dergee-val">&deg;</div> <div class="booked-wzs-day-dergee-name">C</div> </div> </div> <div class="booked-wzs-day"> <div class="booked-wzs-day-d"><span class="plus">+</span>29&deg;</div> <div class="booked-wzs-day-n"><span class="plus">+</span>23&deg;</div> </div> </div> <div class="booked-wzs-160-275-info"> <div class="booked-wzs-160-275-city">서울특별시</div> <div class="booked-wzs-160-275-date">일요일, 17</div> </div> </div> </div> <table cellpadding="0" cellspacing="0" class="booked-wzs-table-160"> <tr> <td class="week-day"> <span class="week-day-txt">월요일</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td> <td class="week-day-val"><span class="plus">+</span>32&deg;</td> <td class="week-day-val"><span class="plus">+</span>23&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">화요일</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-03"></div></td> <td class="week-day-val"><span class="plus">+</span>31&deg;</td> <td class="week-day-val"><span class="plus">+</span>24&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">수요일</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td> <td class="week-day-val"><span class="plus">+</span>30&deg;</td> <td class="week-day-val"><span class="plus">+</span>24&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">목요일</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td> <td class="week-day-val"><span class="plus">+</span>30&deg;</td> <td class="week-day-val"><span class="plus">+</span>23&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">금요일</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td> <td class="week-day-val"><span class="plus">+</span>30&deg;</td> <td class="week-day-val"><span class="plus">+</span>22&deg;</td> </tr> <tr> <td class="week-day"> <span class="week-day-txt">토요일</span></td> <td class="week-day-ico"><div class="wrz-sml wrzs-03"></div></td> <td class="week-day-val"><span class="plus">+</span>31&deg;</td> <td class="week-day-val"><span class="plus">+</span>23&deg;</td> </tr> </table> <div class="booked-wzs-center"> <span class="booked-wzs-bottom-l">7일 예보 보기</span> </div> </div> </div> </div><script type="text/javascript"> var css_file=document.createElement("link"); var widgetUrl = location.href; css_file.setAttribute("rel","stylesheet"); css_file.setAttribute("type","text/css"); css_file.setAttribute("href",'https://s.bookcdn.com/css/w/booked-wzs-widget-160x275.css?v=0.0.1'); document.getElementsByTagName("head")[0].appendChild(css_file); function setWidgetData_2136(data) { if(typeof(data) != 'undefined' && data.results.length > 0) { for(var i = 0; i < data.results.length; ++i) { var objMainBlock = document.getElementById('m-booked-bl-simple-week-vertical-2136'); if(objMainBlock !== null) { var copyBlock = document.getElementById('m-bookew-weather-copy-'+data.results[i].widget_type); objMainBlock.innerHTML = data.results[i].html_code; if(copyBlock !== null) objMainBlock.appendChild(copyBlock); } } } else { alert('data=undefined||data.results is empty'); } } var widgetSrc = "https://widgets.booked.net/weather/info?action=get_weather_info;ver=7;cityID=18406;type=4;scode=2;ltid=3458;domid=593;anc_id=22985;countday=undefined;cmetric=1;wlangID=24;color=137AE9;wwidth=160;header_color=ffffff;text_color=333333;link_color=08488D;border_form=1;footer_color=ffffff;footer_text_color=333333;transparent=0;v=0.0.1";widgetSrc += ';ref=' + widgetUrl;widgetSrc += ';rand_id=2136';var weatherBookedScript = document.createElement("script"); weatherBookedScript.setAttribute("type", "text/javascript"); weatherBookedScript.src = widgetSrc; document.body.appendChild(weatherBookedScript) </script><!-- weather widget end -->
 
 
 
 	<script>
 	
-		function addComment(seq) {
+		function addComment() {
 			
 			$.ajax({
 				type: 'POST',
@@ -319,22 +323,33 @@
 				success: function(result) {
 					if (result.result == "1") {
 						
-						let temp= `<div>
-							<span>작성자 : \${result.id}</span>
-							<span>등록일 : \${result.regdate}</span>
-						</div>
-						<div id="reviewall">
-							<span class="star\${result.star}"></span>
-						</div>
-						<span class="reviewnumber">\${result.star}</span>
-						<div class="reviewcontent">
-							\${$('[name=content]').val()}
-							<span class="spanright">
-								<span class="btnspan"><a href="#!" onclick="delcomment(\${result.seq});">[삭제]</a></span>
-								<span class="btnspan"><a href="#!" onclick="editcomment(\${result.seq});">[수정]</a></span>
-							</span>
+						let temp= `<div class="homereview">
+							<div>
+								<span>작성자 : \${result.id}</span>
+								<span style="float: right">등록일 : \${result.regdate}</span>
+							</div>
+							<div id="reviewall">
+								<span class="star\${result.star}"></span>
+							</div>
+							<span class="reviewnumber">\${result.star}</span>
+							<div class="reviewcontent">
+								\${$('[name=content]').val()}
+								<span class="spanright">
+									<span class="btnspan"><a href="#!" onclick="delcomment(\${result.seq});">[삭제]</a></span>
+									<span class="btnspan"><a href="#!" onclick="editcomment(\${result.seq});">[수정]</a></span>
+								</span>
+							</div>
 						</div>`;
 						
+						if($('.homereview').length == 0) {
+							append('<div class="homereview"></div>');
+						}
+						
+						$('#reviewbox').prepend(temp);
+						
+						$('[name=content]').val('');
+						
+						$('#addCommentForm').remove();
 					}
 				}, error: function(a,b,c) {
 					console.log(a,b,c);
@@ -344,7 +359,7 @@
 			}
 			function delcomment(seq) {
 				
-				let tr = $(event.target).parents('div');
+				let tr = $(event.target).parent().parent().parent().parent();
 				
 				if (confirm('정말 삭제하시겠습니까?')) {
 					

@@ -45,11 +45,10 @@ public class AddCommentOk extends HttpServlet {
 		
 		writer.print("{");
 		writer.printf("\"result\": %d,", 		result);
-//		writer.printf("\"seq\": %s,", 			temp.getSeq());
-//		writer.printf("\"id\": \"%s\",", 		temp.getId());
-//		writer.printf("\"star\": \"%s\",", 		temp.getStar());
-//		writer.printf("\"regdate\": \"%s\",", 	temp.getRegdate());
-//		writer.printf("\"homeseq\": \"%s\",", 	homeseq);
+		writer.printf("\"seq\": %s,", 			temp.getSeq());
+		writer.printf("\"id\": \"%s\",", 		temp.getId());
+	    writer.printf("\"star\": \"%s\",", 		temp.getStar());
+		writer.printf("\"regdate\": \"%s\"", 	temp.getRegdate());
 		writer.print("}");
 		
 		writer.close();

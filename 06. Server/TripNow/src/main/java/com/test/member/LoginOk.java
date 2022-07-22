@@ -22,8 +22,6 @@ public class LoginOk extends HttpServlet {
 		String pw = req.getParameter("pw");
 		int result = 0;
 		
-		System.out.println(id);
-		System.out.println(pw);
 		MemberDTO dto = new MemberDTO();
 		MemberDAO dao = new MemberDAO();
 		

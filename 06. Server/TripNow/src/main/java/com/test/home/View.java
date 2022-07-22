@@ -32,42 +32,41 @@ public class View extends HttpServlet {
 		HomeOptionDTO rldto = dao.homeoption(seq);
 		
 		String id = ((String)session.getAttribute("auth"));
-		int result = dao.getCommentAvail(seq, id);
+		String bookid = dao.getCommentAvail(seq, id);
 		
 		
 		ArrayList<RoomListDTO> rolist = dao.roomlist(seq);
 		ArrayList<HomeReviewListDTO> hrlist = dao.homeReviewList(seq);
 		
-		req.setAttribute("loca", loca);
 		
-		CalDTO caldto = new CalDTO();
-
-		
-		String startYear = dates.split(" ~ ")[0].split("-")[0];
-		String startMonth = dates.split(" ~ ")[0].split("-")[1];
-		String startDay = dates.split(" ~ ")[0].split("-")[2];
+		  req.setAttribute("loca", loca);
 		  
-		String endYear = dates.split(" ~ ")[1].split("-")[0];
-		String endMonth = dates.split(" ~ ")[1].split("-")[1];
-		String endDay = dates.split(" ~ ")[1].split("-")[2];
-		
-		
-		caldto.setStartYear(startYear);
-		caldto.setStartMonth(startMonth);
-		caldto.setStartDay(startDay);
+		  CalDTO caldto = new CalDTO();
 		  
-		caldto.setEndYear(endYear);
-		caldto.setEndMonth(endMonth);
-		caldto.setEndDay(endDay);
-		
-		req.setAttribute("dates", caldto);
-		req.setAttribute("count", count);
+		  
+		  String startYear = dates.split(" ~ ")[0].split("-")[0]; String startMonth =
+		  dates.split(" ~ ")[0].split("-")[1]; String startDay =
+		  dates.split(" ~ ")[0].split("-")[2];
+		  
+		  String endYear = dates.split(" ~ ")[1].split("-")[0]; String endMonth =
+		  dates.split(" ~ ")[1].split("-")[1]; String endDay =
+		  dates.split(" ~ ")[1].split("-")[2];
+		  
+		  
+		  caldto.setStartYear(startYear); caldto.setStartMonth(startMonth);
+		  caldto.setStartDay(startDay);
+		  
+		  caldto.setEndYear(endYear); caldto.setEndMonth(endMonth);
+		  caldto.setEndDay(endDay);
+		  
+		  req.setAttribute("dates", caldto); req.setAttribute("count", count);
+		  
 		req.setAttribute("rimdto", rimdto);
 		req.setAttribute("rldto", rldto);
 		req.setAttribute("rolist", rolist);
 		req.setAttribute("hrlist", hrlist);
 		req.setAttribute("seq", seq);
-		req.setAttribute("result", result);
+		req.setAttribute("bookid", bookid);
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/home/view.jsp");
 

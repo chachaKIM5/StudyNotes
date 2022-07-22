@@ -14,16 +14,18 @@
 
 .couponListContainer{
 
+/* 	background-color: #999; */
+	
+	
 	word-break:break-all;
 	display: flex;
 	flex-direction: column;
 
 
-
 }
 
-
 .couponListContainer > div:nth-child(1){
+/* 	background-color: #eee; */
 	
 	width:160px;
 	height: 50px;
@@ -34,14 +36,12 @@
 	border-bottom: 2px solid gray;
 }	
 
-
 	.couponListContainer > div:nth-child(2){
 	
 		margin-top : 30px;
 		
 	}
 	
-
 
 	
 	.table.coupon > thead,tbody{
@@ -51,13 +51,11 @@
 		border-top: 2px solid black;
 	}
 
-
 	.table.coupon > thead > tr > th:nth-child(1){
 		text-align: center;
 		width:330px;
 	
 	}
-	
 	
 	.table.coupon > thead > tr > th:nth-child(2){
 		text-align: center;
@@ -65,13 +63,11 @@
 	
 	}
 	
-	
 	.table.coupon > thead > tr > th:nth-child(3){
 		text-align: center;
 		width:100px;
 	
 	}
-	
 	
 	.table.coupon > thead > tr > th:nth-child(4){
 		text-align: center;
@@ -79,11 +75,9 @@
 	
 	}
 	
-	
 	body > div > div:nth-child(2) > table > tbody > tr > td.left{
 		text-align: left;	
 	}
-	
 	
 	
 	.btnGroup{
@@ -95,7 +89,6 @@
 	    position: relative;
 		
 	}
-	
 	
 	.selectCoupon{
 		display: inline-block;
@@ -113,7 +106,6 @@
 	    border: 1px solid #000000;
    		background-color: #000000;
 	}
-	
 	
 	.couponback{
 	
@@ -134,14 +126,12 @@
 	}
 	
 	
-	
 	.coupon-info{
 		
 		margin-top: 45px;
 	    padding-top: 10px;
 	    position: relative;
 	}
-
 
 
 </style>
@@ -169,8 +159,8 @@
 				
 					<tr>
 						<td class="left">
-							<label><input type="radio" name="coupon" class="coupon" value="${dto.eseq}">
-							${dto.name}</label>
+							<input type="radio" name="coupon" class="coupon" value="${dto.eseq}"/>
+							<label for="1234">${dto.name}</label>
 						</td>
 						<td>${dto.value}</td>
 						<td>${dto.rate}</td>
@@ -180,54 +170,69 @@
 				</tbody>
 			</table>
 		</div>
-		
-			<div class="btnGroup">
-				
-				<a class="couponback" onclick="window.close()">취소</a>
-				
-				<a class="selectCoupon" onClick="checkCoupon()">쿠폰선택</a>
-			
-			</div>
-		
-		<ul class="coupon-info">
-			<li>쿠폰 적용 시 한 주문, 한 상품에 한해서만 적용됩니다.</li>
-			<li>각 쿠폰은 사용기한이 정해져 있습니다.</li>
-			<li>쿠폰 적용품목이 한정된 쿠폰은 해당 품목에서만 사용가능 합니다.</li>
-			<li>할인/적립(%) 쿠폰은 적립금할인 등을 제외한 실제 결제금액에 적용됩니다.</li>
-			<li>해당 상품에 대한 쿠폰은 해당 상품만 구매시 적용이 가능합니다.</li>
-		</ul>
 	
+			         <div class="btnGroup">
+            
+            <a class="couponback" onclick="window.close()">취소</a>
+            
+            <a class="selectCoupon" onClick="checkCoupon()">쿠폰선택</a>
+         
+         </div>
+      
+      <ul class="coupon-info">
+         <li>쿠폰 적용 시 한 주문, 한 상품에 한해서만 적용됩니다.</li>
+         <li>각 쿠폰은 사용기한이 정해져 있습니다.</li>
+         <li>쿠폰 적용품목이 한정된 쿠폰은 해당 품목에서만 사용가능 합니다.</li>
+         <li>할인/적립(%) 쿠폰은 적립금할인 등을 제외한 실제 결제금액에 적용됩니다.</li>
+         <li>해당 상품에 대한 쿠폰은 해당 상품만 구매시 적용이 가능합니다.</li>
+      </ul>
+   
 
-	</div>
-	
-	<script>
-	
+   </div>
+   
+   <script>
+   
 
 
 
-		function checkCoupon() {  
-			 
-			$.ajax({
-				
-				type: 'POST',
-				url: '/tripnow/activity/activitypayment.do',
-				data: 'eseq=' + $('.coupon:checked').val(),
-				dataType: 'JSON',
-				success: function(result) {
-									
-				},
-				error: function(a,b,c) {
-					console.log(a,b,c);
-				}
-				
-			});
-				
-		};
-		
-		
-		
-	</script>
+      function checkCoupon() {  
+          
+         $.ajax({
+            
+            type: 'POST',
+            url: '/tripnow/activity/activitypayment.do',
+            data: 'eseq=' + $('.coupon:checked').val(),
+            dataType: 'JSON',
+            success: function(result) {
+                           
+            },
+            error: function(a,b,c) {
+               console.log(a,b,c);
+            }
+            
+         });
+            
+      };
+      
+      
+      
+   </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

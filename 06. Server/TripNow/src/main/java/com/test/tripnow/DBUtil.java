@@ -10,9 +10,9 @@ public class DBUtil {
    
    public static Connection open() {
       
-      String url = "jdbc:oracle:thin:@oraclecloud_high?TNS_ADMIN=C://class/Wallet_OracleCloud";
-      String id = "WebPartner";
-      String pw = "JAVAjava1234";
+	   String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	   String id = "jik";
+	   String pw = "java1234";
       
       try {
          
@@ -66,4 +66,3 @@ public class DBUtil {
    
 
 }//DBUtil
-

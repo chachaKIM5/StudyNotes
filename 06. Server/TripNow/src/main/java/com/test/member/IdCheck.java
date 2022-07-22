@@ -46,7 +46,7 @@ public class IdCheck extends HttpServlet {
 
 	private boolean checkletter(String id) {
 		
-		String idPattern = "^[0-9a-z]{4,15}$";
+		String idPattern = "^[0-9a-z]{5,15}$";
 		
 		return Pattern.matches(idPattern, id);
 	}

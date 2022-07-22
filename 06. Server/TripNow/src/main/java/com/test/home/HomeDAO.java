@@ -23,7 +23,7 @@ public class HomeDAO {
 		
 		try {
 			
-			String where = String.format("where location like '%%%s%%' and (maxpeople >= %s and maxpeople <= 5) and value='%s'", dto.getLoca(), dto.getCount(), dto.getValue());
+			String where = String.format("where location like '%%%s%%' and (maxpeople >= %s and maxpeople <= 5) and value='%s' and seq in (select seq from tblhome where seq in (select distinct hseq from tblRoom where not seq in (select rseq from tblHomeBook where enddate > '%s' and startdate < '%s')))", dto.getLoca(), dto.getCount(), dto.getValue(), dto.getSubstart(), dto.getSubstart());
 			
 			String sql = "select * from vwhomeinfo " + where;
 
@@ -294,13 +294,14 @@ public class HomeDAO {
 
 		try {
 			
-			String sql = "insert into tblHomeReview values ((select max(seq) + 1 from tblHomeReview), ?, ?, ?, ?, sysdate)";
+			String sql = "insert into tblHomeReview values ((select max(seq) + 1 from tblHomeReview), ?, (select max(hb.seq) from tblHomeBook hb inner join tblRoom r on hb.rseq = r.seq inner join tblHome h on h.seq = r.hseq where hb.id = ? and h.seq = ?), ?, ?, sysdate)";
 			
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, dto.getId());
-			pstat.setString(2, dto.getHseq());
-			pstat.setString(3, dto.getStar());
-			pstat.setString(4, dto.getContent());
+			pstat.setString(2, dto.getId());
+			pstat.setString(3, dto.getHseq());
+			pstat.setString(4, dto.getStar());
+			pstat.setString(5, dto.getContent());
 			
 			return pstat.executeUpdate();
 			
@@ -316,7 +317,7 @@ public class HomeDAO {
 
 		try {
 			
-			String sql = "select tblComment.* from tblComment where seq = (select max(seq) from tblComment)";
+			String sql = "select tblHomeReview.* from tblHomeReview where seq = (select max(seq) from tblHomeReview)";
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
@@ -328,6 +329,7 @@ public class HomeDAO {
 				dto.setSeq(rs.getString("seq"));
 				dto.setRegdate(rs.getString("regdate"));
 				dto.setId(rs.getString("id"));
+				dto.setStar(rs.getString("star"));
 				
 			}
 			
@@ -382,21 +384,21 @@ public class HomeDAO {
 		return 0;
 	}
 
-	public int getCommentAvail(String seq, String id) {
+	public String getCommentAvail(String seq, String id) {
 
 		try {
 			
-			String sql = "select count(*) as reviewenter from tblHomeBook hb inner join tblRoom r on hb.rseq = r.seq where r.hseq = ? and hb.id = ? and hb.startdate < sysdate and hb.enddate + 7 > sysdate";
+			String sql = "select hb.id from tblHomeBook hb left outer join tblHomeReview hr on hb.seq = hr.hseq inner join tblRoom r on r.seq = hb.rseq inner join tblHome h on h.seq = r.hseq where hb.id = ? and hr.content is null and enddate + 7 > sysdate and h.seq = ?";
 			
 			pstat = conn.prepareStatement(sql);
-			pstat.setString(1, seq);
-			pstat.setString(2, id);
+			pstat.setString(1, id);
+			pstat.setString(2, seq);
 			
 			rs = pstat.executeQuery();
 			
 			if (rs.next()) {
 				
-				return rs.getInt("reviewenter");
+				return rs.getString("id");
 			}
 			
 		} catch (Exception e) {
@@ -404,7 +406,150 @@ public class HomeDAO {
 			e.printStackTrace();
 		}
 		
+		return null;
+	}
+
+	public HomeBookPayDTO homebookpay(String seq) {
+
+		try {
+			
+			String sql = "select r.seq, r.name, h.name as homename, h.location, h.enterhome, h.outerhome, u.id as sellerid, u.name as seller, u.tel as sellertel, r.price from tblRoom r inner join tblHome h on r.hseq = h.seq inner join tblUser u on u.id = h.pid where r.seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			rs = pstat.executeQuery();
+			
+			HomeBookPayDTO dto = new HomeBookPayDTO();
+			
+			if (rs.next()) {
+				
+				dto.setSeq(rs.getString("seq"));
+				dto.setName(rs.getString("name"));
+				dto.setHomename(rs.getString("homename"));
+				dto.setLocation(rs.getString("location"));
+				dto.setEnterhome(rs.getString("enterhome"));
+				dto.setOuterhome(rs.getString("outerhome"));
+				dto.setSellerid(rs.getString("sellerid"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setSellertel(rs.getString("sellertel"));
+				dto.setPrice(rs.getString("price"));
+				
+			}
+			
+			return dto;
+			
+		} catch (Exception e) {
+			System.out.println("HomeDAO.homebookpay");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public BookUserDTO getUserInfo(String auth) {
+
+		try {
+			
+			String sql = "select * from tblUser where id = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, auth);
+			
+			rs = pstat.executeQuery();
+
+			BookUserDTO udto = new BookUserDTO(); 
+			
+			if (rs.next()) {
+				
+				udto.setName(rs.getString("name"));
+				udto.setTel(rs.getString("tel"));
+				udto.setEmail(rs.getString("email"));
+				
+			}
+			
+			return udto;
+			
+		} catch (Exception e) {
+			System.out.println("HomeDAO.getUserInfo");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public int addBookList(String auth) {
+
+		try {
+			
+			String sql = "insert into tblBookList values ((select max(seq) + 1 from tblBookList), ?)";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, auth);
+			
+			return pstat.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			System.out.println("HomeDAO.addBookList");
+			e.printStackTrace();
+		}
+		
 		return 0;
+	}
+
+	public int addHomeBook(String seq, String auth, String startDate, String endDate) {
+		
+		try {
+			
+			String sql = "insert into tblHomeBook values ((select max(seq) + 1 from tblHomeBook), ?, 1, ?, (select max(seq) from tblBookList), 1, ?, ?)";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			pstat.setString(2, auth);
+			pstat.setString(3, startDate);
+			pstat.setString(4, endDate);
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("HomeDAO.addHomeBook");
+			e.printStackTrace();
+		}
+
+		return 0;
+		
+	}
+
+	public PartnerInfoDTO getPartner(String sellerid) {
+
+		try {
+			
+			String sql = "select u.name, a.bank, a.acnumber from tblAccount a inner join tblUser u on a.id = u.id where u.id = ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, sellerid);
+			
+			rs = pstat.executeQuery();
+			
+			PartnerInfoDTO dto = new PartnerInfoDTO();
+			
+			if (rs.next()) {
+				
+				dto.setName(rs.getString("name"));
+				dto.setBank(rs.getString("bank"));
+				dto.setAcnumber(rs.getString("acnumber"));
+				
+			}
+			
+			return dto;
+			
+		} catch (Exception e) {
+			System.out.println("HomeDAO.getPartner");
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 }

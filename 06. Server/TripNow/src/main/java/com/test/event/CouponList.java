@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.test.activity.ActivityDTO;
+import com.test.activitiy.ActivityDTO;
 
 @WebServlet("/event/couponlist.do")
 public class CouponList extends HttpServlet {
@@ -22,8 +22,6 @@ public class CouponList extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		String id = req.getParameter("id");
-		String seq = req.getParameter("seq");
-		String count = req.getParameter("count");
 		
 		CouponDTO dto = new CouponDTO();
 		EventDAO  dao = new EventDAO();
@@ -42,9 +40,6 @@ public class CouponList extends HttpServlet {
 		
 		
 		req.setAttribute("list", list);
-		req.setAttribute("id", id);
-		req.setAttribute("seq", seq);
-		req.setAttribute("count", count);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/event/couponlist.jsp");

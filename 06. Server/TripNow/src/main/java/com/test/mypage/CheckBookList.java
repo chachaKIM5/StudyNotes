@@ -26,11 +26,11 @@ public class CheckBookList extends HttpServlet {
 		int carResult = dao.checkList(id, "car");
 		int actResult = dao.checkList(id, "activity");
 		
-		if (homeResult == 1 || carResult == 1 || actResult == 1) {
-			result = 1;
-		} else {
-			result = 0;
-		}
+	    if (homeResult != 0 || carResult != 0 || actResult != 0) {
+	        result = 1;
+	     } else {
+	        result = 0;
+	     }
 		
 		
 		resp.setCharacterEncoding("UTF-8");

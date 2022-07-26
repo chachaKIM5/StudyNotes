@@ -1,0 +1,64 @@
+
+Spring Web
+	- JSP Model 2 == Spring MVC Project
+
+
+Ex01
+- Spring MVC 동작 원리
+
+Ex02
+- Ex01 + Spring DI
+- "Ex02Controller.java"
+- "SpringDAO.java"
+- "ex02.jsp"
+
+Ex03
+- "Ex03Controller.java"
+- "ex03.jsp"
+
+
+Ex04
+- "Ex04Controller.java"
+- "ex04.jsp"
+
+- 서블릿/JSP 	> 무조건 서블릿 1개 당 가상주소 1개 맵핑
+- 스프링		> 컨트롤러 1개 당 가상주소 N개 맵핑 가능!
+
+- GetMapping, PostMapping 어노테이션은 Spring 버전에 따라 지원여부 다름
+- Spring lagacy project는 정해진 버전으로 만들어짐 -> 스프링 버전 올리기 -> pom.xml
+- 수업 때에는 스프링 5.0.7 버전 사용!
+- pom.xml에서 수정
+	- org.springframework-version 5.0.7
+	- java-version 1.11, 프로젝트 오른쪽 마우스 -> Properties, Project Facets에서 Java를 11로...
+	- maven-compiler-plugin의 source, target 1.11, version 3.5.1
+	- 바뀐 버전 이클립스가 인식하지 못하고 오류 날 경우
+		- 프로젝트 오른쪽 마우스 > Maven > Update Project
+	- .jar 파일 인식하지 못하고 오류 날 경우
+		- C드라이브의 사용자 폴더, .m2\repository의 모든 파일 삭제 후 sts 재실행 -> 다시 다운로드됨
+		
+		
+		
+Ex05
+- "Ex05Controller.java"
+- "SpringDTO.java"
+- add.jsp, addok.jsp
+
+
+
+
+필터링 -> web.xml에 아래 <filter> 추가
+- 모든 POST 요청에 대해(모든 페이지) UTF-8로 인코딩 처리 
+
+<filter>
+   <filter-name>encodingFilter</filter-name>
+   <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+   <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+   </init-param>
+</filter>
+
+<filter-mapping>
+   <filter-name>encodingFilter</filter-name>
+   <url-pattern>*</url-pattern>
+</filter-mapping>

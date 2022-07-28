@@ -1,0 +1,70 @@
+
+새 프로젝트 생성
+- Spring MVC Project > "SpringFile" > "com.test.spring"
+
+
+스프링 파일 업로드
+- cos.jar가 아닌 다른 라이브러리 사용
+
+1. pom.xml
+	- 스프링 버전, 자바 버전
+	
+2. dependency 추가 (파일 업로드)
+	<dependency>
+	   <groupId>commons-io</groupId>
+	   <artifactId>commons-io</artifactId>
+	   <version>2.0.1</version>
+	</dependency>
+	
+	<dependency>
+	   <groupId>commons-fileupload</groupId>
+	   <artifactId>commons-fileupload</artifactId>
+	   <version>1.2.2</version>
+	</dependency>
+	
+3. web.xml에 POST 인코딩 추가
+	<filter>
+	   <filter-name>encodingFilter</filter-name>
+	   <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	   <init-param>
+	      <param-name>encoding</param-name>
+	      <param-value>UTF-8</param-value>
+	   </init-param>
+	</filter>
+	
+	<filter-mapping>
+	   <filter-name>encodingFilter</filter-name>
+	   <url-pattern>*</url-pattern>
+	</filter-mapping>
+	
+	
+4. root-context에 파일 업로드 컨트롤 bean 추가, 업로드 최대 크기 100MB 설정 옵션 추가
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="104857600"></property> 
+	</bean>
+	
+5. 파일 생성
+	- com.test.spring > "FileController.java"
+	- views > "add.jsp"
+			> "addok.jsp"
+   파일 저장 폴더 생성
+    - webapp > resources > "files"
+    
+    
+    
+    
+    
+ 
+자료실 만들기
+ - 첨부 파일 게시판
+ - 쓰기 + 읽기
+ 
+ 
+MyBatis Setting 다시!
+1. pom.xml
+	dependency 5개 추가
+2. root-context
+	bean태그로 DB, log4j 셋팅
+3. mapper(패키지 및 xml 만들기), WEB-INF/"mybatis.xml"
+
+4. src/main/resources/log4j.xml

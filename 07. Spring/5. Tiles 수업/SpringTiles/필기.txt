@@ -1,0 +1,15 @@
+
+
+Spring Tiles
+
+1. pom.xml
+
+2. servlet-context.xml
+
+3. tiles.xml
+
+4. views > "layout" 폴더 생성
+
+
+
+*** 레이아웃 당 definition 하나 만들 것!

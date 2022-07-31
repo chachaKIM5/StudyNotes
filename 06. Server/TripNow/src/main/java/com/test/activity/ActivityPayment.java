@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.test.event.CouponDTO;
+import com.test.event.EventDAO;
 import com.test.member.MemberDTO;
 
 @WebServlet("/activity/activitypayment.do")
@@ -21,11 +23,21 @@ public class ActivityPayment extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String Eseq  = req.getParameter("eseq");
+		String Cseq  = req.getParameter("eseq");
 		
-		System.out.println("fsfsfsf");
-		System.out.println(Eseq);
+		CouponDTO Cdto = new CouponDTO(); 
+		EventDAO Edao = new EventDAO();
 		
+		System.out.println("sffs");
+		System.out.println(Cseq);
+		
+		Cdto.setEseq(Cseq);
+		
+		Cdto = Edao.getEvent(Cdto);
+		
+		
+		
+	
 		String id    = req.getParameter("id");
 		String seq 	 = req.getParameter("seq");
 		
@@ -41,24 +53,19 @@ public class ActivityPayment extends HttpServlet {
 		
 		//유저정보 받아오기
 		MemberDTO Mdto = new MemberDTO();
+		
 		Mdto = dao.getInfo(id);
-		
-		
-		System.out.println("이벤트 번호(Eseq):" + Eseq);
-		System.out.println("상품번호(seq):" + seq);
-		System.out.println("아이디(id):" + id);
-		System.out.println("인원수(count):" + count);
 		
 		//판매자 정보 가져오기
 		
 		MemberDTO Sdto = new MemberDTO();
 		
 		Sdto = dao.getInfo(dto.getPid());
-		System.out.println("pid :" + dto.getPid());
-		System.out.println("email: " + Mdto.getEmail());
+		
+		
 		
 		//이메일 나누기
-		String[] email = Mdto.getEmail().split("@");
+		String [] email = Mdto.getEmail().split("@");
 		
 
 		

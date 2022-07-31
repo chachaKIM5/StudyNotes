@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.test.activitiy.ActivityDTO;
+import com.test.activity.ActivityDTO;
 
 @WebServlet("/event/couponlist.do")
 public class CouponList extends HttpServlet {

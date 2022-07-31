@@ -158,7 +158,7 @@ public class ActivityDAO {
 				dto.setContent(rs.getString("content"));
 				dto.setPath(rs.getString("path"));
 				dto.setShow(rs.getString("show"));
-				System.out.println(dto.getPid());
+								
 			}
 			
 			//이미지 몇개인지 ? view 사진 넘기기에 필요
@@ -317,7 +317,7 @@ public class ActivityDAO {
 	public MemberDTO getInfo(String id) {
 		try {
 			
-			String sql = "select * from tbluser where id = ?";
+			String sql = "select * from tbluser where id like ?";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -327,7 +327,7 @@ public class ActivityDAO {
 			
 			MemberDTO dto = new MemberDTO();
 			
-			if (rs.next()) {
+			while(rs.next()) {
 				
 				dto.setName(rs.getString("name"));
 				dto.setTel(rs.getString("tel"));

@@ -34,6 +34,7 @@ public class CouponAdd extends HttpServlet {
 		
 		String result = dao.getCoupon(dto);
 		
+		System.out.println(result);
 		
 		
 		resp.setCharacterEncoding("UTF-8"); //브라우저에게 전달

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.test.activitiy.ActivityDTO;
+import com.test.activity.ActivityDTO;
 import com.test.tripnow.DBUtil;
 
 public class EventDAO {
@@ -104,6 +104,7 @@ public class EventDAO {
 			
 			
 		} catch (Exception e) {
+			System.out.println("EventDAO.getCoupon");
 			e.printStackTrace();
 		}
 		
@@ -170,6 +171,10 @@ public class EventDAO {
 				
 				
 			}
+			
+			System.out.println("RATE");
+			System.out.println(cdto.getRate());
+			System.out.println("RATE");
 			
 			
 			

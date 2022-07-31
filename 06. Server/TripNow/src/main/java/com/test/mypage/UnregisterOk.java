@@ -29,6 +29,7 @@ public class UnregisterOk extends HttpServlet {
 		int result2 = dao.cancelAct(id);
 		int result3 = dao.cancelCar(id);
 		
+;
 		if (result1 != -1 && result2 != -1 && result3 != -1) {
 			if (dao.unregister(id) == 1) {
 				result = 1;

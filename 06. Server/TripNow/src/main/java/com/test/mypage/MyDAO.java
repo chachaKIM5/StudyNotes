@@ -548,6 +548,7 @@ public class MyDAO {
 				}
 				
 				dto.setState(rs.getString("state"));
+				System.out.println(dto);
 				return dto;
 			}
 			

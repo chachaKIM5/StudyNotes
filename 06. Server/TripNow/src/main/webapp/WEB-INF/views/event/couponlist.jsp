@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 
 
@@ -155,23 +157,23 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${list}" var="dto">
-				
-					<tr>
-						<td class="left">
-							<input type="radio" name="coupon" class="coupon" value="${dto.eseq}"/>
-							<label for="1234">${dto.name}</label>
-						</td>
-						<td>${dto.value}</td>
-						<td>${dto.rate}</td>
-						<td>${dto.enddate}</td>
-					</tr>
-			   </c:forEach>
+				 <c:forEach items="${list}" var="dto">
+            
+               <tr>
+                  <td class="left">
+                     <label><input type="radio" name="coupon" class="coupon" value="${dto.eseq}">
+                     ${dto.name}</label>
+                  </td>
+                  <td>${dto.value}</td>
+                  <td>${dto.rate}</td>
+                  <td>${dto.enddate}</td>
+               </tr>
+            </c:forEach>
 				</tbody>
 			</table>
 		</div>
 	
-			         <div class="btnGroup">
+			<div class="btnGroup">
             
             <a class="couponback" onclick="window.close()">취소</a>
             
@@ -217,22 +219,3 @@
       
       
    </script>
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

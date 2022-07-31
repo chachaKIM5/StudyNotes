@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>TripNow(트립나우)</title>
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
+<script src="https://kit.fontawesome.com/404d069474.js" crossorigin="anonymous"></script>
 <style>
 
 	main {
@@ -37,7 +38,7 @@
 	
 	#contents {
 		width: 840px;
-		height: 500px;
+		height: auto;
 		display: flex;
 	}
 	
@@ -59,6 +60,51 @@
 		margin-left: 20px;
 		width: 780px;
 	}
+	
+	#btns ul {
+		padding: 0px;
+		margin-bottom: 30px;
+	}
+	
+	#btns li {
+		display: inline;
+		font-size: 18px;
+		border-right: 3.5px solid #666;
+		padding-right: 20px;
+		margin-right: 15px;
+	}
+	
+	#btns li:last-child {
+		border: none;
+	}
+	
+	table td:nth-child(2) {
+		width: 270px;
+	}
+	
+	table td:last-child {
+		width: 150px;
+		text-align: right;
+	}
+	
+/* 	table tr:last-child {
+		border-bottom: 1px solid #ddd;
+	} */
+	
+	i {
+		margin-right: 10px;
+	}
+	
+	.table > tbody > tr > td {
+		height: 50px;
+		vertical-align: middle;
+	}
+	
+	.selected {
+		font-weight: bold;
+		color: cornflowerblue;
+	}
+	
 
 	
 </style>
@@ -99,20 +145,76 @@
 			</div>
 			
 			
+			<!-- 세자리 쉼표 찍기 -->
+			<!-- <fmt:formatNumber type="number" maxFractionDigits="3" value="${price}" /> -->
+			
 			<div id="main">
 				
-				<input type="button" value="전체">
-				<input type="button" value="숙소">
-				<input type="button" value="렌터카">
-				<input type="button" value="액티비티">
-				<table class="table table-bordered">
+				<div id="btns">
+					<ul>
+						<li id="all" class="selected">전체</li>
+						<li id="room">숙소</li>
+						<li id="car">렌터카</li>
+						<li id="act">액티비티</li>
+					</ul>
+				</div>
+				
+				<h4><i class="fa-solid fa-angle-right"></i>숙소</h4>
+				<table class="table" id="roomlist">
 					<tr>
-						<td>숙소명: 신라호텔 방이름: 301호 가격: 200000원</td>
+						<td>숙소 정보: 신라호텔 301호</td>
+						<td>예약일자: 2022-07-12 ~ 2022-07-13</td>
+						<td>가격: 200000원</td>
+					</tr>
+					<tr>
+						<td>숙소 정보: 신라호텔 301호</td>
+						<td>예약일자: 2022-07-12 ~ 2022-07-13</td>
+						<td>가격: 200000원</td>
+					</tr>
+					<tr>
+						<td>숙소 정보: 신라호텔 301호</td>
+						<td>예약일자: 2022-07-12 ~ 2022-07-13</td>
+						<td>가격: 200000원</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td>합계: 600000원</td>
+					</tr>
+				</table>
+				
+				<h4><i class="fa-solid fa-angle-right"></i>렌터카</h4>
+				<table class="table" id="carlist">
+					<tr>
+						<td>차량 정보: 아반떼(가솔린)</td>
+						<td>예약일자: 2022-07-12 ~ 2022-07-13</td>
+						<td>가격: 250000원</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td>합계: 250000원</td>
+					</tr>
 					
+				</table>
+				
+				<h4><i class="fa-solid fa-angle-right"></i>액티비티</h4>
+				<table class="table" id="actlist">
+					<tr>
+						<td>액티비티 정보: 신나는 가평 수상레저
+						<td>예약일자: 2022-07-12</td>
+						<td>가격: 25000원</td>
+					</tr>
+					
+					<tr>
+						<td></td>
+						<td></td>
+						<td>합계: 25000원</td>
 					</tr>
 				</table>
 			
 			
+			<h4 style="text-align: right; font-weight: bold;">총 합계: 1150000원</h4>
 			</div>
 				
       	</div>

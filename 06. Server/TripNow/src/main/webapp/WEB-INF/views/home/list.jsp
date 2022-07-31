@@ -14,7 +14,7 @@
 		margin-right: 15px;
 		float: left;
 		width: 250px;
-		height: 2200px;
+		height: 1500px;
 		/* background-color: #999; */
 	}
 	

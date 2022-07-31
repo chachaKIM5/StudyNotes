@@ -517,8 +517,8 @@
 					<td>휴대폰</td>
 					<td>
 						<input type="text" class="paymentNum1" value="${Mdto.tel.substring(0,3)}" /> - 
-						<input type="text" class="paymentNum2" value="${Mdto.tel.substring(3,7)}"/> -
-						<input type="text" class="paymentNum3" value="${Mdto.tel.substring(7,11)}"/>
+						<input type="text" class="paymentNum2" value="${Mdto.tel.substring(4,7)}"/> -
+						<input type="text" class="paymentNum3" value="${Mdto.tel.substring(8,11)}"/>
 					</td>
 				</tr>
 				<tr>
@@ -547,7 +547,7 @@
 			<div>
 				
 				<span>총 상품금액</span>  <span id="price" >${String.format("%,d",dto.price*count)}원</span><br>
-				<div><span>할인</span> <span id="price">-0원</span></div>
+				<div><span>할인</span> <span id="price">-1,000원</span></div>
 			</div>
 			<div>
 				<div id="info">총 결제 금액</div>

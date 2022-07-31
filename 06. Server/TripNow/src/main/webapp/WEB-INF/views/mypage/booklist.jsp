@@ -175,7 +175,7 @@
 	      		<div class="card mb-3 item home">
 				  <div class="row no-gutters">
 				    <div class="col-md-4">
-				      <img src="${dto.pic}" alt="...">
+				      <img src="/tripnow/${dto.pic}" alt="...">
 				    </div>
 				    <div class="col-md-8">
 				      <div class="card-body">
@@ -214,7 +214,7 @@
 	      		<div class="card mb-3 item home">
 				  <div class="row no-gutters">
 				    <div class="col-md-4">
-				      <img src="${dto.pic}" alt="...">
+				      <img src="/tripnow/${dto.pic}" alt="...">
 				    </div>
 				    <div class="col-md-8">
 				      <div class="card-body">

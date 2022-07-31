@@ -437,12 +437,6 @@
 	
 	}
 	
-	
-	tr > td > img {
-		width : 139px;
-		height : 120px;
-	}
-	
 
 </style>
 </head>
@@ -484,7 +478,7 @@
 			
 			<tr>
 				<td style="text-align: center; vertical-align: middle;">${dto.seq}</td>
-				<td style="width:139px;"><img src="/tripnow/images/hotel2.jpg" alt="" /></td>
+				<td style="width:139px;">사진</td>
 				<td style="vertical-align: middle;">
 					정보 <br>(${dto.homename} > ${dto.name})<br>
 					위치 <br>${dto.location}<br>
@@ -539,7 +533,7 @@
 			<div>
 				
 				<span>총 상품금액</span>  <span id="price" ><fmt:formatNumber value="${dto.price}" pattern="#,###,###" />원</span><br>
-				<div><span>할인</span> <span id="price">-0원</span></div>
+				<div><span>할인</span> <span id="price">-1,000원</span></div>
 			</div>
 			<div>
 				<div id="info">총 결제 금액</div>

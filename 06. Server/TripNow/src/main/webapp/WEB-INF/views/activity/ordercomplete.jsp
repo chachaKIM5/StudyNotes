@@ -208,7 +208,7 @@
 				<tr>
 					<td>주문번호</td>
 					<td>
-						1
+						sfds
 					</td>
 				</tr>
 				<tr>

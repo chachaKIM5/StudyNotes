@@ -24,26 +24,44 @@ public class Sales extends HttpServlet {
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("auth");
 		
-		//sales.do를 처음 방문한 경우 -> 기본값 s(elected)month, s(elected)cate 설정
+		//sales.do를 처음 방문한 경우 -> 기본값 s(elected)month 설정, 
 		//조회 월은 이번달, 조회 카테고리는 전체
 		
-		//이미 sales.do를 방문해 조회월과 카테고리를 선택한 경우 -> req.getParameter로 받아오기 
+		//이미 sales.do를 방문해 조회월과 카테고리를 선택한 경우 -> req.getParameter로 받아오기
+		//selected -> 검색 상태 유지를 위한 선택값 정보 저장
+		String syear;
 		String smonth;
-		String scate;
+		String selected;
 	
 		Calendar now = Calendar.getInstance();
+		
+		if (req.getParameter("smonth") == null || req.getParameter("smonth") == "" || req.getParameter("smonth").equals("0")) {
+			selected = "0";
+			syear = (now.get(Calendar.YEAR) + "").substring(2);
+			
+			if (now.get(Calendar.MONTH) + 1 < 10) {
+				smonth = "0" + (now.get(Calendar.MONTH) + 1); 
+			} else {
+				smonth = (now.get(Calendar.MONTH) + 1) + ""; 				
+			}
+		} else {
+			selected = req.getParameter("smonth");
+			Calendar temp = Calendar.getInstance();
+			
+			temp.add(Calendar.MONTH, Integer.parseInt(req.getParameter("smonth")));
+			syear = (temp.get(Calendar.YEAR) + "").substring(2);
 
-		if (req.getParameter("month") == null || req.getParameter("month") == "") {
-			smonth = (now.get(Calendar.MONTH) + 1) + ""; 
-		} else {			
-			smonth = req.getParameter("month");
+			if (temp.get(Calendar.MONTH) + 1 < 10) {
+				smonth = "0" + (temp.get(Calendar.MONTH) + 1); 
+			} else {
+				smonth = (temp.get(Calendar.MONTH) + 1) + ""; 				
+			}			
 		}
 		
-		if (req.getParameter("cate") == null || req.getParameter("cate") == "") {
-			scate = "all";
-		} else {			
-			scate = req.getParameter("cate");
-		}
+		/*
+		 * if (req.getParameter("cate") == null || req.getParameter("cate") == "") {
+		 * scate = "all"; } else { scate = req.getParameter("cate"); }
+		 */
 		
 	
 		//select box의 option에 들어갈 이번달 ~ 이번달 - 11개월을 String[] dates 배열에 넣기 
@@ -60,11 +78,13 @@ public class Sales extends HttpServlet {
 		}
 		
 		
-		//smonth, scate로 DB(dao) 다녀오기
+		System.out.println("syear = " + syear);
+		System.out.println("smonth = " + smonth);
+		//파트너 id, syear, smonth 가지고 DB(dao) 다녀오기
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
+		map.put("syear", syear);
 		map.put("smonth", smonth);
-		map.put("scate", scate);
 		
 		PartnerDAO dao = new PartnerDAO();
 		ArrayList<PartnerDTO> roomlist = new ArrayList<PartnerDTO>();
@@ -75,10 +95,38 @@ public class Sales extends HttpServlet {
 		carlist = dao.getCarList(map);
 		actlist = dao.getActList(map);
 		
+		System.out.println(roomlist);
+		System.out.println(carlist);
+		System.out.println(actlist);
 		
+		int roomsum = 0;
+		int carsum = 0;
+		int actsum = 0;
 		
+		if (roomlist != null) {
+			for (PartnerDTO dto : roomlist) {
+				roomsum += Integer.parseInt(dto.getPrice());
+			}			
+		}
+		if (carlist != null) {
+			for (PartnerDTO dto : carlist) {
+				carsum += Integer.parseInt(dto.getPrice());
+			}			
+		}
+		if (actlist != null) {
+			for (PartnerDTO dto : actlist) {
+				actsum += Integer.parseInt(dto.getPrice());
+			}			
+		}
 		
+		req.setAttribute("roomlist", roomlist);
+		req.setAttribute("carlist", carlist);
+		req.setAttribute("actlist", actlist);
+		req.setAttribute("roomsum", roomsum);
+		req.setAttribute("carsum", carsum);
+		req.setAttribute("actsum", actsum);
 		req.setAttribute("dates", dates);
+		req.setAttribute("selected", selected);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/partner/sales.jsp");
 		dispatcher.forward(req, resp);

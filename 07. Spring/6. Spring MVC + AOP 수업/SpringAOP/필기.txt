@@ -1,0 +1,114 @@
+
+
+새 프로젝트 생성하기
+ - Spring MVC Project > "SpringAOP" > "com.test.spring"
+ 
+파일 생성하기
+ - com.test.spring 	> "AOPController.java"
+ 					> "AOPService.java" (I)
+ 					> "AOPServiceImpl.java"
+ 					> "Cross.java"
+ 					
+ - views 	> "test.jsp"
+ 			> "list.jsp"
+ 			> "add.jsp"
+ 			> "addok.jsp"
+ 			> "del.jsp"
+ 			> "delok.jsp"
+ 			
+ 			
+
+Spring MVC + AOP 설정
+
+1. pom.xml
+	- <java-version>1.11</java-version>
+	- <org.springframework-version>5.0.7.RELEASE</org.springframework-version>
+	- <version>3.5.1</version>
+	- <source>1.11</source>
+	- <target>1.11</target>
+	- Project Facets > Java > 11
+	
+	- dependency 2개 추가
+		<dependency>
+	      <groupId>org.aspectj</groupId>
+	      <artifactId>aspectjrt</artifactId>
+	      <version>${org.aspectj-version}</version>
+	   	</dependency>
+	
+	   	<dependency>
+	      <groupId>org.aspectj</groupId>
+	      <artifactId>aspectjweaver</artifactId>
+	      <version>${org.aspectj-version}</version>
+		</dependency>
+
+2. servlet-context.xml
+
+
+
+
+
+
+
+
+게시판 만들기 (MVC + MyBatis = DB + Tiles = 공통 코드 처리 + AOP = 보조 업무 처리(ex. 회원 전용 기능일 경우, 회원인지 검사? or 로그 남기기...))
+ - 목록
+ - 보기
+ - 쓰기
+ 
+새 프로젝트 생성
+ - Spring MVC Project > "SpringBoard" > "com.test.spring"
+ 
+DB table 새로 만들기
+ - C:\class\spring\SpringBoard\script.sql
+ 
+
+lib 폴더 만든 후 ojdbc.jar 가져오기
+ 
+
+1. pom.xml
+	- MyBatis 관련 4개, log4j, lombok dependency 복사 붙여넣기
+	- Tiles 관련 4개 dependency 복사 붙여넣기
+	- AOP 관련 2개 dependency 복사 붙여넣기
+	- 버전 바꿔주기
+	
+2. web.xml
+	- POST 인코딩 필터 추가
+	
+3. root-context.xml
+	- MyBatis 설정 > mapper.xml + mybatis.xml + log4j.xml
+	- 파일업로드 설정 (이번 게시판에서는 생략)
+	
+4. servlet-context.xml
+	- Tiles 설정 -> Tiles ViewResolver로 -> /WEB-INF/tiles.xml
+	- AOP 설정 -> namespace 및 <aop:aspectj-autoproxy />
+	
+	
+	
+파일 생성하기
+ - com.test.spring > "BoardController.java"
+ 				   > "BoardService.java" (I)
+ 				   > "BoardServiceImpl.java"
+ 				   > "BoardDAO.java" (I)
+ 				   > "BoardDAOImpl.java"
+ 				   > "BoardDTO.java"
+ 				   
+ 				   > "Logger.java"
+ 				   > "Check.java"
+ 
+ 
+ 					  레이아웃 페이지				   
+ - views > "layout" > "board.jsp"
+ 
+ 
+ 				   	 메인 조각 페이지
+ - views > "board" > "list.jsp"
+ 				   > "add.jsp"
+ 				   > "view.jsp"
+ 				   
+ 				   
+ 				   조각 페이지
+ - views > "inc" > "header.jsp"
+ 				 > "asset.jsp"
+ 				 
+ 				 
+ - webapp > resources > css, js, fonts 복사

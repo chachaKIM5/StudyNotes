@@ -133,7 +133,7 @@ Sookmyung Women's University 2016~2021, major in PR & Advertisement
 <div markdown="1">
 
 <br>
-<img src="https://github.com/chachaKIM5/SIST_CLASS/blob/master/03.%20Oracle/DB%20Project/4%EC%A1%B0%20DB%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/3.%20ERD/4%EC%A1%B0%20ERD%20%EC%B5%9C%EC%A2%85.png?raw=true" style="width: 650px;"><br><br>
+<img src="https://github.com/chachaKIM5/SIST_CLASS/blob/master/03.%20Oracle/Project/%EC%8C%8D%EC%9A%A9%EA%B5%90%EC%9C%A1%EC%84%BC%ED%84%B0%20%EC%9A%B4%EC%98%81%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/4%EC%A1%B0%20DB%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/3.%20ERD/4%EC%A1%B0%20ERD%20%EC%B5%9C%EC%A2%85.png?raw=true" style="width: 650px;"><br><br>
 
 
 > 개요: Oracle·ANSI-SQL·PL/SQL 기반, 관리자·교사·교육생 계정 권한별 기능 관리 및 교육센터 프로세스 운영을 위한 데이터베이스 구축

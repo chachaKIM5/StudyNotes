@@ -42,8 +42,6 @@ update tblShipping set enddate = '2022-06-11' where seq = 76;
 ------------- 배송완료 상태
 
 
-
-
 -- B7-01. 진행중인 주문 정보 확인 (상품정보, 주문일, 결제일, 수령인 이름, 수령인 전화번호, 배송지, 현재 처리 현황)
 select
     i.name as "상품명",
@@ -190,11 +188,10 @@ update tblMember set email = '바꿀 이메일' where id = '로그인 아이디'
 update tblMember set emailConsent = 'Y/N' where id = '로그인 아이디' and pw = '로그인 비밀번호';
 
 
-
 --      : 회원 탈퇴
 delete from tblMember where id = '탈퇴할 아이디' and pw = '비밀번호';
 
-
+select * from tblMemberInfo;
 
 
 --B7-06. 적립금 내역 조회
@@ -215,3 +212,6 @@ select
 from tblPoint p
     inner join tblPointCategory pc on p.pcategorySeq = pc.seq
         where p.memberSeq = 회원번호;
+        
+-- 회원정보 확인        
+select * from tblMember m inner join tblMemberInfo i on m.seq = i.memberSeq where m.seq = 회원번호; 

@@ -10,7 +10,6 @@ insert into tblMemberInfo(memberseq, solarLunar, birthDate, footSize)
     values (seqMemberInfo.nextVal, '양력/음력', '생년월일', 발사이즈);
 
 
-
 --B-02. 로그인
 
 select
@@ -21,3 +20,7 @@ select
 from tblMember where id = ' sineob7' and pw = 'CkwPPWmoME%';
 
 -- 결과값이 0이면 실패, 1이면 성공 처리
+
+
+select * from tblMemberInfo;
+

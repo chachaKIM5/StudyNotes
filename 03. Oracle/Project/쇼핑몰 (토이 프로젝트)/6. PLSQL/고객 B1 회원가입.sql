@@ -78,12 +78,45 @@ rollback;
 
 
 
+-- 회원가입  (O)
+create or replace procedure procJoin(
+    pid varchar2,
+    ppw varchar2,
+    pname varchar2,
+    paddress varchar2,
+    ptel varchar2,
+    psmsConsent varchar2,
+    pemail varchar2,
+    pemailConsent varchar2,
+    psolarLunar varchar2,
+    pbirthdate date,
+    pfootSize number,
+    presult out number
+)
+is
+    vmemberseq number;
+begin
+    vmemberseq := seqMember.nextVal;
+-- 회원 기본 정보 등록
+    insert into tblMember(seq, gradeSeq, id, pw, name, address, tel, smsconsent, email, emailconsent)
+        values (vmemberseq, 1, pid, ppw, pname, paddress, ptel,  psmsConsent, pemail, pemailConsent);
 
-
-
-
-
-
+    dbms_output.put_line(psmsConsent);
+    dbms_output.put_line(pbirthdate);
+    
+    
+-- 회원 추가 정보 등록(선택)
+    if (pbirthdate is not null) and (pfootSize is not null) then
+        insert into tblMemberInfo(memberseq, solarLunar, birthDate, footSize)
+            values (vmemberseq, psolarLunar, pbirthdate, pfootSize);
+    end if;
+    
+    presult:=1;
+exception
+    when others then 
+        presult := 0;
+        rollback;
+end;
 
 
 -- 아이디 유효성 검사 함수 (영문 대소문자+숫자 4~12자)
@@ -188,6 +221,11 @@ begin
     else return 0;
     end if;
 end;
+
+drop sequence seqMember;
+create sequence seqMember start with 52;
+
+select * from tblMemberInfo;
 
 
 

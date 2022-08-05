@@ -1,6 +1,7 @@
 -->>>>>>>>>>>>>>>>>>>>> B-03 상품조회
 -- 상품 목록 조회
 create or replace procedure procDisplayItem (
+
     pCategory in number,
     pOrderby  in number,
     pCursor out sys_refcursor
@@ -75,15 +76,3 @@ begin
     procDisplayItem_Print(1, 1);
 end;
   
-
-
-
-
-
-
-
-
-
-
-
-

@@ -110,8 +110,6 @@ begin
 end;
 
 
-
-
 -- 프로시저 실행
 -- pchoice = 바꿀 정보 선택 (1: 비밀번호, 2: 주소, 3: 전화번호, 4: 문자 수신여부, 5: 이메일, 6: 이메일 수신여부)
 -- pedit = 바꿀 값 입력
@@ -124,6 +122,53 @@ select * from tblMember where seq = 51 order by seq;
 
 
 
+--      : 회원 정보 동시 수정
+-- 프로시저 생성
+create or replace procedure procEditProfile(
+    pseq in number,
+    pname in varchar2,
+    paddress in varchar2,
+    ptel in varchar2,
+    psmsConsent in varchar2,
+    pemail in varchar2,
+    pemailConsent in varchar2,
+    psolarLunar in varchar2,
+    pbirthdate in varchar2,
+    pfootSize in number,
+    presult out number
+)
+is
+    vexist number;
+begin
+
+    update tblMember set name = pname, address = paddress, tel= ptel, smsConsent= psmsConsent, email= pemail, emailConsent=pemailConsent where seq = pseq;
+    
+    select count(*) into vexist from tblMemberInfo where memberSeq = pseq;
+    
+    if vexist = 0 and (pbirthdate is not null or pfootSize is not null) then
+        insert into tblMemberInfo values (pseq, psolarLunar, pbirthdate, pfootSize);
+    elsif vexist = 1 and (pbirthdate is not null or pfootSize is not null) then
+        update tblMemberInfo set solarLunar = psolarLunar, birthdate= pbirthdate, footSize = pfootSize  where memberseq = pseq;
+    else
+        delete tblMemberInfo where memberseq = pseq; 
+    end if;
+    
+    presult := 1;
+    commit;
+
+exception when others then 
+    presult := 0;
+    rollback;
+end;
+
+
+-- 프로시저 실행
+declare
+    vresult number;
+begin
+    procEditProfile(1, '주윤아', '부산광역시 사상구 동대문로10, 401-215', '010-7828-7035', 'N', 'sineob7@gmail.com', 'N', '양력', '2001-06-24', 235, vresult);
+    dbms_output.put_line(vresult);    
+end;
 
 
 --      : 회원 탈퇴
@@ -160,4 +205,39 @@ end;
 
 begin
     procWithdraw('sy333262', 'qwera33#');
+end;
+
+
+
+--      : 회원 탈퇴시 관련정보 모두 업데이트 
+-- 프로시저 생성
+create or replace procedure procDelAccount(
+    pseq in number,
+    presult out number
+)
+is
+begin
+    delete from tblLike where memberseq = pseq;
+    delete from tblCart where memberseq = pseq;
+    delete from tblAddress where memberseq = pseq;
+    delete from tblPoint where memberseq = pseq;
+
+    update tblMemberInfo set solarLunar = null, birthdate = null where  memberseq = pseq;
+    update tblMember set gradeSeq = 0, pw='no-user', name='user', address='no-user', tel='010-0000-0000',
+    smsConsent = 'N', email = '@', emailConsent = 'N' where seq = pseq; 
+
+    presult := 1;
+    commit;
+
+exception when others then 
+    presult := 0;
+    rollback;
+end;
+
+
+-- 프로시저 실행
+declare
+    vresult number;
+begin
+   procDelAccount(53, vresult);
 end;

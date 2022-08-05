@@ -58,6 +58,9 @@ begin
     begin
         vNumber := 1;
         procListCart(pMemberSeq, vCursor, vTotalPrice, vShippingFee);
+        
+        dbms_output.put_line('=========================장바구니==============================');
+        
         dbms_output.put_line('----------------------------------------------------------------');
         dbms_output.put_line('상품명   판매가   할인판매가');
         dbms_output.put_line('  - 옵션               (수량)');

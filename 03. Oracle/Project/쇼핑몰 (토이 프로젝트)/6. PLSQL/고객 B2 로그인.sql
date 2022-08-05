@@ -29,8 +29,14 @@ end;
 
 
 -- procedure 실행
-select * from tblMember;
-
 begin
-    procLogin(' sineob7', 'CkwPPWmoME%');
+    procLogin('sineob7', 'CkwPPWmoME%');
 end;
+
+
+
+-- 더미 데이터 복구
+select * from tblMember;
+select * from tblMemberInfo;
+insert into tblMember values (1, 1, 'sineob7', 'CkwPPWmoME%', '주유아', '부산광역시 사상구 동대문10 101-505', '010-7828-7034', 'Y', 'sineob7@naver.com', 'Y');
+insert into tblMemberInfo values (1, '양력', '01/02/23', 235);

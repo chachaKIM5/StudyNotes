@@ -59,7 +59,7 @@ begin
             exit when vcursor%notfound;
             
             if (vflag = 1) then
-                dbms_output.put_line('-------------' || vrow."수령인 이름" || ' 님의 진행 중 주문 -------------');
+                dbms_output.put_line('----------------' || vrow."수령인 이름" || ' 님의 진행 중 주문 ----------------');
                 dbms_output.put_line('');
                 dbms_output.put_line('[주문 정보] ' || vrow."주문번호" || '번 주문(' || vrow."결제일" || ') ▷▷▷ ' || vrow."처리현황");
                 dbms_output.put_line('');
@@ -81,7 +81,7 @@ begin
             dbms_output.put_line('---------------------------------------------------');
             dbms_output.put_line('          진행중인 주문 내역이 없습니다.');
         end if;
-        dbms_output.put_line('---------------------------------------------------');
+        dbms_output.put_line('---------------------------------------------------------');
 end;
 
 
@@ -92,3 +92,55 @@ end;
 begin
     procOrdering(37);
 end;
+
+
+
+-- B7-00 주문진행상태
+create or replace procedure procOrderProcess (
+    pmemberSeq in number,
+    ppaid out number,
+    pready out number,
+    pdelivering out number,
+    pdelivered out number,
+    prefund out number
+)
+is
+begin
+    select
+        count(case
+        when  os.name not in ('취소', '교환', '반품') and oi.processed = 'N' and p.note = '주문 결제' then '1'
+        end) as paid,
+        count(case
+        when  os.name not in ('취소', '교환', '반품') and  s.begindate is null and oi.processed = 'Y' then '1'
+        end) as ready,
+        count(case
+        when  os.name not in ('취소', '교환', '반품') and s.begindate is not null and s.enddate is null then '1'
+        end) as delivering,
+        count(case
+        when os.name not in ('취소', '교환', '반품') and s.enddate is not null then '1'
+        end) as delivered,
+        count(case
+        when os.name in ('취소', '교환', '반품') and (p.note = '주문 결제' or p.note is null) then '1'
+        end) as refund
+        into ppaid, pready, pdelivering, pdelivered, prefund
+    from tblOrderItem oi
+        inner join tblOrder o on oi.orderSeq = o.seq
+        inner join tblOrderResult os on oi.resultseq = os.seq
+        left outer join tblPay p on o.seq = p.orderseq
+        left outer join tblShippingItem si on oi.orderseq = si.orderseq and oi.optionseq = si.optionseq
+        left outer join tblShipping s on si.shippingSeq = s.seq 
+            where orderdate > add_months(sysdate, -3) and memberseq = pmemberseq;
+end;
+
+-- 프로시저 실행
+declare
+    ppaid number;
+    pready number;
+    pdelivering number;
+    pdelivered number;
+    prefund number;
+begin
+    procOrderProcess(회원번호, ppaid, pready, pdelivering, pdelivered, prefund);
+    dbms_output.put_line(ppaid ||' '||pready||' '||pdelivering||' '||pdelivered||' '||prefund);
+end;
+

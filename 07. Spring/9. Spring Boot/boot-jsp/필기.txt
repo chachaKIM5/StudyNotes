@@ -1,0 +1,36 @@
+
+
+1. pom.xml
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+
+2. application.properties
+		# 서버 포트
+		server.port=8090
+		
+		# JSP 설정(ViewResolver)
+		spring.mvc.view.prefix=/WEB-INF/views
+		spring.mvc.view.suffix=.jsp
+		
+		
+3. 파일 생성하기
+	- "com.test.spring.controller" > "TestController.java"
+	- src > main > "webapp" > "WEB-INF" > "views" > "test.jsp"
+	
+	
+
+*** 프로젝트 수정 시 자동 애플리케이션 재시작 (live reload)
+: 프로젝트 생성 시 의존성 DevTools 추가하기: Java파일 수정도 재시작해 줌!
+  프로젝트 생성 시에 추가하는 걸 잊었다? -> 프로젝트 오른쪽 마우스 > Spring > Add Starter, 검색 후 pom.xml 체크하고 Finish
+  
+ 
+ 
+Thymeleaf, 타임리프
+- JSP 대신할 템플릿이 엔진

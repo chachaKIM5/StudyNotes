@@ -1,0 +1,22 @@
+Name: "boot-mybatis"
+Package: "com.test.spring"
+
+1. jsp 사용하기
+	- pom.xml dependency 가져오기
+	
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+		
+		
+
+의존 주입
+	- "com.test.controller" > "DIController.java"
+	- "com.test.repository" > "TestDAO.java"
+							> "IMemberDAO.java" (I)
+							> "MemberDAO.java"  (C)

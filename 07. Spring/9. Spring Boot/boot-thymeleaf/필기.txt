@@ -26,3 +26,12 @@ Thymeleaf, 타임리프
 - 순수 HTML 페이지 기반 > 서버 측 도움 없이 자체적으로 실행 가능한 템플릿
 
 - "com.test.spring.thymeleaf" > "ThymeleafController.java"
+							  > "AddressDAO.java"
+							  > "AddressDTO.java"
+							  
+
+스프링 메시지
+	- application.properties
+	- resources > "messages.properties"
+				> "messages_en.properties"
+				> "messages_ja.properties"

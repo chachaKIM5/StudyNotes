@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf</title>
+<link rel="stylesheet" href="/css/mvp.css">
+</head>
+<body>
+	<!-- m14.html -->
+	<h1>Thymeleaf</h1>
+
+	<!--  
+		
+		5. Fragment Expression, 조각 표현식
+			- ~{}
+			- 조각 페이지를 삽입
+			
+			
+		Thymeleaf Fragment
+		- 조각 페이지
+		- JSP => <%@ include %>
+		- Spring => Tiles
+		
+		1. th:fragment
+			- 조각 페이지 정의
+			- 하나의 조각 페이지(html)를 만들어 놓고 그 안에 수 많은 조각들을 관리할 수 있다
+			
+		2. th:insert
+			- 조각 페이지 삽입
+			- insert와 replace는 렌더링의 차이
+			- 해당 속성이 붙은 태그는 그대로 렌더링 + 조각 페이지를 자식으로 추가
+			- <div th:insert="~{경로}"></div> -> <div>조각 페이지</div>
+			
+		3. th:replace
+			- 조각 페이지 삽입
+			- 해당 속성이 붙은 태그 자체는 사라지고 조각 페이지로 대체된다
+			- <div th:replace="~{경로}"></div> -> 조각 페이지
+			
+		4. th:include
+			- 3.0 이후 비권장
+
+	-->
+
+	<h2>Fragment</h2>
+	
+	<h3>insert</h3>
+	<div th:insert="~{inc/sub1.html}"></div>
+	
+	<h3>replace</h3>
+	<div th:replace="~{inc/sub1.html}"></div>
+	
+	<hr>
+	
+	<!-- 확장자 생략 가능, 일반적으로 생략함 -->
+	<div th:insert="~{inc/sub1}"></div>
+	
+	<hr>
+	
+	<!-- ~{} 생략 가능, But 비권장(가독성) -->
+	<div th:insert="inc/sub1"></div>
+	
+	<hr>
+	
+	<div th:insert="~{inc/sub2.html :: title}"></div>
+	<div th:insert="~{inc/sub2.html :: content}"></div>
+	<hr>
+	
+	<div>적극적으로 표현 가능한 조각 페이지 -> 매개변수 만들기</div>
+	<div th:insert="~{inc/sub2::owner('아무개', '010-1234-5432')}"></div>
+	<div th:insert="~{inc/sub2::owner('테스트', '010-3333-4444')}"></div>
+	
+</body>
+</html>

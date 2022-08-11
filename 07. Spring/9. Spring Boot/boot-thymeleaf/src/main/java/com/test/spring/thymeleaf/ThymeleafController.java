@@ -108,5 +108,40 @@ public class ThymeleafController {
 		
 		return "m7";
 	}
+
+	@GetMapping("/m14")
+	public String m14() {
+		
+		return "m14";
+	}
+
+	@GetMapping("/m15")
+	public String m15(Model model) {
+		
+		//리스트형
+		
+		List<AddressDTO> list = dao.list();
+		model.addAttribute("list", list);
+	
+		return "m15";
+	}
+
+	@GetMapping("/m16")
+	public String m16(Model model) {
+		
+		//카드형
+		
+		List<AddressDTO> list = dao.list();
+		model.addAttribute("list", list);
+		
+		return "m16";
+	}
+	
+	@GetMapping("/m17")
+	public String m17(Model model) {
+		
+		return "m17"; //templates/m17.html
+	}
+	
 	
 }

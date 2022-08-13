@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper">
+	
+	
+	<select id="qnalist" parameterType="hashmap" resultType="qnadto">
+		select * from (select a.*, rownum as rnum from (select q.seq as qseq, a.seq as aseq, q.id as id, qc.value as category, q.title as qsubject, q.content as qcontent, q.regdate as qregdate, a.content as acontent, a.regdate as aregdate, case when q.id = 'admin' then ' ' when a.seq is null then '처리중' when a.seq is not null then '답변완료' end as state from tblQuestion q left outer join tblAnswer a on q.seq = a.qseq inner join tblQuestionCategory qc on q.cseq = qc.seq where q.id != 'admin' order by q.seq desc) a) where rnum between #{begin} and #{end}
+	</select>
+	
+	<select id="qnatotal" resultType="Integer">
+		select count(*) from tblQuestion 
+	</select>
+	
+	<select id="qnanlist" resultType="qnadto">
+		select q.seq as qseq, a.seq as aseq, q.id as id, qc.value as category, q.title as qsubject, q.content as qcontent, q.regdate as qregdate, a.content as acontent, a.regdate as aregdate, case when q.id = 'admin' then ' ' when a.seq is null then '처리중' when a.seq is not null then '답변완료' end as state from tblQuestion q left outer join tblAnswer a on q.seq = a.qseq inner join tblQuestionCategory qc on q.cseq = qc.seq where q.id = 'admin' order by q.seq desc
+	</select>
+	
+	<select id="qnaview" parameterType="String" resultType="qnadto">
+		select q.seq as qseq, a.seq as aseq, q.id as id, qc.value as category, q.title as qsubject, q.content as qcontent, q.regdate as qregdate, a.content as acontent, a.regdate as aregdate, case when q.id = 'admin' then ' ' when a.seq is null then '처리중' when a.seq is not null then '답변완료' end as state from tblQuestion q left outer join tblAnswer a on q.seq = a.qseq inner join tblQuestionCategory qc on q.cseq = qc.seq where q.seq = #{seq} order by q.seq desc
+	</select>
+	
+	<insert id="qnaadd" parameterType="qnadto">
+		insert into tblQuestion values (seqQuestion.nextVal, 'admin', #{category}, #{qsubject}, #{qcontent}, sysdate)
+	</insert>
+	
+	<insert id="addanswer" parameterType="qnadto">
+		insert into tblAnswer values (seqAnswer.nextVal, #{qseq}, 'admin', #{acontent}, sysdate)
+	</insert>
+	
+	<delete id="delanswer" parameterType="String">
+		delete from tblAnswer where seq = (select a.seq from tblAnswer a inner join tblQuestion q on a.qseq = q.seq where q.seq = #{qseq})
+	</delete>
+	
+	
+	
+	
+	
+	
+	<select id="gethomestats" parameterType="Integer" resultType="statsdto">
+		select #{nMonth} as month, nvl(sum(p.finalprice), 0) as sales from tblPayment p inner join tblBookList bl on p.blseq = bl.seq inner join tblHomeBook hb on hb.bseq = bl.seq where hb.bsseq in (2, 3) and to_char(hb.startdate, 'mm') = #{nMonth} 
+	</select>
+
+	<select id="getcarstats" parameterType="Integer" resultType="statsdto">
+		select #{nMonth} as month, nvl(sum(p.finalprice), 0) as sales from tblPayment p inner join tblBookList bl on p.blseq = bl.seq inner join tblCarBook cb on cb.bseq = bl.seq where cb.bsseq in (2, 3) and to_char(cb.startdate, 'mm') = #{nMonth}
+	</select>
+
+	<select id="getactstats" parameterType="Integer" resultType="statsdto">
+		select #{nMonth} as month, nvl(sum(p.finalprice), 0) as sales from tblPayment p inner join tblBookList bl on p.blseq = bl.seq inner join tblActivityBook ab on ab.blseq = bl.seq where ab.bsseq in (2, 3) and to_char(ab.regdate, 'mm') = #{nMonth}
+	</select>
+	
+	
+ 	<select id="gethomegstats" parameterType="Integer" resultType="genderdto">
+		select #{nMonth} as month, count(decode(u.gender, '남', 1)) as male, count(decode(u.gender, '여', 2)) as female from tblPayment p inner join tblBookList bl on p.blseq = bl.seq inner join tblHomeBook hb on hb.bseq = bl.seq inner join tblUser u on hb.id = u.id where hb.bsseq in (2, 3) and to_char(hb.startdate, 'mm') = #{nMonth}
+	</select>
+	
+ 	<select id="getcargstats" parameterType="Integer" resultType="genderdto">
+		select #{nMonth} as month, count(decode(u.gender, '남', 1)) as male, count(decode(u.gender, '여', 2)) as female from tblPayment p inner join tblBookList bl on p.blseq = bl.seq inner join tblCarBook cb on cb.bseq = bl.seq inner join tblUser u on cb.id = u.id where cb.bsseq in (2, 3) and to_char(cb.startdate, 'mm') = #{nMonth}
+	</select>
+
+ 	<select id="getactgstats" parameterType="Integer" resultType="genderdto">
+		select #{nMonth} as month, count(decode(u.gender, '남', 1)) as male, count(decode(u.gender, '여', 2)) as female from tblPayment p inner join tblBookList bl on p.blseq = bl.seq inner join tblActivityBook ab on ab.blseq = bl.seq inner join tblUser u on ab.id = u.id where ab.bsseq in (2, 3) and to_char(ab.regdate, 'mm') = #{nMonth}
+	</select>
+	
+</mapper>

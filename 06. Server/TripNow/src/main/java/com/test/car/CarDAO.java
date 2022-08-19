@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import com.test.member.MemberDTO;
+import com.test.partner.CarOptionDTO;
 import com.test.tripnow.DBUtil;
 
 public class CarDAO {
@@ -396,6 +397,233 @@ public class CarDAO {
 		}
 		
 		return null;
+	}
+
+
+
+	public int delcar(String seq) {
+
+		try {
+			
+			String sql = "delete from tblcar where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, seq);
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("CarDAO.delcar");
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+	}
+
+
+
+	public CarOptionDTO getCarOption(String seq) {
+
+		try {
+			
+			String sql = "select * from tblcar c inner join tblcarname cn on cn.seq = c.carname where c.seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			rs = pstat.executeQuery();
+			
+			CarOptionDTO dto = new CarOptionDTO(); 
+			
+			if (rs.next()) {
+				
+				dto.setSeq(seq);
+				dto.setCarname(rs.getString("carname"));
+				dto.setFseq(rs.getString("fseq"));
+				dto.setHseq(rs.getString("hseq"));
+				dto.setCtseq(rs.getString("ctseq"));
+				dto.setLocation(rs.getString("location"));
+				dto.setMileage(rs.getString("mileage"));
+				dto.setGeartype(rs.getString("geartype"));
+				dto.setPrice(rs.getString("price"));
+				dto.setRentstart(rs.getString("rentstart"));
+				dto.setRentend(rs.getString("rentend"));
+				dto.setCarname(rs.getString("carname"));
+				dto.setPath(rs.getString("path"));
+			}
+			
+			return dto;
+			
+		} catch (Exception e) {
+			System.out.println("CarDAO.getCarOption");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+
+
+	public int edit(CarOptionDTO dto) {
+		
+		try {
+			
+			String sql = "update tblcar set fseq = ?, hseq = ?, ctseq = ?, location = ?, mileage = ?, geartype = ?, price = ?, rentstart = ?, rentend = ?, carname = ? where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getFseq());
+			pstat.setString(2, dto.getHseq());
+			pstat.setString(3, dto.getCtseq());
+			pstat.setString(4, dto.getLocation());
+			pstat.setString(5, dto.getMileage());
+			pstat.setString(6, dto.getGeartype());
+			pstat.setString(7, dto.getPrice());
+			pstat.setString(8, dto.getRentstart());
+			pstat.setString(9, dto.getRentend());
+			pstat.setString(10, dto.getCarname());
+			pstat.setString(11, dto.getSeq());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("CarDAO.edit");
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+	}
+
+
+
+	public int editPath(CarOptionDTO dto) {
+
+		try {
+	
+			String sql = "select seq from tblcarname";
+			
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			
+			boolean check = false;
+			
+			while (rs.next()) {
+				if (rs.getString("seq").equals(dto.getCarname())) {
+					check = true;
+				}
+			}
+			
+			if (check == true) {
+				sql = "update tblcarname set path = ? where seq = ?";
+				
+				pstat = conn.prepareStatement(sql);
+				
+				pstat.setString(1, dto.getPath());
+				pstat.setString(2, dto.getCarname());
+				
+				
+				return pstat.executeUpdate();
+			} else {
+				sql = "insert into tblcarname values (?, ?, ?)";
+				
+				pstat = conn.prepareStatement(sql);
+				
+				pstat.setString(1, dto.getCarname());
+				pstat.setString(2, dto.getCtseq());
+				pstat.setString(3, dto.getPath());
+				
+				return pstat.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+			System.out.println("CarDAO.edit");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+
+
+	public int add(CarOptionDTO dto, String id) {
+
+		try {
+			
+			String sql = "insert into tblcar values (seqcar.nextval, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, 'y', ?)";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getFseq());
+			pstat.setString(2, dto.getHseq());
+			pstat.setString(3, dto.getCtseq());
+			pstat.setString(4, id);
+			pstat.setString(5, dto.getLocation());
+			pstat.setString(6, dto.getMileage());
+			pstat.setString(7, dto.getGeartype());
+			pstat.setString(8, dto.getPrice());
+			pstat.setString(9, dto.getRentstart());
+			pstat.setString(10, dto.getRentend());
+			pstat.setString(11, dto.getCarname());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("CarDAO.add");
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+
+
+	public int addPath(CarOptionDTO dto) {
+
+		try {
+			
+			String sql = "select seq from tblcarname";
+			
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			
+			boolean check = false;
+			
+			while (rs.next()) {
+				if (rs.getString("seq").equals(dto.getCarname())) {
+					check = true;
+				}
+			}
+			
+			if (check == true) {
+				sql = "update tblcarname set path = ? where seq = ?";
+				
+				pstat = conn.prepareStatement(sql);
+				
+				pstat.setString(1, dto.getPath());
+				pstat.setString(2, dto.getCarname());
+				
+				
+				return pstat.executeUpdate();
+			} else {
+				sql = "insert into tblcarname values (?, ?, ?)";
+				
+				pstat = conn.prepareStatement(sql);
+				
+				pstat.setString(1, dto.getCarname());
+				pstat.setString(2, dto.getCtseq());
+				pstat.setString(3, dto.getPath());
+				
+				return pstat.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+			System.out.println("CarDAO.edit");
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 
 

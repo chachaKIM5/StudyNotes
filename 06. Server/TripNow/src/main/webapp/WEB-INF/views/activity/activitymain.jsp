@@ -55,7 +55,7 @@ body > main >#Nback {
          <div class="Abar">
             <%@ include file="/WEB-INF/views/activity/mainmenubar.jsp" %>
          </div>   
-      
+
       
       </div>      
    </main>

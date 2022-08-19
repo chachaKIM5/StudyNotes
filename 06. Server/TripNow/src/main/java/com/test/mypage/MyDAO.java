@@ -196,7 +196,13 @@ public class MyDAO {
 				where = " and " + tbl + ".bsseq = 1";
 			}
 			
-			String sql = "select ab.seq as seq, ab.id as id, a.path as pic, a.name as bookname, ab.regdate as startdate, a.period as enddate, a.location as location, a.price as price, ab.count as count, bs.value as state from tblActivityBook ab inner join tblActivity a on ab.aseq = a.seq inner join tblBookState bs on ab.bsseq = bs.seq where id = ?" + where;
+			String sql = "select ab.seq as seq, ab.id as id, a.path as pic, a.name as bookname, ab.regdate as startdate, a.period as enddate, a.location as location, p.finalprice as price, ab.count as count, bs.value as state \r\n"
+					+ "from tblActivityBook ab \r\n"
+					+ "inner join tblActivity a on ab.aseq = a.seq\r\n"
+					+ "inner join tblBookState bs on ab.bsseq = bs.seq \r\n"
+					+ "inner join tblBookList bl on bl.seq = ab.blseq\r\n"
+					+ "inner join tblPayment p on p.blseq = bl.seq\r\n"
+					+ "where ab.id = ?";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -216,7 +222,7 @@ public class MyDAO {
 				dto.setStartdate(rs.getString("startdate").substring(0, 10));
 				dto.setEnddate(rs.getString("enddate").substring(0, 10));
 				dto.setLocation(rs.getString("location"));
-				dto.setPrice(rs.getInt("price") * rs.getInt("count") + "");
+				dto.setPrice(rs.getString("price"));
 				dto.setCount(rs.getString("count"));
 				dto.setState(rs.getString("state"));
 				
@@ -548,7 +554,6 @@ public class MyDAO {
 				}
 				
 				dto.setState(rs.getString("state"));
-				System.out.println(dto);
 				return dto;
 			}
 			

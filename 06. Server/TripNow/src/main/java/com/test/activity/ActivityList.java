@@ -17,9 +17,6 @@ public class ActivityList extends HttpServlet {
    @Override
    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       
-      
-	   
-	   
 	   
       //ActivityList.java
       req.setCharacterEncoding("UTF-8");

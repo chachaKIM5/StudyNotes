@@ -551,6 +551,26 @@ public class HomeDAO {
 
 		return null;
 	}
+	
+	public int delroom(String seq) {
+
+		try {
+			
+			String sql = "delete from tblroom where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seq);
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("HomeDAO.delhome");
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+	}
 
 }
 

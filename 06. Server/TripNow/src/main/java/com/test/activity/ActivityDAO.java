@@ -29,7 +29,7 @@ public class ActivityDAO {
 				
 
 				
-				String sql = "select * from tblActivity where location like  ?||'%%' and period >= ?";
+				String sql = "select * from tblActivity where location like  ?||'%%' and period >= ? and rseq like '2' and show like 'y'";
 				
 				pstat = conn.prepareStatement(sql);
 				
@@ -46,7 +46,7 @@ public class ActivityDAO {
 				while(rs.next()) {
 					
 					ActivityDTO listDto = new ActivityDTO();
-					
+										
 					listDto.setSeq(rs.getString("seq"));
 					listDto.setPid(rs.getString("pid"));
 					listDto.setName(rs.getString("name"));
@@ -58,10 +58,38 @@ public class ActivityDAO {
 					listDto.setFpath(rs.getString("fpath"));
 					listDto.setShow(rs.getString("show"));
 					listDto.setRegion(dto.getRegion());
+					
+					
+					
+					sql = "select avg(star) as avgstar from tblActivityReview ar inner join tblActivitybook ab on ab.seq = ar.rseq where ab.aseq like ?";
+					
+					pstat = conn.prepareStatement(sql);
+					
+					pstat.setString(1,rs.getString("seq"));
+					
+					ResultSet rs1;
+					rs1 = pstat.executeQuery();
+					
+					while(rs1.next()) {
+						
+						
+						int avgstar = (int)rs1.getDouble("avgstar");
+						
+							listDto.setAvgstar(avgstar);
+						
+					}
+					
+					
+					
+					
+					
 				
 					list.add(listDto);
 					
 				}
+				
+				
+				
 				
 				return list;
 				
@@ -75,8 +103,6 @@ public class ActivityDAO {
 				
 				String location = "";
 				
-				System.out.println("-------1--------------------");
-				System.out.println(county.length);
 				
 				for(int i =0 ; i < county.length ; i++) {
 
@@ -91,8 +117,6 @@ public class ActivityDAO {
 				String date = String.format(")and period >= '%s' and rseq like '2' and show like 'y' ",dto.getDate());
 				
 				sql = sql + location + date;
-				
-				System.out.println(sql);
 				
 				
 				stat = conn.createStatement();
@@ -116,6 +140,25 @@ public class ActivityDAO {
 					listDto.setFpath(rs.getString("fpath"));
 					listDto.setShow(rs.getString("show"));
 					listDto.setRegion(dto.getRegion());
+					
+					sql = "select avg(star) as avgstar from tblActivityReview ar inner join tblActivitybook ab on ab.seq = ar.rseq where ab.aseq like ?";
+					
+					pstat = conn.prepareStatement(sql);
+					
+					pstat.setString(1,rs.getString("seq"));
+					
+					ResultSet rs1;
+					rs1 = pstat.executeQuery();
+					
+					while(rs1.next()) {
+						
+						
+						int avgstar = (int)rs1.getDouble("avgstar");
+						
+							listDto.setAvgstar(avgstar);
+						
+					}
+					
 					
 					list.add(listDto);
 					
@@ -158,6 +201,15 @@ public class ActivityDAO {
 				dto.setContent(rs.getString("content"));
 				dto.setPath(rs.getString("path"));
 				dto.setShow(rs.getString("show"));
+				
+				if(dto.getCount() != null) {
+				
+				int totalPrice = dto.getPrice() * Integer.parseInt(dto.getCount());
+				
+				String totalPrice1 = String.format("%,d", totalPrice);
+				
+				dto.setTotalPrice(totalPrice1);
+				}
 								
 			}
 			
@@ -176,7 +228,7 @@ public class ActivityDAO {
 			}
 			
 			
-			sql = "select avg(star)as avgstar from tblActivityReview where rseq = ?";
+			sql = "select avg(star) as avgstar from tblActivityReview ar inner join tblActivitybook ab on ab.seq = ar.rseq where ab.aseq like ?";
 			
 			pstat = conn.prepareStatement(sql);
 			
@@ -188,11 +240,12 @@ public class ActivityDAO {
 				
 				int avgstar = (int)rs.getDouble("avgstar");
 				
-				System.out.println(avgstar);
-				
+					
 				dto.setAvgstar(avgstar);
 				
 			}
+			
+			
 			
 			
 			return dto;
@@ -246,25 +299,7 @@ public class ActivityDAO {
 		return null;
 	}
 
-	// ActAddComment > dto
-	public int addReview(ActReviewDTO dto) {
-
-		try {
-			
-			String sql = "";
-			
-			
-			
-			
-			
-			
-		} catch (Exception e) {
-			System.out.println("ActivityDAO.addReview");
-			e.printStackTrace();
-		}
-		
-		return 0;
-	}
+	
 
 
 	public ArrayList<ActReviewDTO> review(String seq) {
@@ -273,7 +308,7 @@ public class ActivityDAO {
 			
 			
 			
-			String sql = "select q.*, a.content as acontent from tblActivityReview q left outer join tblActivityReply a on q.seq = a.rseq where q.rseq=?";
+			String sql = "select q.*, a.content as acontent from tblActivityReview q left outer join tblActivityReply a on q.seq = a.rseq inner join tblActivityBook ab on ab.seq = q.rseq  where ab.aseq = ?";
 			
 			
 			pstat = conn.prepareStatement(sql);
@@ -289,8 +324,9 @@ public class ActivityDAO {
 				ActReviewDTO dto =  new ActReviewDTO();
 				
 				//작성자 id,별점,등록일,내용
+				dto.setSeq(rs.getString("seq"));
 				dto.setId(rs.getString("ID"));
-				dto.setStar(rs.getInt("star"));
+				dto.setStar(rs.getString("star"));
 				dto.setRegdate(rs.getString("regdate"));
 				dto.setContent(rs.getString("content"));
 				
@@ -378,9 +414,6 @@ public class ActivityDAO {
 			}
 			
 			
-			
-			
-			System.out.println(dto.getBlseq());
 			
 			//결제 테이블 추가
 			sql ="insert into tblPayment values ((select max(seq)+1 from tblPayment),?,'N',?)";
@@ -476,6 +509,178 @@ public class ActivityDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+
+
+	public ActReviewDTO addReviewCheck(ActReviewDTO rdto) {
+			try {
+			
+
+				
+			String sql ="select ab.id from tblActivityBook ab left outer join tblActivityReview ar on ab.seq = ar.rseq inner join tblActivity a on ab.aseq = a.seq where ab.regdate +7 > sysdate and a.seq = ? and ab.id = ? and ab.pseq = 2 and ar.content is null";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, rdto.getAseq());
+			pstat.setString(2, rdto.getId());
+			
+			rs = pstat.executeQuery();
+			
+			while(rs.next()) {
+				
+				if(rs.getString("id") == null) {
+					return null;
+				}
+				
+				rdto.setBookid(rs.getString("id"));
+
+			}	
+			
+			
+			 //예약번호 있으면 보내주기
+			
+			sql = "select * from tblActivityBook where id= ? ";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, rdto.getBookid());
+			
+			rs = pstat.executeQuery();
+			
+			while(rs.next()) {
+				
+				rdto.setRseq(rs.getString("seq"));
+				
+			}
+			
+			return rdto;
+			
+		} catch (Exception e) {
+			System.out.println("ActivityDAO.addReviewCheck");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	public ActReviewDTO getReview(ActReviewDTO dto) {
+
+		try {
+			
+			String sql="select * from tblActivityReview where seq = (select max(seq) from tblActivityReview where id like ?)";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getId());
+			
+			rs = pstat.executeQuery();
+			
+			
+			
+			if (rs.next()) {
+				
+				dto.setSeq(rs.getString("seq"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setId(rs.getString("id"));
+				dto.setStar(rs.getString("star"));
+				
+			}
+			
+			return dto;
+			
+		} catch (Exception e) {
+			System.out.println("ActivityDAO.getReview");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+
+	public int addReview(ActReviewDTO dto) {
+			try {
+			
+			String sql = "insert into tblActivityReview values ((select max(seq) + 1 from tblActivityReview), ? , ?, ? ,?,default)";
+
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getRseq());
+			pstat.setString(2, dto.getId());
+			pstat.setString(3, dto.getStar());
+			pstat.setString(4, dto.getContent());
+			
+			return pstat.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			System.out.println("ActivityDAO.addReview");
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+
+	public int delActReviewOk(String seq) {
+		
+		try {
+			
+			String sql = "delete from tblActivityReview where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, seq);
+			
+			
+			
+			return pstat.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			System.out.println("ActivityDAO.delActReviewOk");
+			e.printStackTrace();
+		}		
+		return 0;
+	}
+
+
+	public int editReview(ActReviewDTO dto) {
+		try {
+			
+			String sql = "update tblActivityReview set content = ? where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getContent());
+			pstat.setString(2, dto.getSeq());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("ActivityDAO.editReview");
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public int delact(String seq) {
+
+		
+		try {
+			String sql = "delete from tblactivity where seq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, seq);
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("ActivityDAO.delact");
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
 	}
 
 

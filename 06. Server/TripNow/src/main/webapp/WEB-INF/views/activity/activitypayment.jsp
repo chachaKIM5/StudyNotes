@@ -19,16 +19,6 @@
 	}
 	
 	
- 	.paymentBar{
- 		width: 1025px;
- 		height: 105px;
-  		background-color:#eee; 
- 		margin: auto;
- 		display: flex;
- 		border: 1px solid gray;
- 		
- 		margin-bottom:25px;
- 	}
 	
 	#pointer {
 	  width: 500px;
@@ -36,35 +26,7 @@
 	  position: relative;
 	  background: white;
 	}
-	#triangle-right {
-		
-	  position: relative;
-	  left:-29px;
-		
-      width: 0;
-      height: 103px;
-      border-top: 50px solid transparent;
-      border-left: 100px solid white;
-      border-bottom: 50px solid transparent;
-    }
- 	
- 	
- 	.paymentBar > div:nth-child(1){
- 		width: 500px;
- 		height: 105px;
-/*  	background-color:cornflowerblue; */
- 		
- 		
- 		
- 	}
- 	
- 	
- 	.paymentBar > div:nth-child(2){
- 		width: 500px;
- 		height: 105px;
- 		background-color:#eee;
- 	}
- 	
+
  	#pointer > span{
 		
 		font-size:27px;
@@ -86,95 +48,6 @@
 	}
  	
  	
-	/* 	범위 */	
-		
-	.paymentTableContainer{
-		
-/*  		background-color:beige;   */
-		
-		width: 1025px;
- 		height: 855px;
-  		
- 		margin: 0 0 0 18px;
-
- 		display: flex;
- 		flex-direction: column;
-	
-	}
-	.paymentTableContainer > div {
-	
-		margin-left: 10px;
-	}
-	
-	.paymentTableContainer > div:nth-child(1) {
-		padding: 4px 0 0 4px; 
-		width: 95px;
-		height:40px;
-		border-bottom: 1px solid gray;
-		word-break:break-all;
-	}
-	
-	.paymentTableContainer > div:nth-child(1) > p {
-		
-		font-size: 22px;
-		
-	}
-	
-	.paymentTableContainer > div:nth-child(3) {
-		padding: 4px 0 0 4px; 
-		width: 100px;
-		height:40px;
-		border-bottom: 1px solid gray;
-		word-break:break-all;
-	}
-	
-	.paymentTableContainer > div:nth-child(3) > p {
-		
-		font-size: 21px;
-		
-	}
-	/*  	        주문상품  */
-
-	
-	.paymentTable{
-		
-		width: 1000px;
- 		height: 230px;
- 		
-/*  		background-color: white; */
- 		
-	}
-	.table.payment {
-		
-		margin-top:20px;
-		width: 1000px;
- 		height: 180px;
- 		
- 		border-top: 2px solid gray;
-	} 
- 	
-
- 	
- 	div.paymentTable > table > tbody > tr:nth-child(1) > th{
- 		text-align: center;
- 		height: 40px;
- 	}
- 	
-
-	
-	div.paymentTable > table > tbody > tr:nth-child(1) > th:nth-child(1){
-		width:100px;
-	}
-	
-	div.paymentTable > table > tbody > tr:nth-child(2) > td:nth-child(1){
-		width:100px;
-	}
-	
-	div.paymentTable > table > tbody > tr:nth-child(1){
-		
-		background-color: #EEE;
-	
-	}
 
 /* 		주문자 정보 */
 	
@@ -449,6 +322,23 @@
 	
 	}
 	
+	#discount{
+		width: 74px;
+		border:none;
+		text-align:right;
+		outline: none;
+	}
+	
+	#finalPrice{
+		width: 210px;
+		border:none;
+		text-align:right;
+		background-color:#eee;
+		outline: none;
+	
+		
+	}
+	
 
 </style>
 </head>
@@ -473,32 +363,6 @@
 	
 	<div class="paymentTableContainer">
 	
-		<div>
-			<p>주문상품</p>
-		</div>
-		
-		<div class="paymentTable">
-			<table class="table table-bordered payment">
-			
-			<tr>
-				<th>상품번호</th>
-				<th colspan = '2' style="width:350px;">상품</th>
-				<th>판매자</th>
-				<th>수량</th>
-				<th>상품금액</th>	
-			</tr>
-			
-			<tr>
-				<td style="text-align: center; vertical-align: middle;">${dto.seq}</td>
-				<td style="width:139px;"><img src="${dto.path}" class="APimage"/></td>
-				<td style="vertical-align: middle;">${dto.name}</td>
-				<td style="text-align: center; vertical-align: middle;">${Sdto.name}<br>(${Sdto.tel})</td>
-				<td style="text-align: center; vertical-align: middle;">${count}&nbsp;개</td>	
-				<td style="text-align: center; vertical-align: middle;">${String.format("%,d",dto.price*count)}원</td>	
-			</tr>
-
-			</table>			
-		</div>
 		
 		
 		<div>
@@ -517,8 +381,8 @@
 					<td>휴대폰</td>
 					<td>
 						<input type="text" class="paymentNum1" value="${Mdto.tel.substring(0,3)}" /> - 
-						<input type="text" class="paymentNum2" value="${Mdto.tel.substring(4,7)}"/> -
-						<input type="text" class="paymentNum3" value="${Mdto.tel.substring(8,11)}"/>
+						<input type="text" class="paymentNum2" value="${Mdto.tel.substring(3,7)}"/> -
+						<input type="text" class="paymentNum3" value="${Mdto.tel.substring(7,11)}"/>
 					</td>
 				</tr>
 				<tr>
@@ -546,12 +410,12 @@
 			</div>
 			<div>
 				
-				<span>총 상품금액</span>  <span id="price" >${String.format("%,d",dto.price*count)}원</span><br>
-				<div><span>할인</span> <span id="price">-1,000원</span></div>
+				<span>총 상품금액</span>  <span id="price" >${dto.totalPrice}원</span><br>
+				<div><span>할인</span> <span id="price"><input type="text" id="discount" value="0" readonly />원</span></div>
 			</div>
 			<div>
 				<div id="info">총 결제 금액</div>
-				<div id="price">${String.format("%,d",dto.price*count)}<span>원</span></div>								
+				<div id="price"><input type="text" id="finalPrice" value="${dto.totalPrice}" readonly/><span>원</span></div>								
 			</div>
 		</div>
 			
@@ -563,6 +427,7 @@
 				<input type="hidden" name="partnerId" value="${Sdto.id}" />
 				<input type="hidden" name="Id" value="${Mdto.id}" />
 				<input type="hidden" name="count" value="${count}" />
+				<input type="hidden" name="cSeq" value="0" />
 				<button type="submit" class="btns payment">결제하기</button>
 				<!-- 히든에 정보넣어서 submit -->
 			</form>
@@ -602,6 +467,9 @@
 		<%@ include file="/WEB-INF/views/inc/footer.jsp" %>
 	</div>
 	<script>
+		
+	
+	
 		$('.selectEmail').change(function() {
 	   		
 				$('.paymentEmail2').val($('.selectEmail').val());
@@ -611,9 +479,20 @@
 		
 		$('.PcouponList').on("click",function(){
 			var id = '<%=(String)session.getAttribute("auth")%>';
-			window.open("/tripnow/event/couponlist.do?id="+id,"CouponList","width=750,height=400").focus();
+			var total = ${dto.price*count};
+			window.open("/tripnow/event/couponlist.do?category=액티비티&id="+id+"&total="+total,"CouponList","width=750,height=400").focus();
 			
 		});
+		
+// 		function setCseq(v){
+// 			$("input[name=cSeq]").val(v);
+
+			
+// 		}
+		
+		
+		
+		
 	</script>
 
 </body>

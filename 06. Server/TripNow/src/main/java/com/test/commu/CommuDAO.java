@@ -27,7 +27,7 @@ public class CommuDAO {
 			String sql = "";
 			
 
-			if(dto.getId().equals("user")) {
+			if(dto.getId().equals("admin")) {
 				
 				sql = "insert into tblBoard values ((select max(seq) from tblBoard) + 1, ?, ?, ?, default, default, '공지', 1000)";
 				pstat = conn.prepareStatement(sql);
@@ -61,8 +61,7 @@ public class CommuDAO {
 		
 		try {
 			
-			String sql = String.format("select * from (select a.*, rownum as rnum from vwCommu a) where rnum between %s and %s", map.get("begin"), map.get("end"));
-			
+			String sql = String.format("select * from (select a.*, rownum as rnum from (select * from vwCommu) a) where rnum between %s and %s", map.get("begin"), map.get("end"));
 			stat = conn.createStatement();
 			
 			rs = stat.executeQuery(sql);

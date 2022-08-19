@@ -14,32 +14,37 @@
 		<c:if test="${not empty auth}">
 			<li><a href="/tripnow/member/logout.do">로그아웃</a></li>
 		</c:if>
-		
+		<c:if test="${not empty auth}">
 		<li>
-		<c:if test="${empty auth}">
-			<a href="/tripnow/member/login.do">
-			마이페이지
-			</a>
+			<a href="/tripnow/mypage/mypagemain.do">마이페이지</a>
+		</li>
 		</c:if>
 		<c:if test="${not empty auth}">
-			<a href="/tripnow/mypage/mypagemain.do">
-			마이페이지
-			</a>
+		<li ><a id="couponList">쿠폰함</a></li>
 		</c:if>
-		</li>
-		<li>쿠폰함</li>
-		<c:if test="${not empty auth and grade == 1}">
+		<c:if test="${not empty auth == admin}">
 			<li>[Admin Mode]</li>
+		</c:if>
+		<c:if test="${grade == 2}">
+			<li>
+				<a href="/tripnow/partner/partnermain.do">[Partner]</a></li>
+			<li>
+			</li>
 		</c:if>
 	</ul>
 	<ul id="mainmenu">
 		<li><a href="/tripnow/home/main.do">국내숙소</a></li>
-		<li>액티비티</li>
-		<li>렌터카</li>
-		<li>커뮤니티</li>
-		<li>이벤트</li>
-		<c:if test="${not empty auth and grade == 2}">
-			<li><a href="/tripnow/partner/partnermain.do">내 상품 확인</a></li>
-		</c:if>
+		<li><a href="/tripnow/activity/activitymain.do">액티비티</a></li>
+		<li><a href="/tripnow/car/carmain.do">렌터카</a></li>
+		<li><a href="/tripnow/commu/commu.do">커뮤니티</a></li>
+		<li><a href="/tripnow/event/event.do">이벤트</a></li>
 	</ul>
 </header>
+
+<script>
+$('#couponList').on("click",function(){
+    var id = '<%=(String)session.getAttribute("auth")%>';
+    window.open("/tripnow/event/couponlist.do?id="+id,"CouponList","width=750,height=640").focus();
+    
+});
+</script>

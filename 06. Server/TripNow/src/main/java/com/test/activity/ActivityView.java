@@ -17,14 +17,10 @@ public class ActivityView extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 
 		HttpSession session = req.getSession();
 		
 		
-		
 		req.setCharacterEncoding("UTF-8");
-		
-		
 		
 		// 액티비티 상품 번호와 메뉴바에 받을 인원, 날짜, 지역을 받음
 	     String seq    = req.getParameter("seq");
@@ -32,19 +28,14 @@ public class ActivityView extends HttpServlet {
 	     String date   = req.getParameter("date");
 	     String count  = req.getParameter("count");
 	     String id 	   = (String)session.getAttribute("auth");
-		
-
-	     req.setAttribute("region", region);
-	     req.setAttribute("date", date);
-	     req.setAttribute("count", count);
-	     req.setAttribute("id", id);
-	     req.setAttribute("seq", seq);
+			     
 	     
 	     ActivityDTO dto = new ActivityDTO();
 	     ActivityDAO dao = new ActivityDAO();
 	     
 	     // dto에 상품 seq를 받아서 저장
 	     dto.setSeq(seq);
+	     dto.setCount(count);
 	    
 	     
 	     ArrayList<ActivityDTO> imagedto = dao.getImages(dto);
@@ -52,13 +43,19 @@ public class ActivityView extends HttpServlet {
 	     
 	     // seq를 넘겨줘서 상품의 정보를 받아옴
 	     dto = dao.view(dto);
+ 
+	     
+	     //////////////////////////////
+	     //리뷰 쓰기권한 확인
+	     ActReviewDTO rdto = new ActReviewDTO();
 	     
 	     
+	     rdto.setId(id);
+	     rdto.setAseq(seq);
 	     
 	     
-	     //dto jsp에 넘겨주기
-	     req.setAttribute("dto", dto);
-	     req.setAttribute("imagedto", imagedto);
+	     rdto = dao.addReviewCheck(rdto);
+	     
 	     
 	     
 	 ////////////////////////////////////////////////////////////////////    
@@ -67,8 +64,18 @@ public class ActivityView extends HttpServlet {
 	     
 	     ArrayList<ActReviewDTO> review = dao.review(seq);
 	     
+	     
+	     
+	     req.setAttribute("dto", dto);
+	     req.setAttribute("imagedto", imagedto);
 	     req.setAttribute("review", review);
-		
+	     req.setAttribute("region", region);
+	     req.setAttribute("date", date);
+	     req.setAttribute("count", count);
+	     req.setAttribute("id", id);
+	     req.setAttribute("seq", seq);
+	     req.setAttribute("rdto", rdto);
+	    
 		
 		
 	     

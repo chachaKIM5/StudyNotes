@@ -30,6 +30,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+
 	<!-- POST 데이터 인코딩 처리 -->
 	<filter>
 	   <filter-name>encodingFilter</filter-name>

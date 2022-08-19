@@ -9,115 +9,142 @@
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 <style>
 
-	.list {
-		width: 840px;
-		margin: 10px auto;
+	main {
+		text-align: center;
 	}
 	
-	.list > h2 {
-		padding-bottom: 10px;
-		margin-top: 30px;
-		margin-bottom: 15px;
-		border-bottom: 1px dashed #DDD;
+	main h1 {
+		margin: 40px 0px 40px 0px;
+	}
+	
+	#main {
+/* 		background-color: #eee; */
+		
+		width: 780px;
+		height: 500px;
+		padding:0 30px 30px 30px;
+		margin: 50px auto;
+		border-top: 1px solid #DDD;
+		border-bottom: 1px solid #DDD;
+
+	}
+	
+	#regist{
+/* 		background-color: #ccc; */
+		
+		width:540px;
+		display: flex;
+		margin:auto;
+		
+	}
+	#etc{
+		
+		margin-top: 40px;
+		display: flex;
+
 		
 	}
 	
-	.homelist, .actlist, .carlist {
-		padding-bottom: 10px;
-		border-bottom: 1px dashed #DDD;
-	}
-	
-	#title p {
-		font-size: 36px;
+	#main .item {
 		text-align: center;
+		width: 180px;
+		height: 180px;
+		cursor:pointer;
 	}
 	
-	#title #icon {
-		background-image: url('/tripnow/images/booklist.png');
-		width: 52px;
-		height: 52px;
-		background-repeat: no-repeat;
+	.menubtn {
+		margin-top: 50px;
+		margin-left: 15px;
+		margin-right: 15px;
+
+	}
+	
+	#qna {
+		width: 150px;
+		height: 150px;
+		background-image: url('/tripnow/images/qna.png');
+		background-size: contain;
+		
+	}
+	
+	#info {
+		width: 150px;
+		height: 150px;
+		background-image: url('/tripnow/images/info.png');
 		background-size: contain;
 	}
+	#booklist {
+		width: 150px;
+		height: 150px;
+		background-image: url('/tripnow/images/booklist.png');
+		background-size: contain;
+	}
+
 	
-	#title {
-		width: 840px;
-		display: flex;
-		justify-content: center;
-		padding: 20px 0px 30px 0px;
-		margin: 0 auto;
-		border-bottom: 1px solid #CCC;
+	
+	#home{
+		width: 135px;
+		height: 135px;
+		background-image: url('/tripnow/images/homeimg.png');
+		background-size: contain;
+		background-repeat: no-repeat;		
 	}
 	
-	.highlight {
-		color: tomato;
+	#regist > div:nth-child(1) > p{
+		
+		margin-top: 16px;
+   	 	margin-left: -15px;
+	
 	}
 	
-	.card {
-		border: 1px solid #CCC;
-		border-radius: 10px;
-		overflow: hidden;
-		max-width: 840px;
-		max-height: 200px;
+	#car{
+		width: 140px;
+		height: 140px;
+		background-image: url('/tripnow/images/carimg.png');
+		background-size: contain;
+		background-repeat: no-repeat;		
+	
+	}
+	#act{
+		width: 140px;
+		height: 140px;
+		background-image: url('/tripnow/images/actimg.png');
+		background-size: contain;
+		background-repeat: no-repeat;		
+	
 	}
 	
-	.col-md-4 img {
-		width: 250px;
-		height: 200px;
+	#chart{
+		width: 135px;
+		height: 135px;
+		background-image: url('/tripnow/images/chartimg.png');
+		background-size: contain;
+		background-repeat: no-repeat;	
+	
 	}
 	
-	.card-title {
-		font-size: 25px;
-		margin-top: 25px;
+	#etc > div:nth-child(4) > p{
+		margin-top:25px;
 	}
 	
-	.card-title small {
-		font-size: 15px;
-		margin-left: 15px;
+	#item{
+		width: 150px;
+		height: 150px;
+		background-image: url('/tripnow/images/itemimg.png');
+		background-size: contain;
+		background-repeat: no-repeat;	
 	}
 	
-	.card-text.won {
-		margin-bottom: 0px;	
-	}
-	.card-bottom .price {
-		text-align: right;
-		margin-right: 15px;
-		margin-bottom: 10px;
-		padding-right: 10px;
-		border-right: 1px solid #DDD;
-	}
-	
-	.card-bottom {
-		float: right;
-		display: flex;
-	}
-	
-	.card-bottom .price .won {
-		font-size: 20px;
-	}
-	
-	p.card-text.context {
-		margin-bottom: 3px;
-	}
-	
-	.text-muted i {
-		margin-left: 15px;
-	}
-	
-	.state h2 {
-		margin: 10px 15px 0px 0px;
-	}
-	
-	.none {
-		font-size: 15px;
-		text-align: center;
+
+	.item p {
+		margin-top: 10px;
+		margin-bottom: 15px;
+		font-size: 18px;
 	}
 	
 	
-	.unregister {
-		margin: 20px 0px 40px 0px;
-		float: right;
-	}
+	
+	
 </style>
 </head>
 <body>
@@ -125,130 +152,26 @@
    <main>
       <%@ include file="/WEB-INF/views/inc/header.jsp" %>
       
-      <div id="title"><div id="icon"></div><p>&nbsp;카테고리별 내 상품 조회</p></div>
+      <h1>Partner</h1>
+      <div id="main">
       
-      <div class="list">
-      
-      <h2>숙소</h2>
-      <div class="items homelist">
-    	<c:if test="${not empty homeList}">  
-	      	<c:forEach items="${homeList}" var="dto">
-	      		<div class="card mb-3 item home">
-				  <div class="row no-gutters">
-				    <div class="col-md-4">
-				      <img src="/tripnow/${dto.pic}" alt="...">
-				    </div>
-				    <div class="col-md-8">
-				      <div class="card-body">
-				        <h5 class="card-title">${dto.bookName}<small>${dto.roomName}</small></h5>
-				        <p class="card-text"><span class="badge badge-pill badge-secondary">날짜</span>&nbsp;&nbsp;${dto.startdate} ~ ${dto.enddate}</p>
-				        <p class="card-text context"><small class="text-muted"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;체크인: ${dto.checkin}, 체크아웃: ${dto.checkout}</small></p>
-				        <p class="card-text context"><small class="text-muted"><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;&nbsp;위치 정보: ${dto.location}</small></p>
-				        
-				        <div class="card-bottom">
-					        <div class="price">
-					        <p class="card-text context"><small class="text-muted">주문금액</small></p>
-					        <p class="card-text won">￦ ${dto.price}</p>
-					        </div>
-					        
-					        <div class="state"><h2>${dto.state}</h2></div>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				
-			</c:forEach>
-		</c:if>
-		
-		<c:if test="${empty homeList}">
-			<h3 class="none">숙소 상품 내역이 없습니다.</h3>
-		</c:if>
+      		<div id="regist">
+	      		<div class="item" onclick="location.href='/tripnow/partner/homeadd.do'"><div class="menubtn" id="home"></div><p>숙소 등록</p></div>
+	      		<div class="item" onclick="location.href='/tripnow/partner/addcar.do'"><div class="menubtn" id="car"></div><p>랜터카 등록</p></div>
+	      		<div class="item" onclick="location.href='/tripnow/partner/actregister.do'"><div class="menubtn" id="act"></div><p>액티비티 등록</p></div>
+      		</div>
+      		
+      		
+      		<div id = "etc">
+	      		<div class="item" onclick="location.href='/tripnow/partner/mylist.do'"><div class="menubtn" id="item"></div><p>내 상품들</p></div>
+	      		<div class="item" onclick="location.href='/tripnow/partner/bookmanage.do'"><div class="menubtn" id="booklist"></div><p>예약관리</p></div>
+	      		<div class="item" onclick="location.href='/tripnow/partner/reviewreply.do'"><div class="menubtn" id="qna"></div><p>리뷰답변</p></div>
+	      		<div class="item" onclick="location.href='/tripnow/partner/sales.do'"><div class="menubtn" id="chart"></div><p>매출현황</p></div>
+      		</div>
+      		
+      		
+      		
       </div>
-		
-		
-      <h2>액티비티</h2>
-      <div class="items actlist">
-      
-      <c:if test="${not empty actList}">  
-	      	<c:forEach items="${actList}" var="dto">
-	      		<div class="card mb-3 item home">
-				  <div class="row no-gutters">
-				    <div class="col-md-4">
-				      <img src="/tripnow/${dto.pic}" alt="...">
-				    </div>
-				    <div class="col-md-8">
-				      <div class="card-body">
-				        <h5 class="card-title">${dto.bookName}</h5>
-				        <p class="card-text"><span class="badge badge-pill badge-secondary">예약 날짜</span>&nbsp;&nbsp;${dto.startdate}&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge badge-pill badge-secondary">만료 기한</span>&nbsp;&nbsp;${dto.enddate}</p>
-				        <p class="card-text context"><small class="text-muted"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;예약 인원: ${dto.count} 명</small></p>
-				        <p class="card-text context"><small class="text-muted"><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;&nbsp;위치 정보: ${dto.location}</small></p>
-				        
-				        <div class="card-bottom">
-					        <div class="price">
-					        <p class="card-text context"><small class="text-muted">주문금액</small></p>
-					        <p class="card-text won">￦ ${dto.price}</p>
-					        </div>
-					        
-					        <div class="state"><h2>${dto.state}</h2></div>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				
-			</c:forEach>
-		</c:if>
-     
- 		<c:if test="${empty actList}">
-			<h3 class="none">액티비티 상품 내역이 없습니다.</h3>
-		</c:if>
-      </div>
-      
-      
-      <h2>렌터카</h2>
-      <div class="items carlist">
-      
-          	<c:if test="${not empty carList}">  
-	      	<c:forEach items="${carList}" var="dto">
-	      		<div class="card mb-3 item home">
-				  <div class="row no-gutters">
-				    <div class="col-md-4">
-				      <img src="/tripnow/${dto.pic}" alt="...">
-				    </div>
-				    <div class="col-md-8">
-				      <div class="card-body">
-				        <h5 class="card-title">${dto.bookName}</h5>
-				        <p class="card-text"><span class="badge badge-pill badge-secondary">날짜</span>&nbsp;&nbsp;${dto.startdate} ~ ${dto.enddate}</p>
-				        <p class="card-text context"><small class="text-muted"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;대여 시각: ${dto.checkin}, 반납 시각: ${dto.checkout}</small></p>
-				        <p class="card-text context"><small class="text-muted"><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;&nbsp;위치 정보: ${dto.location}</small></p>
-				        
-				        <div class="card-bottom">
-					        <div class="price">
-					        <p class="card-text context"><small class="text-muted">주문금액</small></p>
-					        <p class="card-text won">￦ ${dto.price}</p>
-					        </div>
-					        
-					        <div class="state"><h2>${dto.state}</h2></div>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				
-			</c:forEach>
-		</c:if>
-      
-      
-      	<c:if test="${empty carList}">
-      		<h3 class="none">렌터카 상품 내역이 없습니다.</h3>
-      	</c:if>
-      </div>
- 		
-		
-		
-      </div>
-      
       
       
    </main>

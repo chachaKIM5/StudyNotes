@@ -2,7 +2,7 @@ select * from tblQuestion;
 select * from tblAnswer;
 
 delete from tblAnswer where seq = 6;
-drop sequence seqAnswer;
+create sequence seqQuestion start with 15;
 create sequence seqAnswer start with 6;
 insert into tblQuestion values (seqQuestion.nextVal, 'user', 1, '상품 신고', 'asasdgasdgs 상품이 상품 소개와는 다르게 예약 시 추가금을 받았습니다.', sysdate);
 commit;

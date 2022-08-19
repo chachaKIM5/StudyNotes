@@ -19,8 +19,6 @@ public class DelCommuOk extends HttpServlet {
 		
 		String seq = req.getParameter("seq");
 		
-		System.out.println(seq);
-		
 		CommuDAO dao = new CommuDAO();
 		
 		dao.delCommentSEQ(seq);

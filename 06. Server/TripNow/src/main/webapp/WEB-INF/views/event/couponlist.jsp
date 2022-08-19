@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 
 
@@ -157,23 +155,23 @@
 					</tr>
 				</thead>
 				<tbody>
-				 <c:forEach items="${list}" var="dto">
-            
-               <tr>
-                  <td class="left">
-                     <label><input type="radio" name="coupon" class="coupon" value="${dto.eseq}">
-                     ${dto.name}</label>
-                  </td>
-                  <td>${dto.value}</td>
-                  <td>${dto.rate}</td>
-                  <td>${dto.enddate}</td>
-               </tr>
-            </c:forEach>
+				<c:forEach items="${list}" var="dto">
+				
+					<tr>
+						<td class="left">
+							<input type="radio" name="coupon" class="coupon" value="${dto.eseq}"/>
+							<label>${dto.name}</label>
+						</td>
+						<td>${dto.value}</td>
+						<td>${dto.rate}%</td>
+						<td>${dto.enddate}</td>
+					</tr>
+			   </c:forEach>
 				</tbody>
 			</table>
 		</div>
 	
-			<div class="btnGroup">
+		<div class="btnGroup">
             
             <a class="couponback" onclick="window.close()">취소</a>
             
@@ -194,19 +192,43 @@
    
    <script>
    
-
+   
 
 
       function checkCoupon() {  
-          
-         $.ajax({
-            
+    	  
+    	  var eseq = "";
+    	  var total = "";
+    	  
+    	  eseq = $('input[name=coupon]:checked').val();
+    	  total = ${total};
+    	  
+
+         $.ajax({            
             type: 'POST',
-            url: '/tripnow/activity/activitypayment.do',
-            data: 'eseq=' + $('.coupon:checked').val(),
+            url: '/tripnow/event/calculateprice.do',
+            data: 'eseq=' +eseq+'&total='+total,
             dataType: 'JSON',
             success: function(result) {
-                           
+            	
+
+            	
+            	const num  = parseInt(result.discount);
+            	const num2 = parseInt(result.finalPrice);
+            	const cSeq = result.cSeq;
+
+            	const discount   = num.toLocaleString('ko-KR');
+            	const finalPrice = num2.toLocaleString('ko-KR');
+            	
+            	opener.document.getElementById('discount').value = '-'+discount ;
+            	
+				$("input[name=totalPrice]",opener.document).val(num2);
+				$("input[name=cSeq]",opener.document).val(cSeq);
+				$("#finalPrice",opener.document).val(finalPrice);
+
+				self.close();
+
+            	      
             },
             error: function(a,b,c) {
                console.log(a,b,c);
@@ -219,3 +241,22 @@
       
       
    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

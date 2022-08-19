@@ -32,8 +32,7 @@ public class QnA extends HttpServlet {
 
 		HashMap<String, String> map = new HashMap<String, String>();
 		
-		
-		
+
 		int nowPage = 0; // 현재 페이지 번호
 		int begin = 0;
 		int end = 0;

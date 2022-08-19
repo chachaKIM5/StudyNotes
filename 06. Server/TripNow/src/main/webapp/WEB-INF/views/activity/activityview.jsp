@@ -21,7 +21,7 @@
 	
 	.Acontainer{
 		
-		margin-top:19px ;
+		margin-top:23px ;
 		width: 1060px;
 		height:2000px;
 /*  		background-color : cornflowerblue;  */
@@ -80,40 +80,41 @@
 	
 	.AvName > div{
 		word-break:break-all;
+		margin-left:20px;
+		margin-top:4px;
 	}
 	
 	
 	.AvName > div:nth-child(1){
 	
-/* 		background-color : white; */
+/* 		background-color : cornflowerblue;   */
 		height: 60px;
 		padding-top: 14px;
-		margin-left: 20px;
+		
 	
 	}
 	
 	.AvName > div:nth-child(1) > p {
-		font-size: 17px;
+		font-size: 23px;
+		font-weigth: 600;
 	}
 	
-	.AvName > div:nth-child(1) > span {
-		font-size: 14px;
-		
-	}
 	
 	.AvName > div:nth-child(2){
 		
-/*  		background-color : yellowgreen;  */
-		height: 45px;
-		padding-left: 17px;
-		margin-top: 5px;
+/*   		background-color : yellowgreen;   */
+		height: 30px;
+		margin-left:10px;
+		margin-top:-10px;
+		
+		
+		
 		
 	}
 	
-	.AvName > div:nth-child(2) > .star5{
+	.AvName > div:nth-child(3) > .star5{
 	    display: inline-block;
 	    margin-right: 10px;
-	    margin-top: 5px;
 	    width: 140px;
 	    height: 33px;
 	    background-image: url(/tripnow/images/star.png);
@@ -125,10 +126,9 @@
 	
 	}
 	
-	.AvName > div:nth-child(2) > .star4{
+	.AvName > div:nth-child(3) > .star4{
 	    display: inline-block;
 	    margin-right: 10px;
-	    margin-top: 5px;
 	    width: 140px;
 	    height: 33px;
 	    background-image: url(/tripnow/images/star.png);
@@ -139,10 +139,9 @@
 	    background-color : white; 
 	
 	}
-	.AvName > div:nth-child(2) > .star3{
+	.AvName > div:nth-child(3) > .star3{
 	    display: inline-block;
 	    margin-right: 10px;
-	    margin-top: 5px;
 	    width: 140px;
 	    height: 33px;
 	    background-image: url(/tripnow/images/star.png);
@@ -154,10 +153,9 @@
 	
 	}
 	
-	.AvName > div:nth-child(2) > .star2{
+	.AvName > div:nth-child(3) > .star2{
 	    display: inline-block;
 	    margin-right: 10px;
-	    margin-top: 5px;
 	    width: 140px;
 	    height: 33px;
 	    background-image: url(/tripnow/images/star.png);
@@ -169,17 +167,15 @@
 	
 	}
 	
-	.AvName > div:nth-child(2) > .star1{
+	.AvName > div:nth-child(3) > .star1{
 	    display: inline-block;
 	    margin-right: 10px;
-	    margin-top: 5px;
 	    width: 140px;
 	    height: 33px;
 	    background-image: url(/tripnow/images/star.png);
 	    background-position: 0px 3px;
 	    background-size: 340%;
 	    vertical-align: top;
-	    
 	    background-color : white; 
 	
 	}
@@ -187,23 +183,31 @@
 	
 	
 
-	.AvName > div:nth-child(3){
+	.AvName > div:nth-child(4){
 		
-/*  		background-color : skyblue;  */
-		height: 195px;
-		padding: 4px 20px 20px 20px;
+		margin-right:20px;
+		margin-top : 10px;
+		height: 150px;
 		font-size: 15px;
+/* 		background-color: #eee; */
 		
 	}
 	
-	.AvName > div:nth-child(3) > p{
+	.AvName > div:nth-child(5){
+		
+		font-size:19px;
+		
+		margin-top:13px;	
+/* 		background-color: #ccc; */
 		
 	}
+	
+
 	
 	
 	.Actbook > .btn.actbuy{
 		position:relative;
-		top:-13px;
+		top:-24px;
 		left:-9px;
 		
 		float: right;
@@ -217,7 +221,7 @@
 	    height: 34px;
 	    position: relative;
 	    
-	    top: -17px;
+	    top: -29px;
 	    left: 312px;
 	    font-size: 20px;
 	    text-align: center;
@@ -377,7 +381,48 @@
 		margin-left: 18px;
 	}
 		
+		
+	.spanright {
+		float: right;
+	}
 	
+	.spanright > span:nth-child(1) > a {
+		color: red;
+	}
+	
+	.spanright > span:nth-child(2) > a {
+		color: blue;
+	}
+	
+	.spanright > span > a:hover {
+		color: cornflowerblue;
+	}
+	
+	
+	#editRow {
+		margin: 10px;
+	}
+	
+	.tblEditComment textarea {
+		resize: none;
+		width: 829px;
+		margin: 10px;
+		height: 70px;
+	}
+	
+	.popupMap{
+		cursor:pointer;
+	}
+	
+	.AvName > div:nth-child(5) > span{
+		font-size:17px;
+	}
+	
+	.AvName > div:nth-child(3) > span:nth-child(1){
+		font-size: 19px;
+    	font-weight: 500;
+   		color: cornflowerblue;
+	}
 	
 	   
 </style>
@@ -394,24 +439,34 @@
       <div class="Acontainer">
 	      <div class="AthumbnailContainer">
 	      		<div class="Athumbnail">
-	      			<img src="${dto.path} "  />
+	      			<img src="${dto.path} " />
 	      		</div>
 	      		<div class="AvName">
 		      		<div>
-		      			<p>${dto.name}</p>
-		      			<span>${dto.location}</span>				      		
+		      			<p>${dto.name}</p>				      		
 		      		</div> 
 		      		<div>
+		      			<span class="popupMap">
+		      				<i  class="fa-solid fa-location-dot">${dto.location}</i>
+		      				<input id="location" type="hidden" value="${dto.location}" />
+		      			</span>
+		      		</div>
+		      		<div>
+		      			<c:if test="${dto.avgstar == 0}">
+		      				<span>별점: 평가전</span>
+		      			</c:if>
 		      			<span class="star${dto.avgstar}"></span> 
 	      			</div>
 	      			<div>
-	      				<p>${dto.content}</p>]      				
+	      				<p>${dto.content} </p>   				
 	      			</div>
-	      			<form method="POST" action="/tripnow/activity/activitypayment.do" >
+	      			<div>
+	      				가격:&nbsp;${dto.price}&nbsp;원/<span>1인</span>
+	      			</div>
+	      			<form method="GET" action="/tripnow/activity/activitypayment.do" >
 		      			<div class="Actbook">
 		      				<input type="hidden" name="id" value="${id}" />
 		      				<input type="hidden" name="seq" value="${seq}" />
-<!-- 		      				<input type="hidden" name=""  /> -->
 		      				<input type="number" name="count" value="${count}" class="actCount" />
 		      				<button class="btn btn-primary actbuy" id="book" onclick="login_check();" >구매하기</button>
 		      			</div>
@@ -468,34 +523,48 @@
 		      	   <div>
 		      		<h3 id="reviewstart">리뷰 </h3>
 		      	   </div>
-		 			<form action="" id="addActReviewForm"> 
+		      	   
+		      	   <c:if test="${rdto.bookid == id and id != null}">
+		 			<form id="addActReviewForm">
 						<div id="radiostar">
-							<label><input type="radio" name="reviewstarcheck">&nbsp;<span class="star5"></span></label>
-							<label><input type="radio" name="reviewstarcheck">&nbsp;<span class="star4"></span></label>
-							<label><input type="radio" name="reviewstarcheck">&nbsp;<span class="star3"></span></label>
-							<label><input type="radio" name="reviewstarcheck">&nbsp;<span class="star2"></span></label>
-							<label><input type="radio" name="reviewstarcheck">&nbsp;<span class="star1"></span></label>
+							<label><input type="radio" name="star" value="5" required>&nbsp;<span class="star5"></span></label>
+							<label><input type="radio" name="star" value="4">&nbsp;<span class="star4"></span></label>
+							<label><input type="radio" name="star" value="3">&nbsp;<span class="star3"></span></label>
+							<label><input type="radio" name="star" value="2">&nbsp;<span class="star2"></span></label>
+							<label><input type="radio" name="star" value="1">&nbsp;<span class="star1"></span></label>
 						</div>
+						
 						<div id="reviewWrite">
 							<textarea rows="3" cols="110px" name="content">리뷰를 작성하세요.</textarea>
-							<button class="btn btn-primary write" >작성하기</button>
+							<!-- 글번호 -->
+ 							<input type="hidden" name="seq" value="${seq}" />   
+ 							<input type="hidden" name="rseq" value="${rdto.rseq}" />   
+							<button type="button" class="btn btn-primary write" onclick="addActReview();" >작성하기</button>
 						</div>
 					</form>
+					</c:if>
+					
 				</div>
-		  
-				
+		  <div id="reviewbox"> 
+			
 			<c:forEach items="${review}" var="dto">
 				<div class="homereview">
 					<div>
 						<span>작성자 : ${dto.id}</span>
-						<span>등록일 : ${dto.regdate}</span>
+						<span style="float: right">등록일 : ${dto.regdate}</span>
 					</div>
 					<div id="reviewall">
 						<span class="star${dto.star}"></span>
 					</div>
 					<span class="reviewnumber">${dto.star}</span>
 					<div class="reviewcontent">
-						${dto.content}
+						<span>${dto.content}</span>
+						<c:if test="${dto.id == id}">
+						<span class="spanright">
+							<span class="btnspan"><a href="#!" onclick="delcomment(${dto.seq});">[삭제]</a></span>
+							<span class="btnspan"><a href="#!" onclick="editcomment(${dto.seq});">[수정]</a></span>
+						</span>
+						</c:if>
 					</div>
 					<c:if test="${not empty dto.acontent}">
 					<p><i class="fa-solid fa-angle-down"></i></p>
@@ -506,6 +575,7 @@
 				</div>
 	        </c:forEach>
 
+			</div>
 	      </div>
 	      
       	  
@@ -517,14 +587,21 @@
       <%@ include file="/WEB-INF/views/inc/footer.jsp" %>
    
    <script>
+   
+  
+   
+   
    // 사진 추가
-   $(function() {
+     
+   window.onload=function() {
        
        $('.carousel-indicators li:first-child').addClass("active");
        $('.carousel-inner div:first-child').addClass("active");
        $('#reviewall > span').add
        
-    })
+      
+       
+    }
       
    
    function login_check(){ 
@@ -540,13 +617,169 @@
          };
         
    };   
-
-    
-  	
-    
-    
- 
    
+   function addActReview(){ 
+          
+	   $.ajax({
+			type: 'POST',
+			url: '/tripnow/activity/activityreviewok.do',
+			data: $('#addActReviewForm').serialize(),
+			dataType: 'json',
+			success: function(result) {
+			if (result.result == "1") {
+				
+				
+					
+					let temp= `<div class="homereview">
+						<div>
+							<span>작성자 : \${$('[name=id]').val()}</span>
+							<span style="float: right">등록일 : \${result.regdate}</span>
+						</div>
+						<div id="reviewall">
+							<span class="star\${result.star}"></span>
+						</div>
+						<span class="reviewnumber">\${result.star}</span>
+						<div class="reviewcontent">
+						<span>\${$('[name=content]').val()}</span>
+							<span class="spanright">
+								<span class="btnspan"><a href="#!" onclick="delcomment(\${result.seq});">[삭제]</a></span>
+								<span class="btnspan"><a href="#!" onclick="editcomment(\${result.seq});">[수정]</a></span>
+							</span>
+						</div>
+					</div>`;
+					
+					
+					
+					$('#reviewbox').prepend(temp);
+					
+					$('#addActReviewForm').remove();
+				}
+			}, error: function(a,b,c) {
+				console.log(a,b,c);
+			}
+		});
+		
+		}	
+    
+   		function delcomment(seq) {
+		
+		let tr = $(event.target).parent().parent().parent().parent();
+		
+		if (confirm('정말 삭제하시겠습니까?')) {
+			
+			$.ajax({
+				type: 'POST',
+				url: '/tripnow/activity/actdelreviewtok.do',
+				data: 'seq=' + seq,
+				dataType: 'json',
+				success: function(result) {
+					
+					if (result.result == "1") {
+						tr.remove();
+					} else {
+						alert('댓글 삭제 오류!!');
+					}
+					
+				},
+				error: function(a,b,c) {
+					console.log(a,b,c);
+				}
+			});
+			
+		}
+		
+	}
+   		
+   		
+   		let isEdit = false; 
+		
+		function editcomment(seq) {
+			
+			if (!isEdit) {
+				
+				const tempStr = $(event.target).parent().parent().parent().children(":first").text();
+				
+				console.log($(event.target).parent().parent().parent().children(":first").text());
+				
+				$(event.target).parent().parent().parent().after(temp);
+				
+				isEdit = true;
+				
+				$(event.target).parent().parent().parent().next().find('textarea').val(tempStr);
+				$(event.target).parent().parent().parent().next().find('input[name=seq]').val(seq);
+			}
+			
+		}
+		
+    
+		const temp = `<tr id='editRow' style="background-color: #CDCDCD;">
+			<td>
+				<form id="editCommentForm">
+				<table class="tblEditComment">
+					<tr>
+						<td>
+							<textarea class="form-control" name="content" required id="txtcontent"></textarea>
+						</td>
+						<td>
+							<button class="btn btn-secondary" type="button"
+								onclick="cancelForm();">
+								취소하기
+							</button>
+							<button class="btn btn-primary" type="button"
+									onclick="editComment();">
+								<i class="fas fa-pen"></i>
+								수정하기
+							</button>
+						</td>
+					</tr>
+				</table>
+				
+				<input type="hidden" name="seq">
+				</form>
+			</td>
+		</tr>`;
+		
+		function cancelForm() {
+		$('#editRow').remove();
+		isEdit = false;
+		};
+ 
+		function editComment() {
+			
+			$.ajax({
+				
+				type: 'POST',
+				url: '/tripnow/activity/acteditreviewtok.do',
+				data: $('#editCommentForm').serialize(),
+				dataType: 'json',
+				success: function(result) {
+					
+					if (result.result == "1") {
+						
+						$('#editRow').prev().children().eq(0).text($('#txtcontent').val());
+						$('#editRow').remove();
+						
+					} else {
+						alert('failed');
+					}
+					
+				},
+				error: function(a,b,c) {
+					console.log(a,b,c);
+				}
+				
+			});
+			
+		}
+		
+		
+		 //지도 팝업
+		   $('.popupMap').on("click",function(){
+					var location = $('#location').val();
+					window.open("/tripnow/tripnow/map.do?location="+location,"Map","width=390,height=315").focus();
+					
+				});
+		   
    
    
    </script>

@@ -22,11 +22,16 @@ public class CouponList extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		String id = req.getParameter("id");
+		String total = req.getParameter("total");
+		String category = req.getParameter("category");
+		
+		
 		
 		CouponDTO dto = new CouponDTO();
 		EventDAO  dao = new EventDAO();
 		
 		dto.setId(id);
+		dto.setValue(category);
 		
 		ArrayList<CouponDTO> list = dao.couponlist(dto);
 		
@@ -39,6 +44,7 @@ public class CouponList extends HttpServlet {
 	      }
 		
 		
+		req.setAttribute("total", total);		
 		req.setAttribute("list", list);
 		
 		

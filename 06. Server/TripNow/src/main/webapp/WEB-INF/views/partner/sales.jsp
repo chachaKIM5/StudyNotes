@@ -69,8 +69,7 @@
 	}
 	
 	#main {
-		margin-left: 20px;
-		width: 780px;
+		width: 840px;
 	}
 	
 	#btns {
@@ -99,11 +98,11 @@
 	}
 	
 	table td:nth-child(2) {
-		width: 270px;
+		width: 300px;
 	}
 	
 	table td:last-child {
-		width: 150px;
+		width: 180px;
 		text-align: right;
 	}
 	
@@ -152,14 +151,6 @@
       
       
 		<div id="contents">
-			<div id="menu">
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">상품 등록</li>
-					<li class="list-group-item">예약 관리</li>
-					<li class="list-group-item">매출 현황</li>
-					<li class="list-group-item">리뷰 답변</li>
-				</ul>
-			</div>
 			
 			
 			<div id="main">

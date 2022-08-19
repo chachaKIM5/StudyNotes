@@ -104,7 +104,6 @@ public class EventDAO {
 			
 			
 		} catch (Exception e) {
-			System.out.println("EventDAO.getCoupon");
 			e.printStackTrace();
 		}
 		
@@ -114,11 +113,22 @@ public class EventDAO {
 	public ArrayList<CouponDTO> couponlist(CouponDTO dto) {
 		try {
 			
-			String sql ="select a.* , b.name , b.enddate, b.rate , b.value, b.finished from tblUserCoupon a left outer join tblEvent b on a.eseq = b.seq where a.id like ? and a.used like 'n' and b.finished like 'y'  order by enddate ";
+			if(dto.getValue() == null) {
+				String sql ="select a.* , b.name , b.enddate, b.rate , b.value, b.finished from tblUserCoupon a left outer join tblEvent b on a.eseq = b.seq where a.id like ? and a.used like 'n' and b.finished like 'y' order by enddate ";
+				
+				pstat = conn.prepareStatement(sql);
+				
+				pstat.setString(1, dto.getId());
+			}else {
+			
+			String sql ="select a.* , b.name , b.enddate, b.rate , b.value, b.finished from tblUserCoupon a left outer join tblEvent b on a.eseq = b.seq where a.id like ? and a.used like 'n' and b.finished like 'y' and b.value like ? order by enddate ";
 			
 			pstat = conn.prepareStatement(sql);
 			
 			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getValue());
+			
+			}
 			
 			rs = pstat.executeQuery();
 			
@@ -128,7 +138,7 @@ public class EventDAO {
 				
 				CouponDTO listDto = new CouponDTO();
 				
-				
+				listDto.setSeq(rs.getString("seq"));
 				listDto.setName(rs.getString("name"));
 				listDto.setEnddate(rs.getString("enddate"));
 				listDto.setValue(rs.getString("value"));
@@ -153,7 +163,7 @@ public class EventDAO {
 		return null;
 	}
 
-	public CouponDTO getEvent(CouponDTO cdto) {
+	public CouponDTO getEvent(CouponDTO dto) {
 		
 		try {
 			
@@ -161,20 +171,18 @@ public class EventDAO {
 			
 			pstat = conn.prepareStatement(sql);
 			
-			pstat.setString(1, cdto.getEseq());
+			pstat.setString(1, dto.getEseq());
 			
 			rs = pstat.executeQuery();
 			
 			while(rs.next()) {
 				
-				cdto.setRate(rs.getInt("rate"));
+				dto.setRate(rs.getInt("rate"));
 				
 				
 			}
 			
-			System.out.println("RATE");
-			System.out.println(cdto.getRate());
-			System.out.println("RATE");
+			return dto;
 			
 			
 			
@@ -186,6 +194,62 @@ public class EventDAO {
 		
 		return null;
 	}
+
+	public CouponDTO getCouponSeq(CouponDTO dto) {
+		try {
+			
+			String sql = "select * from  tblUserCoupon where id like ? and eseq like ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getEseq());
+			
+			
+			
+			rs= pstat.executeQuery();	
+			
+			while(rs.next()) {
+				dto.setSeq(rs.getString("seq"));
+				
+			}
+			
+			return dto;
+			
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("EventDAO.getCouponSeq");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	//사용한 구폰 비활성화 
+	public void delCoupon(CouponDTO cDto) {
+		
+		try {
+			
+			String sql ="update tblUserCoupon set used = 'y' where seq like ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, cDto.getSeq());
+			
+			pstat.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			System.out.println("EventDAO.delCoupon");
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	
 
 
 

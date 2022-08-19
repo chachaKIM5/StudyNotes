@@ -9,8 +9,11 @@
 <%@ include file="/WEB-INF/views/inc/asset.jsp" %>
 <style>
 
-	main h1 {
+	main {
 		text-align: center;
+	}
+	
+	main h1 {
 		margin: 40px 0px 40px 0px;
 	}
 	

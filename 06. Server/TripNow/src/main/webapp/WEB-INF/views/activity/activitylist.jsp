@@ -32,7 +32,14 @@
 							  	 <p>${dto.name}</p>
 							  </div>
 							  <div class="star">
-							  	 <p><span>★★★★★</span> 5</p>
+							  	 <p><span>
+							  	 	<c:if test = "${dto.avgstar == 0}">평가 전</c:if>
+							  	 	<c:if test = "${dto.avgstar == 1}">★</c:if>
+							  	 	<c:if test = "${dto.avgstar == 2}">★★</c:if>
+							  	 	<c:if test = "${dto.avgstar == 3}">★★★</c:if>
+							  	 	<c:if test = "${dto.avgstar == 4}">★★★★</c:if>
+							  	 	<c:if test = "${dto.avgstar == 5}">★★★★★</c:if>
+							  	 </span>(${dto.avgstar})</p>
 							  </div>
 							  <div class="price">
 							  	 <p>￦${String.format("%,d",dto.price)}원<span>/1인</span></p>

@@ -12,6 +12,7 @@ public class ActivityDTO {
 	private String count;
 	private String county;
 	private String city;
+	private String id;
 	
 	private String seq;
 	private String pid;
@@ -24,12 +25,15 @@ public class ActivityDTO {
 	private String fpath;
 	private String show;
 	private int    price;
+	private String totalPrice;
 	
 	private int	   avgstar;
 	private int    imagecount;
 	
 	private String bank;
 	private String accountnum;
+	
+	
 	
 		
 	

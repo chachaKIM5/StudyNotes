@@ -6,6 +6,9 @@ import lombok.Data;
 public class CouponDTO {
 	
 	
+	//쿠폰seq
+	private String seq;
+	
 	//이벤트seq
 	private String eseq;
 		
@@ -20,5 +23,7 @@ public class CouponDTO {
 	private String enddate;
 	//할인율
 	private int rate;
+	//총금액
+	private String total;
 	
 }

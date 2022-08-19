@@ -17,25 +17,9 @@ import com.test.member.MemberDTO;
 public class ActivityPayment extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
-		
-		req.setCharacterEncoding("UTF-8");
-		
-		String Cseq  = req.getParameter("eseq");
-		
-		CouponDTO Cdto = new CouponDTO(); 
-		EventDAO Edao = new EventDAO();
-		
-		System.out.println("sffs");
-		System.out.println(Cseq);
-		
-		Cdto.setEseq(Cseq);
-		
-		Cdto = Edao.getEvent(Cdto);
-		
-		
+	
 		
 	
 		String id    = req.getParameter("id");
@@ -48,6 +32,7 @@ public class ActivityPayment extends HttpServlet {
 		
 		//상품 정보 받아오기 dto
 		dto.setSeq(seq);
+		dto.setCount(count);
 		dto = dao.view(dto);
 		
 		

@@ -29,11 +29,6 @@ public class EditInfoOk extends HttpServlet {
 		MemberDTO dto = new MemberDTO();
 		MyDAO dao = new MyDAO();
 
-		System.out.println(id);
-		System.out.println(newpw);
-		System.out.println(name);
-		System.out.println(tel);
-		System.out.println(email);
 		dto.setId(id);
 		dto.setPw(newpw);
 		dto.setName(name);
@@ -41,7 +36,6 @@ public class EditInfoOk extends HttpServlet {
 		dto.setEmail(email);
 		
 		int result = dao.editinfo(dto);
-		System.out.println("result: " + result);
 		
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");

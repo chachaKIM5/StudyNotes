@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.test.event.CouponDTO;
+import com.test.event.EventDAO;
 import com.test.member.MemberDTO;
 
 @WebServlet("/activity/ordercomplete.do")
@@ -24,9 +26,14 @@ public class OrderComplete extends HttpServlet {
 		String partnerId	= req.getParameter("partnerId");
 		String Id 			= req.getParameter("Id");
 		String count 		= req.getParameter("count");
+		//쿠폰번호
+		String cSeq			= req.getParameter("cSeq");
+		
 		
 		ActBookDTO dto = new ActBookDTO();
-		ActivityDAO dao = new ActivityDAO();	
+		ActivityDAO dao = new ActivityDAO();
+		
+		
 		
 		//tblbooklist추가 + tblactivitybook에 필요한 데이터
 		dto.setAseq(actSeq);
@@ -34,8 +41,16 @@ public class OrderComplete extends HttpServlet {
 		dto.setCount(count);
 		dto.setTotalprice(totalPrice);
 		
-		//tblbooklist + tblactivitybook 추가
+		//tblbooklist + tblactivitybook 결제 까지 추가
 		dto = dao.actBook(dto);
+		
+		//결제가 완료되었으니 사용된 쿠폰 비활성화
+		EventDAO eDao = new EventDAO();
+		CouponDTO cDto = new CouponDTO();
+		
+		cDto.setSeq(cSeq);
+		
+		eDao.delCoupon(cDto);
 		
 		//유저정보 받아오기
 		MemberDTO Mdto = new MemberDTO();

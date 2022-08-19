@@ -1,131 +1,206 @@
 package com.test.admin;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.test.dto.ActivityListDTO;
+import com.test.dto.CarListDTO;
+import com.test.dto.HomeListDTO;
+import com.test.service.GoodsManageService;
+
+import lombok.Data;
 
 @Controller
 public class AdminController {
 
 	@Autowired
-	private AdminService service;
+	private GoodsManageService service;
+
 	
-	@GetMapping("/admin/main")
-	public String main() {
+	@GetMapping("/goodsmanage")
+	public String homelist(Model model) {
 		
+		List<HomeListDTO> hlist = service.homelist();
+		List<CarListDTO> clist = service.carlist();
+		List<ActivityListDTO> alist = service.activitylist();
 		
-		return "admin.main.main";
-	}
-	
-	@GetMapping("/admin/qna/list")
-	public String qnaList(Model model, String page) {
+		model.addAttribute("hlist", hlist);
+		model.addAttribute("clist", clist);
+		model.addAttribute("alist", alist);
 		
-		HashMap<String, String> map = service.pagenation(page);
-		List<QnADTO> list = service.getQnAList(map);
-		List<QnADTO> nlist = service.getQnANoticeList();
-		String pagebar = service.getPagebar(map);
-		
-		model.addAttribute("nowPage", map.get("nowPage"));
-		model.addAttribute("pagebar", pagebar);
-		model.addAttribute("list", list);
-		model.addAttribute("nlist", nlist);
-		return "admin.qna.list";
-	}
-	
-	
-	@GetMapping("/admin/qna/view/{seq}")
-	public String qnaList(Model model, String page, String notice, @PathVariable String seq) {
-		
-		QnADTO dto = service.getView(seq);
-		
-		model.addAttribute("nowPage", page);
-		model.addAttribute("isNotice", notice);
-		model.addAttribute("dto", dto);
-		
-		return "admin.qna.view";
-	}
-	
-	
-	@GetMapping("/admin/qna/add")
-	public String qnaAdd() {
-	
-		return "admin.qna.add";
-	}
-	
-	@PostMapping("/admin/qna/addok")
-	public String qnaAddNotice(Model model, QnADTO dto) {
-		
-		int result = service.addNotice(dto);
-		model.addAttribute("result", result);
-		
-		return "admin.qna.addok";
-	}
-	
-	
-	@ResponseBody
-	@PostMapping("/admin/qna/answer")
-	public Object addanswer(QnADTO dto) {
-		
-		QnADTO result = service.addAnswer(dto);
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("acontent", result.getAcontent());
-		map.put("aregdate", result.getAregdate());
-		
-		return map;
+		return "admin.main.goodsmanage";
 	}
 	
 	@ResponseBody
-	@PostMapping("/admin/qna/delanswer")
-	public String delanswer(String qseq) {
+	@GetMapping("/goodsearch")
+	public Object goodsearch(HttpServletRequest req, Model model) {
 		
-		int result = service.delAnswer(qseq);
+		String tagtest = req.getParameter("tag");
+		if(tagtest.equals("all")) {
+			List<HomeListDTO> hlistt = service.homelist();
+			List<CarListDTO> clistt = service.carlist();
+			List<ActivityListDTO> alistt = service.activitylist();
+			
+			model.addAttribute("hlist", hlistt);
+			model.addAttribute("clist", clistt);
+			model.addAttribute("alist", alistt);
+			
+			AllList list = new AllList();
+			list.setHsearch(hlistt);
+			list.setCsearch(clistt);
+			list.setAsearch(alistt);
+			
+			return list;
+			
+		} else if (tagtest.equals("home")) {
+			List<HomeListDTO> hlistt = service.homelist();
+			model.addAttribute("hlistt", hlistt);
+			return hlistt;
+		} else if (tagtest.equals("car")) {
+			List<CarListDTO> clistt = service.carlist();
+			model.addAttribute("clistt", clistt);
+			return clistt;
+		} else if (tagtest.equals("activity")) {
+			List<ActivityListDTO> alistt = service.activitylist();
+			model.addAttribute("alistt", alistt);
+			return alistt;
+		}
 		
-		return String.valueOf(result);
+		return null;
 	}
 	
-	
-	@GetMapping("/admin/stats/view")
-	public String stats(Model model) {
-	
-		//전체 매출 통계 (액티비티, 렌터카, 숙소) -> 당월 카테고리별 매출, 지난 6개월 간 카테고리별 매출 그래프
-		//HashMap<String(월), Integer(매출)>
+	@ResponseBody
+	@GetMapping("/homeshow")
+	public String homeshow(String seq, String show) {
 		
-		List<StatsDTO> homestats = service.getHomeStats();
-		List<StatsDTO> carstats = service.getCarStats();
-		List<StatsDTO> actstats = service.getActStats();
+		int num = 0;
+		String result = "";
 		
+		if (show.equals("y")) {
+			num = service.homenoshow(seq);
+		} else if (show.equals("n")) {
+			num = service.homeshow(seq);
+		}
 		
-		model.addAttribute("homestats", homestats);
-		model.addAttribute("carstats", carstats);
-		model.addAttribute("actstats", actstats);
+		if (num == 1) {
+			result = service.homeselect(seq);
+		}
 		
-		//상품 구매자 성별 통계 (남/여 -> 지난 6개월 간)
-		//결제 -> 예약리스트 -> 각 카테고리 예약 -> 아이디의 성별 join해서 월별로 가져오기
+		return result;
 		
-		List<GenderDTO> gstats = service.getGStats();
-		
-		
-		model.addAttribute("gstats", gstats);
-		
-		Calendar now = Calendar.getInstance();
-		int nMonth = now.get(Calendar.MONTH) + 1;
-		
-		model.addAttribute("nmonth", nMonth);
-		
-		return "admin.stats.view";
 	}
 	
+	@ResponseBody
+	@GetMapping("/carshow")
+	public String carshow(String seq, String show) {
+		
+		int num = 0;
+		String result = "";
+		
+		if (show.equals("y")) {
+			num = service.carnoshow(seq);
+		} else if (show.equals("n")) {
+			num = service.carshow(seq);
+		}
+		
+		if (num == 1) {
+			result = service.carselect(seq);
+		}
+		
+		return result;
+		
+	}
+	
+	@ResponseBody
+	@GetMapping("/activityshow")
+	public String activityshow(String seq, String show) {
+		
+		int num = 0;
+		String result = "";
+		
+		if (show.equals("y")) {
+			num = service.activitynoshow(seq);
+		} else if (show.equals("n")) {
+			num = service.activityshow(seq);
+		}
+		
+		if (num == 1) {
+			result = service.activityselect(seq);
+		}
+		
+		return result;
+		
+	}
+	
+	@ResponseBody
+	@GetMapping("/idsearch")
+	public Object idsearch(String searchword, String selectword, Model model) {
+		
+		if(selectword.equals("all")) {
+			List<HomeListDTO> hsearch = service.homesearch(searchword);
+			List<CarListDTO> csearch = service.carsearch(searchword);
+			List<ActivityListDTO> asearch = service.activitysearch(searchword);
+			
+			model.addAttribute("hsearch", hsearch);
+			model.addAttribute("csearch", csearch);
+			model.addAttribute("asearch", asearch);
+			
+			AllList list = new AllList();
+			list.setHsearch(hsearch);
+			list.setCsearch(csearch);
+			list.setAsearch(asearch);
+			
+			return list;			
+			
+		} else if (selectword.equals("home")) {
+			List<HomeListDTO> hsearch = service.homesearch(searchword);
+			model.addAttribute("hsearch", hsearch);
+			return hsearch;
+		} else if (selectword.equals("car")) {
+			List<CarListDTO> csearch = service.carsearch(searchword);
+			model.addAttribute("csearch", csearch);
+			return csearch;
+		} else if (selectword.equals("activity")) {
+			List<ActivityListDTO> asearch = service.activitysearch(searchword);
+			model.addAttribute("asearch", asearch);
+			return asearch;
+		}
+		
+		
+		
+		return null;
+		
+	}
 	
 }
+
+
+@Data
+class AllList {
+	
+	private List<HomeListDTO> hsearch;
+	private List<CarListDTO> csearch;
+	private List<ActivityListDTO> asearch;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

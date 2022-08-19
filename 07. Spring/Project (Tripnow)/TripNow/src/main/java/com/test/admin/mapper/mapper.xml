@@ -4,6 +4,64 @@
 
 <mapper namespace="mapper">
 	
+	<select id="clist" resultType="cdto">
+		select c.seq as seq, carname, location, price, rentstart, pid, rentend, c.rseq as rseq, path from tbluser u inner join tblcar c on c.pid = u.id inner join tblcarname cn on cn.seq = c.carname where rseq = 1 or rseq = 3 order by c.seq asc
+	</select>
+	
+	<select id="hlist" resultType="hdto">
+		select r.seq as seq, r.name as room, h.name as home, location, price, enterhome, outerhome, r.rseq as rseq, path, pid from tblhome h inner join tblroom r on r.hseq = h.seq where rseq = 2 or rseq = 3 order by h.seq asc
+	</select>
+	
+	<select id="alist" resultType="adto">
+		select a.seq as seq, a.name as name, location, price, pid, period, a.rseq as rseq, fpath from tblactivity a inner join tbluser u on u.id = a.pid where rseq = 1 or rseq = 3 order by a.seq asc
+	</select>
+	
+	<select id="coption" parameterType="cdto" resultType="codto">
+		select c.seq, fseq, hseq, ctseq, location, mileage, geartype, price, rentstart, rentend, carname, path from tblcar c inner join tblcarname cn on cn.seq = c.carname where c.seq = #{seq}
+	</select>
+
+	<select id="aoption" parameterType="adto" resultType="aodto">
+		select * from tblActivity where seq = #{seq}
+	</select>
+	
+	<select id="hoption" parameterType="hdto" resultType="hodto">
+		select r.seq as seq, h.name as hname, location, enterhome, outerhome, r.name as rname, price, path, value, bath, pet, maxpeople, smoke, pool, parking, cook, wifi from tblhome h inner join tblroom r on h.seq = r.hseq inner join tblOptionList ol on ol.rseq = r.seq  inner join tblbedoption bo on bo.seq = ol.bseq where r.seq = #{seq}
+	</select>
+	
+	<update id="carrefusal" parameterType="String">
+		update tblcar set rseq = 3, show = 'n' where seq = #{seq}
+	</update>
+	
+	<update id="carcheck" parameterType="String">
+		update tblcar set rseq = 2, show = 'y' where seq = #{seq}
+	</update>
+	
+	<select id="apath" parameterType="cdto" resultType="String">
+		select path from tblActPhoto where aseq = #{seq}
+	</select>
+	
+	<update id="actrefusal" parameterType="String">
+		update tblactivity set rseq = 3, show = 'n' where seq = #{seq}
+	</update>
+	
+	<update id="actcheck" parameterType="String">
+		update tblactivity set rseq = 2, show = 'y' where seq = #{seq}
+	</update>
+	
+	<select id="fpath" parameterType="hdto" resultType="String">
+		select fpath from tblroompic where rseq = #{seq}
+	</select>
+	
+	<update id="homerefusal" parameterType="String">
+		update tblroom set rseq = 3, show = 'n' where seq = #{seq}
+	</update>
+	
+	<update id="homecheck" parameterType="String">
+		update tblroom set rseq = 1, show = 'y' where seq = #{seq}
+	</update>
+	
+	
+	<!--승연님 -->
 	
 	<select id="qnalist" parameterType="hashmap" resultType="qnadto">
 		select * from (select a.*, rownum as rnum from (select q.seq as qseq, a.seq as aseq, q.id as id, qc.value as category, q.title as qsubject, q.content as qcontent, q.regdate as qregdate, a.content as acontent, a.regdate as aregdate, case when q.id = 'admin' then ' ' when a.seq is null then '처리중' when a.seq is not null then '답변완료' end as state from tblQuestion q left outer join tblAnswer a on q.seq = a.qseq inner join tblQuestionCategory qc on q.cseq = qc.seq where q.id != 'admin' order by q.seq desc) a) where rnum between #{begin} and #{end}
@@ -33,11 +91,6 @@
 		delete from tblAnswer where seq = (select a.seq from tblAnswer a inner join tblQuestion q on a.qseq = q.seq where q.seq = #{qseq})
 	</delete>
 	
-	
-	
-	
-	
-	
 	<select id="gethomestats" parameterType="Integer" resultType="statsdto">
 		select #{nMonth} as month, nvl(sum(p.finalprice), 0) as sales from tblPayment p inner join tblBookList bl on p.blseq = bl.seq inner join tblHomeBook hb on hb.bseq = bl.seq where hb.bsseq in (2, 3) and to_char(hb.startdate, 'mm') = #{nMonth} 
 	</select>
@@ -63,4 +116,130 @@
 		select #{nMonth} as month, count(decode(u.gender, '남', 1)) as male, count(decode(u.gender, '여', 2)) as female from tblPayment p inner join tblBookList bl on p.blseq = bl.seq inner join tblActivityBook ab on ab.blseq = bl.seq inner join tblUser u on ab.id = u.id where ab.bsseq in (2, 3) and to_char(ab.regdate, 'mm') = #{nMonth}
 	</select>
 	
+	
+	<!-- 재민님 -->
+	
+	<select id="homelist" resultType="com.test.dto.HomeListDTO">
+		select 
+		h.name as homename,  r.name as roomname, u.id, u.name as username, 
+		ht.value as hometype, bo.value as bedtype, h.enterhome, h.outerhome, 
+		h.location, r.price, rs.value as regstat, r.show, r.seq
+		from tblHome h inner join tblRoom r on h.seq = r.hseq 
+		inner join tblUser u on h.pid = u.id
+		inner join tblhometype ht on h.tseq = ht.seq
+		inner join tbloptionlist ol on r.seq = ol.rseq
+		inner join tblbedoption bo on ol.bseq = bo.seq
+		inner join tblregstate rs on r.rseq = rs.seq
+		    order by h.seq asc
+	</select>
+	
+	<select id="carlist" resultType="com.test.dto.CarListDTO">
+		select c.carname, c.pid, u.name, f.value as fuelvalue, ct.value as carvalue, c.mileage, hc.value as maxpeople, c.geartype,
+		c.rentstart, c.rentend, c.price, rs.value as regstate, c.show, c.seq
+		from tblCar c
+		inner join tblUser u on c.pid = u.id
+		inner join tblCarType ct on c.ctseq = ct.seq
+		inner join tblFuel f on c.fseq = f.seq
+		inner join tblHeadCount hc on c.hseq = hc.seq
+		inner join tblRegState rs on c.rseq = rs.seq
+			order by c.seq asc
+	</select>
+	
+	<select id="activitylist" resultType="com.test.dto.ActivityListDTO">
+		select a.name as activityname, a.pid, u.name, a.location, to_char(a.period, 'YYYY-MM-DD') as period, a.price, rs.value, a.show, a.seq
+		from tblActivity a
+		inner join tblUser u on a.pid = u.id
+		inner join tblRegState rs on a.rseq = rs.seq
+			order by a.seq asc
+	</select>
+	
+	<update id="homenoshow" parameterType="String">
+		update tblRoom set show = 'n' where seq = #{seq}
+	</update>
+	
+	<update id="homeshow" parameterType="String">
+		update tblRoom set show = 'y' where seq = #{seq}
+	</update>
+	
+	<select id="homeselect" parameterType="String" resultType="String">
+		select show from tblRoom where seq = #{seq}
+	</select>
+	
+	<update id="carnoshow" parameterType="String">
+		update tblCar set show = 'n' where seq = #{seq}
+	</update>
+	
+	<update id="carshow" parameterType="String">
+		update tblCar set show = 'y' where seq = #{seq}
+	</update>
+	
+	<select id="carselect" parameterType="String" resultType="String">
+		select show from tblCar where seq = #{seq}
+	</select>
+	
+	<update id="activitynoshow" parameterType="String">
+		update tblActivity set show = 'n' where seq = #{seq}
+	</update>
+	
+	<update id="activityshow" parameterType="String">
+		update tblActivity set show = 'y' where seq = #{seq}
+	</update>
+	
+	<select id="activityselect" parameterType="String" resultType="String">
+		select show from tblActivity where seq = #{seq}
+	</select>
+	
+	<select id="homesearch" parameterType="String" resultType="com.test.dto.HomeListDTO">
+		select 
+			h.name as homename,  r.name as roomname, u.id, u.name as username, 
+			ht.value as hometype, bo.value as bedtype, h.enterhome, h.outerhome, 
+			h.location, r.price, rs.value as regstat, r.show, r.seq
+			from tblHome h inner join tblRoom r on h.seq = r.hseq 
+			inner join tblUser u on h.pid = u.id
+			inner join tblhometype ht on h.tseq = ht.seq
+			inner join tbloptionlist ol on r.seq = ol.rseq
+			inner join tblbedoption bo on ol.bseq = bo.seq
+			inner join tblregstate rs on r.rseq = rs.seq
+				where u.id = #{searchword}
+			    order by h.seq asc
+	</select>
+	
+	<select id="carsearch" parameterType="String" resultType="com.test.dto.CarListDTO">
+		select c.carname, c.pid, u.name, f.value as fuelvalue, ct.value as carvalue, c.mileage, hc.value as maxpeople, c.geartype,
+		c.rentstart, c.rentend, c.price, rs.value as regstate, c.show, c.seq
+		from tblCar c
+		inner join tblUser u on c.pid = u.id
+		inner join tblCarType ct on c.ctseq = ct.seq
+		inner join tblFuel f on c.fseq = f.seq
+		inner join tblHeadCount hc on c.hseq = hc.seq
+		inner join tblRegState rs on c.rseq = rs.seq
+			where c.pid = #{searchword}
+			order by c.seq asc
+	</select>
+	
+	<select id="activitysearch" parameterType="String" resultType="com.test.dto.ActivityListDTO">
+		select a.name as activityname, a.pid, u.name, a.location, to_char(a.period, 'YYYY-MM-DD') as period, a.price, rs.value, a.show, a.seq
+		from tblActivity a
+		inner join tblUser u on a.pid = u.id
+		inner join tblRegState rs on a.rseq = rs.seq
+			where a.pid = #{searchword}
+			order by a.seq asc
+	</select>
+	
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

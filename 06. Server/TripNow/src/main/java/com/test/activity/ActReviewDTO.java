@@ -27,11 +27,14 @@ public class ActReviewDTO {
 	private String content;
 	
 	//별점
-	private int star; 
+	private String star; 
 	
 	
 	// 답변자 리뷰 내용
 	private String acontent;
+	
+	//댓글 허가
+	private String bookid;
 	
 	
 	
